@@ -83,7 +83,6 @@
             <div class="content">
                 <div class="title m-b-md">
                     Laravel
-                    <button type="button" class="btn btn-primary">Primary</button>
 
                 </div>
 
