@@ -8,6 +8,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 
         <!-- Styles -->
         <style>
@@ -82,6 +83,8 @@
             <div class="content">
                 <div class="title m-b-md">
                     Laravel
+                    <button type="button" class="btn btn-primary">Primary</button>
+
                 </div>
 
                 <div class="links">
@@ -96,5 +99,12 @@
                 </div>
             </div>
         </div>
+        <script src="{{ mix('/js/app.js') }}"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                console.log("ready!");
+            });
+        
+        </script>
     </body>
 </html>
