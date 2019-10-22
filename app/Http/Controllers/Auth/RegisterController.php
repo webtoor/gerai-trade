@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Models\User;
+/* use Illuminate\Foundation\Auth\RegistersUsers; */
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -21,14 +22,14 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+    /* use RegistersUsers; */
 
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    /* protected $redirectTo = '/home'; */
 
     /**
      * Create a new controller instance.
@@ -46,14 +47,14 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+  /*   protected function validator(array $data)
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
-    }
+    } */
 
     /**
      * Create a new user instance after a valid registration.
@@ -61,12 +62,39 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+   /*  protected function create(array $data)
     {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+ */
+
+    public function showRegistrationForm(){
+        return view ('auth.register');
+    }
+    public function register(Request $request){
+        /* return $request; */
+        $data = $request->validate([
+            'nama_depan' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:15'],
+            'nama_belakang' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:20'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
+            'nomor_ponsel' => ['required', 'string','min:11', 'max:14', 'unique:users'],
+            'password' => ['required', 'string', 'min:5', 'confirmed'],
+        ]); 
+        try {
+            User::create([
+                'nama_depan' => $data['nama_depan'],
+                'nama_belakang' => $data['nama_belakang'],
+                'nomor_ponsel' => $data['nomor_ponsel'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    
     }
 }
