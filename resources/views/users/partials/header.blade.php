@@ -17,11 +17,9 @@
             </li>
         </ul>
         <form class="form-inline">
-            <button class="btn btn-sm btn-white" type="button">Masuk</button>
-            <button class="btn btn-outline-white btn-sm my-2 my-sm-0 ml-3" type="button"
-                style="color:white">Daftar</button>
+            <a href="/login" class="btn btn-white btn-sm" role="button"  style="color:black">Masuk</a>
+            <a href="/register" class="btn btn-outline-white btn-sm my-2 my-sm-0 ml-3" role="button"
+                style="color:white">Daftar</a>
         </form>
-
-
     </div>
 </nav>
