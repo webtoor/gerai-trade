@@ -6,9 +6,8 @@
 
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
-@import '~mdbootstrap/scss/mdb';
 @import "~bootstrap/scss/bootstrap";
+@import '~mdbootstrap/scss/mdb';
 @import '~@fortawesome/fontawesome-free/scss/brands';
 @import '~@fortawesome/fontawesome-free/scss/regular';
 @import '~@fortawesome/fontawesome-free/scss/solid';
@@ -17,7 +16,7 @@
 
 html, body {
   background-color: #fff;
-  color: #636b6f;
+/*   color: #636b6f; */
   font-family: 'Nunito', sans-serif;
   font-weight: 200;
   height: 100vh;

@@ -37,7 +37,7 @@
 
                 <div class="wrap-input100 validate-input" data-validate="Format Email : emailkamu@email.com">
                     <span class="label-input100">Email</span>
-                    <input class="input100 @error('email') is-invalid @enderror" type="password" name="email"
+                    <input class="input100 @error('email') is-invalid @enderror" type="email" name="email"
                         placeholder="Alamat email...">
                     <span class="focus-input100"></span>
                     @error('email')
@@ -49,7 +49,7 @@
 
                 <div class="wrap-input100 validate-input" data-validate="Nomor Ponsel harus diisi!">
                     <span class="label-input100">Nomor Ponsel</span>
-                    <input class="input100 @error('password') is-invalid @enderror" type="password" name="nomor_ponsel"
+                    <input class="input100 @error('password') is-invalid @enderror" type="number" name="nomor_ponsel"
                         placeholder="Nomor ponsel...">
                     <span class="focus-input100"></span>
                     @error('nomor_ponsel')
@@ -61,7 +61,7 @@
 
                 <div class="wrap-input100 validate-input" data-validate="Password harus diisi ya">
                     <span class="label-input100">Password</span>
-                    <input class="input100 @error('password') is-invalid @enderror" type="text" name="password"
+                    <input class="input100 @error('password') is-invalid @enderror" type="password" name="password"
                         placeholder="*************">
                     <span class="focus-input100"></span>
                     @error('password')
@@ -73,7 +73,7 @@
 
                 <div class="wrap-input100 validate-input" data-validate="Ulangi password harus diisi ya">
                     <span class="label-input100">Ulangi Password</span>
-                    <input class="input100" type="text" name="password_confirmation" placeholder="*************">
+                    <input class="input100" type="password" name="password_confirmation" placeholder="*************">
                     <span class="focus-input100"></span>
                 </div>
 
