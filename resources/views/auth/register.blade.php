@@ -37,7 +37,7 @@
 
                 <div class="wrap-input100 validate-input" data-validate="Format Email : emailkamu@email.com">
                     <span class="label-input100">Email</span>
-                    <input class="input100 @error('email') is-invalid @enderror" type="text" name="email"
+                    <input class="input100 @error('email') is-invalid @enderror" type="password" name="email"
                         placeholder="Alamat email...">
                     <span class="focus-input100"></span>
                     @error('email')
@@ -49,7 +49,7 @@
 
                 <div class="wrap-input100 validate-input" data-validate="Nomor Ponsel harus diisi!">
                     <span class="label-input100">Nomor Ponsel</span>
-                    <input class="input100 @error('password') is-invalid @enderror" type="text" name="nomor_ponsel"
+                    <input class="input100 @error('password') is-invalid @enderror" type="password" name="nomor_ponsel"
                         placeholder="Nomor ponsel...">
                     <span class="focus-input100"></span>
                     @error('nomor_ponsel')

@@ -14,19 +14,19 @@
 
                 <div class="wrap-input100 validate-input" data-validate="Masukan Nomor Ponsel atau Email">
                     <span class="label-input100">Nomor Ponsel atau Email</span>
-                    <input class="input100 @error('email') is-invalid @enderror" type="text" name="email"
+                    <input class="input100 @error('identity') is-invalid @enderror" type="text" name="identity"
                         placeholder="Nomor Ponsel atau Email">
                     <span class="focus-input100"></span>
-                    @error('email')
-                    <div class="text-danger">
-                        <strong>{{ $message }}</strong>
-                    </div>
-                    @enderror
+                    @if ($errors->has('nomor_ponsel') || $errors->has('email'))
+                    <span class="form-text text-danger">
+                        <small>{{ $errors->first('nomor_ponsel') ?: $errors->first('email') }}</small>
+                    </span>
+                @endif
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Masukan Password">
                     <span class="label-input100">Password</span>
-                    <input class="input100 @error('password') is-invalid @enderror" type="text" name="password"
+                    <input class="input100 @error('password') is-invalid @enderror" type="password" name="password"
                         placeholder="*************">
                     <span class="focus-input100"></span>
                     @error('password')
