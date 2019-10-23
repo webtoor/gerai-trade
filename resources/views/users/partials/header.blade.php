@@ -91,7 +91,7 @@
 
             <!--Trigger-->
             <a class="btn btn-outline-white btn-sm dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">Fityan Ali Munshi</a>
+                aria-haspopup="true" aria-expanded="false"><b> {{Auth::user()->nama_depan}} {{Auth::user()->nama_belakang}}</b></a>
 
             <!--Menu-->
             <div class="dropdown-menu dropdown-menu-right" style=" width:250px;">
