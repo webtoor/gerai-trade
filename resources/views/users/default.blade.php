@@ -14,7 +14,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600" rel="stylesheet">
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-	  @yield('css')
+    @yield('css')
+   
 
 </head>
 <body>
@@ -37,6 +38,8 @@
          $('.multi-level-dropdown .dropdown-menu.show').removeClass('show');
        });
      });
+
+     
          </script>
     @yield('js')
 </body>
