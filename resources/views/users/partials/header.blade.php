@@ -21,7 +21,7 @@
     </div>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item dropdown multi-level-dropdown" style="margin-right:20px;">
+          <li class="nav-item dropdown" style="margin-right:20px;">
             <a href="#" id="menu" data-toggle="dropdown" class="nav-link dropdown-toggle white-text " 
             >Kategori</a>
             <ul class="dropdown-menu mt-2 rounded-0  darken-4 border-0 z-depth-1">
@@ -95,10 +95,10 @@
 
             <!--Menu-->
             <div class="dropdown-menu dropdown-menu-right" style=" width:250px;">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a class="dropdown-item" href="#">Pembelian</a>
+                <a class="dropdown-item" href="#">Wishlist</a>
+                <a class="dropdown-item" href="#">Pengaturan</a>
+                <a class="dropdown-item" href="/logout">Logout</a>
             </div>
         </div>
         @endguest
@@ -172,3 +172,5 @@
        </ul>
 </div>
  --}}
+
+ 

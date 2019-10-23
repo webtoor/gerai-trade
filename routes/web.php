@@ -10,12 +10,19 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('users.index');
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Auth::routes();
+Route::group(['middleware' => ['guest']], function(){
+    Route::get('/', function () {
+        return view('users.index'); 
+});  
 });
 
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix'=> '/', 'as'=> '/' . '.', 'middleware' => ['auth']], function(){
+
+Route::get('home', 'HomeController@index')->name('home');
+
+});  
