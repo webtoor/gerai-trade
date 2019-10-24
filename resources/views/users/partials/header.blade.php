@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm sticky-top navbar-dark indigo">
+<nav class="navbar navbar-expand-sm sticky-top navbar-light" style="background-color: #FFFFFF">
     <a class="navbar-brand" href="#">LOGO</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,7 +21,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item dropdown" style="margin-right:20px;">
-            <a href="#" id="menu" data-toggle="dropdown" class="nav-link dropdown-toggle white-text " 
+            <a href="#" id="menu" data-toggle="dropdown" class="nav-link dropdown-toggle  " 
             >Kategori</a>
             <ul class="dropdown-menu mt-2 rounded-0  darken-4 border-0 z-depth-1">
               <li class="dropdown-item dropdown-submenu p-0">
@@ -62,7 +62,7 @@
               </li> --}}
             </ul>
           </li>
-          
+       
        </li>
             <li class="nav-item dropdown" style="margin-right:20px;">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -77,9 +77,36 @@
                 <a class="nav-link" href="#"><b>Belanja Bersama Kita</b></a>
             </li>
             
+            @guest
+       
+            <li class="nav-item">
+              <a href="/login" class="btn btn-white btn-sm" role="button" style="color:black">Masuk</a>
+    
+            </li>
+            <li class="nav-item">
+              <a href="/register" class="btn btn-outline-indigo btn-sm" role="button"
+              style="color:white">Daftar</a>
+            </li>
+             @else
+             <div class="dropdown">
+     
+                 <!--Trigger-->
+                 <a class="btn btn-outline-indigo btn-sm dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown"
+                     aria-haspopup="true" aria-expanded="false"><b> {{Auth::user()->nama_depan}} {{Auth::user()->nama_belakang}}</b></a>
+     
+                 <!--Menu-->
+                 <div class="dropdown-menu dropdown-menu-right" style=" width:250px;">
+                     <a class="dropdown-item" href="#">Pembelian</a>
+                     <a class="dropdown-item" href="#">Wishlist</a>
+                     <a class="dropdown-item" href="#">Pengaturan</a>
+                     <a class="dropdown-item" href="/logout">Logout</a>
+                 </div>
+             </div>
+             @endguest
         </ul>
 
-        @guest
+       {{--  @guest
+       
         <form class="form-inline">
             <a href="/login" class="btn btn-white btn-sm" role="button" style="color:black">Masuk</a>
             <a href="/register" class="btn btn-outline-white btn-sm my-2 my-sm-0 ml-3" role="button"
@@ -88,11 +115,9 @@
         @else
         <div class="dropdown">
 
-            <!--Trigger-->
             <a class="btn btn-outline-white btn-sm dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false"><b> {{Auth::user()->nama_depan}} {{Auth::user()->nama_belakang}}</b></a>
 
-            <!--Menu-->
             <div class="dropdown-menu dropdown-menu-right" style=" width:250px;">
                 <a class="dropdown-item" href="#">Pembelian</a>
                 <a class="dropdown-item" href="#">Wishlist</a>
@@ -100,7 +125,7 @@
                 <a class="dropdown-item" href="/logout">Logout</a>
             </div>
         </div>
-        @endguest
+        @endguest --}}
 
         <!--Dropdown primary-->
 

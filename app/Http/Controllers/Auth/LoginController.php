@@ -44,7 +44,11 @@ class LoginController extends Controller
         
         $this->clearLoginAttempts($request);
         $user = $request->user()->role;
-        return redirect('home');
+        if(($user->role_id == '1') || ($user->role_id == '2')){
+            return redirect('home');
+        }elseif($user->role == '3'){
+            return redirect('admin');
+        }
        
     }
 }
