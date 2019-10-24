@@ -46,8 +46,8 @@ class LoginController extends Controller
         $user = $request->user()->role;
         if(($user->role_id == '1') || ($user->role_id == '2')){
             return redirect('home');
-        }elseif($user->role == '3'){
-            return redirect('admin');
+        }elseif($user->role_id == '3'){
+            return redirect('admin-panel');
         }
        
     }

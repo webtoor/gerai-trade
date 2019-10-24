@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 /* use Illuminate\Foundation\Auth\RegistersUsers; */
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\User_role;
+
 
 class RegisterController extends Controller
 {
@@ -85,12 +87,17 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:5', 'confirmed'],
         ]); 
         try {
-            User::create([
+           $result = User::create([
                 'nama_depan' => $data['nama_depan'],
                 'nama_belakang' => $data['nama_belakang'],
                 'nomor_ponsel' => $data['nomor_ponsel'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
+            ]);
+
+            User_role::create([
+                'user_id' => $result->id,
+                'role_id' => '1'
             ]);
         } catch (\Throwable $th) {
             //throw $th;
