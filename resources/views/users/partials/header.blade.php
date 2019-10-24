@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md sticky-top navbar-dark indigo">
+<nav class="navbar navbar-expand-sm sticky-top navbar-dark indigo">
     <a class="navbar-brand" href="#">LOGO</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,8 +9,7 @@
     <div style="width:500px;">
         <form>
             <div class="input-group pl-2">
-                <input class="form-control my-0 py-1 white-border" type="text" placeholder="Cari produk"
-                    aria-label="Search">
+                <input class="form-control my-0 py-1 white-border" type="text" placeholder="Cari produk" aria-label="Search">
                 <a href="#" class="input-group-append">
                     <span class="input-group-text white lighten-3" id="basic-text1">
 

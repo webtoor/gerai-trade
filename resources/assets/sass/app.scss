@@ -13,6 +13,10 @@
 @import '~@fortawesome/fontawesome-free/scss/solid';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
+@import 'spec/settings/index';
+@import 'spec/tools/index';
+@import 'spec/index';
+@import 'vendor/index';
 
 html, body {
   background-color: #fff;

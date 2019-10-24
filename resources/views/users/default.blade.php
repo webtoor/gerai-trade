@@ -14,9 +14,27 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600" rel="stylesheet">
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-    @yield('css')
-   
+    <style>
+    .icon-rotates {
+  -moz-transition: all 1s linear;
+  -webkit-transition: all 1s linear;
+  transition: all 1s linear;
+}
 
+.icon-rotates.rotate {
+  -moz-transition: rotate(180deg);
+  -webkit-transition: rotate(180deg);
+  transition: rotate(180deg);
+}
+
+
+.dropdown.open .icon-rotates {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+      </style>
+    @yield('css')
 </head>
 <body>
     @include('users.partials.header');
@@ -41,6 +59,11 @@
 
      
          </script>
+         <script>
+          $(function () {
+            $('#myList a:last-child').tab('show')
+          })
+        </script>
     @yield('js')
 </body>
 </html>

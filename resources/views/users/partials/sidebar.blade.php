@@ -1,10 +1,16 @@
 <div class="col-sm-2 my-2">
     <div class="card">
         <div class="list-group">
-            <p href="#" class="list-group-item border-bottom-0">
+            <p class="list-group-item border-bottom-0">
                 <b>  {{Auth::user()->nama_depan}}
                         {{Auth::user()->nama_belakang}}</b>
               </p>
+
+              <p class="list-group-item border-top-0">
+                <img src="images/profiluser.png" style="width: 152px;">
+              </p>
+
+           
             <a href="#" class="list-group-item border-top-0"><button class="btn btn-primary btn-sm btn-block">Daftar Mitra</button></a>
 
 
@@ -21,4 +27,66 @@
             </div>
         </div>
     </div>
+  {{--   <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <a data-toggle="collapse" href="#Kopi" aria-expanded="false" aria-controls="Kopi">
+                Kopi<span class="mr-3"></span></a>
+                <ul class="collapse" id="Kopi" data-toggle="collapse" aria-expanded="false" aria-controls="Kopi">
+                    <li class="list-group-item border-0 px-0"><a href="#">Kopi Bubuk</a></li>
+                    <li class="list-group-item border-0 px-0"><a href="#">Kopi Kemasan</a></li>
+                    <li class="list-group-item border-0 px-0"><a href="#">Biji Kopi</a></li>
+                    
+                </ul>
+            </li>
+            <li class="list-group-item">
+                    <a data-toggle="collapse" href="#Teh" aria-expanded="false" aria-controls="Teh">
+                    Teh<span class="mr-3"></span></a>
+                    <ul class="collapse" id="Teh" data-toggle="collapse" aria-expanded="false" aria-controls="Kopi">
+                        <li class="list-group-item border-0 px-0"><a href="#">Kopi Bubuk</a></li>
+                        <li class="list-group-item border-0 px-0"><a href="#">Kopi Kemasan</a></li>
+                        <li class="list-group-item border-0 px-0"><a href="#">Biji Kopi</a></li>
+                        
+                    </ul>
+                </li>
+                <li class="list-group-item px-0">
+                    
+                        <a class="collapsed" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="true" aria-controls="collapseExample3">
+                      Link with href 
+                      </a>
+                        <div class="collapse" id="collapseExample3">
+                          <div class="card card-body mt-2">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                          </div>
+                        </div>
+                      </li>
+                      
+        </ul> --}}
+      {{--   <li class="list-group-item">
+            <a class="collapsible-header waves-effect arrow-r">
+            Instruction<i class="fas fa-angle-down icon-rotates"></i></a>
+          <div class="collapsible-body">
+            <ul>
+              <li><a href="#" class="waves-effect">For bloggers</a>
+              </li>
+              <li><a href="#" class="waves-effect">For authors</a>
+              </li>
+            </ul>
+          </div>
+        </li> --}}
+
+        
+  
+{{--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<div class="dropdown">
+		<a id="dropdown1" class="hlo-btn-round-dropdown dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button" tabindex="1">Dropdown <i class="fa fa-chevron-down fa-color icon-rotates" aria-hidden="true"></i></a>
+		<ul class="dropdown-menu" aria-labelledby="dropdown1">
+			<li><a href="#">Action</a></li>
+			<li><a href="#">Another action</a></li>
+			<li><a href="#">Something else here</a></li>
+			<li role="separator" class="divider"></li>
+			<li><a href="#">Separated link</a></li>
+		</ul>
+
+	</div> --}}
 </div>

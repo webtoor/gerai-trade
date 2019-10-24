@@ -1,28 +1,12 @@
 @extends('users.default')
-@section('css')
-<style>
-    .carousel .item {
-        height: 300px;
-    }
 
-    .item img {
-        position: absolute;
-        object-fit: cover;
-        top: 0;
-        left: 0;
-        min-height: 300px;
-    }
-
-</style>
-
-@endsection
 @section('content')
 
 
 <div class="single-product-slider">
     @guest
-    <div class="" style="width: 100%;">
-
+    <div style="width: 100%;">
+       
         @else
         <div class="container-fluid">
             @endguest
@@ -50,7 +34,7 @@
 
                         @guest
                         <div id="carousel-example-1z" class="carousel slide" data-ride="carousel"
-                            style="margin-top:-25px;;">
+                            style="margin-top:-25px;">
                             @else
                             <div id="carousel-example-1z" class="carousel slide my-2 " data-ride="carousel">
                                 @endguest
@@ -134,6 +118,8 @@
                                                             <div class="price">
                                                                 <h6>Rp 150.000</h6>
                                                             </div>
+
+                                                            <h6 style="color:#AEAEAE;">Jakarta</h6>
 
                                                  
                                                             <div class="card-footer px-1" style="background:white">
@@ -472,4 +458,7 @@
 </div>
 </div>
 </div>
+
+
+    
 @endsection

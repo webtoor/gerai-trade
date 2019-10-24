@@ -18,7 +18,9 @@ Route::group(['middleware' => ['guest']], function(){
 });  
 });
 
-
+Route::get('/admin-panel', function () {
+    return view('admin.default'); 
+}); 
 
 
 Route::group(['prefix'=> '/', 'as'=> '/' . '.', 'middleware' => ['auth']], function(){
