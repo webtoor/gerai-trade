@@ -19,7 +19,7 @@ Route::group(['middleware' => ['guest']], function(){
 });
 
 Route::get('/admin-panel', function () {
-    return view('admin.default'); 
+    return view('admin.dashboard.index'); 
 }); 
 
 
