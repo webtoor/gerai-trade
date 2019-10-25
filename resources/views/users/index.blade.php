@@ -23,6 +23,7 @@
                 @guest
                 @else
                 @include('users.partials.sidebar')
+              
                 @endguest
 
                 @guest
@@ -460,5 +461,5 @@
 </div>
 
 {{-- {{Auth::user()->role}} --}}
-    
+
 @endsection

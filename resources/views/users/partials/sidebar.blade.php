@@ -88,5 +88,27 @@
 			<li><a href="#">Separated link</a></li>
 		</ul>
 
-	</div> --}}
+  </div> --}}
+  
+  {{-- <ul class="sidebar-menu scrollable">
+                 
+    <li class="nav-item dropdown">
+        <a class="dropdown-toggle" href="javascript:void(0);">
+          <span class="icon-holder">
+              <i class="c-red-500 ti-files"></i>
+            </span>
+          <span class="title">Pages</span>
+          <span class="arrow">
+              <i class="ti-angle-right"></i>
+            </span>
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <a class='dropdown-item' href="blank.html">Blank</a>
+          </li>                 
+       
+        </ul>
+      </li>
+   
+    </ul> --}}
 </div>

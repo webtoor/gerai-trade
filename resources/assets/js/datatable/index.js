@@ -1,12 +1,11 @@
 import * as $ from 'jquery';
-import 'datatables';
+import 'datatables.net-bs4';
+import 'datatables.net-responsive-bs4';
 
 export default (function () {
   $('#dataTable').DataTable({
-		language: {
-			// 'url' : 'https://cdn.datatables.net/plug-ins/1.10.16/i18n/French.json'
-			// More languages : http://www.datatables.net/plug-ins/i18n/
-		},
-		aaSorting: []
+		aaSorting: [],
+		responsive:true,
+		"oSearch": {"bSmart": false},
 	});
 }());

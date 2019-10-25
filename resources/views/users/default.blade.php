@@ -43,6 +43,7 @@
     <script src="{{ mix('/js/app.js') }}"></script>
     <script type="text/javascript" >
       $(document).ready(function () {
+        /* $('.dropdown-toggle').dropdown() */
         console.log('ready')
      $('.multi-level-dropdown .dropdown-submenu > a').on("mouseenter", function(e) {
          var submenu = $(this);
@@ -60,9 +61,9 @@
      
          </script>
          <script>
-          $(function () {
+         /*  $(function () {
             $('#myList a:last-child').tab('show')
-          })
+          }) */
         </script>
     @yield('js')
 </body>
