@@ -13,5 +13,8 @@ class User_role extends Model
         'user_id', 'role_id'
     ];
 
+    public function user(){
+        return $this->belongsTo('App\Models\User');
+    }
    
 }

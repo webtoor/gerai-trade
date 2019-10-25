@@ -41,10 +41,10 @@
     </a>
     <ul class="dropdown-menu">
       <li>
-        <a class='sidebar-link' href="blank.html"style="font-size:14px;margin-left:10px;">Pembeli</a>
+        <a class='sidebar-link' href="blank.html" style="font-size:14px;margin-left:10px;">Pembeli</a>
       </li>                 
       <li>
-        <a class='sidebar-link' href="404.html"  style="font-size:14px;margin-left:10px;">Mitra</a>
+        <a class='sidebar-link'  href="{{ route('admin-panel.showMitra') }}"  style="font-size:14px;margin-left:10px;">Mitra</a>
       </li>
     </ul>
   </li>
