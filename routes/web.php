@@ -11,26 +11,12 @@
 |
 */
     Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-    Auth::routes();
     Route::group(['middleware' => ['guest']], function(){
         Route::get('/', function () {
             return view('users.index'); 
         });  
     });
-    Route::group(['middleware' => ['auth']], function(){
-        Route::get('/', function () {
-            if(Auth::user()->role->role_id == '1' || Auth::user()->role->role_id == '2'){
-                return redirect('home');
-            }elseif(Auth::user()->role->role_id == '3'){
-                return redirect('admin-panel');
-            }else{
-                return view('auth.login');
-            }
-        }); 
-    }); 
-
-
-
+    Auth::routes();
 
 
     Route::group(['prefix'=> 'admin-panel', 'as'=> 'admin-panel' . '.', 'middleware' => ['auth']], function(){
@@ -48,8 +34,8 @@
    
 
 
-Route::group(['prefix'=> '/', 'as'=> '/' . '.', 'middleware' => ['auth']], function(){
+Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['auth']], function(){
 
-Route::get('home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 });  
