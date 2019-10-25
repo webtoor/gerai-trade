@@ -22,7 +22,7 @@
 
 
 <li class="nav-item mT-30">
-    <a class="sidebar-link" href="">
+    <a class="sidebar-link" href="{{ route('admin-panel.admin') }}">
         <span class="icon-holder">
             <i class="c-blue-500 ti-home"></i>
         </span>
