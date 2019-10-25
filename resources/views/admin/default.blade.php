@@ -22,14 +22,14 @@
 
 <body class="app">
 
-    {{-- @include('admin.partials.spinner') --}}
+    @include('admin.partials.spinner')
 
     <div>
         <!-- #Left Sidebar ==================== -->
         @include('admin.partials.sidebar')
 
         <!-- #Main ============================ -->
-        <div class="page-container">
+        <div class="page-container bgc-grey-100">
             <!-- ### $Topbar ### -->
             @include('admin.partials.topbar')
 
@@ -46,12 +46,12 @@
                     </div>
                 </div>
             </main>
-
-            <!-- ### $App Screen Footer ### -->
-            {{-- <footer class="bdT ta-c p-30 lh-0 fsz-sm c-grey-600">
+             <!-- ### $App Screen Footer ### -->
+            <!-- <footer class="bdT ta-c p-30 lh-0 fsz-sm c-grey-600">
                 <span>Copyright © 2017 Designed by
                     <a href="https://colorlib.com" target='_blank' title="Colorlib">Colorlib</a>. All rights reserved.</span>
-            </footer> --}}
+            </footer> -->
+        
         </div>
     </div>
 

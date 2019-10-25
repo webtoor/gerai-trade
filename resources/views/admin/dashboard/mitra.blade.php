@@ -6,12 +6,11 @@
     <h4 class="c-blue-900"><b>Data Mitra</b></h4>
 </div>
 <div class="bgc-white p-20 bd">
-    <button data-toggle="modal" data-target="#TrainerModals" class="btn btn-dark btn-md"
-        title="{{ trans('app.add_button') }}">
-        <b>Tambah Mitra</b></button>
+    <button data-toggle="modal" data-target="#TrainerModals" class="btn btn-primary btn-md" title="{{ trans('app.add_button') }}">
+        <b><i class="fa fa-plus"></i> Tambah Mitra</b></button>
     <div class="mT-30">
         <table id="dataTable" class="table table-bordered" cellspacing="0" width="100%">
-            <thead class="thead-dark">
+            <thead class="thead-light">
                 <tr>
                     <th>Nama</th>
                     <th>Email</th>

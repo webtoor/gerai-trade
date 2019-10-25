@@ -36,6 +36,7 @@
     Route::group(['prefix'=> 'admin-panel', 'as'=> 'admin-panel' . '.', 'middleware' => ['auth']], function(){
 
         Route::get('/', 'AdminController@index')->name('admin');
+        Route::get('member', 'AdminController@showMember')->name('showMember');
 
         Route::get('mitra', 'AdminController@showMitra')->name('showMitra');
     
