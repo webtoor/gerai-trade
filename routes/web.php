@@ -17,7 +17,9 @@
         });  
     });
     Auth::routes();
-
+    
+    Route::get('ajax-kota-kab/{provinsi_id}', 'LokasiController@ajaxKotaKab');
+    Route::get('kecamatan/{kotaKab_id}', 'LokasiController@ajaxKecamatan');
 
     Route::group(['prefix'=> 'admin-panel', 'as'=> 'admin-panel' . '.', 'middleware' => ['admin']], function(){
 
@@ -25,8 +27,7 @@
         Route::get('member', 'AdminController@showMember')->name('showMember');
 
         Route::get('mitra', 'AdminController@showMitra')->name('showMitra');
-        Route::get('ajax-kota-kab/{provinsi_id}', 'AdminController@ajaxKotaKab');
-        Route::get('kecamatan/{kotaKab_id}', 'AdminController@ajaxKecamatan');
+       
 
         
         });  

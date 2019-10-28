@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\User_role;
 use App\Models\Provinsi;
-use App\Models\KotaKabupaten;
 
 class AdminController extends Controller
 {
@@ -37,11 +36,5 @@ class AdminController extends Controller
         }
     }
 
-    public function ajaxKotaKab($provinsi_id){
-        $kotaKab = KotaKabupaten::where('province_id', $provinsi_id)->get();
-        return response()->json(
-           [ 'status' => '1',
-            'data' => $kotaKab]
-        );
-    }
+
 }

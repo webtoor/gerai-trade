@@ -117,7 +117,7 @@ $(document).ready(function () {
         contentType: "application/json",
         dataType: "json",
         type: 'GET',
-        url: "ajax-kota-kab/" + valueSelected,
+        url: "/ajax-kota-kab/" + valueSelected,
         success: function (results) {
           console.log(results);
           $.each( results['data'], function(id, name) {
