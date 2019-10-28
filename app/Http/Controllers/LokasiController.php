@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\KotaKabupaten;
+use App\Models\Kecamatan;
 
 class LokasiController extends Controller
 {
@@ -16,10 +17,10 @@ class LokasiController extends Controller
     }
 
     public function ajaxKecamatan($kotaKab_id){
-        $kotaKab = Kecamatan::where('province_id', $provinsi_id)->get();
-        return response()->json(
-           [ 'status' => '1',
-            'data' => $kotaKab]
-        );
+        $kecamatan = Kecamatan::where('regency_id', $kotaKab_id)->get();
+        return response()->json([
+             'status' => '1',
+            'data' => $kecamatan
+            ]);
     }
 }

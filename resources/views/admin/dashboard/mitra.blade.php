@@ -78,12 +78,27 @@
                 </div>
                 <div class="form-group col-md-6">
                         <label>Kota atau Kabupaten</label>
-                            <select class="form-control" name="kota_kabupaten" id="kotaKab" required disabled="disabled">
-                                <option selected value="">Pilih Kota/Kabupaten</option>
+                            <select class="form-control" name="kota_kabupaten" id="selectKotaKab" required disabled="disabled">
+                                <option selected value="0">Pilih Kota/Kabupaten</option>
                             </select>
                     </div>
               
             </div>
+            <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Kecamatan</label>
+                            <select class="form-control" name="kecamatan" id="selectKecamatan" required disabled="disabled">
+                                <option selected value="0">Pilih Kecamatan</option>
+                            </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                            <label>Kelurahan atau Desa</label>
+                                <select class="form-control" name="kelurahan_desa" id="selectKelurahanDesa" required disabled="disabled">
+                                    <option selected value="0">Pilih Kelurahan/Desa</option>
+                                </select>
+                        </div>
+                  
+                </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -97,17 +112,20 @@
 <script>
 $(document).ready(function () {
     $('select#selectProvinsi').on('change', function (e) {
-    var optionSelected = $("option:selected", this);
-    var valueSelected = this.value;
+    let optionSelected = $("option:selected", this);
+    let valueSelected = this.value;
     console.log(valueSelected)
     if(valueSelected != 0){
-        $("#kotaKab").prop('disabled', false);
-        $("#kotaKab option").remove();
+        $("#selectKotaKab").prop('disabled', false);
+        $("#selectKotaKab option").remove();
 
     }else{
-        $("#kotaKab").prop('disabled', true);
-        $('#kotaKab').append($('<option>', {value:'0', text:'Pilih Kota/Kabupaten'}, '</option>'));
-
+        $("#selectKotaKab").prop('disabled', true);
+        $("#selectKotaKab option").remove();
+        $('#selectKotaKab').append($('<option>', {value:'0', text:'Pilih Kota/Kabupaten'}, '</option>'));
+        $("#selectKecamatan").prop('disabled', true);
+        $("#selectKecamatan option").remove();
+        $('#selectKecamatan').append($('<option>', {value:'0', text:'Pilih Kecamatan'}, '</option>'));
     }
 
     $.ajax({
@@ -120,8 +138,74 @@ $(document).ready(function () {
         url: "/ajax-kota-kab/" + valueSelected,
         success: function (results) {
           console.log(results);
-          $.each( results['data'], function(id, name) {
-                $('#kotaKab').append($('<option>', {value:id['id'], text:name['name']}, '</option>'));
+          $.each( results['data'], function(index, data) {
+                $('#selectKotaKab').append($('<option>', {value:data['id'], text:data['name']}, '</option>'));
+           })
+          }
+
+      });
+    });
+
+    $('select#selectKotaKab').on('change', function (e) {
+    let optionSelected = $("option:selected", this);
+    let valueSelected = this.value;
+
+    console.log(valueSelected)
+    if(valueSelected != 0){
+        $("#selectKecamatan").prop('disabled', false);
+        $("#selectKecamatan option").remove();
+
+    }else{
+        $("#selectKecamatan").prop('disabled', true);
+        $('#selectKecamatan').append($('<option>', {value:'0', text:'Pilih Kecamatan'}, '</option>'));
+
+    }
+
+    $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        contentType: "application/json",
+        dataType: "json",
+        type: 'GET',
+        url: "/kecamatan/" + valueSelected,
+        success: function (results) {
+          console.log(results);
+          $.each( results['data'], function(index, data) {
+                $('#selectKecamatan').append($('<option>', {value:index['id'], text:data['name']}, '</option>'));
+           })
+          }
+
+      });
+    });
+
+    $('select#selectKelurahanDesa').on('change', function (e) {
+    let optionSelected = $("option:selected", this);
+    let valueSelected = this.value;
+
+    console.log(valueSelected)
+    if(valueSelected != 0){
+        $("#selectKelurahanDesa").prop('disabled', false);
+        $("#selectKelurahanDesa option").remove();
+
+    }else{
+        $("#selectKelurahanDesa").prop('disabled', true);
+        $('#selectKelurahanDesa').append($('<option>', {value:'0', text:'Pilih Kelurahan/Desa'}, '</option>'));
+
+    }
+
+    $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        contentType: "application/json",
+        dataType: "json",
+        type: 'GET',
+        url: "/kelurahan_desa/" + valueSelected,
+        success: function (results) {
+          console.log(results);
+          $.each( results['data'], function(index, data) {
+                $('#selectKelurahanDesa').append($('<option>', {value:index['id'], text:data['name']}, '</option>'));
            })
           }
 
