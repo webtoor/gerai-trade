@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\KotaKabupaten;
 use App\Models\Kecamatan;
+use App\Models\KelurahanDesa;
 
 class LokasiController extends Controller
 {
@@ -24,10 +25,10 @@ class LokasiController extends Controller
             ]);
     }
     public function ajaxKelurahanDesa($kecamatan_id){
-        $kecamatan = Kecamatan::where('regency_id', $kotaKab_id)->get();
+        $kelurahanDesa = KelurahanDesa::where('district_id', $kecamatan_id)->get();
         return response()->json([
              'status' => '1',
-            'data' => $kecamatan
+            'data' => $kelurahanDesa
             ]);
     }
 }

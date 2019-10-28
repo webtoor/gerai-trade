@@ -20,7 +20,7 @@
 
     Route::get('ajax-kota-kab/{provinsi_id}', 'LokasiController@ajaxKotaKab');
     Route::get('kecamatan/{kotaKab_id}', 'LokasiController@ajaxKecamatan');
-    Route::get('kelurahan/{kecamatan_id}', 'LokasiController@ajaxKelurahanDesa');
+    Route::get('kelurahan-desa/{kecamatan_id}', 'LokasiController@ajaxKelurahanDesa');
 
     Route::group(['prefix'=> 'admin-panel', 'as'=> 'admin-panel' . '.', 'middleware' => ['admin']], function(){
 
@@ -28,7 +28,8 @@
         Route::get('member', 'AdminController@showMember')->name('showMember');
 
         Route::get('mitra', 'AdminController@showMitra')->name('showMitra');
-       
+        Route::post('mitra', 'AdminController@addMitra')->name('addMitra');
+
 
         
         });  

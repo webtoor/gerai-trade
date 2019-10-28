@@ -36,5 +36,45 @@ class AdminController extends Controller
         }
     }
 
+    public function addMitra(Request $request){
+        $data = $request->validate([
+            'nama_depan' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:15'],
+            'nama_belakang' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:20'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
+            'nomor_ponsel' => ['required', 'string','min:11', 'max:14', 'unique:users'],
+            'alamat' => ['required'],
+            'provinsi' => ['required'],
+            'kota_kabupaten' => ['required'],
+            'kecamatan' => ['required'],
+            'kelurahan_desa' => ['required'],
+            'password' => ['required', 'string', 'min:5', 'confirmed'],
+        ]); 
+
+        try {
+            $result = User::create([
+                'nama_depan' => $data['nama_depan'],
+                'nama_belakang' => $data['nama_belakang'],
+                'nomor_ponsel' => $data['nomor_ponsel'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+
+            User_role::create([
+                'user_id' => $result->id,
+                'role_id' => '2'
+            ]);
+
+            /* Alamat::create([
+                'alamat' => $data['alamat'],
+                'provinsi' => $data['provinsi'],
+                'kota_kabupaten' => $data['kota_kabupaten'],
+                'kecamatan' => $data['kecamatan'],
+                'kelurahan_desa' => $data['kelurahan_desa']
+            ]); */
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+
 
 }

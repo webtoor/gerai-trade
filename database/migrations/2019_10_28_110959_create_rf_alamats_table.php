@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRfKotaKabupatensTable extends Migration
+class CreateRfAlamatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateRfKotaKabupatensTable extends Migration
      */
     public function up()
     {
-        Schema::create('rf_kota_kabupatens', function (Blueprint $table) {
+        Schema::create('rf_alamats', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('provinsi_id')->unsigned();
-            $table->string('kota_kabupaten');
-            $table->foreign('provinsi_id')->references('id')->on('rf_provinsies')->onDelete('cascade');
+            $table->string('deskripsi_alamat');
         });
     }
 
@@ -28,6 +26,6 @@ class CreateRfKotaKabupatensTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rf_kota_kabupatens');
+        Schema::dropIfExists('rf_alamats');
     }
 }

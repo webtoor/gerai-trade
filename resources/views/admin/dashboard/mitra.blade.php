@@ -38,6 +38,7 @@
 <!-- Modal -->
 <div class="modal fade" id="addMitra" tabindex="-1" role="dialog" aria-labelledby="addMitraLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
+                {!! Form::open([ 'route' => ['admin-panel.addMitra'], 'method' => "POST"])!!}
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="addMitraLabel">Tambah Mitra</h5>
@@ -49,21 +50,27 @@
             <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>Nama Depan</label>
-                        <input type="text" class="form-control" name="username" placeholder="Masukan Nama depan">
+                        <input type="text" class="form-control" name="nama_depan" placeholder="Masukan Nama depan" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label>Nama Belakang</label>
-                        <input type="text" class="form-control" id="trainer_firstname" placeholder="Masukan Nama belakang" name="firstname" required>
+                        <input type="text" class="form-control" name="nama_belakang" placeholder="Masukan Nama belakang" required>
                     </div>
             </div>
             <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>Email</label>
-                        <input type="text" class="form-control" name="email" placeholder="Masukan Email" required>
+                        <input type="email" class="form-control" name="email" placeholder="Masukan Email" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label>Nomor Ponsel</label>
-                        <input type="text" class="form-control" placeholder="Masukan Nomor Ponsel" name="nomor_ponsel" required>
+                        <input type="text" name="nomor_ponsel" class="form-control" placeholder="Masukan Nomor Ponsel" required>
+                    </div>
+            </div>
+            <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Alamat</label>
+                        <input type="text" class="form-control" name="alamat" placeholder="Masukan Alamat" required>
                     </div>
             </div>
             <div class="form-row">
@@ -85,25 +92,35 @@
               
             </div>
             <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Kecamatan</label>
+                    <select class="form-control" name="kecamatan" id="selectKecamatan" required disabled="disabled">
+                        <option selected value="0">Pilih Kecamatan</option>
+                    </select>
+            </div>
+            <div class="form-group col-md-6">
+                    <label>Kelurahan atau Desa</label>
+                        <select class="form-control" name="kelurahan_desa" id="selectKelurahanDesa" required disabled="disabled">
+                            <option selected value="0">Pilih Kelurahan/Desa</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label>Kecamatan</label>
-                            <select class="form-control" name="kecamatan" id="selectKecamatan" required disabled="disabled">
-                                <option selected value="0">Pilih Kecamatan</option>
-                            </select>
+                        <label>Password</label>
+                        <input type="password" class="form-control" name="password" placeholder="Password" required>
                     </div>
                     <div class="form-group col-md-6">
-                            <label>Kelurahan atau Desa</label>
-                                <select class="form-control" name="kelurahan_desa" id="selectKelurahanDesa" required disabled="disabled">
-                                    <option selected value="0">Pilih Kelurahan/Desa</option>
-                                </select>
-                        </div>
-                  
+                        <label>Ulangi Password</label>
+                        <input type="password" name="password_confirmation" class="form-control" placeholder="Ulangi Password" required>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary btn-md">Submit</button>
             </div>
+            {!! Form::close() !!}
           </div>
         </div>
       </div>
@@ -172,14 +189,14 @@ $(document).ready(function () {
         success: function (results) {
           console.log(results);
           $.each( results['data'], function(index, data) {
-                $('#selectKecamatan').append($('<option>', {value:index['id'], text:data['name']}, '</option>'));
+                $('#selectKecamatan').append($('<option>', {value:data['id'], text:data['name']}, '</option>'));
            })
           }
 
       });
     });
 
-    $('select#selectKelurahanDesa').on('change', function (e) {
+    $('select#selectKecamatan').on('change', function (e) {
     let optionSelected = $("option:selected", this);
     let valueSelected = this.value;
 
@@ -201,11 +218,11 @@ $(document).ready(function () {
         contentType: "application/json",
         dataType: "json",
         type: 'GET',
-        url: "/kelurahan_desa/" + valueSelected,
+        url: "/kelurahan-desa/" + valueSelected,
         success: function (results) {
           console.log(results);
           $.each( results['data'], function(index, data) {
-                $('#selectKelurahanDesa').append($('<option>', {value:index['id'], text:data['name']}, '</option>'));
+                $('#selectKelurahanDesa').append($('<option>', {value:data['id'], text:data['name']}, '</option>'));
            })
           }
 
