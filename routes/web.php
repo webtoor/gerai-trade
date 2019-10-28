@@ -26,6 +26,7 @@
 
         Route::get('mitra', 'AdminController@showMitra')->name('showMitra');
         Route::get('ajax-kota-kab/{provinsi_id}', 'AdminController@ajaxKotaKab');
+        Route::get('kecamatan/{kotaKab_id}', 'AdminController@ajaxKecamatan');
 
         
         });  
