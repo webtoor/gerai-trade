@@ -27,7 +27,8 @@ class AdminController extends Controller
     public function showMitra(){
         try {
             $mitra = User_role::with('user')->where('role_id', '2')->get();
-            return view('admin.dashboard.mitra', ['mitra' => $mitra]);
+            $provinsi = Rf_provinsi::all();
+            return view('admin.dashboard.mitra', ['mitra' => $mitra, 'provinsi' => $provinsi]);
 
         } catch (\Throwable $th) {
             //throw $th;
