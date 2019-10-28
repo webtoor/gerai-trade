@@ -23,4 +23,11 @@ class LokasiController extends Controller
             'data' => $kecamatan
             ]);
     }
+    public function ajaxKelurahanDesa($kecamatan_id){
+        $kecamatan = Kecamatan::where('regency_id', $kotaKab_id)->get();
+        return response()->json([
+             'status' => '1',
+            'data' => $kecamatan
+            ]);
+    }
 }

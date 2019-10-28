@@ -17,9 +17,10 @@
         });  
     });
     Auth::routes();
-    
+
     Route::get('ajax-kota-kab/{provinsi_id}', 'LokasiController@ajaxKotaKab');
     Route::get('kecamatan/{kotaKab_id}', 'LokasiController@ajaxKecamatan');
+    Route::get('kelurahan/{kecamatan_id}', 'LokasiController@ajaxKelurahanDesa');
 
     Route::group(['prefix'=> 'admin-panel', 'as'=> 'admin-panel' . '.', 'middleware' => ['admin']], function(){
 
