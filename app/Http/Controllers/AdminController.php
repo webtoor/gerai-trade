@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\User_role;
 use App\Models\Provinsi;
+use App\Models\Alamat;
 
 class AdminController extends Controller
 {
@@ -20,7 +22,7 @@ class AdminController extends Controller
             $member = User_role::with('user')->where('role_id', '1')->get();
             return view('admin.dashboard.member', ['member' => $member]);
 
-        } catch (\Throwable $th) {
+        } catch (\Exception $e) {
         }
     }
 
@@ -30,8 +32,7 @@ class AdminController extends Controller
             $provinsi = Provinsi::all();
             return view('admin.dashboard.mitra', ['mitra' => $mitra, 'provinsi' => $provinsi]);
 
-        } catch (\Throwable $th) {
-            return $th;
+        } catch (\Exception $e) {
 
         }
     }
@@ -64,15 +65,17 @@ class AdminController extends Controller
                 'role_id' => '2'
             ]);
 
-            /* Alamat::create([
+            Alamat::create([
                 'alamat' => $data['alamat'],
-                'provinsi' => $data['provinsi'],
-                'kota_kabupaten' => $data['kota_kabupaten'],
-                'kecamatan' => $data['kecamatan'],
-                'kelurahan_desa' => $data['kelurahan_desa']
-            ]); */
-        } catch (\Throwable $th) {
-            //throw $th;
+                'user_id' => $result->id,
+                'jenis_alamat_id' => '1',
+                'provinsi_id' => $data['provinsi'],
+                'kota_kabupaten_id' => $data['kota_kabupaten'],
+                'kecamatan_id' => $data['kecamatan'],
+                'kelurahan_desa_id' => $data['kelurahan_desa']
+            ]);
+        } catch (\Exception $e) {
+            
         }
     }
 
