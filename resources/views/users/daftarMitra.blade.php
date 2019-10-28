@@ -53,17 +53,31 @@
                             <div class="login100-more" style="">
                                  
                             </div>
+
+                           
                           
                             <div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
                                     <a href="/home" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-5">
                                         <i class="fa fa-long-arrow-left m-l-5"></i>  Kembali
                                     </a>
-                                    <form class="login100-form" method="POST" action="{{ route('home.insertDaftarMitra') }}">
+                                    <form class="login100-form validate-form" method="POST" action="{{ route('home.insertDaftarMitra') }}">
                                             @csrf
                                    
                                     <span class="login100-form-title p-b-59">
                                        Jadilah Mitra Kami
                                     </span>
+
+                                    <div class="wrap-input100 validate-input" data-validate="Masukan Alamat">
+                                            <span class="label-input100">Alamat</span>
+                                            <input class="input100 @error('alamat') is-invalid @enderror" type="text" name="alamat"
+                                                placeholder="Masukan Alamat">
+                                            <span class="focus-input100"></span>
+                                            @if ($errors->has('alamat'))
+                                            <span class="form-text text-danger">
+                                                <small>{{ $errors->first('alamat')}}</small>
+                                            </span>
+                                        @endif
+                                        </div>
                                    
                                     <div class="wrap-input100" style="margin-top:-20px;">
                                         <span class="label-input100">Pilih Provinsi</span>

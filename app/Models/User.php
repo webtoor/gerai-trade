@@ -21,6 +21,7 @@ class User extends Authenticatable
         'nomor_ponsel',
         'email',
         'password',
+        'status_mitra'
     ];
 
     /**
@@ -45,6 +46,6 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\User_role');
     }
     public function alamat(){
-        return $this->hasOne('App\Models\Alamat', 'user_id', 'user_id');
+        return $this->hasOne('App\Models\Alamat', 'user_id', 'id');
     }
 }

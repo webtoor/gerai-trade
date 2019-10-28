@@ -25,23 +25,23 @@
             >Kategori</a>
             <ul class="dropdown-menu mt-2 rounded-0  darken-4 border-0 z-depth-1">
               <li class="dropdown-item dropdown-submenu p-0">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle dropdown-item text-black w-100">Click Me Too! </a>
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle dropdown-item text-black w-100">A </a>
                 <ul class="dropdown-menu ml-0 rounded-0  darken-4 border-0 z-depth-1">
                   
                   <li class="dropdown-item p-0">
-                    <a href="#" class="dropdown-item text-black w-100">Hey</a>
+                    <a href="#" class="dropdown-item text-black w-100">A</a>
                   </li>
                   <li class="dropdown-item p-0">
-                    <a href="#" class="dropdown-item text-black w-100">Hi</a>
+                    <a href="#" class="dropdown-item text-black w-100">B</a>
                   </li>
                   <li class="dropdown-item dropdown-submenu p-0">
-                      <a href="#" data-toggle="dropdown" class="dropdown-toggle dropdown-item text-black w-100">Hello </a>
+                      <a href="#" data-toggle="dropdown" class="dropdown-toggle dropdown-item text-black w-100">D </a>
                       <ul class="dropdown-menu ml-0 rounded-0  darken-4 border-0 z-depth-1 r-100 ">
                         <li class="dropdown-item p-0">
-                          <a href="#" class="dropdown-item text-black w-100">Some</a>
+                          <a href="#" class="dropdown-item text-black w-100">C</a>
                         </li>
                         <li class="dropdown-item p-0">
-                          <a href="#" class="dropdown-item text-black w-100">Text</a>
+                          <a href="#" class="dropdown-item text-black w-100">D</a>
                         </li>
                         </ul>
                 </ul>
