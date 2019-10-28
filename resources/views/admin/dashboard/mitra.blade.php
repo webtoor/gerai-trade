@@ -12,6 +12,7 @@
         <table id="dataTable" class="table table-bordered" cellspacing="0" width="100%">
             <thead class="thead-light">
                 <tr>
+                    <th>#</th>
                     <th>Nama</th>
                     <th>Email</th>
                     <th>Nomor Ponsel</th>
@@ -22,6 +23,7 @@
                 <?php $i = 1; ?>
                 @foreach ($mitra as $mitras)
                 <tr>
+                    <td>{{$i++}}</td>
                     <td>{{$mitras->user->nama_depan}} {{$mitras->user->nama_belakang}}</td>
                     <td>{{$mitras->user->email}}</td>
                     <td>{{$mitras->user->nomor_ponsel}}</td>

@@ -1,12 +1,15 @@
 <div class="col-sm-2 my-2">
     <div class="card">
         <div class="list-group">
-            <p class="list-group-item border-bottom-0">
-                <b>  {{Auth::user()->nama_depan}}
-                        {{Auth::user()->nama_belakang}}</b>
-              </p>
 
-              <p class="list-group-item border-top-0">
+          <div style="text-align:center">
+              <p class="list-group-item border-bottom-0">
+                  <b>  {{Auth::user()->nama_depan}}
+                          {{Auth::user()->nama_belakang}}</b>
+                </p>
+          </div>
+          
+              <p class="list-group-item border-top-0" style="margin-top:-10px;">
                 <img src="images/profiluser.png" style="width: 152px;">
               </p>
 

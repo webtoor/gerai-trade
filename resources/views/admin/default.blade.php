@@ -11,6 +11,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 	<link href="{{ mix('/css/app.css') }}" rel="stylesheet"> 
 	{{-- <link href="{{ mix('/css/rtl.css') }}" rel="stylesheet">  --}}
 	

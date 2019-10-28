@@ -34,7 +34,7 @@
    
 
 
-Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['auth']], function(){
+Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']], function(){
 
 Route::get('/', 'HomeController@index')->name('home');
 

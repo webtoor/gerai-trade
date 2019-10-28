@@ -22,7 +22,7 @@ class MemberMiddleware
         $user = $request->user()->role;
 
         if ($user) {
-            if ($user->role_id == '1') {
+            if (($user->role_id == '1') || ($user->role_id == '2')) {
                 return $next($request);
             }
         }
