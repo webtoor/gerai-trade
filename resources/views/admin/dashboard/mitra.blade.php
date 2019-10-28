@@ -70,7 +70,7 @@
                 <div class="form-group col-md-6">
                     <label>Provinsi</label>
                         <select class="form-control" name="provinsi" id="selectProvinsi" required>
-                            <option selected value="">Pilih Provinsi</option>
+                            <option selected value="0">Pilih Provinsi</option>
                             @foreach ($provinsi as $provinsi_item)
                             <option value="{{$provinsi_item->id}}">{{$provinsi_item->name}}</option>
                             @endforeach
@@ -78,9 +78,8 @@
                 </div>
                 <div class="form-group col-md-6">
                         <label>Kota atau Kabupaten</label>
-                            <select class="form-control" name="kota_kabupaten" id="kotaKab" required disabled>
+                            <select class="form-control" name="kota_kabupaten" id="kotaKab" required disabled="disabled">
                                 <option selected value="">Pilih Kota/Kabupaten</option>
-                                <option value="1">Male</option>
                             </select>
                     </div>
               
@@ -101,6 +100,16 @@ $(document).ready(function () {
     var optionSelected = $("option:selected", this);
     var valueSelected = this.value;
     console.log(valueSelected)
+    if(valueSelected != 0){
+        $("#kotaKab").prop('disabled', false);
+        $("#kotaKab option").remove();
+
+    }else{
+        $("#kotaKab").prop('disabled', true);
+        $('#kotaKab').append($('<option>', {value:'0', text:'Pilih Kota/Kabupaten'}, '</option>'));
+
+    }
+
     $.ajax({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -111,8 +120,8 @@ $(document).ready(function () {
         url: "ajax-kota-kab/" + valueSelected,
         success: function (results) {
           console.log(results);
-          $.each( results, function(k, v) {
-                $('#kotaKab').append($('<option>', {value:k, text:v}));
+          $.each( results['data'], function(id, name) {
+                $('#kotaKab').append($('<option>', {value:id['id'], text:name['name']}, '</option>'));
            })
           }
 
