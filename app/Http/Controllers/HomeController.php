@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Provinsi;
 
 class HomeController extends Controller
 {
@@ -24,5 +25,12 @@ class HomeController extends Controller
     public function index()
     {
         return view('users.index');
+    }
+
+    public function daftarMitra()
+    {
+        $provinsi = Provinsi::all();
+
+        return view('users.daftarMitra', ['provinsi' => $provinsi]);
     }
 }

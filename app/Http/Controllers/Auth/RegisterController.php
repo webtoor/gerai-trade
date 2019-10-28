@@ -93,12 +93,15 @@ class RegisterController extends Controller
                 'nomor_ponsel' => $data['nomor_ponsel'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
+                'status_mitra' => '0',
             ]);
 
             User_role::create([
                 'user_id' => $result->id,
                 'role_id' => '1'
             ]);
+
+            return view('auth.login');
         } catch (\Throwable $th) {
             //throw $th;
         }

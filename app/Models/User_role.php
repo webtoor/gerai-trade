@@ -16,5 +16,8 @@ class User_role extends Model
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
+    public function alamat(){
+        return $this->hasOne('App\Models\Alamat', 'user_id', 'user_id');
+    }
    
 }

@@ -18,4 +18,17 @@ class Alamat extends Model
         'kecamatan_id',
         'kelurahan_desa_id'
     ];
+
+    public function provinsi(){
+        return $this->hasOne('App\Models\Provinsi', 'id', 'provinsi_id');
+    }
+    public function kota_kabupatens(){
+        return $this->hasOne('App\Models\KotaKabupaten', 'id', 'kota_kabupaten_id');
+    }
+    public function kecamatans(){
+        return $this->hasOne('App\Models\Kecamatan', 'id', 'kecamatan_id');
+    }
+    public function kelurahan_desa(){
+        return $this->hasOne('App\Models\KelurahanDesa', 'id', 'kelurahan_desa_id');
+    }
 }

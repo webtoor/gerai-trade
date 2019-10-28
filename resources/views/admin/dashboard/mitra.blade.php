@@ -6,32 +6,68 @@
     <h4 class="c-blue-900"><b>Data Mitra</b></h4>
 </div>
 <div class="bgc-white p-20 bd">
-    <button data-toggle="modal" data-target="#addMitra" class="btn btn-primary btn-md" title="{{ trans('app.add_button') }}">
+    <button data-toggle="modal" data-target="#addMitra" class="btn btn-primary btn-md" title="{{ trans('Tambah Mitra') }}">
         <b><i class="fa fa-plus"></i> Tambah Mitra</b></button>
     <div class="mT-30">
         <table id="dataTable" class="table table-bordered" cellspacing="0" width="100%">
             <thead class="thead-light">
                 <tr>
-                    <th>#</th>
                     <th>Nama</th>
                     <th>Email</th>
                     <th>Nomor Ponsel</th>
                     <th>Join</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $i = 1; ?>
                 @foreach ($mitra as $mitras)
                 <tr>
-                    <td>{{$i++}}</td>
                     <td>{{$mitras->user->nama_depan}} {{$mitras->user->nama_belakang}}</td>
                     <td>{{$mitras->user->email}}</td>
                     <td>{{$mitras->user->nomor_ponsel}}</td>
-                    <td>{{ date("j M Y", strtotime($mitras->user->created_at))}}</td>
+                    <td>{{ date("j M Y", strtotime($mitras->user->updated_at))}}</td>
+                    <td>
+                        <ul class="list-inline">
+                                <li class="list-inline-item">
+                                    <button id="showModalMitra" data-toggle="modal" data-target="#showMitra" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"
+                                data-nama="{{$mitras->user->nama_depan}} {{$mitras->user->nama_belakang}}" data-alamat="{{$mitras->alamat['alamat']}}" data-provinsi="{{$mitras->alamat['provinsi']['name']}}"
+                                data-kota_kabs="{{$mitras->alamat['kota_kabupatens']['name']}}" data-kecamatans="{{$mitras->alamat['kecamatans']['name']}}" data-kel_dess="{{$mitras->alamat['kelurahan_desa']['name']}}"
+                                >
+                                        <span class="ti-zoom-in"></span>
+                                </button>
+                                </li>
+                        </ul>
+                    </td>
+                  
                 </tr>
                 @endforeach
             </tbody>
         </table>
+    </div>
+</div>
+
+<div class="modal fade" id="showMitra" tabindex="-1" role="dialog" aria-labelledby="showMitraLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="showMitraLabel">Detail Mitra</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+          <div id="nama"> </div>
+          <div id="alamat"> </div>
+          <div id="provinsi"> </div>
+          <div id="kota_kabs"> </div>
+          <div id="kecamatans"> </div>
+          <div id="kel_dess"> </div>
+          </div>
+        <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -117,7 +153,6 @@
                 </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary btn-md">Submit</button>
             </div>
             {!! Form::close() !!}
@@ -228,6 +263,25 @@ $(document).ready(function () {
 
       });
     });
+
+    $("button#showModalMitra").click(function () {
+            var nama = $(this).data('nama');
+            var alamat = $(this).data('alamat');
+            var provinsi = $(this).data('provinsi');
+            var kota_kabs = $(this).data('kota_kabs');
+            var kecamatans = $(this).data('kecamatans');
+            var kel_dess = $(this).data('kel_dess');
+
+            $('#nama').html('Nama : '+ nama);
+            $('#alamat').html('Alamat : '+ alamat);
+            $('#provinsi').html('Provinsi : '+ provinsi);
+            $('#kota_kabs').html('Kota/Kabupaten : '+ kota_kabs);
+            $('#kecamatans').html('Kecamatan : '+ kecamatans);
+            $('#kel_dess').html('Kelurahan/Desa : '+ kel_dess);
+
+
+
+        });
 });
 </script>
 

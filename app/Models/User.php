@@ -44,4 +44,7 @@ class User extends Authenticatable
     public function role(){
         return $this->hasOne('App\Models\User_role');
     }
+    public function alamat(){
+        return $this->hasOne('App\Models\Alamat', 'user_id', 'user_id');
+    }
 }

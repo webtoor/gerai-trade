@@ -14,7 +14,12 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard.index');
+        $member = User_role::where('role_id', '1')->get();
+        $mitra = User_role::where('role_id', '2')->get();
+        $reqMitra = User::with(['alamat' => function ($query) {
+            $query->with('provinsi', 'kota_kabupatens', 'kecamatans', 'kelurahan_desa')->where(['jenis_alamat_id' => '1']);
+        } ])->where(['status_mitra' => '2'])->get();
+        return view('admin.dashboard.index', ['jumlah_member' => count($member), 'jumlah_mitra' => count($mitra), 'request_mitra' => $reqMitra]);
     }
 
     public function showMember(){
@@ -27,8 +32,11 @@ class AdminController extends Controller
     }
 
     public function showMitra(){
+      
         try {
-            $mitra = User_role::with('user')->where('role_id', '2')->get();
+            $mitra = User_role::with(['user', 'alamat' => function ($query) {
+                $query->with('provinsi', 'kota_kabupatens', 'kecamatans', 'kelurahan_desa')->where(['jenis_alamat_id' => '1']);
+            } ])->where('role_id', '2')->OrderBy('id', 'desc')->get();
             $provinsi = Provinsi::all();
             return view('admin.dashboard.mitra', ['mitra' => $mitra, 'provinsi' => $provinsi]);
 
@@ -48,7 +56,7 @@ class AdminController extends Controller
             'kota_kabupaten' => ['required'],
             'kecamatan' => ['required'],
             'kelurahan_desa' => ['required'],
-            'password' => ['required', 'string', 'min:5', 'confirmed'],
+            'password' => ['required', 'string', 'min:3', 'confirmed'],
         ]); 
 
         try {
@@ -74,6 +82,7 @@ class AdminController extends Controller
                 'kecamatan_id' => $data['kecamatan'],
                 'kelurahan_desa_id' => $data['kelurahan_desa']
             ]);
+            return back()->withSuccess(trans('Anda Berhasil menambahkan mitra')); 
         } catch (\Exception $e) {
             
         }
