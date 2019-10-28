@@ -42,7 +42,9 @@
 Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']], function(){
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('daftar-mitra', 'HomeController@daftarMitra')->name('daftarMitra');
+Route::get('daftar-mitra', 'HomeController@showDaftarMitra')->name('showDaftarMitra');
+Route::post('daftar-mitra', 'HomeController@insertDaftarMitra')->name('insertDaftarMitra');
+
 
 
 });  

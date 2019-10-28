@@ -14,7 +14,7 @@
               </p>
 
            
-            <a href="{{route('home.daftarMitra')}}" class="list-group-item border-top-0">
+            <a href="{{route('home.showDaftarMitra')}}" class="list-group-item border-top-0">
               @if(Auth::user()->role->role_id == '1')
             <button class="btn btn-primary btn-sm btn-block">Daftar Mitra</button>
               @else

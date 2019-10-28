@@ -53,18 +53,18 @@
                             <div class="login100-more" style="">
                                  
                             </div>
-                    
+                          
                             <div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
-                                    <a href="/register" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-5">
+                                    <a href="/home" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-5">
                                         <i class="fa fa-long-arrow-left m-l-5"></i>  Kembali
                                     </a>
-                        
-                                <form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
-                                    @csrf
+                                    <form class="login100-form" method="POST" action="{{ route('home.insertDaftarMitra') }}">
+                                            @csrf
+                                   
                                     <span class="login100-form-title p-b-59">
                                        Jadilah Mitra Kami
                                     </span>
-                    
+                                   
                                     <div class="wrap-input100" style="margin-top:-20px;">
                                         <span class="label-input100">Pilih Provinsi</span>
                                         <select class="input100" name="provinsi" id="selectProvinsi" required>
@@ -108,14 +108,15 @@
                                     <div class="container-login100-form-btn" style="margin-top:-20px">
                                         <div class="wrap-login100-form-btn">
                                             <div class="login100-form-bgbtn"></div>
-                                            <button class="login100-form-btn" type="submit">
+                                            <button class="login100-form-btn" type="submit" id="submits">
                                                 Submit
                                             </button>
                                         </div>
-                                </form>
                     
                                
                             </div>
+                        </form>
+
                         </div>
                     </div>
                     </div>       
@@ -144,6 +145,18 @@
     </script>
     <script>
     $(document).ready(function () {
+        $('button#submits').click(function () {
+        var provinsi = $("#selectProvinsi").val();
+        var kota_kab = $("#selectKotaKab").val();
+        var kecamatanz = $("#selectKecamatan").val();
+        var kelurahan = $("#selectKelurahanDesa").val();
+        if((provinsi == undefined) || (kota_kab == undefined) || (kecamatanz == undefined) ||(kelurahan == undefined)){
+            alert('Provinsi, Kota/Kabupaten, Kecamatan dan Kelurahan/Desa Harus diisi!!!')
+            return false;
+        }else{
+            return true;
+        }
+    });
     $('select#selectProvinsi').on('change', function (e) {
     let optionSelected = $("option:selected", this);
     let valueSelected = this.value;
@@ -155,10 +168,10 @@
     }else{
         $("#selectKotaKab").prop('disabled', true);
         $("#selectKotaKab option").remove();
-        $('#selectKotaKab').append($('<option>', {value:'0', text:'Pilih Kota/Kabupaten'}, '</option>'));
+        $('#selectKotaKab').append($('<option>', {value:'', text:'Pilih Kota/Kabupaten'}, '</option>'));
         $("#selectKecamatan").prop('disabled', true);
         $("#selectKecamatan option").remove();
-        $('#selectKecamatan').append($('<option>', {value:'0', text:'Pilih Kecamatan'}, '</option>'));
+        $('#selectKecamatan').append($('<option>', {value:'', text:'Pilih Kecamatan'}, '</option>'));
     }
 
     $.ajax({
@@ -190,7 +203,7 @@
 
     }else{
         $("#selectKecamatan").prop('disabled', true);
-        $('#selectKecamatan').append($('<option>', {value:'0', text:'Pilih Kecamatan'}, '</option>'));
+        $('#selectKecamatan').append($('<option>', {value:'', text:'Pilih Kecamatan'}, '</option>'));
 
     }
 
@@ -223,7 +236,7 @@
 
     }else{
         $("#selectKelurahanDesa").prop('disabled', true);
-        $('#selectKelurahanDesa').append($('<option>', {value:'0', text:'Pilih Kelurahan/Desa'}, '</option>'));
+        $('#selectKelurahanDesa').append($('<option>', {value:'', text:'Pilih Kelurahan/Desa'}, '</option>'));
 
     }
 
@@ -244,6 +257,7 @@
 
       });
     });
+  
 });
     </script>
 <!--===============================================================================================-->

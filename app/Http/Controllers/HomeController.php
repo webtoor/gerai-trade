@@ -27,10 +27,14 @@ class HomeController extends Controller
         return view('users.index');
     }
 
-    public function daftarMitra()
+    public function showDaftarMitra()
     {
         $provinsi = Provinsi::all();
 
         return view('users.daftarMitra', ['provinsi' => $provinsi]);
+    }
+
+    public function insertDaftarMitra(Request $request){
+        return $request;
     }
 }
