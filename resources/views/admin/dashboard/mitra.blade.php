@@ -69,18 +69,18 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label>Provinsi</label>
-                        <select class="form-control" name="provinsi" id="provinsi" required>
-                            <option selected>Pilih Provinsi</option>
-                            <option value="1">Male</option>
-                            <option value="0">Female</option>
+                        <select class="form-control" name="provinsi" id="selectProvinsi" required>
+                            <option selected value="">Pilih Provinsi</option>
+                            @foreach ($provinsi as $provinsi_item)
+                            <option value="{{$provinsi_item->id}}">{{$provinsi_item->name}}</option>
+                            @endforeach
                         </select>
                 </div>
                 <div class="form-group col-md-6">
                         <label>Kota atau Kabupaten</label>
-                            <select class="form-control" name="provinsi" id="provinsi" required>
-                                <option selected>Pilih Provinsi</option>
+                            <select class="form-control" name="kota_kabupaten" id="kotaKab" required disabled>
+                                <option selected value="">Pilih Kota/Kabupaten</option>
                                 <option value="1">Male</option>
-                                <option value="0">Female</option>
                             </select>
                     </div>
               
@@ -93,4 +93,32 @@
           </div>
         </div>
       </div>
+@endsection
+@section('js')
+<script>
+$(document).ready(function () {
+    $('select#selectProvinsi').on('change', function (e) {
+    var optionSelected = $("option:selected", this);
+    var valueSelected = this.value;
+    console.log(valueSelected)
+    $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        contentType: "application/json",
+        dataType: "json",
+        type: 'GET',
+        url: "ajax-kota-kab/" + valueSelected,
+        success: function (results) {
+          console.log(results);
+          $.each( results, function(k, v) {
+                $('#kotaKab').append($('<option>', {value:k, text:v}));
+           })
+          }
+
+      });
+    });
+});
+</script>
+
 @endsection

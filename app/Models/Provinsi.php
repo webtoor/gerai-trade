@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Rf_provinsi extends Model
+class Provinsi extends Model
 {
-    protected $table = 'rf_provinsies';
+    protected $table = 'provinces';
     public $timestamps = false;
 
     protected $fillable = [
-        'provinsi'
+        'name'
     ];
 }

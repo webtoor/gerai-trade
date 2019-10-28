@@ -25,7 +25,8 @@
         Route::get('member', 'AdminController@showMember')->name('showMember');
 
         Route::get('mitra', 'AdminController@showMitra')->name('showMitra');
-    
+        Route::get('ajax-kota-kab/{provinsi_id}', 'AdminController@ajaxKotaKab');
+
         
         });  
   
