@@ -29,6 +29,8 @@
         Route::get('kelola-kategori', 'AdminController@kelolaKategori')->name('kelola-kategori');
         Route::post('kategori', 'KategoriController@addKategori')->name('add-kategori');
         Route::put('kategori', 'KategoriController@updateKategori')->name('update-kategori');
+        Route::post('sub-kategori', 'KategoriController@addSubKategori')->name('add-subkategori');
+        Route::put('sub-kategori', 'KategoriController@updateSubKategori')->name('update-subkategori');
 
         Route::get('member', 'AdminController@showMember')->name('showMember');
 

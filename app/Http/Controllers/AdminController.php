@@ -10,6 +10,7 @@ use App\Models\User_role;
 use App\Models\Provinsi;
 use App\Models\Alamat;
 use App\Models\Kategori;
+use App\Models\SubKategori;
 
 class AdminController extends Controller
 {
@@ -37,7 +38,9 @@ class AdminController extends Controller
 
     public function kelolaKategori(){
         $kategori = Kategori::all();
-        return view('admin.dashboard.kelolaKategori', ['kategori' => $kategori]);
+        $sub_kategori = SubKategori::with('kategori')->get();
+
+        return view('admin.dashboard.kelolaKategori', ['kategori' => $kategori, 'sub_kategori' => $sub_kategori]);
 
     }
 
