@@ -25,6 +25,8 @@
     Route::group(['prefix'=> 'admin-panel', 'as'=> 'admin-panel' . '.', 'middleware' => ['admin']], function(){
 
         Route::get('/', 'AdminController@index')->name('admin');
+        Route::put('verifikasi', 'AdminController@updateStatusMitra')->name('verifikasi');
+
         Route::get('member', 'AdminController@showMember')->name('showMember');
 
         Route::get('mitra', 'AdminController@showMitra')->name('showMitra');

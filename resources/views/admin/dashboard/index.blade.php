@@ -77,7 +77,7 @@
                                 </button>
                                 </li>
                                 <li class="list-inline-item">
-                                        <button id="#" data-toggle="modal" data-target="#updateStatusMitra" title="{{ trans('Verifikasikan') }}" class="btn btn-success px-3 btn-sm">
+                                <button data-id="{{$items->id}}" id="updateModalMitra" data-toggle="modal" data-target="#updateStatusMitra" title="{{ trans('Verifikasikan') }}" class="btn btn-success px-3 btn-sm">
                                             <span class="ti-check"></span>
                                     </button>
                                     </li>
@@ -117,6 +117,8 @@
 
         <div class="modal fade" id="updateStatusMitra" tabindex="-1" role="dialog" aria-labelledby="updateStatusMitraLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
+             {!! Form::open([ 'route' => ['admin-panel.verifikasi'], 'method' => "PUT"])!!}
+
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="updateStatusMitraLabel">Konfirmasi</h5>
@@ -128,10 +130,12 @@
                     <p>Apakah Anda setuju user ini menjadi Mitra?</p>
               </div>
             <div class="modal-footer">
+                    <input type="hidden" id="user_id" name="user_id">
                     <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary btn-md">Ya</button>
                 </div>
             </div>
+            {!! Form::close() !!}
         </div>
     </div>
 @endsection
@@ -156,6 +160,12 @@ $(document).ready(function () {
             $('#kel_dess').html('Kelurahan/Desa : '+ kel_dess);
 
         });
+
+    $("button#updateModalMitra").click(function () {
+        var user_id = $(this).data('id');
+        $('#user_id').val(user_id);
+
+    });
 });
 </script>
 

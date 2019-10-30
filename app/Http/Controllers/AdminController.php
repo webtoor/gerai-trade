@@ -22,6 +22,18 @@ class AdminController extends Controller
         return view('admin.dashboard.index', ['jumlah_member' => count($member), 'jumlah_mitra' => count($mitra), 'request_mitra' => $reqMitra]);
     }
 
+    public function updateStatusMitra(Request $request){
+        $user = User::findOrFail($request->user_id)->update([
+            'status_mitra' => '1'
+        ]);
+        User_role::where('user_id', $request->user_id)->update([
+            'role_id' => '2'
+        ]);
+
+        return back()->withSuccess(trans('Berhasil, user tersebut telah menjadi Mitra')); 
+
+    }
+
     public function showMember(){
         try {
             $member = User_role::with('user')->where('role_id', '1')->get();
@@ -66,6 +78,7 @@ class AdminController extends Controller
                 'nomor_ponsel' => $data['nomor_ponsel'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
+                'status_mitra' => '1'
             ]);
 
             User_role::create([
