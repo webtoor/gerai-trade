@@ -8,4 +8,18 @@ export default (function () {
 		responsive:true,
 		"oSearch": {"bSmart": false},
 	});
+
+	$('#kelolaKategori').DataTable({
+		aaSorting: [],
+		responsive:true,
+		"searching": false
+		
+	});
+
+	$('#kelolaSubKategori').DataTable({
+		aaSorting: [],
+		responsive:true,
+		"searching": false
+		
+	});
 }());

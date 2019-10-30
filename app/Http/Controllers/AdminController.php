@@ -34,6 +34,11 @@ class AdminController extends Controller
 
     }
 
+    public function kelolaKategori(){
+        return view('admin.dashboard.kelolaKategori');
+
+    }
+
     public function showMember(){
         try {
             $member = User_role::with('user')->where('role_id', '1')->get();

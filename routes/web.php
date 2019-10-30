@@ -26,6 +26,8 @@
 
         Route::get('/', 'AdminController@index')->name('admin');
         Route::put('verifikasi', 'AdminController@updateStatusMitra')->name('verifikasi');
+        Route::get('kelola-kategori', 'AdminController@kelolaKategori')->name('kelola-kategori');
+        Route::post('kategori', 'KategoriController@addKategori')->name('add-kategori');
 
         Route::get('member', 'AdminController@showMember')->name('showMember');
 

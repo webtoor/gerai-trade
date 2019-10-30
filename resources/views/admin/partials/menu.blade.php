@@ -29,12 +29,20 @@
         <span class="title">Dashboard</span>
     </a>
 </li>
-<li class="nav-item dropdown">
+<li class="nav-item">
+    <a class="sidebar-link" href="{{ route('admin-panel.kelola-kategori') }}">
+        <span class="icon-holder">
+            <i class="c-orange-500 ti-layers-alt"></i>
+        </span>
+        <span class="title">Kelola Kategori</span>
+    </a>
+</li>
+  <li class="nav-item dropdown">
     <a class="dropdown-toggle" href="javascript:void(0);">
       <span class="icon-holder">
-          <i class="c-red-500 ti-user"></i>
+          <i class="c-green-500 ti-user"></i>
         </span>
-      <span class="title">User</span>
+      <span class="title">Kelola User</span>
       <span class="arrow">
           <i class="ti-angle-right"></i>
         </span>
