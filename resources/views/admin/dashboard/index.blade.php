@@ -62,7 +62,6 @@
                     <tbody>
                         @foreach ($request_mitra as $items)
                             
-                        @endforeach
                         <tr>
                         <td>{{$items->nama_depan}} {{$items->nama_belakang}}</td>
                         <td>{{$items->email}}</td>
@@ -78,7 +77,7 @@
                                 </button>
                                 </li>
                                 <li class="list-inline-item">
-                                        <button id="#" data-toggle="#" data-target="#" title="{{ trans('Verifikasikan') }}" class="btn btn-success px-3 btn-sm">
+                                        <button id="#" data-toggle="modal" data-target="#updateStatusMitra" title="{{ trans('Verifikasikan') }}" class="btn btn-success px-3 btn-sm">
                                             <span class="ti-check"></span>
                                     </button>
                                     </li>
@@ -86,6 +85,8 @@
                             </td>
                           
                         </tr>
+                        @endforeach
+
                     </tbody>
                 </table>
             </div>
@@ -108,11 +109,31 @@
                   <div id="kel_dess"> </div>
                   </div>
                 <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Tutup</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="updateStatusMitra" tabindex="-1" role="dialog" aria-labelledby="updateStatusMitraLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="updateStatusMitraLabel">Konfirmasi</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah Anda setuju user ini menjadi Mitra?</p>
+              </div>
+            <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary btn-md">Ya</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('js')
 <script>

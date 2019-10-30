@@ -65,7 +65,7 @@
           <div id="kel_dess"> </div>
           </div>
         <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>
@@ -100,7 +100,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label>Nomor Ponsel</label>
-                        <input type="text" name="nomor_ponsel" class="form-control" placeholder="Masukan Nomor Ponsel" required>
+                        <input type="number" name="nomor_ponsel" class="form-control" placeholder="Masukan Nomor Ponsel" required>
                     </div>
             </div>
             <div class="form-row">

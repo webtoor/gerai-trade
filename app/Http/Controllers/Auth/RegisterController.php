@@ -101,7 +101,7 @@ class RegisterController extends Controller
                 'role_id' => '1'
             ]);
 
-            return view('auth.login');
+            return redirect()->route('login' );
         } catch (\Throwable $th) {
             //throw $th;
         }
