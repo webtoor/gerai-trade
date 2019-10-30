@@ -23,4 +23,22 @@ class KategoriController extends Controller
         }
 
     }
+    public function updateKategori(Request $request){
+        $data = $request->validate([
+            'kategori_id' => 'required',
+            'kategori_name' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:20'],
+        ]);
+
+        try {
+            Kategori::findOrFail($data['kategori_id'])->update([
+                'kategori_name' => $data['kategori_name']
+            ]);
+            return back()->withSuccess(trans('Berhasil, Mengubah Kategori')); 
+
+
+        } catch (\Exception $e) {
+            return $e;
+        }
+
+    }
 }

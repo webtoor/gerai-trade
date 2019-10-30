@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\User_role;
 use App\Models\Provinsi;
 use App\Models\Alamat;
+use App\Models\Kategori;
 
 class AdminController extends Controller
 {
@@ -35,7 +36,8 @@ class AdminController extends Controller
     }
 
     public function kelolaKategori(){
-        return view('admin.dashboard.kelolaKategori');
+        $kategori = Kategori::all();
+        return view('admin.dashboard.kelolaKategori', ['kategori' => $kategori]);
 
     }
 
