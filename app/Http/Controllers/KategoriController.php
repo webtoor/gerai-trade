@@ -12,10 +12,12 @@ class KategoriController extends Controller
         $data = $request->validate([
             'nama_kategori' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:20'],
         ]);
-
+        $slug = strtolower($data['nama_kategori']);
+        $slug_kategori= preg_replace('/\s+/', '-', $slug);
         try {
             Kategori::create([
-                'kategori_name' => $data['nama_kategori']
+                'kategori_name' => $data['nama_kategori'],
+                'slug' => $slug_kategori
             ]);
             return back()->withSuccess(trans('Berhasil, Menambahkan Kategori')); 
 
@@ -30,10 +32,12 @@ class KategoriController extends Controller
             'kategori_id' => 'required',
             'kategori_name' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:20'],
         ]);
-
+        $slug = strtolower($data['kategori_name']);
+        $slug_kategori= preg_replace('/\s+/', '-', $slug);
         try {
             Kategori::findOrFail($data['kategori_id'])->update([
-                'kategori_name' => $data['kategori_name']
+                'kategori_name' => $data['kategori_name'],
+                'slug' => $slug_kategori
             ]);
             return back()->withSuccess(trans('Berhasil, Mengubah Kategori')); 
 
