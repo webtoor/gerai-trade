@@ -95,4 +95,8 @@ class KategoriController extends Controller
         }
 
     }
+
+    public function showKategori($slug){
+        return $slug;
+    }
 }

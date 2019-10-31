@@ -26,7 +26,7 @@
             <ul class="dropdown-menu mt-2 rounded-0  darken-4 border-0 z-depth-1">
               @foreach ($kategori as $kategories)
               @if(count($kategories->sub_kategori) == 0 )
-              <a class="dropdown-item" href="#">{{$kategories->kategori_name}}</a>
+            <a class="dropdown-item" href="{{ url('k/'.$kategories->slug) }}">{{$kategories->kategori_name}}</a>
               @else
               <li class="dropdown-item dropdown-submenu p-0">
 
@@ -36,7 +36,7 @@
                     @foreach ($kategories->sub_kategori as $sub_kategories)
 
                   <li class="dropdown-item p-0">
-                    <a href="#" class="dropdown-item text-black w-100">{{$sub_kategories->subkategori_name}}</a>
+                    <a href="{{ url('k/'.$sub_kategories->slug) }}" class="dropdown-item text-black w-100">{{$sub_kategories->subkategori_name}}</a>
                   </li>
                   @endforeach
 
