@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Provinsi;
 use App\Models\Alamat;
 use App\Models\User;
+use App\Models\Kategori;
 
 class HomeController extends Controller
 {
@@ -17,7 +18,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        /* $this->middleware('auth'); */
     }
 
     /**
@@ -27,7 +28,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('users.index');
+        $kategori =  Kategori::with('sub_kategori')->get();
+        return view('users.index', ['kategori' => $kategori]);
     }
 
     public function showDaftarMitra()

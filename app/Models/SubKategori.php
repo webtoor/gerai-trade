@@ -11,7 +11,8 @@ class SubKategori extends Model
 
     protected $fillable = [
         'kategori_id',
-        'subkategori_name'
+        'subkategori_name',
+        'slug'
     ];
 
 

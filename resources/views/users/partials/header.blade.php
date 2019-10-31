@@ -24,44 +24,32 @@
             <a href="#" id="menu" data-toggle="dropdown" class="nav-link dropdown-toggle  " 
             >Kategori</a>
             <ul class="dropdown-menu mt-2 rounded-0  darken-4 border-0 z-depth-1">
+              @foreach ($kategori as $kategories)
+              @if(count($kategories->sub_kategori) == 0 )
+              <a class="dropdown-item" href="#">{{$kategories->kategori_name}}</a>
+              @else
               <li class="dropdown-item dropdown-submenu p-0">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle dropdown-item text-black w-100">A </a>
+
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle dropdown-item text-black w-100">{{$kategories->kategori_name}} </a>
+                    
                 <ul class="dropdown-menu ml-0 rounded-0  darken-4 border-0 z-depth-1">
-                  
+                    @foreach ($kategories->sub_kategori as $sub_kategories)
+
                   <li class="dropdown-item p-0">
-                    <a href="#" class="dropdown-item text-black w-100">A</a>
+                    <a href="#" class="dropdown-item text-black w-100">{{$sub_kategories->subkategori_name}}</a>
                   </li>
-                  <li class="dropdown-item p-0">
-                    <a href="#" class="dropdown-item text-black w-100">B</a>
-                  </li>
-                  <li class="dropdown-item dropdown-submenu p-0">
-                      <a href="#" data-toggle="dropdown" class="dropdown-toggle dropdown-item text-black w-100">D </a>
-                      <ul class="dropdown-menu ml-0 rounded-0  darken-4 border-0 z-depth-1 r-100 ">
-                        <li class="dropdown-item p-0">
-                          <a href="#" class="dropdown-item text-black w-100">C</a>
-                        </li>
-                        <li class="dropdown-item p-0">
-                          <a href="#" class="dropdown-item text-black w-100">D</a>
-                        </li>
-                        </ul>
+                  @endforeach
+
                 </ul>
+
               </li>
-             {{--  <li class="dropdown-item dropdown-submenu p-0">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle text-black w-100">Click me </a>
-                <ul class="dropdown-menu  ml-1 rounded-0   darken-4 border-0 z-depth-1 r-100 ">
-                  <li class="dropdown-item p-0">
-                    <a href="#" class="text-black w-100">How</a>
-                  </li>
-                  <li class="dropdown-item p-0">
-                    <a href="#" class="text-black w-100">are</a>
-                  </li>
-                  <li class="dropdown-item p-0">
-                      <a href="#" class="text-black w-100">you </a>
-                    </li>
-                </ul>
-              </li> --}}
+              @endif
+              @endforeach
+
             </ul>
+
           </li>
+
        
        </li>
             <li class="nav-item dropdown" style="margin-right:20px;">

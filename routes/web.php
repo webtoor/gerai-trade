@@ -12,9 +12,7 @@
 */
     Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
     Route::group(['middleware' => ['guest']], function(){
-        Route::get('/', function () {
-            return view('users.index'); 
-        });  
+            Route::get('/', 'HomeController@index');
     });
     Auth::routes();
 
