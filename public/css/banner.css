@@ -1,0 +1,156 @@
+/*--------------------------- Color variations ----------------------*/
+/* Medium Layout: 1280px */
+/* Tablet Layout: 768px */
+/* Mobile Layout: 320px */
+/* Wide Mobile Layout: 480px */
+/* =================================== */
+/*  Basic Style 
+/* =================================== */
+/* line 5, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_reset.scss */
+
+
+/* line 20, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_home.scss */
+.p1-gradient-bg, .primary-btn2, .primary-btn2.primary-border:hover, .banner-area, .category-area .content .content-overlay, .men-product-area .overlay-bg, .bottom, .countdown-area .view-btn:hover, .single-footer-widget .click-btn, .generic-banner, .top-section-area, .details-tab-navigation .nav-link:hover, .details-tab-navigation .nav-link.active, .quick-view-carousel-details .owl-controls .owl-dots .owl-dot.active:after, .organic-body .quick-view-carousel .owl-controls .owl-dots .owl-dot.active:after, .organic-body .organic, .organic-body .organic:hover, .checkput-login .top-title, .register-form, .mini-cart-2a.mini-cart-1 .mini-border, .mini-cart-2a.mini-cart-2 .mini-border, .mini-cart-2a.mini-cart-3 .mini-border, .mini-cart-2a.mini-cart-4 .mini-border, .mini-cart.mini-cart-1 .mini-border, .mini-cart.mini-cart-2 .mini-border, .mini-cart.mini-cart-3 .mini-border, .mini-cart.mini-cart-4 .mini-border, .item-cart, .submit-btn, .submit-btn.color-1, .submit-btn.color-2, .submit-btn.color-3, .submit-btn.color-4, .view-btn.color-1:after, .view-btn.color-2:after, .view-btn.color-3:after, .view-btn.color-4:after, .organic-section-title-left .carousel-trigger .prev-trigger:after, .organic-section-title-left .carousel-trigger .next-trigger:after, .single-search-product:before, .single-organic-product:after, .single-organic-product .bottom, .single-organic-product:hover .discount, .single-furniture-product .bottom, .single-furniture-product:hover .discount, .single-sidebar-product:before, .organic-breadcrumb, .grid-btn:hover, .list-btn:hover, .grid-btn.active, .list-btn.active, .pagination a.active, .pagination a:hover, .single-organic-product-list:after {
+  background-image: -moz-linear-gradient(45deg, #3f51b5 0%, #0277bd 45%, #03a9f4 100%);
+  background-image: -webkit-linear-gradient(45deg, #3f51b5 0%, #0277bd 45%, #03a9f4 100%);
+  background-image: -ms-linear-gradient(45deg, #3f51b5 0%, #0277bd 45%, #03a9f4 100%);
+}
+
+/* line 28, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_home.scss */
+.p1-gradient-color, .countdown-area .countdown .countdown-item .countdown-timer, .footer-social a:hover i, .single-footer-widget .bb-btn, .quick-view-content .price span, .quick-view-content .category span, .quick-view-content .view-full, .organic-body .quick-view-content .price span, .organic-body .quick-view-content .category span, .organic-body .quick-view-content .view-full, .organic-product-top .single-product-top:hover .product-title, .tab-navigation .nav-link:hover, .tab-navigation .nav-link.active, .mini-cart-2a.mini-cart-1 .middle h5 a:hover, .mini-cart-2a.mini-cart-1 .cross span:hover, .mini-cart-2a.mini-cart-2 .middle h5 a:hover, .mini-cart-2a.mini-cart-2 .cross span:hover, .mini-cart-2a.mini-cart-3 .middle h5 a:hover, .mini-cart-2a.mini-cart-3 .cross span:hover, .mini-cart-2a.mini-cart-4 .middle h5 a:hover, .mini-cart-2a.mini-cart-4 .cross span:hover, .mini-cart.mini-cart-1 .middle h5 a:hover, .mini-cart.mini-cart-1 .cross span:hover, .mini-cart.mini-cart-2 .middle h5 a:hover, .mini-cart.mini-cart-2 .cross span:hover, .mini-cart.mini-cart-3 .middle h5 a:hover, .mini-cart.mini-cart-3 .cross span:hover, .mini-cart.mini-cart-4 .middle h5 a:hover, .mini-cart.mini-cart-4 .cross span:hover, .single-search-product .desc .title:hover, .single-sidebar-product .desc .title:hover {
+  background: -moz-linear-gradient(45deg, #f6463d 0%, #f6398d 45%, #f52cdc 100%);
+  background: -webkit-linear-gradient(45deg, #f6463d 0%, #f6398d 45%, #f52cdc 100%);
+  background: -ms-linear-gradient(45deg, #f6463d 0%, #f6398d 45%, #f52cdc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+
+@media (max-width: 767px) {
+  /* line 195, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_home.scss */
+  .banner-area .fullscreen {
+    height: 700px !important;
+  }
+}
+
+@media (max-width: 991px) {
+  /* line 201, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_home.scss */
+  .banner-content {
+    text-align: center;
+  }
+}
+
+
+/* line 1233, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_common.scss */
+.organic-breadcrumb {
+  margin-bottom: 100px;
+  margin-top: 62px;
+}
+
+/* line 1238, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_common.scss */
+.breadcrumb-banner {
+  padding: 30px 0 50px 0;
+}
+
+/* line 1240, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_common.scss */
+.breadcrumb-banner h1 {
+  font-weight: 600;
+  color: #fff;
+}
+
+/* line 1244, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_common.scss */
+.breadcrumb-banner p {
+  margin-bottom: 0;
+  color: #fff;
+}
+
+/* line 1248, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_common.scss */
+.breadcrumb-banner nav {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  -webkit-justify-content: end;
+  -moz-justify-content: end;
+  justify-content: end;
+}
+
+/* line 1251, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_common.scss */
+.breadcrumb-banner nav a {
+  display: inline-block;
+  color: #fff;
+  font-weight: 400;
+}
+
+/* line 1255, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_common.scss */
+.breadcrumb-banner nav a i {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+/* line 1261, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_common.scss */
+.breadcrumb-banner .col-first {
+  margin-top: 20px;
+  width: 38%;
+  padding-right: 15px;
+}
+
+@media (max-width: 991px) {
+  /* line 1261, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_common.scss */
+  .breadcrumb-banner .col-first {
+    width: 40%;
+  }
+}
+
+@media (max-width: 991px) {
+  /* line 1261, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_common.scss */
+  .breadcrumb-banner .col-first {
+    width: 100%;
+    border-right: none;
+  }
+}
+
+/* line 1272, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_common.scss */
+.breadcrumb-banner .col-first nav {
+  margin-top: 20px;
+}
+
+/* line 1276, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_common.scss */
+.breadcrumb-banner .col-second {
+  margin-top: 20px;
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 991px) {
+  /* line 1276, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_common.scss */
+  .breadcrumb-banner .col-second {
+    width: 50%;
+  }
+}
+
+@media (max-width: 991px) {
+  /* line 1276, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_common.scss */
+  .breadcrumb-banner .col-second {
+    width: 100%;
+  }
+}
+
+/* line 1288, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_common.scss */
+.breadcrumb-banner .col-third {
+  margin-top: 20px;
+  width: 27%;
+}
+
+@media (max-width: 991px) {
+  /* line 1288, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_common.scss */
+  .breadcrumb-banner .col-third {
+    width: 100%;
+  }
+}
+

@@ -97,6 +97,14 @@ class KategoriController extends Controller
     }
 
     public function showKategori($slug){
-        return $slug;
+        $kategori =  Kategori::with('sub_kategori')->get();
+        $kategori_menu = Kategori::where('slug', $slug)->first();
+
+        if($kategori_menu){
+            $kategori_menu = $kategori_menu;
+        }else{
+            $kategori_menu = SubKategori::with('kategori')->where('slug', $slug)->first();
+        }
+        return view('users.kategori', ['kategori' => $kategori, 'kategori_menu' => $kategori_menu]);
     }
 }
