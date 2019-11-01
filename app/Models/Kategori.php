@@ -10,7 +10,8 @@ class Kategori extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'kategori_name'
+        'kategori_name',
+        'slug'
     ];
 
     public function sub_kategori(){

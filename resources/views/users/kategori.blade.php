@@ -59,61 +59,6 @@
     </div>
 </section>
 <!-- End Banner Area -->
-<div class="container-fluid" style="padding-bottom:30px;">
-		<div class="row">
-			<div class="col-xl-3 col-lg-4 col-md-5">
-        <div class="sidebar-categories">
-        <div class="head">Kategori</div>
-        <ul class="main-categories" style="list-style-type:none;">
-            <li class="main-nav-list" >
-                <a data-toggle="collapse" href="#Kopi" aria-expanded="false" aria-controls="Kopi">
-                    <span
-                     class="lnr lnr-arrow-right"></span>Kopi</a>
-                <ul style="list-style-type:none;" class="collapse" id="Kopi" data-toggle="collapse" aria-expanded="false" aria-controls="Kopi">
-                    <li class="main-nav-list child"><a href="#" >Kopi Bubuk</a></li>
-                    <li class="main-nav-list child"><a href="#">Kopi Kemasan</a></li>
-                    <li class="main-nav-list child"><a href="#">Biji Kopi</a></li>
-                    
-                </ul>
-            </li>
-            <li class="main-nav-list"><a data-toggle="collapse" href="#Teh" aria-expanded="false" aria-controls="Teh"><span
-                class="lnr lnr-arrow-right"></span>Teh</a>
-           <ul class="collapse" id="Teh" data-toggle="collapse" aria-expanded="false" aria-controls="Teh">
-               <li class="main-nav-list child"><a href="#">Daun Teh</a></li>
-               <li class="main-nav-list child"><a href="#">Teh Bubuk</a></li>
-               <li class="main-nav-list child"><a href="#">Teh Kemasan</a></li>
-               
-           </ul>
-          </li>
-
-            <li class="main-nav-list">
-                <a data-toggle="collapse" href="#Beras" aria-expanded="false" aria-controls="Beras"><span
-                     class="lnr lnr-arrow-right"></span>Beras</a>
-                <ul class="collapse" id="Beras" data-toggle="collapse" aria-expanded="false" aria-controls="Beras">
-                    <li class="main-nav-list child"><a href="#">Beras Putih</a></li>
-                    <li class="main-nav-list child"><a href="#">Beras Merah</a></li>
-                    <li class="main-nav-list child"><a href="#">Beras Hitam</a></li>
-                    <li class="main-nav-list child"><a href="#">Beras Ketan</a></li>
-                </ul>
-            </li>
-            <li class="main-nav-list"><a data-toggle="collapse" href="#Minuman" aria-expanded="false" aria-controls="Minuman"><span
-                     class="lnr lnr-arrow-right"></span>Minuman Lainnya</a>
-                <ul class="collapse" id="Minuman" data-toggle="collapse" aria-expanded="false" aria-controls="Minuman">
-                    <li class="main-nav-list child"><a href="#">Madu</a></li>
-                    <li class="main-nav-list child"><a href="#">Minuman Tradisional</a></li>								
-                </ul>
-            </li>
-            <li class="main-nav-list"><a data-toggle="collapse" href="#Alat aria-expanded="false" aria-controls="Alat"><span
-                class="lnr lnr-arrow-right"></span>Alat-alat</a>
-          </li>
-            <li class="main-nav-list"><a data-toggle="collapse" href="#Jasa aria-expanded="false" aria-controls="Jasa"><span
-                class="lnr lnr-arrow-right"></span>Jasa</a>
-          </li>
-        </ul>
-    </div>
-            </div>
-        </div>
-    </div>
 
 
     <div class="container-fluid" style="padding-bottom:30px;">
@@ -131,10 +76,10 @@
                 @else
                 
                 <li class="main-nav-list" >
-                    <a data-toggle="collapse" href="#{{$kategories->kategori_name}}" aria-expanded="false" aria-controls="{{$kategories->kategori_name}}">
+                    <a data-toggle="collapse" href="#{{$kategories->slug}}" aria-expanded="false" aria-controls="{{$kategories->slug}}">
                         <span
                          class="lnr lnr-arrow-right"></span>{{$kategories->kategori_name}}</a>
-                    <ul style="list-style-type:none;" class="collapse" id="{{$kategories->kategori_name}}" data-toggle="collapse" aria-expanded="false" aria-controls="{{$kategories->kategori_name}}">
+                    <ul style="list-style-type:none;" class="collapse" id="{{$kategories->slug}}" data-toggle="collapse" aria-expanded="false" aria-controls="{{$kategories->slug}}">
                             @foreach ($kategories->sub_kategori as $sub_kategories)
 
                         <li class="main-nav-list child"><a href="#" >{{$sub_kategories->subkategori_name}}</a></li>
@@ -144,13 +89,6 @@
                 </li>
                 @endif
                 @endforeach
-
-                <li class="main-nav-list"><a data-toggle="collapse" href="#Alat aria-expanded="false" aria-controls="Alat"><span
-                    class="lnr lnr-arrow-right"></span>Alat-alat</a>
-              </li>
-                <li class="main-nav-list"><a data-toggle="collapse" href="#Jasa aria-expanded="false" aria-controls="Jasa"><span
-                    class="lnr lnr-arrow-right"></span>Jasa</a>
-              </li>
             </ul>
         </div>
                 </div>
