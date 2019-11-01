@@ -114,4 +114,46 @@
             </div>
         </div>
     </div>
+
+
+    <div class="container-fluid" style="padding-bottom:30px;">
+            <div class="row">
+                <div class="col-xl-3 col-lg-4 col-md-5">
+            <div class="sidebar-categories">
+            <div class="head">Kategori</div>
+            <ul class="main-categories" style="list-style-type:none;">
+                @foreach ($kategori as $kategories)
+
+                @if(count($kategories->sub_kategori) == 0 )
+                <li class="main-nav-list"><a data-toggle="collapse" href="#Alat aria-expanded="false" aria-controls="Alat"><span
+                    class="lnr lnr-arrow-right"></span>{{$kategories->kategori_name}}</a>
+              </li>
+                @else
+                
+                <li class="main-nav-list" >
+                    <a data-toggle="collapse" href="#{{$kategories->kategori_name}}" aria-expanded="false" aria-controls="{{$kategories->kategori_name}}">
+                        <span
+                         class="lnr lnr-arrow-right"></span>{{$kategories->kategori_name}}</a>
+                    <ul style="list-style-type:none;" class="collapse" id="{{$kategories->kategori_name}}" data-toggle="collapse" aria-expanded="false" aria-controls="{{$kategories->kategori_name}}">
+                            @foreach ($kategories->sub_kategori as $sub_kategories)
+
+                        <li class="main-nav-list child"><a href="#" >{{$sub_kategories->subkategori_name}}</a></li>
+                        @endforeach
+
+                    </ul>
+                </li>
+                @endif
+                @endforeach
+
+                <li class="main-nav-list"><a data-toggle="collapse" href="#Alat aria-expanded="false" aria-controls="Alat"><span
+                    class="lnr lnr-arrow-right"></span>Alat-alat</a>
+              </li>
+                <li class="main-nav-list"><a data-toggle="collapse" href="#Jasa aria-expanded="false" aria-controls="Jasa"><span
+                    class="lnr lnr-arrow-right"></span>Jasa</a>
+              </li>
+            </ul>
+        </div>
+                </div>
+            </div>
+        </div>
 @endsection
