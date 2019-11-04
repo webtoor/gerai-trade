@@ -37,6 +37,14 @@
         <span class="title">Kelola Kategori</span>
     </a>
 </li>
+<li class="nav-item">
+    <a class="sidebar-link" href="{{ route('admin-panel.kelola-produk') }}">
+        <span class="icon-holder">
+            <i class="c-purple-500 ti-shopping-cart"></i>
+        </span>
+        <span class="title">Kelola Produk</span>
+    </a>
+</li>
   <li class="nav-item dropdown">
     <a class="dropdown-toggle" href="javascript:void(0);">
       <span class="icon-holder">
