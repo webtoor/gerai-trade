@@ -74,7 +74,7 @@
 <!-- Modal -->
 <div class="modal fade" id="addMitra" tabindex="-1" role="dialog" aria-labelledby="addMitraLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-                {!! Form::open([ 'route' => ['admin-panel.addMitra'], 'method' => "POST"])!!}
+                {!! Form::open([ 'route' => ['admin-panel.insert-produk'], 'method' => "POST"])!!}
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="addMitraLabel">Tambah Mitra</h5>

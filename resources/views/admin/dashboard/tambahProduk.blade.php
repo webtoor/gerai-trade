@@ -8,7 +8,10 @@
     <h4 class="c-blue-900"><b>Tambah Produk</b></h4>
 </div>
 <div class="bgc-white p-20 bd">
-<form>
+  {{-- {!! Form::open([ 'route' => ['admin-panel.insert-produk'], 'method' => "POST"])!!} --}}
+  <form action=" {!! action('AdminProdukController@insert') !!}" method="POST" enctype="multipart/form-data">
+  {{ csrf_field() }}
+
     <div class="form-group">
             <label>Mitra</label>
             <select class="form-control" name="mitra_id" id="">
@@ -42,11 +45,16 @@
                        <textarea  id="deskripsi" name="deskripsi" class="form-control"></textarea>
                 </div>
                 <div class="form-group">
-                        <label>Stok</label>
-                        <input type="text" class="form-control" name="stok_produk" id="stok_produk" aria-describedby="emailHelp" placeholder="Masukan Stok Produk">
+                        <label>Stok <sup> *Hanya Angka</sup></label> 
+                        <input type="number" class="form-control" name="stok" id="stok_produk" aria-describedby="emailHelp" placeholder="Masukan Stok Produk">
+                    </div>
+                 <div class="form-group">
+                        <label>Harga <sup> *Hanya Angka</sup></label>
+                        <input type="number" class="form-control" name="harga" id="harga_produk" aria-describedby="emailHelp" placeholder="Masukan Harga Produk">
                     </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
+                {{-- {!! Form::close() !!} --}}
+                </form>
 </div>
 @endsection
 
@@ -64,7 +72,7 @@ $('select#kategori').on('change', function (e) {
     let optionSelected = $("option:selected", this);
     let valueSelected = this.value;
 
-    console.log(valueSelected)
+    //console.log(valueSelected)
     if(valueSelected != ''){
         $("#subkategori").prop('disabled', false);
         $("#subkategori option").remove();
@@ -86,9 +94,15 @@ $('select#kategori').on('change', function (e) {
         url: "get-subkategori/" + valueSelected,
         success: function (results) {
           console.log(results);
-          $.each( results['data'], function(index, data) {
+          if(results['data'].length > 0){
+          $.each(results['data'], function(index, data) {
                 $('#subkategori').append($('<option>', {value:data['id'], text:data['subkategori_name']}, '</option>'));
            })
+           }else{
+            $("#subkategori").empty();
+        $("#subkategori").prop('disabled', true);
+        $('#subkategori').append($('<option>', {value:'', text:'Belum Ada SubKategori'}, '</option>'));
+           }
           }
 
       });
