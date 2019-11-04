@@ -6,7 +6,7 @@
     <h4 class="c-blue-900"><b>List Produk</b></h4>
 </div>
 <div class="bgc-white p-20 bd">
-    <a href="#" class="btn btn-primary btn-md" title="{{ trans('Tambah Mitra') }}"><b><i class="fa fa-plus"></i> Tambah Produk</b></a>
+    <a href="{{route('admin-panel.add-produk')}}" class="btn btn-primary btn-md" title="{{ trans('Tambah Produk') }}"><b><i class="fa fa-plus"></i> Tambah Produk</b></a>
     <div class="mT-30">
         <table id="dataTable" class="table table-bordered" cellspacing="0" width="100%">
             <thead class="thead-light">

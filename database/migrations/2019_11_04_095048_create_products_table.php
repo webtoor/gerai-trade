@@ -16,17 +16,19 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
+            $table->integer('kategori_id')->unsigned();
             $table->integer('subkategori_id')->unsigned();
-            $table->string('productname' , 200);
+            $table->string('nama_produk' , 200);
             $table->string('slug', 200);
-            $table->string('description', 200);
-            $table->integer('stock');
-            $table->bigInteger('price');
+            $table->string('deskripsi', 200);
+            $table->integer('stok');
+            $table->bigInteger('harga');
             $table->integer('rating')->unsigned();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('subkategori_id')->references('id')->on('rf_kategories')->onDelete('cascade');
+            $table->foreign('kategori_id')->references('id')->on('rf_kategories')->onDelete('cascade');
+            $table->foreign('subkategori_id')->references('id')->on('rf_subkategories')->onDelete('cascade');
         });
     }
 
