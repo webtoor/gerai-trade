@@ -10,6 +10,7 @@ use App\Models\User_role;
 use App\Models\Kategori;
 use App\Models\SubKategori;
 use App\Models\Produk;
+use App\Models\ProdukImage;
 
 class AdminProdukController extends Controller
 {
@@ -32,7 +33,6 @@ class AdminProdukController extends Controller
          );
     }
     public function insert(Request $request){
-        //return htmlentities($request['deskripsi']);
         $data = $request->validate([
             'mitra_id' => ['required'],
             'kategori_id' => ['required'],
@@ -45,10 +45,9 @@ class AdminProdukController extends Controller
             'image_produk.*' => 'mimes:jpeg,jpg,png|max:5100'
 
         ]); 
-
-
-
-        $post = new Produk([
+        
+        try {
+            $post = Produk::create([
             'mitra_id' => $data['mitra_id'],
             'kategori_id' => $data['kategori_id'],
             'subkategori_id' => $data['subkategori_id'],
@@ -58,22 +57,21 @@ class AdminProdukController extends Controller
             'harga' => $data['harga'],
         ]);
         
+            $newPost = $post->replicate();
         
-        $post->save();
-        
-        $newPost = $post->replicate();
-
-        $files = $request->file('image_produk');
-        if(!empty($files)) :
-            foreach($files as $file) :
+            $files = $request->file('image_produk');
+            if(!empty($files)) :
+                foreach ($files as $file) :
                 $imageName = 'image_'.time().Str::random(10).'.png';
                 $path = Storage::disk('public')->putFileAs('produk', $file, $imageName);
-                ProdukImage::create([
-                    'produk_id' => $post->id,
+                    ProdukImage::create([
+                    'product_id' => $post->id,
                     'image_path' => $path,
-                  ]);
-            endforeach;
-        endif;
-       
+                    ]);
+                endforeach;
+            endif;
+        }catch(\Exception $e){
+            return $e;
+        }
     }
 }
