@@ -5,8 +5,8 @@
             margin: 10px 5px 0 0;
             width: 300px;
         } 
-        </style>
- @endsection
+</style>
+@endsection
 @extends('admin.default')
 
 @section('content')
@@ -20,7 +20,7 @@
 
     <div class="form-group">
             <label>Mitra <sup style="color:red"> *Wajib</sup></label>
-            <select class="form-control" name="mitra_id" id="mitra_id" >
+            <select class="form-control" name="mitra_id" id="mitra_id" required>
                 <option value="">Pilih Mitra</option>
                 @foreach ($mitra as $mitraes)
             <option value="{{$mitraes->user->id}}">{{$mitraes->user->nama_depan}} {{$mitraes->user->nama_belakang}}</option>
@@ -29,7 +29,7 @@
         </div>
         <div class="form-group">
                 <label>Kategori <sup style="color:red"> *Wajib</sup></label>
-                <select id="kategori" class="form-control" name="kategori_id" id="kategori_id" >
+                <select id="kategori" class="form-control" name="kategori_id" id="kategori_id" required>
                 <option value="">Pilih Kategori</option>
                 @foreach ($kategori as $kategories)
                     <option value="{{$kategories->id}}">{{$kategories->kategori_name}}</option>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="form-group">
                   <label>Nama Produk <sup style="color:red"> *Wajib</sup></label>
-                  <input type="text" class="form-control" name="nama_produk" id="nama_produk" aria-describedby="emailHelp" placeholder="Masukan Nama Produk" >
+                  <input type="text" class="form-control" name="nama_produk" id="nama_produk" aria-describedby="emailHelp" placeholder="Masukan Nama Produk" required>
                 </div>
                 <div class="form-group">
                         <label>Deskripsi Produk <sup style="color:red"> *Wajib *Hanya Karakter/String</sup> </label>
@@ -52,15 +52,15 @@
                 </div>
                 <div class="form-group">
                         <label>Stok Produk <sup style="color:red"> *Wajib *Hanya Angka</sup></label> 
-                        <input type="number" class="form-control" name="stok" id="stok_produk" aria-describedby="emailHelp" placeholder="Masukan Stok Produk" >
+                        <input type="number" class="form-control" name="stok" id="stok_produk" aria-describedby="emailHelp" placeholder="Masukan Stok Produk" required>
                     </div>
                  <div class="form-group">
                         <label>Harga Produk<sup style="color:red"> *Wajib *Hanya Angka</sup></label>
-                        <input type="number" class="form-control" name="harga" id="harga_produk" aria-describedby="emailHelp" placeholder="Masukan Harga Produk" >
+                        <input type="number" class="form-control" name="harga" id="harga_produk" aria-describedby="emailHelp" placeholder="Masukan Harga Produk" required>
                     </div>
                     <div class="form-group">
                           <label>Pilih Foto Produk<sup style="color:red"> *Wajib *Maksimal 3</sup></label>
-                          <input type="file" class="form-control" name="image_produk[]" id="file-input" multiple />   
+                          <input type="file" class="form-control" name="image_produk[]" id="file-input" multiple required/>   
                           <div id="thumb-output"></div>
                          
                         </div>
@@ -147,7 +147,7 @@ $('select#kategori').on('change', function (e) {
             
         var data = $(this)[0].files; //this file data
         $.each(data, function(index, file){ //loop though each file
-            if((/(\.|\/)(gif|jpe?g|png|jpg)$/i.test(file.type))){ //check supported file type
+            if((/(\.|\/)(jpeg|png|jpg)$/i.test(file.type))){ //check supported file type
                 var fRead = new FileReader(); //new filereader
                 fRead.onload = (function(file){ //trigger function on successful read
                 return function(e) {

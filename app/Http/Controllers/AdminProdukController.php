@@ -16,13 +16,13 @@ class AdminProdukController extends Controller
 {
     public function index(){
         $produk = Produk::with('produk_image')->get();
-        return view('admin.dashboard.produk', ['produk' => $produk]);
+        return view('admin.dashboard.produk.index', ['produk' => $produk]);
     }
 
     public function add(){
         $kategori = Kategori::all();
         $mitra = User_role::where('role_id', 2)->get();
-        return view('admin.dashboard.tambahProduk', ['kategori' => $kategori, 'mitra' => $mitra]);
+        return view('admin.dashboard.produk.tambahProduk', ['kategori' => $kategori, 'mitra' => $mitra]);
     }
 
     public function getAjaxSubkategori($kategori_id){
@@ -43,7 +43,7 @@ class AdminProdukController extends Controller
             'stok' => ['required'],
             'harga' => ['required'],
             'image_produk' => 'required|array|min:1|max:3',
-            'image_produk.*' => 'mimes:jpeg,jpg,png|max:5100'
+            'image_produk.*' => 'file|mimes:jpeg,jpg,png|max:8000'
 
         ]); 
         
@@ -77,5 +77,15 @@ class AdminProdukController extends Controller
         }catch(\Exception $e){
             return $e;
         }
+    }
+
+    public function edit($id){
+        
+        $produk = Produk::with('produk_image')->where('id', $id)->first();
+        $mitra = User_role::where('role_id', 2)->get();
+        $kategori = Kategori::all();
+        $subkategori = SubKategori::where('id', $produk->subkategori_id)->first();
+
+        return view('admin.dashboard.produk.edit', ['produk' => $produk, 'mitra' => $mitra, 'kategori' => $kategori, 'subkategori' => $subkategori]);
     }
 }

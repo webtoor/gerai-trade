@@ -30,10 +30,14 @@
         Route::post('sub-kategori', 'KategoriController@addSubKategori')->name('add-subkategori');
         Route::put('sub-kategori', 'KategoriController@updateSubKategori')->name('update-subkategori');
         Route::get('produk', 'AdminProdukController@index')->name('kelola-produk');
+        // TAMBAH PRODUK
         Route::get('produk/tambah-produk', 'AdminProdukController@add')->name('add-produk');
         Route::get('produk/get-subkategori/{kategori_id}', 'AdminProdukController@getAjaxSubkategori');
-
         Route::post('produk/tambah-produk', 'AdminProdukController@insert')->name('insert-produk');
+
+        //EDIT PRODUK
+        Route::get('produk/edit-produk/{produk_id}', 'AdminProdukController@edit')->name('edit-produk');
+
         Route::get('member', 'AdminController@showMember')->name('showMember');
         Route::get('mitra', 'AdminController@showMitra')->name('showMitra');
         Route::post('mitra', 'AdminController@addMitra')->name('addMitra');

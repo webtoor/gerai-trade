@@ -30,6 +30,13 @@
                     <td>{{$produks->stok}}</td>
                     <td>Rp {{number_format($produks->harga,0, ".", ".")}}</td>
                     <td>
+                            <ul class="list-inline">
+                                    <li class="list-inline-item">
+                                        <a href="{{route('admin-panel.edit-produk', ['produk_id' => $produks->id])}}" title="{{ trans('Edit Produk') }}" class="btn btn-dark px-3 btn-sm">
+                                            <span class="ti-pencil"></span>
+                                        </a>
+                                    </li>
+                            </ul>
                       
                     </td>
                   
