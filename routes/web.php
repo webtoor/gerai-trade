@@ -37,6 +37,7 @@
 
         //EDIT PRODUK
         Route::get('produk/edit-produk/{produk_id}', 'AdminProdukController@edit')->name('edit-produk');
+        Route::put('produk/edit-produk/{produk_id}', 'AdminProdukController@updateProduk')->name('update-produk');
 
         Route::get('member', 'AdminController@showMember')->name('showMember');
         Route::get('mitra', 'AdminController@showMitra')->name('showMitra');

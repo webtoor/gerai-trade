@@ -12,8 +12,8 @@
         <button data-toggle="modal" data-target="#addKategori" class="btn btn-dark btn-md" title="{{ trans('Tambah Mitra') }}">
                 <b><i class="fa fa-plus"></i> Tambah Kategori</b></button>
        <div class="mT-30">
-           <table id="kelolaKategori" class="table table-bordered" cellspacing="0" width="100%">
-               <thead class="thead-light">
+           <table id="kelolaKategori" class="table  table-bordered" cellspacing="0" width="100%">
+               <thead class="indigo white-text">
                    <tr>
                        <th>Nama Kategori</th>
                        <th>Action</th>
@@ -107,7 +107,7 @@
                         <b><i class="fa fa-plus"></i> Tambah Sub-Kategori</b></button>
                <div class="mT-30">
                    <table id="kelolaSubKategori" class="table table-bordered" cellspacing="0" width="100%">
-                       <thead class="thead-light">
+                       <thead class="indigo white-text">
                            <tr>
                                <th>Kategori</th>
                                <th>Nama Sub-Kategori</th>

@@ -37,14 +37,16 @@ class AdminProdukController extends Controller
         $data = $request->validate([
             'mitra_id' => ['required'],
             'kategori_id' => ['required'],
-            'subkategori_id' => ['nullable'],
+            'subkategori_id' => ['required','nullable'],
             'nama_produk' => ['required'], 
             'deskripsi' => ['required'], 
             'stok' => ['required'],
             'harga' => ['required'],
+            'link_tokped' => ['required', 'nullable'],
+            'link_shopee' => ['required', 'nullable'],
+            'link_bukalapak' => ['required', 'nullable'],
             'image_produk' => 'required|array|min:1|max:3',
             'image_produk.*' => 'file|mimes:jpeg,jpg,png|max:8000'
-
         ]); 
         
         try {
@@ -84,8 +86,32 @@ class AdminProdukController extends Controller
         $produk = Produk::with('produk_image')->where('id', $id)->first();
         $mitra = User_role::where('role_id', 2)->get();
         $kategori = Kategori::all();
-        $subkategori = SubKategori::where('id', $produk->subkategori_id)->first();
+        $subkategori = SubKategori::where('kategori_id', $produk->kategori_id)->get();
 
         return view('admin.dashboard.produk.edit', ['produk' => $produk, 'mitra' => $mitra, 'kategori' => $kategori, 'subkategori' => $subkategori]);
+    }
+
+    public function updateProduk(Request $request, $produk_id){
+        
+        $data = $request->validate([
+            'mitra_id' => ['required'],
+            'kategori_id' => ['required'],
+            'subkategori_id' => ['nullable'],
+            'nama_produk' => ['required'], 
+            'deskripsi' => ['required'], 
+            'stok' => ['required'],
+            'harga' => ['required'],
+            'link_tokped' => ['nullable'],
+            'link_shopee' => ['nullable'],
+            'link_bukalapak' => ['nullable'],
+        ]); 
+
+        $post = Produk::findOrFail($produk_id);
+        $post->slug = null;
+        $post->update($data);
+        $newPost = $post->replicate();
+
+
+        return back()->withSuccess(trans('Anda Berhasil mengubah produk')); 
     }
 }

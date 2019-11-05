@@ -21,7 +21,10 @@ class Produk extends Model
         'deskripsi',
         'stok',
         'harga',
-        'rating'
+        'rating',
+        'link_tokped',
+        'link_shopee',
+        'link_bukalapak'
     ];
 
     public function sluggable()

@@ -14,9 +14,16 @@
     <b>Produk</b>
     <h4 class="c-blue-900"><b>Edit Produk</b></h4>
 </div>
+<br>
+<div class="row gap-20 masonry pos-r">
+        <div class="masonry-sizer col-md-6"></div>
+        <div class="masonry-item col-md-6">
 <div class="bgc-white p-20 bd">
   <form action=" #" method="POST" enctype="multipart/form-data">
-  {{ csrf_field() }}
+    {!! Form::open([
+        'url'  => route('admin-panel.update-produk', $produk->id), 
+        'method' => 'PUT',
+        ]) !!}  
 
     <div class="form-group">
             <label>Mitra <sup style="color:red"> *Wajib</sup></label>
@@ -46,11 +53,13 @@
                 <div class="form-group">
                         <label>SubKategori</label>
                         <select class="form-control" name="subkategori_id" id="subkategori">
-                            @if($subkategori)
-                            <option value="{{$subkategori->id}}" selected="selected">{{$subkategori->subkategori_name}}</option>
+                            @foreach($subkategori as $subkategories)
+                            @if(($subkategories->id) == ($produk->subkategori_id))
+                            <option value="{{$subkategories->id}}" selected="selected">{{$subkategories->subkategori_name}}</option>
                             @else
-                            <option value="" selected="selected">Belum Ada SubKategori</option>
+                            <option value="{{$subkategories->id}}">{{$subkategories->subkategori_name}}</option>
                             @endif
+                            @endforeach
                         </select>
                 </div>
                 <div class="form-group">
@@ -86,8 +95,57 @@
 
                 <button type="submit" id="submit" class="btn btn-primary">Submit</button>
 
-                </form>
+                {!! Form::close() !!}
+
 </div>
+</div>
+<div class="masonry-item col-md-6">
+        <div class="bgc-white p-20 bd">
+            @if(count($produk->produk_image) < 3)
+            <button data-toggle="modal" data-target="#addSubKategori" class="btn indigo white-text btn-md" title="{{ trans('Tambah Mitra') }}">
+                    <b><i class="fa fa-plus"></i> Tambah Foto Produk</b></button>
+            @endif
+              
+                <div class="mT-30">
+                        <table class="table table-bordered" cellspacing="0" width="100%">
+                            <thead class="indigo white-text">
+                                <tr>
+                                    <th style="width: 150px;">Foto Produk</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($produk->produk_image as $item)
+                                    
+                                <tr>
+                                <td><img src="{{ asset('storage/' .$item->image_path)}}" style="height:150px; width: 150px;"></td>
+                                <td>
+                                    <ul>
+                                        <li class="list-inline-item">
+                                                {!! Form::open([
+                                                  'class'=>'delete',
+                                                  'url'  => '', 
+                                                  'method' => 'DELETE',
+                                                  ]) 
+                                              !!} 
+                                            <button class="btn btn-link btn-lg" title="{{ trans('Hapus Foto') }}"><i class="ti-trash"></i> Hapus Foto</button>
+                                                  
+                                              {!! Form::close() !!}
+                                        </li>                        
+                                    </ul>
+
+                                </td>
+                               
+                                  
+                                </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+        </div>
+</div>
+
 @endsection
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>    
