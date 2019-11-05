@@ -30,7 +30,7 @@ class AdminProdukController extends Controller
     }
     public function insert(Request $request){
         //return htmlentities($request['deskripsi']);
-        return $data = $request->validate([
+         $data = $request->validate([
             'mitra_id' => ['required'],
             'kategori_id' => ['required'],
             'subkategori_id' => ['nullable'],
