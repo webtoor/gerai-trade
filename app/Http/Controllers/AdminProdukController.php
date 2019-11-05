@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\User_role;
 use App\Models\Kategori;
@@ -30,7 +33,7 @@ class AdminProdukController extends Controller
     }
     public function insert(Request $request){
         //return htmlentities($request['deskripsi']);
-         $data = $request->validate([
+        $data = $request->validate([
             'mitra_id' => ['required'],
             'kategori_id' => ['required'],
             'subkategori_id' => ['nullable'],
@@ -38,7 +41,12 @@ class AdminProdukController extends Controller
             'deskripsi' => ['required'], 
             'stok' => ['required'],
             'harga' => ['required'],
+            'image_produk' => 'required|array|min:1|max:3',
+            'image_produk.*' => 'mimes:jpeg,jpg,png|max:5100'
+
         ]); 
+
+
 
         $post = new Produk([
             'mitra_id' => $data['mitra_id'],
@@ -50,8 +58,22 @@ class AdminProdukController extends Controller
             'harga' => $data['harga'],
         ]);
         
+        
         $post->save();
         
         $newPost = $post->replicate();
+
+        $files = $request->file('image_produk');
+        if(!empty($files)) :
+            foreach($files as $file) :
+                $imageName = 'image_'.time().Str::random(10).'.png';
+                $path = Storage::disk('public')->putFileAs('produk', $file, $imageName);
+                ProdukImage::create([
+                    'produk_id' => $post->id,
+                    'image_path' => $path,
+                  ]);
+            endforeach;
+        endif;
+       
     }
 }

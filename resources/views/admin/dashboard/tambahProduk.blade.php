@@ -19,8 +19,8 @@
   {{ csrf_field() }}
 
     <div class="form-group">
-            <label>Mitra</label>
-            <select class="form-control" name="mitra_id" id="mitra_id" required>
+            <label>Mitra <sup style="color:red"> *Wajib</sup></label>
+            <select class="form-control" name="mitra_id" id="mitra_id" >
                 <option value="">Pilih Mitra</option>
                 @foreach ($mitra as $mitraes)
             <option value="{{$mitraes->user->id}}">{{$mitraes->user->nama_depan}} {{$mitraes->user->nama_belakang}}</option>
@@ -28,8 +28,8 @@
             </select>
         </div>
         <div class="form-group">
-                <label>Kategori</label>
-                <select id="kategori" class="form-control" name="kategori_id" id="kategori_id" required>
+                <label>Kategori <sup style="color:red"> *Wajib</sup></label>
+                <select id="kategori" class="form-control" name="kategori_id" id="kategori_id" >
                 <option value="">Pilih Kategori</option>
                 @foreach ($kategori as $kategories)
                     <option value="{{$kategories->id}}">{{$kategories->kategori_name}}</option>
@@ -43,27 +43,41 @@
                         </select>
                 </div>
                 <div class="form-group">
-                  <label>Nama Produk</label>
-                  <input type="text" class="form-control" name="nama_produk" id="nama_produk" aria-describedby="emailHelp" placeholder="Masukan Nama Produk" required>
+                  <label>Nama Produk <sup style="color:red"> *Wajib</sup></label>
+                  <input type="text" class="form-control" name="nama_produk" id="nama_produk" aria-describedby="emailHelp" placeholder="Masukan Nama Produk" >
                 </div>
                 <div class="form-group">
-                        <label>Deskripsi Produk <sup style="color:red"> *Hanya Karakter/String</sup></label> </label>
-                       <textarea  id="deskripsi" name="deskripsi" class="form-control" required></textarea>
+                        <label>Deskripsi Produk <sup style="color:red"> *Wajib *Hanya Karakter/String</sup> </label>
+                       <textarea  id="deskripsi" name="deskripsi" class="form-control" ></textarea>
                 </div>
                 <div class="form-group">
-                        <label>Stok Produk <sup style="color:red"> *Hanya Angka</sup></label> 
-                        <input type="number" class="form-control" name="stok" id="stok_produk" aria-describedby="emailHelp" placeholder="Masukan Stok Produk" required>
+                        <label>Stok Produk <sup style="color:red"> *Wajib *Hanya Angka</sup></label> 
+                        <input type="number" class="form-control" name="stok" id="stok_produk" aria-describedby="emailHelp" placeholder="Masukan Stok Produk" >
                     </div>
                  <div class="form-group">
-                        <label>Harga Produk<sup style="color:red"> *Hanya Angka</sup></label>
-                        <input type="number" class="form-control" name="harga" id="harga_produk" aria-describedby="emailHelp" placeholder="Masukan Harga Produk" required>
+                        <label>Harga Produk<sup style="color:red"> *Wajib *Hanya Angka</sup></label>
+                        <input type="number" class="form-control" name="harga" id="harga_produk" aria-describedby="emailHelp" placeholder="Masukan Harga Produk" >
                     </div>
+                    <div class="form-group">
+                          <label>Pilih Foto Produk<sup style="color:red"> *Wajib *Maksimal 3</sup></label>
+                          <input type="file" class="form-control" name="image_produk[]" id="file-input" multiple />   
+                          <div id="thumb-output"></div>
+                         
+                        </div>
+
                 <div class="form-group">
-                        <label>Pilih Gambar<sup style="color:red"> *Maksimal 3</sup></label>
-                        <input type="file" class="form-control" id="file-input" multiple />   
-                        <div id="thumb-output"></div>
-        
+                        <label>Link Tokopedia</label>
+                        <input type="text" class="form-control" name="link_tokped" aria-describedby="emailHelp" placeholder="Masukan Link Produk di Tokopedia">
                       </div>
+                <div class="form-group">
+                    <label>Link Shopee</label>
+                    <input type="text" class="form-control" name="link_shopee" aria-describedby="emailHelp" placeholder="Masukan Link Produk di Shopee">
+                </div>
+
+                <div class="form-group">
+                        <label>Link BukaLapak</label>
+                        <input type="text" class="form-control" name="link_bukalapak" aria-describedby="emailHelp" placeholder="Masukan Link Produk di Bukalapak">
+                    </div>
 
                 <button type="submit" id="submit" class="btn btn-primary">Submit</button>
 
@@ -122,23 +136,21 @@ $('select#kategori').on('change', function (e) {
     $('input#file-input').on('change', function(){ 
         if (window.FileReader) //check File API supported browser
         {
-            if (this.files.length > 1){
-                alert('to many files')
+            if (this.files.length > 3){
+                alert('Gambar Maksimal Hanya 3')
                 this.value = ""
                 $('#thumb-output').empty()
 
             }else{
+                $('#thumb-output').empty()
 
-           
             
         var data = $(this)[0].files; //this file data
         $.each(data, function(index, file){ //loop though each file
-            if((/(\.|\/)(gif|jpe?g|png)$/i.test(file.type))){ //check supported file type
+            if((/(\.|\/)(gif|jpe?g|png|jpg)$/i.test(file.type))){ //check supported file type
                 var fRead = new FileReader(); //new filereader
                 fRead.onload = (function(file){ //trigger function on successful read
                 return function(e) {
-                    $('#thumb-output').empty()
-
                     var img = $('<img style="height:200px; width:200px;"/>').addClass('thumb').attr('src', e.target.result); //create image element 
                     $('#thumb-output').append(img); //append image to output element
                 };

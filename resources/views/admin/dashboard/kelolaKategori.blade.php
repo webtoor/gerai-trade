@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="text-center">
-    <b>kategori</b>
+    <b>Kategori</b>
     <h4 class="c-blue-900"><b>Kelola Kategori</b></h4>
 </div>
 <div class="row gap-20 masonry pos-r">
