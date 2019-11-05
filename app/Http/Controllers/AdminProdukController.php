@@ -15,7 +15,8 @@ use App\Models\ProdukImage;
 class AdminProdukController extends Controller
 {
     public function index(){
-        return view('admin.dashboard.produk');
+        $produk = Produk::with('produk_image')->get();
+        return view('admin.dashboard.produk', ['produk' => $produk]);
     }
 
     public function add(){
@@ -70,6 +71,9 @@ class AdminProdukController extends Controller
                     ]);
                 endforeach;
             endif;
+
+            return redirect()->route('admin-panel.kelola-produk')->withSuccess(trans('Berhasil Menambahkan Produk'));
+
         }catch(\Exception $e){
             return $e;
         }

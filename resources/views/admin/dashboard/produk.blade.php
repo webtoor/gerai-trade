@@ -11,7 +11,7 @@
         <table id="dataTable" class="table table-bordered" cellspacing="0" width="100%">
             <thead class="thead-light">
                 <tr>
-                    <th>Foto Produk</th>
+                    <th width="150px">Foto Produk</th>
                     <th>Nama Produk</th>
                     <th>Stok</th>
                     <th>Harga</th>
@@ -19,17 +19,22 @@
                 </tr>
             </thead>
             <tbody>
-               
+               @foreach ($produk as $produks)
+                   
+              
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td> 
+                        <img src="{{ asset('storage/' .$produks->produk_image[0]->image_path)}}" style="height:150px">
+                    </td>
+                    <td>{{$produks->nama_produk}}</td>
+                    <td>{{$produks->stok}}</td>
+                    <td>Rp {{number_format($produks->harga,0, ".", ".")}}</td>
                     <td>
                       
                     </td>
                   
                 </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

@@ -33,4 +33,8 @@ class Produk extends Model
         ];
     }
 
+    public function produk_image(){
+        return $this->hasMany('App\Models\ProdukImage', 'product_id', 'id');
+    }
+
 }
