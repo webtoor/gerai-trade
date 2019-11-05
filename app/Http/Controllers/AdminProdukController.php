@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\User_role;
@@ -105,13 +106,24 @@ class AdminProdukController extends Controller
             'link_shopee' => ['nullable'],
             'link_bukalapak' => ['nullable'],
         ]); 
+        
+        try {
+            $post = Produk::findOrFail($produk_id);
+            $post->slug = null;
+            $post->update($data);
+            $newPost = $post->replicate();
 
-        $post = Produk::findOrFail($produk_id);
-        $post->slug = null;
-        $post->update($data);
-        $newPost = $post->replicate();
-
-
-        return back()->withSuccess(trans('Anda Berhasil mengubah produk')); 
+            return back()->withSuccess(trans('Anda Berhasil mengubah produk')); 
+        } catch (\Exception $e) {
+            
+        }
+ 
+    }
+    public function deleteImage($produk_id){
+        $produk_image = ProdukImage::findOrFail($produk_id);
+        Storage::disk('public')->delete($produk_image->image_path);
+        $produk_image->delete();
+        DB::statement("ALTER TABLE product_images AUTO_INCREMENT = 1");
+        return back()->withSuccess(trans('Anda Berhasil menghapus Foto Produk')); 
     }
 }
