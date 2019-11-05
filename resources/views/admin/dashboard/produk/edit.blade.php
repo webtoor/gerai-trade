@@ -102,7 +102,7 @@
 <div class="masonry-item col-md-6">
         <div class="bgc-white p-20 bd">
             @if(count($produk->produk_image) < 3)
-            <button data-toggle="modal" data-target="#addSubKategori" class="btn indigo white-text btn-md" title="{{ trans('Tambah Mitra') }}">
+        <button id="insertImage" data-produk_id="{{$produk->id}}" data-toggle="modal" data-target="#addFotoProduk" class="btn indigo white-text btn-md" title="{{ trans('Tambah Mitra') }}">
                     <b><i class="fa fa-plus"></i> Tambah Foto Produk</b></button>
             @endif
               
@@ -145,7 +145,38 @@
                     </div>
         </div>
 </div>
+<div class="modal fade" id="addFotoProduk" tabindex="-1" role="dialog" aria-labelledby="ShowModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+    <form action=" {!! action('AdminProdukController@tambahImage') !!}" method="POST" enctype="multipart/form-data">
+        {{ csrf_field() }}
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title c-grey-900">Upload Image</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                    <div class="col-sm-9">
+                        <input type="file" name="image_produk" required>
+                    </div>
+  
+                </div>
+              </div>
+          
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="produk_id" id="dataProdukId" required>
 
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+  
+          </div>
+        </form>
+        </div>
+      </div>
 @endsection
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>    
@@ -194,6 +225,12 @@ height: 200
 
       });
     });
+
+    $("button#insertImage").click(function () {
+            var produk_id =  $(this).data('produk_id');
+            $('#dataProdukId').val(produk_id);
+            console.log(produk_id)
+        });
 });
     </script>
 @endsection

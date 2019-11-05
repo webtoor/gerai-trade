@@ -39,6 +39,7 @@
         Route::get('produk/edit-produk/{produk_id}', 'AdminProdukController@edit')->name('edit-produk');
         Route::put('produk/edit-produk/{produk_id}', 'AdminProdukController@updateProduk')->name('update-produk');
         Route::delete('produk/edit-produk/{produk_id}', 'AdminProdukController@deleteImage')->name('delete-image');
+        Route::post('produk/edit-produk/tambah-foto', 'AdminProdukController@tambahImage')->name('tambah-image');
 
         Route::get('member', 'AdminController@showMember')->name('showMember');
         Route::get('mitra', 'AdminController@showMitra')->name('showMitra');
