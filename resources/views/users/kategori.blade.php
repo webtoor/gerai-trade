@@ -141,7 +141,7 @@
                                     @else
                                     {{$kategori_menu->kategori_name}}
                                     @endif
-                                    ({{$produk->firstItem()}} - {{$produk->perPage()}} dari {{$produk->total()}} )
+                                    ({{$produk->firstItem()}} - {{$produk->lastItem()}} dari {{$produk->total()}} )
                             </div>
                             <div class="ml-auto">
                                    <label style="margin-top:20px; margin-right:20px; color:black; font-weight:bold;">Urutkan : </label>
@@ -218,13 +218,7 @@
                     <!-- Start Filter Bar -->
                     <div class="filter-bar d-flex flex-wrap align-items-center">
                         <div class="pagination ml-auto">
-                            <a href="#" class="prev-arrow"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
-                            <a href="#" class="active">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#" class="dot-dot"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
-                            <a href="#">6</a>
-                            <a href="#" class="next-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                            {{$produk->links()}}
                         </div>
                     </div>
                     @endif
