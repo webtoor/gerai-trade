@@ -107,7 +107,7 @@
             <ul class="main-categories" style="list-style-type:none;">
                 @foreach ($kategori as $kategories)
 
-                @if(count($kategories->sub_kategori) == 0 )
+                @if(count($kategories->sub_kategori) < 1 )
                 <li class="main-nav-list"><a data-toggle="collapse" href="#Alat aria-expanded="false" aria-controls="Alat"><span
                     class="lnr lnr-arrow-right"></span>{{$kategories->kategori_name}}</a>
               </li>
@@ -132,10 +132,16 @@
                 </div>
                 <div class="col-xl-9 col-lg-8 col-md-7">
                     <!-- Start Filter Bar -->
-      
+                    @if(count($produk))
                     <div class="filter-bar d-flex flex-wrap align-items-center">
                             <div class="sorting">
-                                    Menampilkan 1 produk untuk "perlengkapan medis" (1 - 60 dari 1.103.574)
+                                    Menampilkan {{$produk->total()}} produk untuk 
+                                    @if($kategori_menu->kategori)
+                                    {{$kategori_menu->subkategori_name}}
+                                    @else
+                                    {{$kategori_menu->kategori_name}}
+                                    @endif
+                                    ({{$produk->firstItem()}} - {{$produk->perPage()}} dari {{$produk->total()}} )
                             </div>
                             <div class="ml-auto">
                                    <label style="margin-top:20px; margin-right:20px; color:black; font-weight:bold;">Urutkan : </label>
@@ -151,10 +157,8 @@
                     <!-- Start Best Seller -->
                     <section class=" pb-40" style="margin-top:30px;">
                         <div class="row">
-                            <?php
-                            for ($x = 0; $x <= 11; $x++) { 
+                            @foreach ($produk as $produk_item)
                                 
-                                ?>
                                 <div class="col-lg-3 col-sm-4">
                             <div class="single-product">
                                 <a href="single-product.html">
@@ -171,14 +175,14 @@
                                             <div class="card-body">
 
                                                 <!-- Title -->
-                                                <h6 class="card-title" style="margin-top:-10px;">Nama Produk
+                                                <h6 class="card-title" style="margin-top:-10px;">{{$produk_item->nama_produk}}
                                                 </h6>
                                                 <!-- Text -->
                                                 <div class="price">
-                                                    <h6>Rp 150.000</h6>
+                                                    <h6>{{$produk_item->harga}}</h6>
                                                 </div>
 
-                                                <h6 style="color:#AEAEAE;">Jakarta</h6>
+                                                {{-- <h6 style="color:#AEAEAE;">Jakarta</h6> --}}
 
                                      
                                                 <div class="card-footer px-1" style="background:white">
@@ -204,8 +208,8 @@
                         </div>
                     </div>
 
-                          <?php  }
-                            ?>
+                    @endforeach
+
                         
 
 </div>
@@ -223,6 +227,7 @@
                             <a href="#" class="next-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                         </div>
                     </div>
+                    @endif
                     <!-- End Filter Bar -->
                 </div>
             </div>

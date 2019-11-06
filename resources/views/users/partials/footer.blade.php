@@ -13,9 +13,9 @@
                 <h2 class="ftco-heading-2">GeraiTrade</h2>
                 <p>XCXCfsdfsd sdfkjsd fsdlkf jsdlkjflsdkjf </p>
                 <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                  <li class="ftco-animate"><a href="#"><span class="fab fa-twitter"></span></a></li>
-                  <li class="ftco-animate"><a href="#"><span class="fab fa-facebook"></span></a></li>
-                  <li class="ftco-animate"><a href="#"><span class="fab fa-instagram"></span></a></li>
+                  <li class="ftco-animate"><a href="javascript:void(0)"><span class="fab fa-twitter"></span></a></li>
+                  <li class="ftco-animate"><a href="javascript:void(0)"><span class="fab fa-facebook"></span></a></li>
+                  <li class="ftco-animate"><a href="javascript:void(0)"><span class="fab fa-instagram"></span></a></li>
                 </ul>
               </div>
             </div>

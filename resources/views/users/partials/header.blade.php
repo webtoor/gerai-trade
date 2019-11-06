@@ -30,7 +30,7 @@
               @else
               <li class="dropdown-item dropdown-submenu p-0">
 
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle dropdown-item text-black w-100">{{$kategories->kategori_name}} </a>
+                <a href="javascript:void(0)" data-toggle="dropdown" class="dropdown-toggle dropdown-item text-black w-100">{{$kategories->kategori_name}} </a>
                     
                 <ul class="dropdown-menu ml-0 rounded-0  darken-4 border-0 z-depth-1">
                     @foreach ($kategories->sub_kategori as $sub_kategories)

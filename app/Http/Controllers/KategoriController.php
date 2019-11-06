@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Kategori;
 use App\Models\SubKategori;
+use App\Models\Produk;
+use App\Models\ProdukImage;
 
 class KategoriController extends Controller
 {
@@ -99,12 +101,15 @@ class KategoriController extends Controller
     public function showKategori($slug){
         $kategori =  Kategori::with('sub_kategori')->get();
         $kategori_menu = Kategori::where('slug', $slug)->first();
-
         if($kategori_menu){
             $kategori_menu = $kategori_menu;
+            $produk = Produk::with('produk_image')->where('kategori_id', $kategori_menu->id)->paginate(20);
+
         }else{
             $kategori_menu = SubKategori::with('kategori')->where('slug', $slug)->first();
+            $produk = Produk::with('produk_image')->where('subkategori_id', $kategori_menu->id)->paginate(2);
+
         }
-        return view('users.kategori', ['kategori' => $kategori, 'kategori_menu' => $kategori_menu]);
+        return view('users.kategori', ['produk' => $produk, 'kategori' => $kategori, 'kategori_menu' => $kategori_menu]);
     }
 }
