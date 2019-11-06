@@ -42,18 +42,18 @@
                                 <div class="carousel-inner" role="listbox">
                                     <!--First slide-->
                                     <div class="carousel-item active">
-                                        <img class="d-block w-100" src="http://placehold.it/900x240" alt="First slide">
+                                        <img class="d-block w-100" src="img/banner/banner_2.jpg" alt="First slide">
                                     </div>
                                     <!--/First slide-->
                                     <!--Second slide-->
                                     <div class="carousel-item">
-                                        <img class="d-block  w-100" src="http://placehold.it/900x240"
+                                        <img class="d-block  w-100" src="img/banner/banner_4.jpg"
                                             alt="Second slide">
                                     </div>
                                     <!--/Second slide-->
                                     <!--Third slide-->
                                     <div class="carousel-item">
-                                        <img class="d-block  w-100" src="http://placehold.it/900x240" alt="Third slide">
+                                        <img class="d-block  w-100" src="img/banner/banner_1.jpg" alt="Third slide">
                                     </div>
                                     <!--/Third slide-->
                                 </div>
@@ -94,7 +94,7 @@
                                             <a href="single-product.html">
                                                 <div class="card">
                                                     <div class="view overlay">
-                                                        <img class="card-img-top" src="images/produk/a3.jpg"
+                                                        <img class="card-img-top" src="img/produk/produk_default.jpg"
                                                             alt="Card image cap">
                                                         <a href="#!">
                                                             <div class="mask rgba-white-slight"></div>
