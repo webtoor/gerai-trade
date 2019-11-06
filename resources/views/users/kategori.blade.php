@@ -36,32 +36,7 @@
   .main-categories a {
   color: #000; }
 
-  .pagination {
-  margin-top: 10px;
-  border-left: 1px solid #eee;
-  border-radius: 0px; }
-  .pagination a {
-    width: 40px;
-    line-height: 40px;
-    text-align: center;
-    display: inline-block;
-    background: #fff; }
-    .pagination a.active {
-      color: #fff; }
-    .pagination a:hover {
-      color: #fff; }
-  .pagination .dot-dot {
-    width: auto;
-    background: transparent;
-    border-top: 0px;
-    border-bottom: 0px;
-    color: #cccccc;
-    padding: 0 5px; }
-    .pagination .dot-dot:hover {
-      background: transparent;
-      border: 0px;
-      border-right: 1px solid #eee;
-      color: #cccccc; }
+
   .sorting {
   margin-top: 10px;
   margin-right: 10px; }
@@ -147,8 +122,10 @@
                                    <label style="margin-top:20px; margin-right:20px; color:black; font-weight:bold;">Urutkan : </label>
                             </div>
                         <div class="sorting">
-                                <select class="form-control">
-                                <option value="1">Produk Terbaru</option>
+                                <select id="sort" class="form-control">
+                                <option value="/k/{{$kategori_menu->slug}}?sort=desc" {{ ( $sort == 'desc') ? 'selected' : '' }}>Produk Terbaru</option>
+                                <option value="/k/{{$kategori_menu->slug}}?sort=murah" {{ ( $sort == 'murah') ? 'selected' : '' }}>Harga Termurah</option>
+                                <option value="/k/{{$kategori_menu->slug}}?sort=mahal" {{ ( $sort == 'mahal') ? 'selected' : '' }}>Harga Termahal</option>
                             </select>
                         </div>
                         
@@ -164,8 +141,7 @@
                                 <a href="single-product.html">
                                     <div class="card">
                                         <div class="view overlay">
-                                            <img class="card-img-top" src="/img/produk/produk_default.jpg"
-                                                alt="Card image cap">
+                                            <img class="card-img-top" src="/img/produk/produk_default.jpg" alt="Card image cap">
                                             <a href="#!">
                                                 <div class="mask rgba-white-slight"></div>
                                             </a>
@@ -179,7 +155,7 @@
                                                 </h6>
                                                 <!-- Text -->
                                                 <div class="price">
-                                                    <h6>{{$produk_item->harga}}</h6>
+                                                    <h6>Rp {{number_format($produk_item->harga,0, ".", ".")}}</h6>
                                                 </div>
 
                                                 {{-- <h6 style="color:#AEAEAE;">Jakarta</h6> --}}
@@ -212,13 +188,15 @@
 
                         
 
-</div>
+                </div>
                     </section>
                     <!-- End Best Seller -->
                     <!-- Start Filter Bar -->
                     <div class="filter-bar d-flex flex-wrap align-items-center">
                         <div class="pagination ml-auto">
-                            {{$produk->links()}}
+                            {{-- {{$produk->links()}} --}}
+                            {{ $produk->appends(['sort' => $sort])->links() }}
+
                         </div>
                     </div>
                     @endif
@@ -226,4 +204,17 @@
                 </div>
             </div>
         </div>
+@endsection
+@section('js')
+<script>
+$(document).ready(function () {
+$('select#sort').on('change', function (e) {
+let optionSelected = $("option:selected", this);
+let valueSelected = this.value;
+window.location = valueSelected;
+
+console.log(valueSelected)
+});
+});
+</script>
 @endsection

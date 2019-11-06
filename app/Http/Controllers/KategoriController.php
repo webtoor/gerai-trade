@@ -99,17 +99,37 @@ class KategoriController extends Controller
     }
 
     public function showKategori($slug){
+        //return request()->sort;
         $kategori =  Kategori::with('sub_kategori')->get();
         $kategori_menu = Kategori::where('slug', $slug)->first();
         if($kategori_menu){
             $kategori_menu = $kategori_menu;
-            $produk = Produk::with('produk_image')->where('kategori_id', $kategori_menu->id)->paginate(20);
+            $sort = request()->sort;
+            if($sort == 'desc'){
+                $produk = Produk::with('produk_image')->where('kategori_id', $kategori_menu->id)->orderBy('id', 'desc')->paginate(20);
+            }elseif($sort == 'murah'){
+                $produk = Produk::with('produk_image')->where('kategori_id', $kategori_menu->id)->orderBy('harga', 'asc')->paginate(20);
+            }elseif($sort == 'mahal'){
+                $produk = Produk::with('produk_image')->where('kategori_id', $kategori_menu->id)->orderBy('harga', 'desc')->paginate(20);
+            }else{
+                $produk = Produk::with('produk_image')->where('kategori_id', $kategori_menu->id)->orderBy('id', 'desc')->paginate(20);
+            }
+
 
         }else{
             $kategori_menu = SubKategori::with('kategori')->where('slug', $slug)->first();
-            $produk = Produk::with('produk_image')->where('subkategori_id', $kategori_menu->id)->paginate(2);
+            $sort = request()->sort;
+            if($sort == 'desc'){
+                $produk = Produk::with('produk_image')->where('subkategori_id', $kategori_menu->id)->orderBy('id', 'desc')->paginate(2);
+            }elseif($sort == 'murah'){
+                $produk = Produk::with('produk_image')->where('subkategori_id', $kategori_menu->id)->orderBy('harga', 'asc')->paginate(2);
+            }elseif($sort == 'mahal'){
+                $produk = Produk::with('produk_image')->where('subkategori_id', $kategori_menu->id)->orderBy('harga', 'desc')->paginate(2);
+            }else{
+                $produk = Produk::with('produk_image')->where('subkategori_id', $kategori_menu->id)->orderBy('id', 'desc')->paginate(2);
+            }
 
         }
-        return view('users.kategori', ['produk' => $produk, 'kategori' => $kategori, 'kategori_menu' => $kategori_menu]);
+        return view('users.kategori', ['produk' => $produk, 'kategori' => $kategori, 'kategori_menu' => $kategori_menu , 'sort' => $sort]);
     }
 }
