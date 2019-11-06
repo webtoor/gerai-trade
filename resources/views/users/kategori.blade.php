@@ -60,8 +60,8 @@
             <div class="col-first">
                 <h1>Kategori Produk</h1>
                  <nav class="d-flex align-items-center justify-content-start">
-                     @if($kategori_menu->kategori)
-                 <a href="#">{{$kategori_menu->kategori->kategori_name}}<i class="fa fa-caret-right" aria-hidden="true"></i></a>
+                    @if($kategori_menu->kategori)
+                    <a href="#">{{$kategori_menu->kategori->kategori_name}}<i class="fa fa-caret-right" aria-hidden="true"></i></a>
                     <a href="#">{{$kategori_menu->subkategori_name}}</a>
                     @else
                     <a href="#">{{$kategori_menu->kategori_name}}</a>
@@ -83,7 +83,7 @@
                 @foreach ($kategori as $kategories)
 
                 @if(count($kategories->sub_kategori) < 1 )
-                <li class="main-nav-list"><a data-toggle="collapse" href="#Alat aria-expanded="false" aria-controls="Alat"><span
+                <li class="main-nav-list"><a href="{{ url('k/'.$kategories->slug) }}" aria-expanded="false" aria-controls="Alat"><span
                     class="lnr lnr-arrow-right"></span>{{$kategories->kategori_name}}</a>
               </li>
                 @else
@@ -92,10 +92,10 @@
                     <a data-toggle="collapse" href="#{{$kategories->slug}}" aria-expanded="false" aria-controls="{{$kategories->slug}}">
                         <span
                          class="lnr lnr-arrow-right"></span>{{$kategories->kategori_name}}</a>
-                    <ul style="list-style-type:none;" class="collapse" id="{{$kategories->slug}}" data-toggle="collapse" aria-expanded="false" aria-controls="{{$kategories->slug}}">
-                            @foreach ($kategories->sub_kategori as $sub_kategories)
+                    <ul style="list-style-type:none;" class="{{ ( $kategori_menu->kategori->slug == $kategories->slug) ? "collapse show" : "collapse"}} "id="{{$kategories->slug}}" data-toggle="collapse" aria-expanded="false" aria-controls="{{$kategories->slug}}">
+                        @foreach ($kategories->sub_kategori as $sub_kategories)
 
-                        <li class="main-nav-list child"><a href="#" >{{$sub_kategories->subkategori_name}}</a></li>
+                        <li class="main-nav-list child"><a href="{{ url('k/'.$sub_kategories->slug) }}" >{{$sub_kategories->subkategori_name}}</a></li>
                         @endforeach
 
                     </ul>
