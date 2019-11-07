@@ -15,6 +15,8 @@
     </section>
 
     <div class="container" style="margin-top:-50px;">
+            @if(count($produk))
+
             <div class="d-flex flex-wrap align-items-center">
                     <div class="sorting">
                             Menampilkan {{$produk->total()}} produk untuk 
@@ -26,15 +28,16 @@
                     </div>
                 <div class="sorting">
                         <select id="sort" class="form-control">
-                        <option value="">Produk Terbaru</option>
-                        <option value="">Harga Termurah</option>
-                        <option value="">Harga Termahal</option>
+                                <option value="/p/search?filter={{$filter}}&sort=desc" {{ ( $sort == 'desc') ? 'selected' : '' }}>Produk Terbaru</option>
+                                <option value="/p/search?filter={{$filter}}&sort=murah" {{ ( $sort == 'murah') ? 'selected' : '' }}>Harga Termurah</option>
+                                <option value="/p/search?filter={{$filter}}&sort=mahal" {{ ( $sort == 'mahal') ? 'selected' : '' }}>Harga Termahal</option>
                     </select>
                 </div>
                 
             </div>
         <section class=" pb-40" style="margin-top:20px;">
                 <div class="row">
+
                     @foreach ($produk as $produk_item)
                         
                     <div class="col-lg-3 col-sm-4">
@@ -86,7 +89,7 @@
             </div>
 
             @endforeach
-
+            @endif
         </div>
     </section>
     <div class="filter-bar d-flex flex-wrap align-items-center">
@@ -97,4 +100,17 @@
             </div>
         </div>
 </div>
+@endsection
+@section('js')
+<script>
+$(document).ready(function () {
+$('select#sort').on('change', function (e) {
+let optionSelected = $("option:selected", this);
+let valueSelected = this.value;
+window.location = valueSelected;
+
+console.log(valueSelected)
+});
+});
+</script>
 @endsection
