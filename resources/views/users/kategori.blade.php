@@ -92,7 +92,13 @@
                     <a data-toggle="collapse" href="#{{$kategories->slug}}" aria-expanded="false" aria-controls="{{$kategories->slug}}">
                         <span
                          class="lnr lnr-arrow-right"></span>{{$kategories->kategori_name}}</a>
-                    <ul style="list-style-type:none;" class="{{ ( $kategori_menu->kategori->slug == $kategories->slug) ? "collapse show" : "collapse"}} "id="{{$kategories->slug}}" data-toggle="collapse" aria-expanded="false" aria-controls="{{$kategories->slug}}">
+                         @if($kategori_menu->kategori)
+
+                         <ul style="list-style-type:none;" class="{{ ( ($kategori_menu->kategori->slug) == ($kategories->slug)) ? "collapse show" : "collapse"}} "id="{{$kategories->slug}}" data-toggle="collapse" aria-expanded="false" aria-controls="{{$kategories->slug}}">
+                        @else
+                        <ul style="list-style-type:none;" class="collapse" id="{{$kategories->slug}}" data-toggle="collapse" aria-expanded="false" aria-controls="{{$kategories->slug}}">
+
+                        @endif
                         @foreach ($kategories->sub_kategori as $sub_kategories)
 
                         <li class="main-nav-list child"><a href="{{ url('k/'.$sub_kategories->slug) }}" >{{$sub_kategories->subkategori_name}}</a></li>
