@@ -40,4 +40,11 @@ class Produk extends Model
         return $this->hasMany('App\Models\ProdukImage', 'product_id', 'id');
     }
 
+    public function kategori(){
+        return $this->belongsTo('App\Models\Kategori');
+    }
+    public function subkategori(){
+        return $this->belongsTo('App\Models\SubKategori');
+    }
+
 }

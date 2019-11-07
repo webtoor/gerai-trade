@@ -54,8 +54,10 @@
    
 Route::group(['prefix'=> 'k', 'as'=> 'k' . '.', ], function(){
             Route::get('/{slug}', 'KategoriController@showKategori')->name('showing-category');
-            Route::get('search', 'ProdukController@search')->name('search-produk');
 
+});
+Route::group(['prefix'=> 'p', 'as'=> 'p' . '.', ], function(){
+        Route::get('search', 'ProdukController@search')->name('search-produk');
 });
 
 Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']], function(){

@@ -7,14 +7,14 @@
    
       
     <div style="width:500px;">
-        <form>
+    <form action="{{route('p.search-produk')}}">
             <div class="input-group pl-2">
-                <input class="form-control my-0 py-1 white-border" type="text" placeholder="Cari produk" aria-label="Search">
-                <a href="#" class="input-group-append">
-                    <span class="input-group-text white lighten-3" id="basic-text1">
-
-                        <i class="fas fa-search text-grey" aria-hidden="true"></i> </span>
-                </a>
+                <input class="form-control my-0 py-1 white-border" name="filter" type="text" placeholder="Cari produk" aria-label="Search" required>
+                <a class="input-group-append white">
+                    <button type="submit" class="input-group-text white no-border" id="basic-text1">
+                        <i class="fas fa-search" aria-hidden="true"></i> 
+                      </button>
+                    </a>
             </div>
         </form>
     </div>
