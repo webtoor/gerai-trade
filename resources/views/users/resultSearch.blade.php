@@ -89,5 +89,12 @@
 
         </div>
     </section>
+    <div class="filter-bar d-flex flex-wrap align-items-center">
+            <div class="pagination ml-auto">
+                {{-- {{$produk->links()}} --}}
+                {{ $produk->appends(['filter' => $filter, 'sort' => $sort])->links() }}
+
+            </div>
+        </div>
 </div>
 @endsection
