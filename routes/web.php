@@ -60,12 +60,13 @@ Route::group(['prefix'=> 'p', 'as'=> 'p' . '.', ], function(){
         Route::get('search', 'ProdukController@search')->name('search-produk');
 });
 
+Route::get('/siapa-kita', 'HomeController@siapaKita')->name('siapa-kita');
+Route::get('/cerita-kita', 'HomeController@ceritaKita')->name('cerita-kita');
+Route::get('/kontak-kita', 'HomeController@kontakKita')->name('kontak-kita');
+
 Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']], function(){
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('daftar-mitra', 'HomeController@showDaftarMitra')->name('showDaftarMitra');
 Route::post('daftar-mitra', 'HomeController@insertDaftarMitra')->name('insertDaftarMitra');
-
-
-
 });  
