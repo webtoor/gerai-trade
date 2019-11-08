@@ -24,7 +24,10 @@
               
                 <tr>
                     <td> 
+                        @if(count($produks->produk_image))
                         <img src="{{ asset('storage/' .$produks->produk_image[0]->image_path)}}" style="height:150px; width: 150px;">
+                        @endif
+                       {{--  <img src="{{ asset('storage/' .$produks->produk_image[0]->image_path)}}" style="height:150px; width: 150px;"> --}}
                     </td>
                     <td>{{$produks->nama_produk}}</td>
                     <td>{{$produks->stok}}</td>

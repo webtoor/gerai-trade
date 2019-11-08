@@ -99,6 +99,7 @@
 
             </div>
         </div>
+        <br>
 </div>
 @endsection
 @section('js')

@@ -74,7 +74,7 @@
 <!-- End Banner Area -->
 
 
-    <div class="container-fluid" style="padding-bottom:30px;">
+    <div class="container-fluid" style="margin-top:-50px; padding-bottom:30px;">
             <div class="row">
                 <div class="col-xl-3 col-lg-4 col-md-5">
             <div class="sidebar-categories">
