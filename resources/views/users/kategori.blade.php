@@ -106,10 +106,7 @@
 
                     </ul>
                 </li>
-                @else
-                <div class="text-center">
-                    Maaf, produk dalam kategeri ini masih kosong <i class="far fa-sad-cry"></i>
-                </div>
+              
                 @endif
                 @endforeach
             </ul>
@@ -151,7 +148,7 @@
                                 <a href="single-product.html">
                                     <div class="card">
                                         <div class="view overlay">
-                                            <img class="card-img-top" src="/img/produk/produk_default.jpg" alt="Card image cap">
+                                            <img class="card-img-top" src="/img/produk/produk_default.jpg" alt="Card image cap" style="height:180px;">
                                             <a href="#!">
                                                 <div class="mask rgba-white-slight"></div>
                                             </a>

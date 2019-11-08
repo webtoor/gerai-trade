@@ -1,27 +1,21 @@
+
 <nav class="navbar navbar-expand-sm sticky-top navbar-light" style="background-color: #FFFFFF">
-    <a class="navbar-brand" href="/">LOGO</a>
+    <a class="navbar-brand" href="/">            
+      <img src="/img/logo.png" alt="" style="margin-top:-10px;">
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
    
       
-    <div style="width:500px;">
-    <form action="{{route('p.search-produk')}}">
-            <div class="input-group pl-2">
-                <input class="form-control my-0 py-1 white-border" name="filter" type="text" placeholder="Cari produk" aria-label="Search" required>
-                <a class="input-group-append white">
-                    <button type="submit" class="input-group-text white no-border" id="basic-text1">
-                        <i class="fas fa-search" aria-hidden="true"></i> 
-                      </button>
-                    </a>
-            </div>
-        </form>
-    </div>
+   
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item dropdown" style="margin-right:20px;">
-            <a href="#" id="menu" data-toggle="dropdown" class="nav-link dropdown-toggle  " 
+      
+        <ul class="navbar-nav mr-auto">
+            
+          <li class="nav-item dropdown " >
+            <a href="#" id="menu" data-toggle="dropdown" class="nav-link dropdown-toggle indigo-text  " 
             >Kategori</a>
             <ul class="dropdown-menu mt-2 rounded-0  darken-4 border-0 z-depth-1">
               @foreach ($kategori as $kategories)
@@ -52,18 +46,34 @@
 
        
        </li>
-            <li class="nav-item dropdown" style="margin-right:20px;">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">Tentang Kita</a>
-                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="{{route('siapa-kita')}}">Siapa Kita</a>
-                    <a class="dropdown-item" href="{{route('cerita-kita')}}">Cerita Kita</a>
-                    <a class="dropdown-item" href="{{route('kontak-kita')}}">Kontak Kita</a>
-                </div>
-            </li>
-            <li class="nav-item" style="margin-right:20px;">
-                <a class="nav-link" href="#"><b>Belanja Bersama Kita</b></a>
-            </li>
+      
+        </ul>
+        <form class="my-auto d-inline w-50" action="{{route('p.search-produk')}}">
+            <div class="input-group" >
+                <input class="form-control my-0 py-1" name="filter" type="text" placeholder="Cari produk" aria-label="Search" required>
+                <a class="input-group-append white">
+                    <button type="submit" class="input-group-text white no-border" id="basic-text1">
+                        <i class="fas fa-search" aria-hidden="true"></i> 
+                      </button>
+                    </a>
+            </div>
+        </form>
+        
+        <ul class="navbar-nav ml-auto">
+
+       <li class="nav-item" style="margin-right:20px;">
+          <a class="nav-link" href="#"><b>Cerita Kita</b></a>
+      </li>
+          <li class="nav-item dropdown" style="margin-right:20px;">
+              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">Tentang Kita</a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="{{route('siapa-kita')}}">Siapa Kita</a>
+                  <a class="dropdown-item" href="{{route('cerita-kita')}}">Cerita Kita</a>
+                  <a class="dropdown-item" href="{{route('kontak-kita')}}">Kontak Kita</a>
+              </div>
+          </li>
+            
             
             @guest
        
