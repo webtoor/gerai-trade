@@ -16,10 +16,14 @@
     });
     Auth::routes();
 
+
+    // LOKASI
     Route::get('ajax-kota-kab/{provinsi_id}', 'LokasiController@ajaxKotaKab');
     Route::get('kecamatan/{kotaKab_id}', 'LokasiController@ajaxKecamatan');
     Route::get('kelurahan-desa/{kecamatan_id}', 'LokasiController@ajaxKelurahanDesa');
 
+
+    //ADMIN PANEL
     Route::group(['prefix'=> 'admin-panel', 'as'=> 'admin-panel' . '.', 'middleware' => ['admin']], function(){
 
         Route::get('/', 'AdminController@index')->name('admin');
@@ -51,11 +55,12 @@
   
 
     
-   
+   // KATEGORI
 Route::group(['prefix'=> 'k', 'as'=> 'k' . '.', ], function(){
             Route::get('/{slug}', 'KategoriController@showKategori')->name('showing-category');
 
 });
+// PRODUK
 Route::group(['prefix'=> 'p', 'as'=> 'p' . '.', ], function(){
         Route::get('search', 'ProdukController@search')->name('search-produk');
 });
@@ -64,9 +69,14 @@ Route::get('/siapa-kita', 'HomeController@siapaKita')->name('siapa-kita');
 Route::get('/cerita-kita', 'HomeController@ceritaKita')->name('cerita-kita');
 Route::get('/kontak-kita', 'HomeController@kontakKita')->name('kontak-kita');
 
+// MITRA / MEMBER
 Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']], function(){
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('daftar-mitra', 'HomeController@showDaftarMitra')->name('showDaftarMitra');
-Route::post('daftar-mitra', 'HomeController@insertDaftarMitra')->name('insertDaftarMitra');
+        Route::get('/', 'HomeController@index')->name('home');
+        
+        Route::group(['middleware' => ['onlymember']], function(){
+                Route::get('daftar-mitra', 'HomeController@showDaftarMitra')->name('showDaftarMitra');
+                Route::post('daftar-mitra', 'HomeController@insertDaftarMitra')->name('insertDaftarMitra');
+                });  
+
 });  
