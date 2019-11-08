@@ -106,6 +106,10 @@
 
                     </ul>
                 </li>
+                @else
+                <div class="text-center">
+                    Maaf, produk dalam kategeri ini masih kosong <i class="far fa-sad-cry"></i>
+                </div>
                 @endif
                 @endforeach
             </ul>

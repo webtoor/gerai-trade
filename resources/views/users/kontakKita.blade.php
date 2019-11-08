@@ -2,10 +2,11 @@
 
 @section('content')
 
+
 <div class="container">
-    <div class="row">
-    sdfdsff
-    </div>
-    
-    </div>
+<div class="row">
+sdfdsff
+</div>
+
+</div>
 @endsection

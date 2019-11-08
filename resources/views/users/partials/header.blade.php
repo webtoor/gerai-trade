@@ -56,9 +56,9 @@
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Tentang Kita</a>
                 <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Siapa Kita</a>
-                    <a class="dropdown-item" href="#">Cerita Kita</a>
-                    <a class="dropdown-item" href="#">Kontak Kita</a>
+                    <a class="dropdown-item" href="{{route('siapa-kita')}}">Siapa Kita</a>
+                    <a class="dropdown-item" href="{{route('cerita-kita')}}">Cerita Kita</a>
+                    <a class="dropdown-item" href="{{route('kontak-kita')}}">Kontak Kita</a>
                 </div>
             </li>
             <li class="nav-item" style="margin-right:20px;">

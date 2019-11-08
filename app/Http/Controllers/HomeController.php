@@ -63,4 +63,17 @@ class HomeController extends Controller
         ]);
         return redirect()->route('home.home' );
     }
+
+    public function siapaKita(){
+        $kategori =  Kategori::with('sub_kategori')->get();
+        return view('users.siapaKita', ['kategori' => $kategori]);
+    }
+    public function kontakKita(){
+        $kategori =  Kategori::with('sub_kategori')->get();
+        return view('users.kontakKita', ['kategori' => $kategori]);
+    }
+    public function ceritaKita(){
+        $kategori =  Kategori::with('sub_kategori')->get();
+        return view('users.ceritaKita', ['kategori' => $kategori]);
+    }
 }

@@ -73,10 +73,10 @@ Route::get('/kontak-kita', 'HomeController@kontakKita')->name('kontak-kita');
 Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']], function(){
 
         Route::get('/', 'HomeController@index')->name('home');
-        
+
         Route::group(['middleware' => ['onlymember']], function(){
                 Route::get('daftar-mitra', 'HomeController@showDaftarMitra')->name('showDaftarMitra');
                 Route::post('daftar-mitra', 'HomeController@insertDaftarMitra')->name('insertDaftarMitra');
-                });  
+        });  
 
 });  
