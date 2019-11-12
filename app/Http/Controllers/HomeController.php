@@ -64,6 +64,11 @@ class HomeController extends Controller
         return redirect()->route('home.home' );
     }
 
+    public function produkDetail(){
+        $kategori =  Kategori::with('sub_kategori')->get();
+        return view('users.produk', ['kategori' => $kategori]);
+    }
+
     public function siapaKita(){
         $kategori =  Kategori::with('sub_kategori')->get();
         return view('users.siapaKita', ['kategori' => $kategori]);

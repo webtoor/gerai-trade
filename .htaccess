@@ -1,0 +1,9 @@
+
+# HTID:11421754: DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES BELOW
+php_value display_errors 1
+# DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES ABOVE HTID:11421754:
+RewriteEngine On
+RewriteRule ^(.*)$ public/$1 [L]
+
+
+

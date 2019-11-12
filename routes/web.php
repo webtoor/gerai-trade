@@ -65,6 +65,8 @@ Route::group(['prefix'=> 'p', 'as'=> 'p' . '.', ], function(){
         Route::get('search', 'ProdukController@search')->name('search-produk');
 });
 
+Route::get('/produk', 'HomeController@produkDetail')->name('produk-detail');
+
 Route::get('/siapa-kita', 'HomeController@siapaKita')->name('siapa-kita');
 Route::get('/cerita-kita', 'HomeController@ceritaKita')->name('cerita-kita');
 Route::get('/kontak-kita', 'HomeController@kontakKita')->name('kontak-kita');

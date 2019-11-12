@@ -192,7 +192,7 @@
                     </div>
 
                     @endforeach
-
+                   
                         
 
                 </div>
@@ -206,7 +206,13 @@
 
                         </div>
                     </div>
+
+                    @else
+                    <div class="text-center">
+                            Maaf barang yang Anda cari tidak tersedia <i class="far fa-sad-cry"></i>
+                        </div>
                     @endif
+
                     <!-- End Filter Bar -->
                 </div>
             </div>

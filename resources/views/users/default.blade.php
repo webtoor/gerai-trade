@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600" rel="stylesheet">
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <style>
     .icon-rotates {
@@ -90,8 +91,9 @@
     <footer class="ftco-footer ftco-section" style="background-color:#f8f9fa">
         @include('users.partials.footer');
     </footer>
-
+ 
     <script src="{{ mix('/js/app.js') }}"></script>
+
     <script type="text/javascript" >
       $(document).ready(function () {
         /* $('.dropdown-toggle').dropdown() */
@@ -116,6 +118,7 @@
             $('#myList a:last-child').tab('show')
           }) */
         </script>
+
     @yield('js')
 </body>
 </html>
