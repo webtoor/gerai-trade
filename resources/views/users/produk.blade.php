@@ -346,8 +346,20 @@
 						<h3>{{$produk_detail->nama_produk}}</h3>
 						<h2>Rp {{number_format($produk_detail->harga,0, ".", ".")}}</h2>
 						<ul style="list-style-type:none;" class="list">
-							<li style="margin-left:-40px;"><a class="active" href="#"><span>Kategori</span> : Minuman Kemasan</a></li>
-							<li style="margin-left:-40px;"><a href="#"><span>Ketersediaan</span> : Tersedia</a></li>
+              <li style="margin-left:-40px;"><a class="active" href="#"><span>Kategori</span> : 
+                @if($produk_detail->subkategori)
+                {{$produk_detail->subkategori->subkategori_name}}
+                @else
+                {{$produk_detail->kategori->kategori_name}}
+                @endif
+              </a></li>
+              <li style="margin-left:-40px;"><a href="#"><span>Ketersediaan</span> : 
+                @if($produk_detail->stok > 0)
+                Tersedia
+                @else
+                Habis
+              @endif
+          </a></li>
 						</ul>
 						<p>Deskripsi Produk Deskripsi Produk Deskripsi Produk Deskripsi Produk Deskripsi Produk Deskripsi Produk </p>
 						<div class="product_count">
