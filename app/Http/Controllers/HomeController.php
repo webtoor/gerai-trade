@@ -8,6 +8,7 @@ use App\Models\Provinsi;
 use App\Models\Alamat;
 use App\Models\User;
 use App\Models\Kategori;
+use App\Models\Produk;
 
 class HomeController extends Controller
 {
@@ -64,9 +65,12 @@ class HomeController extends Controller
         return redirect()->route('home.home' );
     }
 
-    public function produkDetail(){
+    public function produkDetail($slug_produk){
         $kategori =  Kategori::with('sub_kategori')->get();
-        return view('users.produk', ['kategori' => $kategori]);
+        $produk_detail = Produk::with(['produk_image', 'kategori' => function ($query) {
+            $query->with('sub_kategori');
+        } ])->where('slug', $slug_produk)->orderBy('id', 'desc')->first();
+        return view('users.produk', ['kategori' => $kategori, 'produk_detail' => $produk_detail]);
     }
 
     public function siapaKita(){
