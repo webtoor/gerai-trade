@@ -30,6 +30,7 @@ class HomeController extends Controller
     public function index()
     {
         $kategori =  Kategori::with('sub_kategori')->get();
+        
         return view('users.index', ['kategori' => $kategori]);
     }
 
