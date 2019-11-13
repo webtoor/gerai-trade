@@ -48,10 +48,7 @@
         Route::get('member', 'AdminController@showMember')->name('showMember');
         Route::get('mitra', 'AdminController@showMitra')->name('showMitra');
         Route::post('mitra', 'AdminController@addMitra')->name('addMitra');
-
-
-        
-        });  
+   });  
   
 
     
