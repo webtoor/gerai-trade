@@ -85,34 +85,37 @@
                                 </div>
 
                                 <div class="row">
-                                        <?php
-                                        for ($x = 0; $x <= 11; $x++) { 
-                                            
-                                            ?>
+                                     @foreach ($produk_unggulan as $produk_unggulans)
+                                         
                                             <div class="col-lg-3 col-sm-4">
                                         <div class="single-product">
-                                            <a href="single-product.html">
                                                 <div class="card">
                                                     <div class="view overlay">
-                                                        <img class="card-img-top" src="img/produk/produk_default.jpg"
-                                                            alt="Card image cap">
-                                                        <a href="#!">
-                                                            <div class="mask rgba-white-slight"></div>
+                                                            @if(count($produk_unggulans->produk->produk_image) > 0)
+                                                            <img class="card-img-top" src="{{ asset('storage/' .$produk_unggulans->produk->produk_image[0]->image_path)}}" alt="Card image cap" style="height:180px;">
+                                                            @else
+                                                            <img class="card-img-top" src="http://placehold.it/180x180" alt="Card image cap" style="height:180px;">
+                                                            @endif                                                           
+                                                        <a href="{{route('produk-detail', ['slug_produk' => $produk_unggulans->produk->slug])}}">
+                                                                    <div class="mask rgba-white-slight"></div>
                                                         </a>
                                                     </div>
                                                     <div class="product-details">
+                                                            <a href="{{route('produk-detail', ['slug_produk' => $produk_unggulans->produk->slug])}}">
+
                                                         <!-- Card content -->
                                                         <div class="card-body">
 
                                                             <!-- Title -->
-                                                            <h6 class="card-title" style="margin-top:-10px;">Nama Produk
+                                                            <h6 class="card-title" style="margin-top:-10px;">
+                                                                {{$produk_unggulans->produk->nama_produk}}
                                                             </h6>
                                                             <!-- Text -->
                                                             <div class="price">
-                                                                <h6>Rp 150.000</h6>
-                                                            </div>
-
-                                                            <h6 style="color:#AEAEAE;">Jakarta</h6>
+                                                                    <h6>Rp {{number_format($produk_unggulans->produk->harga,0, ".", ".")}}</h6>
+                                                                </div>
+                                                            </a>
+                                                            {{-- <h6 style="color:#AEAEAE;">Jakarta</h6> --}}
 
                                                  
                                                             <div class="card-footer px-1" style="background:white">
@@ -133,13 +136,12 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                            </a>
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
 
-                                      <?php  }
-                                        ?>
+                                    
                                     
 
             </div>
@@ -148,7 +150,8 @@
 </div>
 </div>
     </div>
-</div></div>
+</div>
+</div>
 </div>
 {{-- {{Auth::user()->role}} --}}
 

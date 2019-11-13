@@ -9,6 +9,7 @@ use App\Models\Alamat;
 use App\Models\User;
 use App\Models\Kategori;
 use App\Models\Produk;
+use App\Models\ProdukUnggulan;
 
 class HomeController extends Controller
 {
@@ -30,8 +31,10 @@ class HomeController extends Controller
     public function index()
     {
         $kategori =  Kategori::with('sub_kategori')->get();
-        
-        return view('users.index', ['kategori' => $kategori]);
+        $produk_unggulan = ProdukUnggulan::with(['produk' => function ($query) {
+            $query->with('produk_image');
+        } ])->get();
+        return view('users.index', ['kategori' => $kategori, 'produk_unggulan' => $produk_unggulan]);
     }
 
     public function showDaftarMitra()
