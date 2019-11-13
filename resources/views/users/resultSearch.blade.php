@@ -42,15 +42,20 @@
                         
                     <div class="col-lg-3 col-sm-4">
                             <div class="single-product">
-                            <a href="single-product.html">
                             <div class="card">
                                 <div class="view overlay">
-                                    <img class="card-img-top" src="/img/produk/produk_default.jpg" alt="Card image cap">
-                                    <a href="#!">
-                                        <div class="mask rgba-white-slight"></div>
-                                    </a>
-                                </div>
+                                    @if(count($produk_item->produk_image) > 0)
+                                    <img class="card-img-top" src="{{ asset('storage/' .$produk_item->produk_image[0]->image_path)}}" alt="Card image cap" style="height:180px;">
+                                    @else
+                                    <img class="card-img-top" src="http://placehold.it/180x180" alt="Card image cap" style="height:180px;">
+                                    @endif                                  
+                                    <a href="{{route('produk-detail', ['slug_produk' => $produk_item->slug])}}">
+                                            <div class="mask rgba-white-slight"></div>
+                                        </a>
+                                    </div>
                                 <div class="product-details">
+                                <a href="{{route('produk-detail', ['slug_produk' => $produk_item->slug])}}">
+
                                     <!-- Card content -->
                                     <div class="card-body">
 
@@ -63,8 +68,7 @@
                                         </div>
 
                                         {{-- <h6 style="color:#AEAEAE;">Jakarta</h6> --}}
-
-                                
+                                    </a>
                                         <div class="card-footer px-1" style="background:white">
                                     
                                             <span class="float-right">
@@ -83,7 +87,6 @@
                                         </div>
                                     </div>
                                 </div>
-                        </a>
                     </div>
                 </div>
             </div>

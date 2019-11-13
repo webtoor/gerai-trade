@@ -147,7 +147,11 @@
                             <div class="single-product">
                                     <div class="card">
                                         <div class="view overlay">
-                                            <img class="card-img-top" src="/img/produk/produk_default.jpg" alt="Card image cap" style="height:180px;">
+                                            @if(count($produk_item->produk_image) > 0)
+                                            <img class="card-img-top" src="{{ asset('storage/' .$produk_item->produk_image[0]->image_path)}}" alt="Card image cap" style="height:180px;">
+                                            @else
+                                            <img class="card-img-top" src="http://placehold.it/180x180" alt="Card image cap" style="height:180px;">
+                                            @endif
                                             <a href="{{route('produk-detail', ['slug_produk' => $produk_item->slug])}}">
                                                 <div class="mask rgba-white-slight"></div>
                                             </a>

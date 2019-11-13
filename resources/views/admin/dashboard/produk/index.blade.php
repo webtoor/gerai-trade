@@ -26,6 +26,8 @@
                     <td> 
                         @if(count($produks->produk_image))
                         <img src="{{ asset('storage/' .$produks->produk_image[0]->image_path)}}" style="height:150px; width: 150px;">
+                        @else
+                        <img src="http://placehold.it/150x150" style="height:150px; width: 150px;"> 
                         @endif
                        {{--  <img src="{{ asset('storage/' .$produks->produk_image[0]->image_path)}}" style="height:150px; width: 150px;"> --}}
                     </td>
