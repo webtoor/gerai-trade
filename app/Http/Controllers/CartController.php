@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Cart;
 use App\Models\Produk;
 use App\Models\Kategori;
@@ -10,10 +11,16 @@ use App\Models\Kategori;
 class CartController extends Controller
 {
     public function index(Request $request){
-    	//Cart::destroy();
-    	$produks = Produk::find($request->produk_id);
-    	Cart::add($produks->id, $produks->nama_produk, $request->qty, $produks->harga);
-        return redirect('keranjang-belanja'); 
+        //Cart::destroy();
+        if(Auth::guest()){
+            return redirect('login'); 
+
+        }else{
+            $produks = Produk::find($request->produk_id);
+    	    Cart::add($produks->id, $produks->nama_produk, $request->qty, $produks->harga);
+            return redirect('keranjang-belanja'); 
+        }
+    	
     }
 
     public function keranjangBelanja(){
@@ -23,7 +30,7 @@ class CartController extends Controller
     }
 
     public function update(Request $request){
-        Cart::remove($rowId);
+        Cart::update($request->rowid, $request->qty);
         $kategori = Kategori::with('sub_kategori')->get();
         return back(); 
     }

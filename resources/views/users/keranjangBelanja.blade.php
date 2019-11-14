@@ -20,7 +20,7 @@
             
             <div id="basket" class="col-lg-8">
               <div class="box mt-0 pb-0 no-horizontal-padding">
-                <form action="#" method="POST">
+                <form action="{{ url('cart/update') }}" method="POST">
                   {{ @csrf_field() }}
                   <div class="table-responsive">
                     <table class="table">
