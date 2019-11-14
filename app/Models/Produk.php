@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Gloudemans\Shoppingcart\Contracts\Buyable;
 
 class Produk extends Model
 {   
@@ -46,5 +47,20 @@ class Produk extends Model
     public function subkategori(){
         return $this->belongsTo('App\Models\SubKategori');
     }
+
+   /*  public function getBuyableIdentifier($options = null) {
+        return $this->id;
+    }
+
+    public function getBuyableDescription($options = null) {
+        return $this->name;
+    }
+    public function getBuyableQyt($options = null) {
+        return $this->qyt;
+    }
+
+    public function getBuyablePrice($options = null) {
+        return $this->price;
+    } */
 
 }

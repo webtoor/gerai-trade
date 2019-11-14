@@ -70,7 +70,7 @@ Route::get('/produk/{slug_produk}', 'HomeController@produkDetail')->name('produk
 Route::post('/cart', 'CartController@index');
 
 //KERANJANG BELANJA
-Route::get('/keranjang-belanja', 'CartController@keranjangBelanja');
+Route::get('/keranjang-belanja', 'CartController@keranjangBelanja')->name('keranjang-belanja');
 
 Route::get('/siapa-kita', 'HomeController@siapaKita')->name('siapa-kita');
 Route::get('/cerita-kita', 'HomeController@ceritaKita')->name('cerita-kita');

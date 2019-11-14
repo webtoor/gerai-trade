@@ -88,9 +88,9 @@
     @yield('content')
 
 
-    <footer class="ftco-footer ftco-section" style="background-color:#f8f9fa">
+   {{--  <footer class="ftco-footer ftco-section" style="background-color:#f8f9fa">
         @include('users.partials.footer');
-    </footer>
+    </footer> --}}
  
     <script src="{{ mix('/js/app.js') }}"></script>
 
