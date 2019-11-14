@@ -15,9 +15,8 @@
     </section>
         <div class="container" style="margin-top:-30px;">
           <div class="row bar">
-            <div class="col-lg-12">
-            </div>
-            <div id="basket" class="col-lg-9">
+            
+            <div id="basket" class="col-lg-8">
               <div class="box mt-0 pb-0 no-horizontal-padding">
                 <form action="#" method="POST">
                   {{ @csrf_field() }}
@@ -41,13 +40,13 @@
                             <input type="hidden" name="rowid" value="{{ $row->rowId }}">
                             <input type="number" value="<?php echo $row->qty; ?>" class="form-control" name="qty" style="width:70px;">
                           </td>
-                          <td><?php echo $row->price; ?></td>
+                          <td>Rp {{number_format($row->price,0, ".", ".")}}</td>
                           <td>
-                            <button style="border: none;background: none;" type="submit"><i class="fas fa-sync-alt"></i>
+                            <button style="border: none;background: none;" type="submit"><i class="fas fa-sync-alt green-text"></i>
                             </button>
                           </td>
                           <td>
-                             <a class="" href="#" ><i class="fa fa-trash" aria-hidden="true"></i>
+                             <a href="{{ url('/cart-delete/'$row->rowId) }}"><i class="fa fa-trash red-text" aria-hidden="true"></i>
                             </a>
                           </td>
                         </tr>
@@ -63,10 +62,10 @@
                 </form>
               </div>
             </div>
-            <div class="col-lg-3">
-                    <div id="order-summary" class=" card box mt-0 mb-4 p-0">
+            <div class="col-lg-4" style="margin-top:10px;">
+                    <div id="order-summary" class="card box mt-0 mb-4 p-0">
                             <div class="card-body">
-                              <h5 class="card-title">Ringkasan Belanja</h5>
+                              <h6 class="card-title"><b>Ringkasan Belanja</b></h6>
                               <div class="table-responsive">
                                     <table class="table">
                                       <tbody>
@@ -78,7 +77,7 @@
                                     </table>
                   
                                   </div>
-                              <a href="#" class="btn btn-outline-primary btn-block">Beli ({{ Cart::count() }})</a>
+                              <a href="#" class="btn btn-outline-dark btn-block"><b>Beli ({{ Cart::count() }})</b></a>
 
                             </div>
                           </div>

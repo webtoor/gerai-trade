@@ -21,4 +21,9 @@ class CartController extends Controller
 
         return view ('users.keranjangBelanja', ['kategori' => $kategori]);
     }
+
+    public function delete($rowId){
+        return $rowId;
+
+    }
 }
