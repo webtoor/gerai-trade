@@ -68,7 +68,8 @@ Route::get('/produk/{slug_produk}', 'HomeController@produkDetail')->name('produk
 
 //CART
 Route::post('/cart', 'CartController@index');
-Route::get('/cart-delete/{rowid}','CartController@delete');
+Route::post('cart/update','CartController@update');
+Route::get('/cart-delete/{rowId}','CartController@delete');
 
 //KERANJANG BELANJA
 Route::get('/keranjang-belanja', 'CartController@keranjangBelanja')->name('keranjang-belanja');

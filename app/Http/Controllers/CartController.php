@@ -22,9 +22,17 @@ class CartController extends Controller
         return view ('users.keranjangBelanja', ['kategori' => $kategori]);
     }
 
+    public function update(Request $request){
+        Cart::remove($rowId);
+        $kategori = Kategori::with('sub_kategori')->get();
+        return back(); 
+    }
+
     public function delete($rowId){
         Cart::remove($rowId);
         $kategori = Kategori::with('sub_kategori')->get();
         return back(); 
     }
+
+  
 }

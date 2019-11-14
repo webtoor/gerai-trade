@@ -13,6 +13,8 @@
             </div>
         </div>
     </section>
+
+    @if(count(Cart::content()))
         <div class="container" style="margin-top:-30px;">
           <div class="row bar">
             
@@ -86,4 +88,10 @@
             
           </div>
         </div>
+        @else
+        <div class="text-center">
+            <p>Wah, keranjang Anda kosong nih </p>
+            <a href="/" class="btn btn-primary">Belanja</a>
+        </div>
+        @endif
 @endsection
