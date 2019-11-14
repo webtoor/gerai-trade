@@ -58,12 +58,16 @@ Route::group(['prefix'=> 'k', 'as'=> 'k' . '.', ], function(){
 
 
 });
-// PRODUK
+// SEARCH PRODUK
 Route::group(['prefix'=> 'p', 'as'=> 'p' . '.', ], function(){
         Route::get('search', 'ProdukController@search')->name('search-produk');
 });
 
+// PRODUK DETAIL
 Route::get('/produk/{slug_produk}', 'HomeController@produkDetail')->name('produk-detail');
+
+//CART
+Route::post('/cart', 'CartController@index');
 
 Route::get('/siapa-kita', 'HomeController@siapaKita')->name('siapa-kita');
 Route::get('/cerita-kita', 'HomeController@ceritaKita')->name('cerita-kita');

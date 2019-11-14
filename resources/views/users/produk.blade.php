@@ -366,6 +366,8 @@
               {!! html_entity_decode($produk_detail->deskripsi) !!}
             
             </div>
+            <form action="{{ url('cart') }}" method="POST">
+                {{ @csrf_field() }}
 						<div class="product_count">
 							<label for="qty">Jumlah:</label>
 							<input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
@@ -375,7 +377,13 @@
 							 class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
 						</div>
 						<div class="card_area d-flex align-items-center">
-							<div><a class="btn btn-primary" href="#">Masukan Keranjang</a> </div>
+							<div>
+                 
+                  <input type="hidden" name="produk_id" value="<?php echo $produk_detail->id;?>">
+
+                <button type="submit" class="btn btn-primary" href="#">Masukan Keranjang</button>
+                  </form>
+               </div>
 							<div><a class="btn btn-success" href="{{$produk_detail->link_tokped}}">Beli di Tokopedia</a></div>
 
               </div>
