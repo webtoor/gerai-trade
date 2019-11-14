@@ -69,6 +69,9 @@ Route::get('/produk/{slug_produk}', 'HomeController@produkDetail')->name('produk
 //CART
 Route::post('/cart', 'CartController@index');
 
+//KERANJANG BELANJA
+Route::get('/keranjang-belanja', 'CartController@keranjangBelanja');
+
 Route::get('/siapa-kita', 'HomeController@siapaKita')->name('siapa-kita');
 Route::get('/cerita-kita', 'HomeController@ceritaKita')->name('cerita-kita');
 Route::get('/kontak-kita', 'HomeController@kontakKita')->name('kontak-kita');

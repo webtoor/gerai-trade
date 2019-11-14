@@ -9,9 +9,13 @@ class CartController extends Controller
 {
     public function index(Request $request){
     	// Cart::destroy();
-    	/* $product = Product::find($req->id);
-    	Cart::add(['id' => $product->id, 'name' => $product->name, 'qty' => $req->qty, 'price' => $product->price]);
-        return redirect('keranjang'); */
+    	$produk = Produk::find($request->produk_id);
+    	return Cart::add(['id' => $produk->id, 'name' => $produk->nama_produk, 'qty' => $request->qty, 'price' => $produk->harga]);
+        return redirect('keranjang'); 
         return $request->all();
+    }
+
+    public function keranjangBelanja(){
+        
     }
 }
