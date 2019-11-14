@@ -23,7 +23,8 @@ class CartController extends Controller
     }
 
     public function delete($rowId){
-        return $rowId;
-
+        Cart::remove($rowId);
+        $kategori = Kategori::with('sub_kategori')->get();
+        return back(); 
     }
 }

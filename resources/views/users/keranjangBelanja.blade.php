@@ -46,7 +46,7 @@
                             </button>
                           </td>
                           <td>
-                             <a href="{{ url('/cart-delete/'$row->rowId) }}"><i class="fa fa-trash red-text" aria-hidden="true"></i>
+                             <a href="{{ url('/cart-delete/'.$row->rowId) }}"><i class="fa fa-trash red-text" aria-hidden="true"></i>
                             </a>
                           </td>
                         </tr>
