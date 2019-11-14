@@ -300,18 +300,23 @@
                     <div id="carousel-example-1z" class="carousel slide my-2 " data-ride="carousel" data-interval="false">
                             <!--Indicators-->
                             <ol class="carousel-indicators">
+                                @if(count($produk_detail->produk_image) > 0)
+
+                                @foreach($produk_detail->produk_image as $key=> $images)
+                                <li data-target="#carousel-example-1z" data-slide-to="{{$key}}" class="<?php if($key==0){echo "active";} ?>"></li>
+                                @endforeach
+                                @else
                                 <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
-                                <li data-target="#carousel-example-1z" data-slide-to="1"></li>
-                                <li data-target="#carousel-example-1z" data-slide-to="2"></li>
+                                @endif
                             </ol>
                             <!--/.Indicators-->
                             <!--Slides-->
                             <div class="carousel-inner" role="listbox">
                                 <!--First slide-->
                                 @if(count($produk_detail->produk_image) > 0)
-                                @foreach($produk_detail->produk_image as $images)
-                                <div class="carousel-item active">
-                                  <img src="{{ asset('storage/' .$images->image_path)}}">     
+                                @foreach($produk_detail->produk_image as $key=> $images)
+                                <div class="carousel-item <?php if($key==0){echo "active";} ?>">
+                                  <img class="d-block w-100" src="{{ asset('storage/' .$images->image_path)}}" style="height:600px; width:555px">     
                                 </div>
                                 @endforeach
                                 @else
