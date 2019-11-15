@@ -128,7 +128,7 @@
                                                                         <i class="fas fa-shopping-cart grey-text ml-3"></i>
                                                                     </a>
 
-                                                                    <a href="" class="material-tooltip-main"
+                                                                    <a href="{{ url('/cart-wishlist/'.$produk_unggulans->produk->id) }}" class="material-tooltip-main"
                                                                         data-toggle="tooltip" data-placement="top"
                                                                         title="Tambah Wishlist">
                                                                         <i class="fas fa-heart grey-text ml-3"></i>

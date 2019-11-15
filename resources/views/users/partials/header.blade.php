@@ -83,7 +83,7 @@
 								<div class="shopping-card">
 									<i class="flaticon-bag fa-lg"></i>
                   <span>
-                      {{ Cart::count() }}
+                      {{ Cart::instance('default')->count() }}
                   </span>
                 </div>
                 <b style="margin-left:5px;">

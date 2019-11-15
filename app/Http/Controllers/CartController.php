@@ -36,6 +36,19 @@ class CartController extends Controller
     	
     }
 
+    public function cartWishlist($produk_id){
+        //Cart::destroy();
+        if(Auth::guest()){
+            return redirect('login'); 
+
+        }else{
+            $produks = Produk::find($produk_id);
+    	    Cart::instance('wishlist')->add($produks->id, $produks->nama_produk, 1, $produks->harga, ['slug' => $produks->slug]);
+            return redirect('wishlist'); 
+        }
+    	
+    }
+
     public function keranjangBelanja(){
         $kategori = Kategori::with('sub_kategori')->get();
 
@@ -65,5 +78,26 @@ class CartController extends Controller
         }
     }
 
-  
+    public function wishlist(){
+        $carts = Cart::instance('wishlist')->content();
+        $wishlist_cart = [];
+        foreach($carts as $cartz){
+            $wishlist_cart[] = $cartz->id;
+        }
+        
+        if(count($wishlist_cart) > 0){
+            $wishlist = Produk::with('produk_image')->whereIn('id', $wishlist_cart)->get();
+        }else{
+            $wishlist = [];
+        }
+        $kategori = Kategori::with('sub_kategori')->get();
+
+        return view ('users.wishlist', ['kategori' => $kategori, 'wishlist' => $wishlist]);
+    }
+
+    public function deleteWishlist($rowId){
+        Cart::instance('wishlist')->remove($rowId);
+        $kategori = Kategori::with('sub_kategori')->get();
+        return back(); 
+    }
 }

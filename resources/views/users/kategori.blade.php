@@ -141,8 +141,9 @@
                     <!-- Start Best Seller -->
                     <section class=" pb-40" style="margin-top:30px;">
                         <div class="row">
+
                             @foreach ($produk as $produk_item)
-                                
+
                                 <div class="col-lg-3 col-sm-4">
                             <div class="single-product">
                                     <div class="card">
@@ -176,17 +177,48 @@
                                                 <div class="card-footer px-1" style="background:white">
                                          
                                                     <span class="float-right">
-                                                        <a class="material-tooltip-main"
-                                                            data-toggle="tooltip" data-placement="top"
-                                                            title="Masukan keranjang">
-                                                            <i
-                                                                class="fas fa-shopping-cart grey-text ml-3"></i>
-                                                        </a>
-                                                        <a class="material-tooltip-main"
-                                                            data-toggle="tooltip" data-placement="top"
-                                                            title="Tambah Wishlist">
-                                                            <i class="fas fa-heart grey-text ml-3"></i>
-                                                        </a>
+                                                            
+                                                            <a href="{{ url('/cart-shop/'.$produk_item->id) }}" class="material-tooltip-main"
+                                                                data-toggle="tooltip" data-placement="top"
+                                                                title="Masukan keranjang">
+                                                                <i class="fas fa-shopping-cart grey-text ml-3"></i>
+                                                            </a>
+                                                            @if(count(Cart::instance('wishlist')->content()) > 0)
+                                                            <?php $test = null ?>
+
+                                                            @foreach(Cart::instance('wishlist')->content() as $row)
+
+                                                            @if($produk_item->id == $row->id)
+                                                            <?php $test = 1 ?>
+
+                                                                <a href="{{ url('/delete-wishlist/'.$row->rowId) }}" class="material-tooltip-main"
+                                                                    data-toggle="tooltip" data-placement="top"
+                                                                    title="Hapus Wishlist">
+                                                                    <i class="fas fa-heart pink-text ml-3"></i>
+                                                                    </a>
+                                                           
+                                                            @endif
+                                                            @endforeach
+
+                                                            @if($test == null)
+                                                            <a href="{{ url('/cart-wishlist/'.$produk_item->id) }}" class="material-tooltip-main"
+                                                                data-toggle="tooltip" data-placement="top"
+                                                                title="Tambah Wishlist">
+                                                                <i class="fas fa-heart grey-text ml-3"></i>
+                                                            </a>
+                                                            @endif
+                                                            @else
+                                                            <a href="{{ url('/cart-wishlist/'.$produk_item->id) }}" class="material-tooltip-main"
+                                                                data-toggle="tooltip" data-placement="top"
+                                                                title="Tambah Wishlist">
+                                                                <i class="fas fa-heart grey-text ml-3"></i>
+                                                            </a>
+                                                            @endif          
+                                                           
+                                                          
+                                                            
+                                                          
+                                                          
                                                     </span>
                                                 </div>
                                             </div>
@@ -196,6 +228,7 @@
                     </div>
 
                     @endforeach
+
                    
                         
 

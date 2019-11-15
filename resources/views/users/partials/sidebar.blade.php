@@ -30,7 +30,7 @@
                     <b style="font-size:14px;">PROFIL SAYA</b>    
             </p>
             <div style="font-size: 14px;">
-                <a href="#" class="list-group-item border-top-0" style="margin-bottom:-10px;">Wishlist</a>
+                <a href="{{route('wishlist')}}" class="list-group-item border-top-0" style="margin-bottom:-10px;">Wishlist</a>
                 <a href="#" class="list-group-item border-top-0" style="margin-top:-14px;">Pengaturan</a>
             </div>
         </div>

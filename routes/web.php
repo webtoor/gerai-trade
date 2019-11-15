@@ -69,11 +69,13 @@ Route::get('/produk/{slug_produk}', 'HomeController@produkDetail')->name('produk
 //CART
 Route::post('/cart', 'CartController@index');
 Route::get('/cart-shop/{produk_id}', 'CartController@cartShop');
+Route::get('/cart-wishlist/{produk_id}', 'CartController@cartWishlist');
 
 Route::post('/cart/update','CartController@update');
 Route::get('/cart-delete/{rowId}','CartController@delete');
 Route::post('/cart-wishlist', 'CartController@addWishlist');
 Route::get('/wishlist', 'CartController@wishlist')->name('wishlist');
+Route::get('/delete-wishlist/{rowId}','CartController@deleteWishlist');
 
 
 //KERANJANG BELANJA

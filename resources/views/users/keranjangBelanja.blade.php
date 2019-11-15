@@ -14,7 +14,7 @@
         </div>
     </section>
 
-    @if(count(Cart::content()))
+    @if(count(Cart::instance('default')->content()))
         <div class="container" style="margin-top:-30px;">
           <div class="row bar">
             
@@ -72,13 +72,13 @@
                                       <tbody>
                                         <tr>
                                           <td>Total Harga</td>
-                                          <th><?php echo Cart::total(); ?></th>
+                                          <th><?php echo Cart::instance('default')->total(); ?></th>
                                       </tr>
                                       </tbody>
                                     </table>
                   
                                   </div>
-                              <a href="#" class="btn btn-outline-dark btn-block"><b>Beli ({{ Cart::count() }})</b></a>
+                              <a href="#" class="btn btn-outline-dark btn-block"><b>Beli ({{ Cart::instance('default')->count() }})</b></a>
 
                             </div>
                           </div>
