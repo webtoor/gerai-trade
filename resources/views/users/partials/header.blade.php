@@ -78,11 +78,13 @@
 
               @else
               <li class="nav-item" style="margin-right:20px;">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ url('/keranjang-belanja') }}">
                     <div class="up-item">
 								<div class="shopping-card">
-									<i class="flaticon-bag"></i>
-                  <span>0</span>
+									<i class="flaticon-bag fa-lg"></i>
+                  <span>
+                      {{ Cart::count() }}
+                  </span>
                 </div>
                 <b style="margin-left:5px;">
                     Keranjang Belanja

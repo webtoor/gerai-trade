@@ -70,9 +70,12 @@ Route::get('/produk/{slug_produk}', 'HomeController@produkDetail')->name('produk
 Route::post('/cart', 'CartController@index');
 Route::post('cart/update','CartController@update');
 Route::get('/cart-delete/{rowId}','CartController@delete');
+Route::post('/cart-wishlist', 'CartController@addWishlist');
+
 
 //KERANJANG BELANJA
 Route::get('/keranjang-belanja', 'CartController@keranjangBelanja')->name('keranjang-belanja');
+Route::get('/wishlist', 'HomeController@wishlist')->name('wishlist');
 
 Route::get('/siapa-kita', 'HomeController@siapaKita')->name('siapa-kita');
 Route::get('/cerita-kita', 'HomeController@ceritaKita')->name('cerita-kita');

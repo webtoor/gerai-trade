@@ -17,7 +17,7 @@ class CartController extends Controller
 
         }else{
             $produks = Produk::find($request->produk_id);
-    	    Cart::add($produks->id, $produks->nama_produk, $request->qty, $produks->harga);
+    	    Cart::add($produks->id, $produks->nama_produk, $request->qty, $produks->harga, ['slug' => $produks->slug]);
             return redirect('keranjang-belanja'); 
         }
     	

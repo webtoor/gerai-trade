@@ -13,7 +13,7 @@
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600" rel="stylesheet">
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
-  	<link rel="stylesheet" href="css/flaticon.css"/>
+  	<link rel="stylesheet" href="/css/flaticon.css"/>
 
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <style>

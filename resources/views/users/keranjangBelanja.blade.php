@@ -34,13 +34,12 @@
                         </tr>
                       </thead>
                       <tbody>
-
                         <?php foreach(Cart::content() as $row) :?>
                         <tr>
-                          <td><a href="#"><?php echo $row->name; ?></a></td>
+                          <td><a href="{{route('produk-detail', ['slug_produk' => $row->options->slug])}}" style="color:#3f51b5; font-weight:bold"><?php echo $row->name; ?></a></td>
                           <td>
                             <input type="hidden" name="rowid" value="{{ $row->rowId }}">
-                            <input type="number" value="<?php echo $row->qty; ?>" class="form-control" name="qty" style="width:70px;">
+                            <input type="number" min="0" value="<?php echo $row->qty; ?>" class="form-control" name="qty" style="width:60px; height:25px;">
                           </td>
                           <td>Rp {{number_format($row->price,0, ".", ".")}}</td>
                           <td>
