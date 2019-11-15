@@ -60,10 +60,12 @@
         </form>
         
         <ul class="navbar-nav ml-auto">
+         
 
-       <li class="nav-item" style="margin-right:20px;">
+       <li class="nav-item" style="margin-right:17px;">
           <a class="nav-link" href="#"><b>Cerita Kita</b></a>
       </li>
+      @guest
           <li class="nav-item dropdown" style="margin-right:20px;">
               <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">Tentang Kita</a>
@@ -72,7 +74,25 @@
                   <a class="dropdown-item" href="{{route('cerita-kita')}}">Cerita Kita</a>
                   <a class="dropdown-item" href="{{route('kontak-kita')}}">Kontak Kita</a>
               </div>
-          </li>
+            </li>
+
+              @else
+              <li class="nav-item" style="margin-right:20px;">
+                <a class="nav-link" href="#">
+                    <div class="up-item">
+								<div class="shopping-card">
+									<i class="flaticon-bag"></i>
+                  <span>0</span>
+                </div>
+                <b style="margin-left:5px;">
+                    Keranjang Belanja
+                  </b>
+							</div> 
+                </a>
+            </li>
+							
+
+              @endguest
             
             
             @guest

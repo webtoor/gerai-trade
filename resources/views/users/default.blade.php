@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600" rel="stylesheet">
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+  	<link rel="stylesheet" href="css/flaticon.css"/>
 
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <style>
@@ -78,6 +79,26 @@
           color: #000000; }
         .ftco-footer-social li a:hover {
           color: #000000; }
+
+          .shopping-card {
+	display: inline-block;
+	position: relative;
+}
+
+.shopping-card span {
+	position: absolute;
+	top: -4px;
+	left: 100%;
+	height: 16px;
+	min-width: 16px;
+	color: #fff;
+	font-size: 13px;
+	background: #f51167;
+	text-align: center;
+	border-radius: 30px;
+	padding: 0 2px;
+	margin-left: -7px;
+}
       </style>
     @yield('css')
 </head>
