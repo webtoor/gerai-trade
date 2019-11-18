@@ -72,17 +72,42 @@
                                         <div class="card-footer px-1" style="background:white">
                                     
                                             <span class="float-right">
-                                                <a class="material-tooltip-main"
+                                                <a href="{{ url('/cart-shop/'.$produk_item->id) }}" class="material-tooltip-main"
                                                     data-toggle="tooltip" data-placement="top"
                                                     title="Masukan keranjang">
-                                                    <i
-                                                        class="fas fa-shopping-cart grey-text ml-3"></i>
+                                                    <i class="fas fa-shopping-cart grey-text ml-3"></i>
                                                 </a>
-                                                <a class="material-tooltip-main"
+                                                @if(count(Cart::instance('wishlist')->content()) > 0)
+                                                <?php $checks = null ?>
+
+                                                @foreach(Cart::instance('wishlist')->content() as $row)
+
+                                                @if($produk_item->id == $row->id)
+                                                <?php $checks = 1 ?>
+
+                                                    <a href="{{ url('/delete-wishlist/'.$row->rowId) }}" class="material-tooltip-main"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="Hapus Wishlist">
+                                                        <i class="fas fa-heart pink-text ml-3"></i>
+                                                        </a>
+                                               
+                                                @endif
+                                                @endforeach
+
+                                                @if($checks == null)
+                                                <a href="{{ url('/cart-wishlist/'.$produk_item->id) }}" class="material-tooltip-main"
                                                     data-toggle="tooltip" data-placement="top"
                                                     title="Tambah Wishlist">
                                                     <i class="fas fa-heart grey-text ml-3"></i>
                                                 </a>
+                                                @endif
+                                                @else
+                                                <a href="{{ url('/cart-wishlist/'.$produk_item->id) }}" class="material-tooltip-main"
+                                                    data-toggle="tooltip" data-placement="top"
+                                                    title="Tambah Wishlist">
+                                                    <i class="fas fa-heart grey-text ml-3"></i>
+                                                </a>
+                                                @endif 
                                             </span>
                                         </div>
                                     </div>

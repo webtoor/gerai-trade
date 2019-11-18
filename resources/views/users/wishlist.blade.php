@@ -13,7 +13,8 @@
           </ul>
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="wishlist" role="tabpanel" aria-labelledby="wishlist-tab">
-                
+                    @if(count($wishlist))
+
                     <div class="row" style="margin-top:50px;">
                             @foreach ($wishlist as $wishlists)
                                 
@@ -74,12 +75,17 @@
                            </div>
                        </div>
                        @endforeach
-
+                     
                            
                            
 
-   </div>
-                    {{Cart::instance('wishlist')->content()}}
+                </div>
+                @else
+                <div class="text-center" style="margin-top:100px;">
+                    <p>Wah, Wishlist Anda kosong nih </p>
+                    <a href="/" class="btn btn-primary">Belanja</a>
+                </div>
+                @endif
 
             </div>
           </div>

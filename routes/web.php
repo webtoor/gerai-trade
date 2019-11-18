@@ -67,20 +67,21 @@ Route::group(['prefix'=> 'p', 'as'=> 'p' . '.', ], function(){
 Route::get('/produk/{slug_produk}', 'HomeController@produkDetail')->name('produk-detail');
 
 //CART
-Route::post('/cart', 'CartController@index');
-Route::get('/cart-shop/{produk_id}', 'CartController@cartShop');
-Route::get('/cart-wishlist/{produk_id}', 'CartController@cartWishlist');
+Route::group(['middleware' => 'member'], function(){
+    Route::post('/cart', 'CartController@index');
+    Route::get('/cart-shop/{produk_id}', 'CartController@cartShop');
+    Route::get('/cart-wishlist/{produk_id}', 'CartController@cartWishlist');
 
-Route::post('/cart/update','CartController@update');
-Route::get('/cart-delete/{rowId}','CartController@delete');
-Route::post('/cart-wishlist', 'CartController@addWishlist');
-Route::get('/wishlist', 'CartController@wishlist')->name('wishlist');
-Route::get('/delete-wishlist/{rowId}','CartController@deleteWishlist');
+    Route::post('/cart/update', 'CartController@update');
+    Route::get('/cart-delete/{rowId}', 'CartController@delete');
+    Route::post('/cart-wishlist', 'CartController@addWishlist');
+    Route::get('/wishlist', 'CartController@wishlist')->name('wishlist');
+    Route::get('/delete-wishlist/{rowId}', 'CartController@deleteWishlist');
 
 
-//KERANJANG BELANJA
-Route::get('/keranjang-belanja', 'CartController@keranjangBelanja')->name('keranjang-belanja');
-
+    //KERANJANG BELANJA
+    Route::get('/keranjang-belanja', 'CartController@keranjangBelanja')->name('keranjang-belanja');
+});
 Route::get('/siapa-kita', 'HomeController@siapaKita')->name('siapa-kita');
 Route::get('/cerita-kita', 'HomeController@ceritaKita')->name('cerita-kita');
 Route::get('/kontak-kita', 'HomeController@kontakKita')->name('kontak-kita');

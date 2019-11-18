@@ -184,12 +184,12 @@
                                                                 <i class="fas fa-shopping-cart grey-text ml-3"></i>
                                                             </a>
                                                             @if(count(Cart::instance('wishlist')->content()) > 0)
-                                                            <?php $test = null ?>
+                                                            <?php $checks = null ?>
 
                                                             @foreach(Cart::instance('wishlist')->content() as $row)
 
                                                             @if($produk_item->id == $row->id)
-                                                            <?php $test = 1 ?>
+                                                            <?php $checks = 1 ?>
 
                                                                 <a href="{{ url('/delete-wishlist/'.$row->rowId) }}" class="material-tooltip-main"
                                                                     data-toggle="tooltip" data-placement="top"
@@ -200,7 +200,7 @@
                                                             @endif
                                                             @endforeach
 
-                                                            @if($test == null)
+                                                            @if($checks == null)
                                                             <a href="{{ url('/cart-wishlist/'.$produk_item->id) }}" class="material-tooltip-main"
                                                                 data-toggle="tooltip" data-placement="top"
                                                                 title="Tambah Wishlist">
