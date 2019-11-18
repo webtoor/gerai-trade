@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class AdminBlogController extends Controller
 {
     function index(){
-        
+       
     }
 }
