@@ -28,13 +28,16 @@
 
         Route::get('/', 'AdminController@index')->name('admin');
         Route::put('verifikasi', 'AdminController@updateStatusMitra')->name('verifikasi');
+
+        //KATEGORI 
         Route::get('kelola-kategori', 'AdminController@kelolaKategori')->name('kelola-kategori');
         Route::post('kategori', 'KategoriController@addKategori')->name('add-kategori');
         Route::put('kategori', 'KategoriController@updateKategori')->name('update-kategori');
         Route::post('sub-kategori', 'KategoriController@addSubKategori')->name('add-subkategori');
         Route::put('sub-kategori', 'KategoriController@updateSubKategori')->name('update-subkategori');
         Route::get('produk', 'AdminProdukController@index')->name('kelola-produk');
-        // TAMBAH PRODUK
+
+        // PRODUK
         Route::get('produk/tambah-produk', 'AdminProdukController@add')->name('add-produk');
         Route::get('produk/get-subkategori/{kategori_id}', 'AdminProdukController@getAjaxSubkategori');
         Route::post('produk/tambah-produk', 'AdminProdukController@insert')->name('insert-produk');
@@ -45,6 +48,10 @@
         Route::delete('produk/edit-produk/{produk_id}', 'AdminProdukController@deleteImage')->name('delete-image');
         Route::post('produk/edit-produk/tambah-foto', 'AdminProdukController@tambahImage')->name('tambah-image');
 
+        // BLOGS
+        Route::get('blog', 'AdminBlogController@index')->name('blog');
+
+        // USER
         Route::get('member', 'AdminController@showMember')->name('showMember');
         Route::get('mitra', 'AdminController@showMitra')->name('showMitra');
         Route::post('mitra', 'AdminController@addMitra')->name('addMitra');
