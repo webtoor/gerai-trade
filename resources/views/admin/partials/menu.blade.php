@@ -64,3 +64,11 @@
       </li>
     </ul>
   </li>
+  <li class="nav-item">
+    <a class="sidebar-link" href="{{ route('admin-panel.blog') }}">
+        <span class="icon-holder">
+            <i class="c-purple-500 ti-shopping-cart"></i>
+        </span>
+        <span class="title">Kelola Cerita</span>
+    </a>
+</li>
