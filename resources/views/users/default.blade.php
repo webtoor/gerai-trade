@@ -103,7 +103,7 @@
     @yield('css')
 </head>
 <body>
-    @include('users.partials.header');
+    @include('users.partials.header')
 
 
     @yield('content')
