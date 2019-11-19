@@ -10,6 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/storage-link', function () {
+Artisan::call('storage:link');
+});
     Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
     Route::group(['middleware' => ['guest']], function(){
             Route::get('/', 'HomeController@index');

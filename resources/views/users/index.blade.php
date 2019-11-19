@@ -1,3 +1,22 @@
+@section('css')
+<style>
+    @media screen and (max-width:700px){
+    .maxs{
+    max-height: 100%;
+    min-height: 100%;
+    height: 300px;
+    }
+    
+    }
+    @media screen and (max-width:700px){
+    .maxs-img{
+    max-height: 100%;
+    min-height: 100%;
+    height: 300px;
+    }
+    }
+    </style>
+@endsection
 @extends('users.default')
 
 @section('content')
@@ -90,11 +109,11 @@
                                             <div class="col-lg-3 col-sm-4">
                                         <div class="single-product">
                                                 <div class="card">
-                                                    <div class="view overlay">
+                                                    <div class="view overlay maxs">
                                                             @if(count($produk_unggulans->produk->produk_image) > 0)
-                                                            <img class="card-img-top" src="{{ asset('storage/' .$produk_unggulans->produk->produk_image[0]->image_path)}}" alt="Card image cap" style="height:180px;">
+                                                            <img class="img-fluid card-img-top maxs-img" src="{{ asset('storage/' .$produk_unggulans->produk->produk_image[0]->image_path)}}" alt="Card image cap" style="height:230px;">
                                                             @else
-                                                            <img class="card-img-top" src="http://placehold.it/180x180" alt="Card image cap" style="height:180px;">
+                                                            <img class="img-fluid card-img-top maxs-img" src="http://placehold.it/700x700" alt="Card image cap" style="height:230px;>
                                                             @endif                                                           
                                                         <a href="{{route('produk-detail', ['slug_produk' => $produk_unggulans->produk->slug])}}">
                                                                     <div class="mask rgba-white-slight"></div>
@@ -163,6 +182,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    
                                         </div>
                                     </div>
                                 </div>

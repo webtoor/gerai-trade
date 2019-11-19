@@ -9,7 +9,7 @@
                 </p>
           </div>
           
-              <p class="list-group-item border-top-0" style="margin-top:-10px;">
+              <p class="list-group-item border-top-0 text-center" style="margin-top:-10px;">
                 <img src="images/profiluser.png" style="width: 152px;">
               </p>
 

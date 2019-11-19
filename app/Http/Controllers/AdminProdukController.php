@@ -43,9 +43,9 @@ class AdminProdukController extends Controller
             'deskripsi' => ['required'], 
             'stok' => ['required'],
             'harga' => ['required'],
-            'link_tokped' => ['required', 'nullable'],
-            'link_shopee' => ['required', 'nullable'],
-            'link_bukalapak' => ['required', 'nullable'],
+            'link_tokped' => ['nullable'],
+            'link_shopee' => ['nullable'],
+            'link_bukalapak' => ['nullable'],
             'image_produk' => 'required|array|min:1|max:3',
             'image_produk.*' => 'file|mimes:jpeg,jpg,png|max:8000'
         ]); 
@@ -59,6 +59,10 @@ class AdminProdukController extends Controller
             'deskripsi' => $data['deskripsi'],
             'stok' => $data['stok'],
             'harga' => $data['harga'],
+            'link_tokped' => $data['link_tokped'],
+            'link_shopee' => $data['link_shopee'],
+            'link_bukalapak' => $data['link_bukalapak'],
+
         ]);
         
             $newPost = $post->replicate();

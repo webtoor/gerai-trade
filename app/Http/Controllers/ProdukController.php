@@ -16,13 +16,13 @@ class ProdukController extends Controller
         $kategori =  Kategori::with('sub_kategori')->get();
         $produk = Produk::with('kategori', 'subkategori')->where('nama_produk', 'like',"%".$filter."%")->paginate(2);
         if($sort == 'desc'){
-            $produk = Produk::with('kategori', 'subkategori', 'produk_image')->where('nama_produk', 'like',"%".$filter."%")->orderBy('id', 'desc')->paginate(2);
+            $produk = Produk::with('kategori', 'subkategori', 'produk_image')->where('nama_produk', 'like',"%".$filter."%")->orderBy('id', 'desc')->paginate(20);
         }elseif($sort == 'murah'){
-            $produk = Produk::with('kategori', 'subkategori', 'produk_image')->where('nama_produk', 'like',"%".$filter."%")->orderBy('harga', 'asc')->paginate(2);
+            $produk = Produk::with('kategori', 'subkategori', 'produk_image')->where('nama_produk', 'like',"%".$filter."%")->orderBy('harga', 'asc')->paginate(20);
         }elseif($sort == 'mahal'){
-            $produk = Produk::with('kategori', 'subkategori', 'produk_image')->where('nama_produk', 'like',"%".$filter."%")->orderBy('harga', 'desc')->paginate(2);
+            $produk = Produk::with('kategori', 'subkategori', 'produk_image')->where('nama_produk', 'like',"%".$filter."%")->orderBy('harga', 'desc')->paginate(20);
         }else{
-            $produk = Produk::with('kategori', 'subkategori', 'produk_image')->where('nama_produk', 'like',"%".$filter."%")->orderBy('id', 'desc')->paginate(2);
+            $produk = Produk::with('kategori', 'subkategori', 'produk_image')->where('nama_produk', 'like',"%".$filter."%")->orderBy('id', 'desc')->paginate(20);
         }
         return view('users.resultSearch', ['kategori' => $kategori, 'produk' => $produk, 'filter' => $filter, 'sort' => $sort]);
     }

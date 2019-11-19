@@ -47,7 +47,7 @@
         <nav class="navbar navbar-expand-md sticky-top navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{-- {{ config('app.name', 'Laravel') }} --}} LOGO
+                        <img src="/img/logo.png" alt="" style="margin-top:-10px;" height="45px;">
                 </a>
                 
 
