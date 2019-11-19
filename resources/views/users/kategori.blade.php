@@ -1,6 +1,21 @@
 @section('css')
 <link rel="stylesheet" type="text/css" href="../css/banner.css">
 <style>
+    @media screen and (max-width:700px){
+    .maxs{
+    max-height: 100%;
+    min-height: 100%;
+    height: 300px;
+    }
+    
+    }
+    @media screen and (max-width:700px){
+    .maxs-img{
+    max-height: 100%;
+    min-height: 100%;
+    height: 300px;
+    }
+    }
     .sidebar-categories .head {
   line-height: 60px;
  
@@ -54,7 +69,7 @@
 
 @section('content')
  <!-- Start Banner Area -->
- <section class="banner-area organic-breadcrumb" style="margin-top:-50px;">
+ <section class="banner-area organic-breadcrumb" style="margin-top:-30px;">
     <div class="container">
         <div class="breadcrumb-banner d-flex flex-wrap align-items-center">
             <div class="col-first">
@@ -112,11 +127,12 @@
             </ul>
         </div>
                 </div>
+               
                 <div class="col-xl-9 col-lg-8 col-md-7">
                     <!-- Start Filter Bar -->
                     @if(count($produk))
                     <div class="filter-bar d-flex flex-wrap align-items-center">
-                            <div class="sorting">
+                            <div class="sorting" style="font-size:13px;">
                                     Menampilkan {{$produk->total()}} produk untuk 
                                     @if($kategori_menu->kategori)
                                     {{$kategori_menu->subkategori_name}}
@@ -147,11 +163,11 @@
                                 <div class="col-lg-3 col-sm-4">
                             <div class="single-product">
                                     <div class="card">
-                                        <div class="view overlay">
+                                        <div class="view overlay maxs">
                                             @if(count($produk_item->produk_image) > 0)
-                                            <img class="card-img-top" src="{{ asset('storage/' .$produk_item->produk_image[0]->image_path)}}" alt="Card image cap" style="height:180px;">
+                                            <img class="card-img-top maxs-img" src="{{ asset('storage/' .$produk_item->produk_image[0]->image_path)}}" alt="Card image cap" style="height:200px;">
                                             @else
-                                            <img class="card-img-top" src="http://placehold.it/180x180" alt="Card image cap" style="height:180px;">
+                                            <img class="card-img-top maxs-img" src="http://placehold.it/300x300" alt="Card image cap" style="height:200px;">
                                             @endif
                                             <a href="{{route('produk-detail', ['slug_produk' => $produk_item->slug])}}">
                                                 <div class="mask rgba-white-slight"></div>

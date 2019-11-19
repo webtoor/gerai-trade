@@ -45,6 +45,7 @@ Artisan::call('storage:link');
         Route::get('produk/tambah-produk', 'AdminProdukController@add')->name('add-produk');
         Route::get('produk/get-subkategori/{kategori_id}', 'AdminProdukController@getAjaxSubkategori');
         Route::post('produk/tambah-produk', 'AdminProdukController@insert')->name('insert-produk');
+        Route::delete('produk/delete-produk/{produk_id}', 'AdminProdukController@deleteProduk')->name('delete-produk');
 
         //EDIT PRODUK
         Route::get('produk/edit-produk/{produk_id}', 'AdminProdukController@edit')->name('edit-produk');

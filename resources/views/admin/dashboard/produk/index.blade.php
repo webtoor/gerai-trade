@@ -41,6 +41,17 @@
                                             <span class="ti-pencil"></span>
                                         </a>
                                     </li>
+                                    <li class="list-inline-item">
+                                            {!! Form::open([
+                                                'class'=>'delete',
+                                                'url'  => route('admin-panel.delete-produk', $produks->id), 
+                                                'method' => 'DELETE',
+                                                ]) 
+                                            !!}
+                                                <button class="btn btn-danger btn-sm" title="{{ trans('app.delete_title') }}"><i class="ti-trash"></i></button>
+                                                
+                                            {!! Form::close() !!}
+                                        </li>
                             </ul>
                       
                     </td>

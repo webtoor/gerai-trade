@@ -1,10 +1,27 @@
 @section('css')
 <link rel="stylesheet" type="text/css" href="../css/banner.css">
+<style>
+ @media screen and (max-width:700px){
+    .maxs{
+    max-height: 100%;
+    min-height: 100%;
+    height: 300px;
+    }
+    
+    }
+    @media screen and (max-width:700px){
+    .maxs-img{
+    max-height: 100%;
+    min-height: 100%;
+    height: 300px;
+    }
+    }
+</style>
 @endsection
 @extends('users.default')
 
 @section('content')
-<section class="banner-area organic-breadcrumb" style="margin-top:-50px;">
+<section class="banner-area organic-breadcrumb" style="margin-top:-30px;">
         <div class="container">
             <div class="breadcrumb-banner d-flex flex-wrap align-items-center">
                 <div class="col-first">
@@ -14,11 +31,11 @@
         </div>
     </section>
 
-    <div class="container" style="margin-top:-50px;">
+    <div class="container" style="margin-top:-40px;">
             @if(count($produk))
 
             <div class="d-flex flex-wrap align-items-center">
-                    <div class="sorting">
+                    <div class="sorting" style="font-size:13px;">
                             Menampilkan {{$produk->total()}} produk untuk 
                            "{{$filter}}"
                             ({{$produk->firstItem()}} - {{$produk->lastItem()}} dari {{$produk->total()}} )
@@ -43,11 +60,11 @@
                     <div class="col-lg-3 col-sm-4">
                             <div class="single-product">
                             <div class="card">
-                                <div class="view overlay">
+                                <div class="view overlay maxs">
                                     @if(count($produk_item->produk_image) > 0)
-                                    <img class="card-img-top" src="{{ asset('storage/' .$produk_item->produk_image[0]->image_path)}}" alt="Card image cap" style="height:180px;">
+                                    <img class="card-img-top maxs-img" src="{{ asset('storage/' .$produk_item->produk_image[0]->image_path)}}" alt="Card image cap" style="height:230px;">
                                     @else
-                                    <img class="card-img-top" src="http://placehold.it/180x180" alt="Card image cap" style="height:180px;">
+                                    <img class="card-img-top maxs-img" src="http://placehold.it/180x180" alt="Card image cap" style="height:230px;">
                                     @endif                                  
                                     <a href="{{route('produk-detail', ['slug_produk' => $produk_item->slug])}}">
                                             <div class="mask rgba-white-slight"></div>

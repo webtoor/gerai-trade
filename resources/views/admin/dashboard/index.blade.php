@@ -80,7 +80,7 @@
                                 <button data-id="{{$items->id}}" id="updateModalMitra" data-toggle="modal" data-target="#updateStatusMitra" title="{{ trans('Verifikasikan') }}" class="btn btn-success px-3 btn-sm">
                                             <span class="ti-check"></span>
                                     </button>
-                                    </li>
+                                </li>
                         </ul>
                             </td>
                           
