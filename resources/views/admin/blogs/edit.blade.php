@@ -56,8 +56,11 @@
         </div>
         <div class="modal fade" id="replaceImage" tabindex="-1" role="dialog" aria-labelledby="replaceImage" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-            <form action=" {!! action('AdminProdukController@tambahImage') !!}" method="POST" enctype="multipart/form-data">
-                {{ csrf_field() }}
+                    {!! Form::open([
+                        'url'  => route('admin-panel.update-image-blog'), 
+                        'method' => 'PUT',
+                        'enctype' => 'multipart/form-data'
+                        ]) !!}  
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title c-grey-900">Ganti Foto</h5>
@@ -77,14 +80,16 @@
                   
                     </div>
                     <div class="modal-footer">
-                        <input type="hidden" name="produk_id" id="dataProdukId" required>
+                        <input type="hidden" name="blog_id" id="dataBlogId" required>
         
                         <button type="submit" class="btn btn-primary">Submit</button>
                       </div>
           
                   </div>
-                </form>
+
                 </div>
+                {!! Form::close() !!}
+
               </div>
 @endsection
 @section('js')
@@ -95,6 +100,12 @@ $(document).ready(function() {
 $('#konten').summernote({
 height: 200
 });
+
+$("button#replacesImage").click(function () {
+            var blog_id =  $(this).data('blog_id');
+            $('#dataBlogId').val(blog_id);
+            console.log(blog_id)
+        });
 
 });
 </script>

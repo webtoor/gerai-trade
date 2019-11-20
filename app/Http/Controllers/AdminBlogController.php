@@ -33,7 +33,7 @@ class AdminBlogController extends Controller
                 'user_id' => $data['user_id'],
                 'judul' => $data['judul'],
                 'konten' => $data['konten'],
-                'image' => $imageName
+                'image' => $path
                 ]);
             $newPost = $post->replicate();
 
@@ -74,4 +74,27 @@ class AdminBlogController extends Controller
         }
       
     } 
+
+    function updateImageBlog(Request $request){
+        $data = $request->validate([
+            'blog_id' => 'required',
+            'image_blog' => 'required|mimes:jpeg,jpg,png|max:5000'
+        ]); 
+        try {
+            $blog_image = Blog::findOrFail($data['blog_id']);
+            Storage::disk('public')->delete($blog_image->image);
+            $file = $request->file('image_blog');
+            $imageName = 'blogs_'.time().Str::random(10).'.png';
+            $path = Storage::disk('public')->putFileAs('blog', $file, $imageName);
+            $blog_image->update([
+                'image' => $path
+            ]);
+            return back()->withSuccess(trans('Anda Berhasil Memperbarui Banner')); 
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+       
+
+
+    }
 }
