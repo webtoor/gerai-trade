@@ -69,7 +69,7 @@
                       <div class="form-group row">
                         <div class="col-sm-12">
                             <div class="col-sm-9">
-                                <input type="file" name="image_produk" required>
+                                <input type="file" name="image_blog" required>
                             </div>
           
                         </div>

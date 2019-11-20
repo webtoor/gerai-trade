@@ -59,6 +59,7 @@ Artisan::call('storage:link');
         Route::post('blog/tambah-blog', 'AdminBlogController@insert')->name('insert-blog');
         Route::get('blog/edit-blog/{blog_id}', 'AdminBlogController@edit')->name('edit-blog');
         Route::put('blog/edit-blog/{blog_id}', 'AdminBlogController@updateBlog')->name('update-blog');
+        Route::put('blog/edit-blog-banner', 'AdminBlogController@updateImageBlog')->name('update-image-blog');
 
         // USER
         Route::get('member', 'AdminController@showMember')->name('showMember');
