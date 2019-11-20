@@ -29,11 +29,23 @@
                 </div>
                     <div class="form-group">
                           <label>Pilih Banner Foto<sup style="color:red"> *Wajib </sup></label>
-                          <input type="file" class="form-control" name="image" id="file-input" required/>                            
+                          <input type="file" class="form-control" name="images" id="images" required/>                            
                         </div>
                 <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
                 <button type="submit" id="submit" class="btn btn-primary">Submit</button>
 
                 </form>
 </div>
+@endsection
+@section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>    
+<script>
+$(document).ready(function() {
+
+$('#konten').summernote({
+height: 200
+});
+
+});
+</script>
 @endsection

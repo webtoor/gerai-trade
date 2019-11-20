@@ -14,20 +14,18 @@
                     <th width="150px">Judul</th>
                     <th>Cerita</th>
                     <th>Pembuat</th>
-                    <th>Tanggal</th>
+                    <th>Tanggal Pembuatan</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                   
+                   @foreach($blog as $blogs)
               
                 <tr>
-                    <td> 
-                       
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{$blogs->judul}}</td>
+                    <td>{!! html_entity_decode($blogs->konten) !!}</td>
+                    <td>{{$blogs->user->nama_depan}}</td>
+                    <td>{{ date("j-M-Y, H:i", strtotime($blogs->created_at))}}</td>
                     <td>
                             <ul class="list-inline">
                                     <li class="list-inline-item">
@@ -40,6 +38,7 @@
                     </td>
                   
                 </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

@@ -7,13 +7,17 @@ use Cviebrock\EloquentSluggable\Sluggable;
 
 class Blog extends Model
 {
+
+    use Sluggable;
     protected $table = 'blogs';
     protected $fillable = [
         'judul',
         'slug',
         'konten',
         'image',
-        'user_id'
+        'user_id',
+        'created_at',
+        'updated_at'
     ];
 
     public function sluggable()
@@ -23,5 +27,9 @@ class Blog extends Model
                 'source' => 'judul'
             ]
         ];
+    }
+
+    public function user(){
+        return $this->hasOne('App\Models\User','id', 'user_id') ;
     }
 }

@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Blog;
 
 class AdminBlogController extends Controller
 {
     function index(){
-       return view ('admin.blogs.index');
+       $blog = Blog::with('user')->orderBy('id', 'desc')->get();
+       return view ('admin.blogs.index', ['blog' => $blog]);
     }
     function addBlog(){
         return view ('admin.blogs.tambahCerita');
@@ -19,13 +22,13 @@ class AdminBlogController extends Controller
             'user_id' => ['required'],
             'judul' => ['required'],
             'konten' => ['required'],
-            'image' => 'required|mimes:jpeg,jpg,png|max:5000'
+            'images' => 'required|mimes:jpeg,jpg,png|max:5000'
         ]); 
         
-        try {
-            $files = $request->file('image');
+        
+            $files = $request->file('images');
             $imageName = 'blog_'.time().Str::random(10).'.png';
-            $path = Storage::disk('public')->putFileAs('blog', $file, $imageName);
+            $path = Storage::disk('public')->putFileAs('blog', $files, $imageName);
                 $post = Blog::create([
                 'user_id' => $data['user_id'],
                 'judul' => $data['judul'],
@@ -36,9 +39,9 @@ class AdminBlogController extends Controller
 
             return redirect()->route('admin-panel.kelola-blog')->withSuccess(trans('Berhasil Menambahkan Cerita'));
 
-        } catch (\Exception $e) {
-            //throw $th;
-        }
+        /* } catch (\Exception $e) {
+            $e;
+        } */
        
 
     }
