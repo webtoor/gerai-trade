@@ -54,8 +54,9 @@ Artisan::call('storage:link');
         Route::post('produk/edit-produk/tambah-foto', 'AdminProdukController@tambahImage')->name('tambah-image');
 
         // BLOGS
-        Route::get('blog', 'AdminBlogController@index')->name('blog');
+        Route::get('blog', 'AdminBlogController@index')->name('kelola-blog');
         Route::get('blog/tambah-blog', 'AdminBlogController@addBlog')->name('add-blog');
+        Route::post('blog/tambah-blog', 'AdminBlogController@insert')->name('insert-blog');
 
         // USER
         Route::get('member', 'AdminController@showMember')->name('showMember');

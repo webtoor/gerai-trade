@@ -65,7 +65,7 @@
     </ul>
   </li>
   <li class="nav-item">
-    <a class="sidebar-link" href="{{ route('admin-panel.blog') }}">
+    <a class="sidebar-link" href="{{ route('admin-panel.kelola-blog') }}">
         <span class="icon-holder">
             <i class="c-red-500 ti-blackboard"></i>
         </span>
