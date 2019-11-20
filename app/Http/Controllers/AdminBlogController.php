@@ -49,4 +49,29 @@ class AdminBlogController extends Controller
         $blog = Blog::where('id', $blog_id)->first();
         return view('admin.blogs.edit', ['blog' => $blog]);
     } 
+
+    function updateBlog(Request $request, $blog_id){
+        $data = $request->validate([
+            'user_id' => ['required'],
+            'judul' => ['required'],
+            'konten' => ['required'],
+        ]); 
+        try {
+            $post = Blog::findOrFail($blog_id);
+            $post->slug = null;
+            $post->update([
+                'user_id' => $data['user_id'],
+                'judul' => $data['judul'],
+                'konten' => $data['konten']
+            ]);
+            $newPost = $post->replicate();
+    
+    
+            return back()->withSuccess(trans('Anda Berhasil Memperbarui')); 
+            
+        } catch (\Exception $e) {
+            //$e;
+        }
+      
+    } 
 }

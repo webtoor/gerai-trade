@@ -18,8 +18,10 @@
     <div class="masonry-sizer col-md-6"></div>
     <div class="masonry-item col-md-6">
 <div class="bgc-white p-20 bd">
-  <form action=" {!! action('AdminBlogController@insert') !!}" method="POST" enctype="multipart/form-data">
-  {{ csrf_field() }}
+        {!! Form::open([
+            'url'  => route('admin-panel.update-blog', $blog->id), 
+            'method' => 'PUT',
+            ]) !!}  
 
    
                 <div class="form-group">
@@ -34,7 +36,7 @@
                 <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
                 <button type="submit" id="submit" class="btn btn-primary">Submit</button>
 
-                </form>
+                {!! Form::close() !!}
             </div>
         </div>
         <div class="masonry-item col-md-6">
