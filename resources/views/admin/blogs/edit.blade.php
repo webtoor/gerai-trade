@@ -24,16 +24,13 @@
    
                 <div class="form-group">
                   <label>Judul Cerita <sup style="color:red"> *Wajib</sup></label>
-                  <input type="text" class="form-control" name="judul" id="judul" aria-describedby="emailHelp" value="" required>
+                <input type="text" class="form-control" name="judul" id="judul" aria-describedby="emailHelp" value="{{$blog->judul}}" required>
                 </div>
                 <div class="form-group">
                         <label>Konten <sup style="color:red"> *Wajib *Hanya Karakter/String</sup> </label>
-                       <textarea  id="konten" name="konten" class="form-control" value="" required></textarea>
+                       <textarea  id="konten" name="konten" class="form-control" required> {{$blog->konten}}</textarea>
                 </div>
-                    <div class="form-group">
-                          <label>Pilih Banner Foto<sup style="color:red"> *Wajib </sup></label>
-                          <input type="file" class="form-control" name="images" id="images" value="" required/>                            
-                        </div>
+    
                 <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
                 <button type="submit" id="submit" class="btn btn-primary">Submit</button>
 
@@ -42,6 +39,17 @@
         </div>
         <div class="masonry-item col-md-6">
         <div class="bgc-white p-20 bd">
+                <label>Foto Banner</label>
+
+            <div style="width:100%; height:300px;"> 
+               <img src="{{ asset('storage/' .$blog->image)}}" style="height:300px; width: 100%;">
+            </div>
+            <div class="text-center">
+                    <button class="btn btn-md btn-outline-secondary">Ganti Foto</button>
+
+            </div>
+            </div>
+           
         </div>
         </div>
 </div>

@@ -46,6 +46,7 @@ class AdminBlogController extends Controller
     }
 
     function edit($blog_id){
-        return view('admin.blogs.edit');
+        $blog = Blog::where('id', $blog_id)->first();
+        return view('admin.blogs.edit', ['blog' => $blog]);
     } 
 }
