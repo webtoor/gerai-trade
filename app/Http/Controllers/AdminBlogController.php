@@ -25,7 +25,7 @@ class AdminBlogController extends Controller
             'images' => 'required|mimes:jpeg,jpg,png|max:5000'
         ]); 
         
-        
+        try{
             $files = $request->file('images');
             $imageName = 'blog_'.time().Str::random(10).'.png';
             $path = Storage::disk('public')->putFileAs('blog', $files, $imageName);
@@ -39,10 +39,13 @@ class AdminBlogController extends Controller
 
             return redirect()->route('admin-panel.kelola-blog')->withSuccess(trans('Berhasil Menambahkan Cerita'));
 
-        /* } catch (\Exception $e) {
+        } catch (\Exception $e) {
             $e;
-        } */
-       
+        }
 
     }
+
+    function edit($blog_id){
+        return view('admin.blogs.edit');
+    } 
 }

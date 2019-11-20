@@ -29,7 +29,7 @@
                     <td>
                             <ul class="list-inline">
                                     <li class="list-inline-item">
-                                        <a href="#" title="{{ trans('Edit Produk') }}" class="btn btn-dark px-3 btn-sm">
+                                        <a href="{{route('admin-panel.edit-blog', ['blog_id' => $blogs->id])}}" title="{{ trans('Edit Produk') }}" class="btn btn-dark px-3 btn-sm">
                                             <span class="ti-pencil"></span>
                                         </a>
                                     </li>
