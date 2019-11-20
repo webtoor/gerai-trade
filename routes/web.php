@@ -60,6 +60,7 @@ Artisan::call('storage:link');
         Route::get('blog/edit-blog/{blog_id}', 'AdminBlogController@edit')->name('edit-blog');
         Route::put('blog/edit-blog/{blog_id}', 'AdminBlogController@updateBlog')->name('update-blog');
         Route::put('blog/edit-banner', 'AdminBlogController@updateImageBlog')->name('update-image-blog');
+        Route::delete('blog/delete-blog/{blog_id}', 'AdminBlogController@deleteBlog')->name('delete-blog');
 
         // USER
         Route::get('member', 'AdminController@showMember')->name('showMember');

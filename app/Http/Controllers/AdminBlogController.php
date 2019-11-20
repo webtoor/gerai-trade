@@ -98,7 +98,7 @@ class AdminBlogController extends Controller
        
     }
 
-    function deleteBlogs($blog_id){
+    function deleteBlog($blog_id){
         $blog_image = Blog::findOrFail($blog_id);
         Storage::disk('public')->delete($blog_image->image);
         $blog_image->delete();
