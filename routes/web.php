@@ -55,6 +55,7 @@ Artisan::call('storage:link');
 
         // BLOGS
         Route::get('blog', 'AdminBlogController@index')->name('blog');
+        Route::get('blog/tambah-produk', 'AdminBlogController@add')->name('add-blog');
 
         // USER
         Route::get('member', 'AdminController@showMember')->name('showMember');

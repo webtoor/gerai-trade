@@ -6,7 +6,7 @@
     <h4 class="c-blue-900"><b>Kelola Cerita</b></h4>
 </div>
 <div class="bgc-white p-20 bd">
-    <a href="#" class="btn btn-primary btn-md" title="{{ trans('Tambah Cerita') }}"><b><i class="fa fa-plus"></i> Cerita Baru</b></a>
+    <a href="{{route('admin-panel.add-blog')}}" class="btn btn-primary btn-md" title="{{ trans('Tambah Cerita') }}"><b><i class="fa fa-plus"></i> Cerita Baru</b></a>
     <div class="mT-30">
         <table id="dataTable" class="table table-bordered" cellspacing="0" width="100%">
             <thead class="thead-light">
