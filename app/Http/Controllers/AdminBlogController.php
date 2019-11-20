@@ -69,7 +69,7 @@ class AdminBlogController extends Controller
     
             return back()->withSuccess(trans('Anda Berhasil Memperbarui')); 
             
-        } catch (\Exception $e) {
+        }catch (\Exception $e) {
             //$e;
         }
       

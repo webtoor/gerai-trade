@@ -47,14 +47,45 @@
                <img src="{{ asset('storage/' .$blog->image)}}" style="height:300px; width: 100%;">
             </div>
             <div class="text-center">
-                    <button class="btn btn-md btn-outline-secondary">Ganti Foto</button>
+                    <button class="btn btn-md btn-outline-secondary" id="replacesImage" data-blog_id="{{$blog->id}}" data-toggle="modal" data-target="#replaceImage" title="{{ trans('Ganti Foto Banner') }}">Ganti Foto</button>
 
             </div>
             </div>
            
         </div>
         </div>
-</div>
+        <div class="modal fade" id="replaceImage" tabindex="-1" role="dialog" aria-labelledby="replaceImage" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+            <form action=" {!! action('AdminProdukController@tambahImage') !!}" method="POST" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title c-grey-900">Ganti Foto</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="form-group row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-9">
+                                <input type="file" name="image_produk" required>
+                            </div>
+          
+                        </div>
+                      </div>
+                  
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="produk_id" id="dataProdukId" required>
+        
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+          
+                  </div>
+                </form>
+                </div>
+              </div>
 @endsection
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>    
