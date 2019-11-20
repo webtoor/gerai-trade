@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 use App\Models\Blog;
 
 class AdminBlogController extends Controller
@@ -90,11 +92,20 @@ class AdminBlogController extends Controller
                 'image' => $path
             ]);
             return back()->withSuccess(trans('Anda Berhasil Memperbarui Banner')); 
-        } catch (\Throwable $th) {
-            //throw $th;
+        } catch (\Exception $e) {
+            //throw $e;
         }
        
+    }
 
+    function deleteBlogs($blog_id){
+        $blog_image = Blog::findOrFail($blog_id);
+        Storage::disk('public')->delete($blog_image->image);
+        $blog_image->delete();
+        
+        DB::statement("ALTER TABLE blogs AUTO_INCREMENT = 1");
+
+        return back()->withSuccess(trans('Anda Berhasil Menghapus Cerita')); 
 
     }
 }
