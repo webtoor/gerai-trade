@@ -107,7 +107,7 @@
             @endif
               
                 <div class="mT-30">
-                        <table class="table table-bordered" cellspacing="0" width="100%">
+                        <table class="table table-responsive table-bordered" cellspacing="0" width="100%">
                             <thead class="indigo white-text">
                                 <tr>
                                     <th style="width: 150px;">Foto Produk</th>

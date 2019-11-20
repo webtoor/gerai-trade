@@ -148,7 +148,7 @@ class AdminProdukController extends Controller
     }
 
     public function deleteImage($produk_id){
-        $produk_image = ProdukImage::findOrFail($produk_id);
+        return $produk_image = ProdukImage::findOrFail($produk_id);
         Storage::disk('public')->delete($produk_image->image_path);
         $produk_image->delete();
         DB::statement("ALTER TABLE product_images AUTO_INCREMENT = 1");
@@ -156,9 +156,13 @@ class AdminProdukController extends Controller
     }
 
     public function deleteProduk($produk_id){
-        $produk_image = ProdukImage::findOrFail($produk_id);
-        Storage::disk('public')->delete($produk_image->image_path);
-        $produk_image->delete();
+        $produk_image = ProdukImage::where('product_id', $produk_id)->get();
+        if(count($produk_image) > 0 ){
+            foreach($produk_image as $images){
+                Storage::disk('public')->delete($images->image_path);
+            }
+        }
+       
         DB::statement("ALTER TABLE product_images AUTO_INCREMENT = 1");
 
         $produk = Produk::findOrFail($produk_id)->delete();

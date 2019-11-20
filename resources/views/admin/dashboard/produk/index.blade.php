@@ -48,7 +48,7 @@
                                                 'method' => 'DELETE',
                                                 ]) 
                                             !!}
-                                                <button class="btn btn-danger btn-sm" title="{{ trans('app.delete_title') }}"><i class="ti-trash"></i></button>
+                                                <button class="btn btn-danger px-3 btn-sm" title="{{ trans('app.delete_title') }}"><i class="ti-trash"></i></button>
                                                 
                                             {!! Form::close() !!}
                                         </li>
