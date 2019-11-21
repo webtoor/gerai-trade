@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Kategori;
 use App\Models\Produk;
 use App\Models\ProdukUnggulan;
+use App\Models\Blog;
 
 class HomeController extends Controller
 {
@@ -34,7 +35,8 @@ class HomeController extends Controller
         $produk_unggulan = ProdukUnggulan::with(['produk' => function ($query) {
             $query->with('produk_image');
         } ])->get();
-        return view('users.index', ['kategori' => $kategori, 'produk_unggulan' => $produk_unggulan]);
+        $blog = Blog::with('user')->orderBy('id', 'desc')->take(6)->get();
+        return view('users.index', ['kategori' => $kategori, 'produk_unggulan' => $produk_unggulan, 'blog' => $blog]);
     }
 
     public function showDaftarMitra()

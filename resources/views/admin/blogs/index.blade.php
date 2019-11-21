@@ -23,7 +23,8 @@
               
                 <tr>
                     <td>{{$blogs->judul}}</td>
-                    <td>{!! html_entity_decode($blogs->konten) !!}</td>
+                    
+                    <td> {!! \Illuminate\Support\Str::limit(html_entity_decode($blogs->konten),100) !!}</td>
                     <td>{{$blogs->user->nama_depan}}</td>
                     <td>{{ date("j-M-Y, H:i", strtotime($blogs->created_at))}}</td>
                     <td>
