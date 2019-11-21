@@ -15,6 +15,108 @@
     height: 300px;
     }
     }
+
+    .section-intro p {
+    margin-bottom: 3px
+}
+
+.section-intro__style {
+    border-bottom: 2px solid #384aeb;
+    padding-bottom: 8px
+}
+.card-blog {
+    border: 0
+}
+
+.card-blog .card-body {
+    padding: 25px 25px 25px 0
+}
+
+.card-blog__info {
+    margin-bottom: 12px;
+    margin-left: -20px;
+}
+
+.card-blog__info li {
+    display: inline-block;
+    font-size: 14px;
+    color: #999999
+}
+
+.card-blog__info li a {
+    color: #999999
+}
+
+.card-blog__info li i,
+.card-blog__info li span {
+    margin-right: 5px;
+    vertical-align: middle
+}
+
+.card-blog__info li:not(:last-child) {
+    margin-right: 20px
+}
+
+.card-blog__title {
+    font-size: 20px;
+    margin-bottom: 20px;
+    padding-left:20px;
+}
+
+.card-blog__title a {
+    color: #222;
+}
+
+
+.card-blog__link {
+    font-weight: 500;
+    color: #222
+}
+
+.card-blog__link i,
+.card-blog__link span {
+    font-size: 13px;
+    padding-left: 3px;
+    display: inline-block;
+    transition: all .5s ease
+}
+
+.card-blog:hover .card-blog__title a {
+    color: #384aeb
+}
+
+.card-blog:hover .card-blog__link {
+    color: #384aeb
+}
+
+.card-blog:hover .card-blog__link i,
+.card-blog:hover .card-blog__link span {
+    padding-left: 10px
+}
+
+.card-blog__info {
+    margin-bottom: 12px
+}
+
+.card-blog__info li {
+    display: inline-block;
+    font-size: 14px;
+    color: #999999
+}
+
+.card-blog__info li a {
+    color: #999999
+}
+
+.card-blog__info li i,
+.card-blog__info li span {
+    margin-right: 5px;
+    vertical-align: middle
+}
+
+.card-blog__info li:not(:last-child) {
+    margin-right: 20px
+}
     </style>
 @endsection
 @extends('users.default')
@@ -199,7 +301,71 @@
     </div>
 </div>
 </div>
+
 </div>
-{{-- {{Auth::user()->role}} --}}
+
+<section class="blog section_gap" style="padding-bottom:100px;">
+	<div class="container">
+	  <div class="section-intro pb-20px" style="padding-bottom:40px;">
+		<h2>Info <span class="section-intro__style">Terbaru</span></h2> 
+	  </div>
+
+	  <div class="row">
+		<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+		  <div class="card card-blog">
+			<div class="card-blog__img">
+			  <img class="card-img rounded-0" src="img/blog/blog1.png" alt="">
+			</div>
+			<div class="card-body">
+			  <ul class="card-blog__info">
+				<li><a href="#">By Admin</a></li>
+				<li><a href="#"><i class="ti-comments-smiley"></i> 2 Comments</a></li>
+			  </ul>
+			  <h4 class="card-blog__title"><a href="cerita-kita.html">Judul Judul Judul</a></h4>
+			  <p style="padding-left:20px;">Deskripsi Deskripsi Deskripsi Deskripsi Deskripsi Deskripsi </p>
+			  <a class="card-blog__link" href="single-blog.html" style="padding-left:20px">Read More <i class="ti-arrow-right"></i></a>
+			</div>
+		  </div>
+		</div>
+
+		<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+		  <div class="card card-blog">
+			<div class="card-blog__img">
+			  <img class="card-img rounded-0" src="img/blog/blog2.png" alt="">
+			</div>
+			<div class="card-body">
+			  <ul class="card-blog__info">
+				<li><a href="#">By Admin</a></li>
+				<li><a href="#"><i class="ti-comments-smiley"></i> 2 Comments</a></li>
+			  </ul>
+			  <h4 class="card-blog__title"><a href="single-blog.html">Judul Judul Judul</a></h4>
+			  <p style="padding-left:20px;">Deskripsi Deskripsi Deskripsi Deskripsi Deskripsi Deskripsi </p>
+			  <a class="card-blog__link" href="single-blog.html" style="padding-left:20px">Read More <i class="ti-arrow-right"></i></a>
+			</div>
+		  </div>
+		</div>
+
+		
+
+		<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+		  <div class="card card-blog">
+			<div class="card-blog__img">
+			  <img class="card-img rounded-0" src="img/blog/blog3.png" alt="">
+			</div>
+			<div class="card-body">
+			  <ul class="card-blog__info">
+				<li><a href="#">By Admin</a></li>
+				<li><a href="#"><i class="ti-comments-smiley"></i> 2 Comments</a></li>
+			  </ul>
+			  <h4 class="card-blog__title"><a href="single-blog.html">Judul Judul Judul</a></h4>
+			  <p style="padding-left:20px;">Deskripsi Deskripsi Deskripsi Deskripsi Deskripsi Deskripsi </p>
+			  <a class="card-blog__link" href="single-blog.html" style="padding-left:20px">Read More <i class="ti-arrow-right"></i></a>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </section>
+
 
 @endsection
