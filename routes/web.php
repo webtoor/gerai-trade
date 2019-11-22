@@ -96,10 +96,10 @@ Route::group(['middleware' => 'member'], function(){
     Route::get('/wishlist', 'CartController@wishlist')->name('wishlist');
     Route::get('/delete-wishlist/{rowId}', 'CartController@deleteWishlist');
 
-
     //KERANJANG BELANJA
     Route::get('/keranjang-belanja', 'CartController@keranjangBelanja')->name('keranjang-belanja');
 });
+Route::get('/single/{slug}', 'HomeController@singleBlog')->name('single-blog');
 Route::get('/siapa-kita', 'HomeController@siapaKita')->name('siapa-kita');
 Route::get('/cerita-kita', 'HomeController@ceritaKita')->name('cerita-kita');
 Route::get('/kontak-kita', 'HomeController@kontakKita')->name('kontak-kita');
