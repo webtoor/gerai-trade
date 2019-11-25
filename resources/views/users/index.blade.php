@@ -310,11 +310,11 @@
                                                 <li><a href="#">By {{$blogs->user->nama_depan}}</a></li>
                                                 <li><a href="#"><i class="ti-comments-smiley"></i> {{ date("j-M-Y", strtotime($blogs->created_at))}}</a></li>
                                               </ul>
-                                              <h4 class="card-blog__title"><a href="cerita-kita.html">{{$blogs->judul}}</a></h4>
+                                              <h4 class="card-blog__title"><a href="{{ url('single/'.$blogs->slug) }}">{{$blogs->judul}}</a></h4>
                                               <div style="padding-left:20px; height:100px;">
                                                 {!! \Illuminate\Support\Str::limit($blogs->konten, 100) !!}
                                                 </div>
-                                              <a class="card-blog__link" href="single-blog.html" style="padding-left:20px">Read More <i class="ti-arrow-right"></i></a>
+                                              <a class="card-blog__link" href="{{ url('single/'.$blogs->slug) }}" style="padding-left:20px">Read More <i class="ti-arrow-right"></i></a>
                                             </div>
                                           </div>
                                         </div>
