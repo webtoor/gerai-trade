@@ -101,7 +101,7 @@ Route::group(['middleware' => 'member'], function(){
 });
 Route::get('/single/{slug}', 'BlogController@singleBlog')->name('single-blog');
 Route::get('/siapa-kita', 'HomeController@siapaKita')->name('siapa-kita');
-Route::get('/cerita-kita', 'HomeController@ceritaKita')->name('cerita-kita');
+Route::get('/cerita-kita', 'BlogController@ceritaKita')->name('cerita-kita');
 Route::get('/kontak-kita', 'HomeController@kontakKita')->name('kontak-kita');
 
 // MITRA / MEMBER

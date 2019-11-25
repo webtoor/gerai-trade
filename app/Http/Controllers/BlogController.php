@@ -17,4 +17,9 @@ class BlogController extends Controller
         return view('users.singleBlog', ['kategori' => $kategori, 'blog' => $blog, 'blogAll' => $blogAll]);
 
     }
+
+    public function ceritaKita(){
+        $kategori =  Kategori::with('sub_kategori')->get();
+        return view('users.ceritaKita', ['kategori' => $kategori]);
+    }
 }
