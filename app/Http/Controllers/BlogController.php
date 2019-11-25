@@ -19,7 +19,9 @@ class BlogController extends Controller
     }
 
     public function ceritaKita(){
-        $kategori =  Kategori::with('sub_kategori')->get();
-        return view('users.ceritaKita', ['kategori' => $kategori]);
+        $kategori = Kategori::with('sub_kategori')->get();
+        $blogAll = Blog::orderBy('id', 'desc')->paginate(10);
+        $side = Blog::orderBy('id', 'desc')->limit(4)->get();
+        return view('users.ceritaKita', ['kategori' => $kategori, 'blogAll' => $blogAll, 'side' => $side]);
     }
 }
