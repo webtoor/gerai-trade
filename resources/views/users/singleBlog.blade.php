@@ -487,8 +487,8 @@
                     <div class="col-lg-3  col-md-3">
                         <div class="blog_info text-right">
                             <ul class="blog_meta list" style="list-style-type:none;">
-                                <li><a href="#">Admin<i class="lnr lnr-user"></i></a></li>
-                                <li><a href="#">12 Oct, 2019<i class="lnr lnr-calendar-full"></i></a></li>
+                                <li><a href="#">{{$blog->user->nama_depan}}<i class="lnr lnr-user"></i></a></li>
+                                <li><a href="#">{{ date("j-M-Y", strtotime($blog->created_at))}}<i class="lnr lnr-calendar-full"></i></a></li>
                                {{--  <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
                                 <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li> --}}
                             </ul>
@@ -501,9 +501,9 @@
                     </div>
                     <div class="col-lg-9 col-md-9 blog_details">
                         <h2>{{$blog->judul}}</h2>
-                        <p class="excert"> 
-                          {{$blog->konten}}
-                        </p>
+                        <div class="excert"> 
+                          {!! $blog->konten !!}
+                        </div>
                     </div>
                     {{-- <div class="col-lg-12">
                         <div class="quotes">
@@ -681,15 +681,15 @@
                         <div class="br"></div>
                     </aside> -->
                     <aside class="single_sidebar_widget author_widget">
-                        <img class="author_img rounded-circle" src="/img/blog/author.png" alt="">
-                        <h4>{{$blog->user->firstname}}</h4>
-                        <p>Admin</p>
-                        <div class="social_icon">
+                        <img class="author_img rounded-circle" src="/images/profiluser.png" alt="" style="height:120; width:120px;">
+                        <h4>{{$blog->user->nama_depan}}</h4>
+                        <p>Content Blogger</p>
+                       {{--  <div class="social_icon">
                             <a href="#"><i class="fab fa-facebook"></i></a>
                             <a href="#"><i class="fab fa-twitter"></i></a>
                             <a href="#"><i class="fab fa-github"></i></a>
                             <a href="#"><i class="fab fa-behance"></i></a>
-                        </div>
+                        </div> --}}
                         {{-- <p>Deskripsi Deskripsi Deskripsi Deskripsi Deskripsi Deskripsi</p> --}}
                         <div class="br"></div>
                     </aside>
