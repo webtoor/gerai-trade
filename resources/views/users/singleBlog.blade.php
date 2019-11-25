@@ -1,6 +1,5 @@
 @section('css')
     <style>
-  *============ blog_left_sidebar css ==============*/
 .blog_item {
   margin-bottom: 40px; }
 
