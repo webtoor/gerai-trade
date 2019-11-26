@@ -86,6 +86,8 @@ Route::get('/produk/{slug_produk}', 'HomeController@produkDetail')->name('produk
 
 //CART
 Route::group(['middleware' => 'member'], function(){
+    Route::get('/pengaturan', 'UserController@index')->name('index-pengaturan');
+
     Route::post('/cart', 'CartController@index');
     Route::get('/cart-shop/{produk_id}', 'CartController@cartShop');
     Route::get('/cart-wishlist/{produk_id}', 'CartController@cartWishlist');
