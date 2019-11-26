@@ -104,10 +104,17 @@
 	margin-left: -7px;
 }
       </style>
-    @yield('css')
 </head>
 <body>
+ <nav class="navbar navbar-expand-md sticky-top navbar-light bg-white shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                        <img src="/img/logo.png" alt="" style="margin-top:-10px;" height="45px;">
+                </a>
+                
 
+            </div>
+        </nav>
 
     <section class="banner-area organic-breadcrumb" style="margin-top:-20px;">
         <div class="container">
@@ -125,8 +132,29 @@
             
             <div id="basket" class="col-lg-8">
               <div class="box mt-0 pb-0 no-horizontal-padding">
-                <form action="{{ url('cart/update') }}" method="POST">
-                  {{ @csrf_field() }}
+              <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th><b> Alamat Pengiriman </b></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                          @if($alamat)
+                          @else
+                          Anda belum mempunyai alamat pengiriman, silakan isi dulu <a href="" style="color:blue">disini</a>
+                          @endif
+                          </td>
+                    
+                        </tr>
+                      </tbody>
+                      <tfoot>
+                       
+                      </tfoot>
+                    </table>
+                  </div>
                   <div class="table-responsive">
                     <table class="table">
                       <thead>
@@ -156,7 +184,6 @@
                           </td> --}}
                         </tr>
                         <?php endforeach;?>
-                         </form>
                       </tbody>
                       <tfoot>
                        
@@ -164,7 +191,6 @@
                     </table>
                   </div>
               
-                </form>
               </div>
             </div>
             <div class="col-lg-4" style="margin-top:10px;">

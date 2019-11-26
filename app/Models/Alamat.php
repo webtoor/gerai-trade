@@ -13,6 +13,7 @@ class Alamat extends Model
         'alamat',
         'user_id',
         'jenis_alamat_id',
+        'nama_penerima',
         'provinsi_id',
         'kota_kabupaten_id',
         'kecamatan_id',

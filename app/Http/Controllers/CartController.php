@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Cart;
 use App\Models\Produk;
 use App\Models\Kategori;
+use App\Models\Alamat;
 
 class CartController extends Controller
 {
@@ -102,9 +103,10 @@ class CartController extends Controller
     }
 
     public function checkout(){
-        $kategori = Kategori::with('sub_kategori')->get();
+        $user_id = Auth::user()->id;
 
-        return view('users.chekout', ['kategori' => $kategori]);
+        $alamat = Alamat::where('user_id', $user_id)->first();
+        return view('users.chekout', ['alamat' => $alamat]);
 
     }
 }
