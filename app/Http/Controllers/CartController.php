@@ -100,4 +100,11 @@ class CartController extends Controller
         $kategori = Kategori::with('sub_kategori')->get();
         return back(); 
     }
+
+    public function checkout(){
+        $kategori = Kategori::with('sub_kategori')->get();
+
+        return view('users.chekout', ['kategori' => $kategori]);
+
+    }
 }

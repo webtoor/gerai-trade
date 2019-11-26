@@ -1,14 +1,119 @@
-@section('css')
-<link rel="stylesheet" type="text/css" href="../css/banner.css">
-@endsection
-@extends('users.default')
-@section('content')
 
-<section class="banner-area organic-breadcrumb" style="margin-top:-20px;">
+
+
+<!DOCTYPE html>
+<html lang="{{ app()->getLocale() }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600" rel="stylesheet">
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+  	<link rel="stylesheet" href="/css/flaticon.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/banner.css">
+
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <style>
+    .icon-rotates {
+  -moz-transition: all 1s linear;
+  -webkit-transition: all 1s linear;
+  transition: all 1s linear;
+}
+
+.icon-rotates.rotate {
+  -moz-transition: rotate(180deg);
+  -webkit-transition: rotate(180deg);
+  transition: rotate(180deg);
+}
+
+
+.dropdown.open .icon-rotates {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.ftco-footer {
+      font-size: 14px;
+      padding: 7em 0;
+      color: #000000; }
+      .ftco-footer .ftco-footer-logo {
+        text-transform: uppercase;
+        letter-spacing: .1em; }
+      .ftco-footer .ftco-footer-widget h2 {
+        font-weight: normal;
+        margin-bottom: 20px;
+        font-size: 16px;
+        font-weight: 500; }
+      .ftco-footer .ftco-footer-widget ul li {
+        font-size: 14px;
+        margin-bottom: 0px; }
+        .ftco-footer .ftco-footer-widget ul li a {
+          color: #000000; }
+      .ftco-footer .ftco-footer-widget .btn-primary {
+        border: 2px solid #fff !important; }
+        .ftco-footer .ftco-footer-widget .btn-primary:hover {
+          border: 2px solid #fff !important; }
+    
+    .ftco-footer-social li {
+      list-style: none;
+      margin: 0 10px 0 0;
+      display: inline-block; }
+      .ftco-footer-social li a {
+        height: 50px;
+        width: 50px;
+        display: block;
+        float: left;
+        background: rgba(0, 0, 0, 0.02);
+        border-radius: 50%;
+        position: relative; }
+        .ftco-footer-social li a span {
+          position: absolute;
+          font-size: 26px;
+          top: 50%;
+          left: 50%;
+          -webkit-transform: translate(-50%, -50%);
+          -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+          color: #000000; }
+        .ftco-footer-social li a:hover {
+          color: #000000; }
+
+          .shopping-card {
+	display: inline-block;
+	position: relative;
+}
+
+.shopping-card span {
+	position: absolute;
+	top: -4px;
+	left: 100%;
+	height: 16px;
+	min-width: 16px;
+	color: #fff;
+	font-size: 13px;
+	background: #f51167;
+	text-align: center;
+	border-radius: 30px;
+	padding: 0 2px;
+	margin-left: -7px;
+}
+      </style>
+    @yield('css')
+</head>
+<body>
+
+
+    <section class="banner-area organic-breadcrumb" style="margin-top:-20px;">
         <div class="container">
             <div class="breadcrumb-banner d-flex flex-wrap align-items-center">
                 <div class="col-first">
-                    <h1>Keranjang Belanja</h1>
+                    <h1>Checkout</h1>
                 </div>
             </div>
         </div>
@@ -38,18 +143,17 @@
                         <tr>
                           <td><a href="{{route('produk-detail', ['slug_produk' => $row->options->slug])}}" style="color:#3f51b5; font-weight:bold"><?php echo $row->name; ?></a></td>
                           <td>
-                            <input type="hidden" name="rowid" value="{{ $row->rowId }}">
-                            <input type="number" min="0" value="<?php echo $row->qty; ?>" class="form-control" name="qty" style="width:60px; height:25px;">
+                            {{$row->qty}}
                           </td>
                           <td>Rp {{number_format($row->price,0, ".", ".")}}</td>
-                          <td>
+                          {{-- <td>
                             <button style="border: none;background: none;" type="submit"><i class="fas fa-sync-alt green-text"></i>
                             </button>
                           </td>
                           <td>
                              <a href="{{ url('/cart-delete/'.$row->rowId) }}"><i class="fa fa-trash red-text" aria-hidden="true"></i>
                             </a>
-                          </td>
+                          </td> --}}
                         </tr>
                         <?php endforeach;?>
                          </form>
@@ -78,7 +182,7 @@
                                     </table>
                   
                                   </div>
-                              <a href="{{route('checkout')}}" class="btn btn-outline-dark btn-block"><b>Beli ({{ Cart::instance('default')->count() }})</b></a>
+                              <a href="#" class="btn btn-outline-dark btn-block"><b>BAYAR SEKARANG</b></a>
 
                             </div>
                           </div>
@@ -93,4 +197,9 @@
             <a href="/" class="btn btn-primary">Belanja</a>
         </div>
         @endif
-@endsection
+
+
+ 
+    <script src="{{ mix('/js/app.js') }}"></script>
+</body>
+</html>

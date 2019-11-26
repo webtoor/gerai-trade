@@ -98,6 +98,8 @@ Route::group(['middleware' => 'member'], function(){
 
     //KERANJANG BELANJA
     Route::get('/keranjang-belanja', 'CartController@keranjangBelanja')->name('keranjang-belanja');
+    Route::get('/checkout', 'CartController@checkout')->name('checkout');
+
 });
 Route::get('/single/{slug}', 'BlogController@singleBlog')->name('single-blog');
 Route::get('/siapa-kita', 'HomeController@siapaKita')->name('siapa-kita');
