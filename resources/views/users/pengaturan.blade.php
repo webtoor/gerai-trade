@@ -101,11 +101,17 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label>Kecamatan</label>
-          <input type="text" class="form-control" placeholder="Masukan Nama Penerima">
+          <select class="form-control" name="kecamatan" id="selectKecamatan" required disabled="disabled">
+            <option selected value="0">Pilih Kecamatan</option>
+      
+        </select>
         </div>
         <div class="form-group col-md-6">
           <label for="inputPassword4">Kelurahan/Desa</label>
-          <input type="number" class="form-control" placeholder="No Hp">
+          <select class="form-control" name="kelurahan_desa" id="selectKelurahanDesa" required disabled="disabled">
+            <option selected value="0">Pilih Kelurahan/ Desa</option>
+        
+        </select>
         </div>
       </div>
       </div>
@@ -117,4 +123,125 @@
     </div>
   </div>
 </div>
+@endsection
+@section('js')
+<script>
+
+    $(document).ready(function () {
+        $('button#submits').click(function () {
+        var provinsi = $("#selectProvinsi").val();
+        var kota_kab = $("#selectKotaKab").val();
+        var kecamatanz = $("#selectKecamatan").val();
+        var kelurahan = $("#selectKelurahanDesa").val();
+        if((provinsi == undefined) || (kota_kab == undefined) || (kecamatanz == undefined) ||(kelurahan == undefined)){
+            alert('Provinsi, Kota/Kabupaten, Kecamatan dan Kelurahan/Desa Harus diisi!!!')
+            return false;
+        }else{
+            return true;
+        }
+    });
+    $('select#selectProvinsi').on('change', function (e) {
+    let optionSelected = $("option:selected", this);
+    let valueSelected = this.value;
+    console.log(valueSelected)
+    if(valueSelected != 0){
+        $("#selectKotaKab").prop('disabled', false);
+        $("#selectKotaKab option").remove();
+
+    }else{
+        $("#selectKotaKab").prop('disabled', true);
+        $("#selectKotaKab option").remove();
+        $('#selectKotaKab').append($('<option>', {value:'', text:'Pilih Kota/Kabupaten'}, '</option>'));
+        $("#selectKecamatan").prop('disabled', true);
+        $("#selectKecamatan option").remove();
+        $('#selectKecamatan').append($('<option>', {value:'', text:'Pilih Kecamatan'}, '</option>'));
+    }
+
+    $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        contentType: "application/json",
+        dataType: "json",
+        type: 'GET',
+        url: "/ajax-kota-kab/" + valueSelected,
+        success: function (results) {
+          console.log(results);
+          $.each( results['data'], function(index, data) {
+                $('#selectKotaKab').append($('<option>', {value:data['id'], text:data['name']}, '</option>'));
+           })
+          }
+
+      });
+    });
+
+    $('select#selectKotaKab').on('change', function (e) {
+    let optionSelected = $("option:selected", this);
+    let valueSelected = this.value;
+
+    console.log(valueSelected)
+    if(valueSelected != 0){
+        $("#selectKecamatan").prop('disabled', false);
+        $("#selectKecamatan option").remove();
+
+    }else{
+        $("#selectKecamatan").prop('disabled', true);
+        $('#selectKecamatan').append($('<option>', {value:'', text:'Pilih Kecamatan'}, '</option>'));
+
+    }
+
+    $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        contentType: "application/json",
+        dataType: "json",
+        type: 'GET',
+        url: "/kecamatan/" + valueSelected,
+        success: function (results) {
+          console.log(results);
+          $.each( results['data'], function(index, data) {
+                $('#selectKecamatan').append($('<option>', {value:data['id'], text:data['name']}, '</option>'));
+           })
+          }
+
+      });
+    });
+
+    $('select#selectKecamatan').on('change', function (e) {
+    let optionSelected = $("option:selected", this);
+    let valueSelected = this.value;
+
+    console.log(valueSelected)
+    if(valueSelected != 0){
+        $("#selectKelurahanDesa").prop('disabled', false);
+        $("#selectKelurahanDesa option").remove();
+
+    }else{
+        $("#selectKelurahanDesa").prop('disabled', true);
+        $('#selectKelurahanDesa').append($('<option>', {value:'', text:'Pilih Kelurahan/Desa'}, '</option>'));
+
+    }
+
+    $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        contentType: "application/json",
+        dataType: "json",
+        type: 'GET',
+        url: "/kelurahan-desa/" + valueSelected,
+        success: function (results) {
+          console.log(results);
+          $.each( results['data'], function(index, data) {
+                $('#selectKelurahanDesa').append($('<option>', {value:data['id'], text:data['name']}, '</option>'));
+           })
+          }
+
+      });
+    });
+  
+});
+</script>
+    
 @endsection

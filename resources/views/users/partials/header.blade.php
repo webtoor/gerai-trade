@@ -80,10 +80,12 @@
                 <a class="nav-link" href="{{ url('/keranjang-belanja') }}">
                     <div class="up-item">
 								<div class="shopping-card">
-									<i class="flaticon-bag fa-lg"></i>
+                  <i class="flaticon-bag fa-lg"></i>
+                  @if(Cart::instance('default')->count() > 0)
                   <span>
                       {{ Cart::instance('default')->count() }}
                   </span>
+                  @endif
                 </div>
                 <b style="margin-left:5px;">
                     Keranjang Belanja
