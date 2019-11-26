@@ -117,7 +117,7 @@
                  <div class="dropdown-menu dropdown-menu-right" style=" width:250px;">
                      <a class="dropdown-item" href="#">Pembelian</a>
                      <a class="dropdown-item" href="{{route('wishlist')}}">Wishlist</a>
-                     <a class="dropdown-item" href="#">Pengaturan</a>
+                     <a class="dropdown-item" href="{{route('index-pengaturan')}}">Pengaturan</a>
                      <a class="dropdown-item" href="/logout">Logout</a>
                  </div>
              </div>
