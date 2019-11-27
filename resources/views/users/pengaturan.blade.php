@@ -18,6 +18,8 @@
 
                     <div class="row" style="margin-top:40px;">
                       <div class="col-sm-12">
+                          @include('admin.partials.messages') 
+
                         <button data-toggle="modal" data-target="#addAlamat" class="btn btn-dark btn-md" title="{{ trans('Tambah Alamat') }}">
                           <b><i class="fa fa-plus"></i> Tambah Alamat</b></button>                        <div class="mT-20">
                             <table class="table table-bordered" cellspacing="0" width="100%">
@@ -55,7 +57,7 @@
     <!-- Modal Tambah Alamat-->
 <div class="modal fade" id="addAlamat" tabindex="-1" role="dialog" aria-labelledby="addKategoriLabel" aria-hidden="true">
   <div class="modal-dialog modal-md" role="document">
-          {!! Form::open([ 'route' => ['admin-panel.add-kategori'], 'method' => "POST"])!!}
+          {!! Form::open([ 'route' => ['post-alamat'], 'method' => "POST"])!!}
 
     <div class="modal-content">
       <div class="modal-header">
@@ -69,22 +71,22 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="inputEmail4">Nama Penerima</label>
-          <input type="text" class="form-control" name="nama_penerima" placeholder="Masukan Nama Penerima">
+          <input type="text" class="form-control" name="nama_penerima" placeholder="Masukan Nama Penerima" required>
         </div>
         <div class="form-group col-md-6">
           <label for="inputPassword4">Nomor Hp</label>
-          <input type="number" class="form-control" name="nomor_hp" placeholder="Masukan Nomor Hp">
+          <input type="number" class="form-control" name="nomor_hp" placeholder="Masukan Nomor Hp" required>
         </div>
       </div>
       <div class="form-group">
         <label>Alamat</label>
-        <textarea type="text" class="form-control" name="nama_alamat" placeholder="Masukan Alamat" required></textarea>
+        <textarea type="text" class="form-control" name="alamat" placeholder="Masukan Alamat" required></textarea>
     </div>
       <div class="form-row">
         <div class="form-group col-md-6">
           <label>Provinsi</label>
-          <select class="form-control" name="provinsi" id="selectProvinsi" required>
-            <option selected value="0">Pilih Provinsi</option>
+          <select class="form-control" name="provinsi" id="selectProvinsi" required="true">
+            <option selected value="">Pilih Provinsi</option>
             @foreach ($provinsi as $provinsi_item)
             <option value="{{$provinsi_item->id}}">{{$provinsi_item->name}}</option>
             @endforeach                                                
@@ -93,7 +95,7 @@
         <div class="form-group col-md-6">
           <label>Kota/Kabupaten</label>
           <select class="form-control" name="kota_kabupaten" id="selectKotaKab" required disabled="disabled">
-            <option selected value="0">Pilih Kota/Kabupaten</option>
+            <option selected value="">Pilih Kota/Kabupaten</option>
       
         </select>       
        </div>
@@ -102,14 +104,14 @@
         <div class="form-group col-md-6">
           <label>Kecamatan</label>
           <select class="form-control" name="kecamatan" id="selectKecamatan" required disabled="disabled">
-            <option selected value="0">Pilih Kecamatan</option>
+            <option selected value="">Pilih Kecamatan</option>
       
         </select>
         </div>
         <div class="form-group col-md-6">
           <label for="inputPassword4">Kelurahan/Desa</label>
           <select class="form-control" name="kelurahan_desa" id="selectKelurahanDesa" required disabled="disabled">
-            <option selected value="0">Pilih Kelurahan/ Desa</option>
+            <option selected value="">Pilih Kelurahan/ Desa</option>
         
         </select>
         </div>
