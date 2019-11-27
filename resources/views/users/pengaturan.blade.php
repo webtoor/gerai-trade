@@ -216,8 +216,12 @@
           </div>
         </div>
         </div>
+        <input type="hidden" id="uid" name="alamat_id">
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary btn-md">Submit</button>
+            <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Tutup</button>
+
+            <button type="submit" class="btn btn-primary btn-md">Submit</button>
+
         </div>
         {!! Form::close() !!}
   
