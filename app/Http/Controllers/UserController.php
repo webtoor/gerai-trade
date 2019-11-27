@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\Kategori;
 use App\Models\Provinsi;
 use App\Models\Alamat;
@@ -50,5 +51,14 @@ class UserController extends Controller
             //throw $e;
         }
        
+    }
+
+    public function deleteAlamat($alamat_id){
+        $alamat = Alamat::findOrFail($alamat_id);
+        $alamat->delete();
+        
+        DB::statement("ALTER TABLE alamats AUTO_INCREMENT = 1");
+
+        return back()->withSuccess(trans('Anda Berhasil Alamat Pengiriman')); 
     }
 }

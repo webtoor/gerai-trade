@@ -88,6 +88,7 @@ Route::get('/produk/{slug_produk}', 'HomeController@produkDetail')->name('produk
 Route::group(['middleware' => 'member'], function(){
     Route::get('/pengaturan', 'UserController@index')->name('index-pengaturan');
     Route::post('/pengaturan-alamat', 'UserController@postAlamat')->name('post-alamat');
+    Route::delete('/pengaturan-alamat/delete/{alamat_id}', 'UserController@deleteAlamat')->name('delete-alamat');
 
     Route::post('/cart', 'CartController@index');
     Route::get('/cart-shop/{produk_id}', 'CartController@cartShop');
