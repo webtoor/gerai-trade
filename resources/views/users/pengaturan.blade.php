@@ -43,7 +43,9 @@
 
                                             <ul class="list-inline">
                                                 <li class="list-inline-item">
-                                                    <button id="ubahAlamats" data-toggle="modal" data-target="#ubahAlamat" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"><span class="ti-pencil"></span>
+                                                    <button id="ubahAlamats" data-toggle="modal" data-target="#ubahAlamat" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"
+                                                data-iud="{{$alamats->id}}" data-unama_penerima="{{$alamats->nama_penerima}}" data-unohp_penerima="{{$alamats->nohp_penerima}}" data-ualamat="{{$alamats->alamat}}"
+                                                data-uprovinsi="{{$alamats->provinsi->id}}" data-ukotakabs="{{$alamats->kota_kabupatens->id}}"><span class="ti-pencil"></span>
                                                       Ubah
                                                 </button>
                                                 </li>
@@ -108,7 +110,8 @@
         <div class="form-group col-md-6">
           <label>Provinsi</label>
           <select class="form-control" name="provinsi" id="selectProvinsi" required="true">
-            <option selected value="">Pilih Provinsi</option>
+              <option selected value="">Pilih Provinsi</option>
+
             @foreach ($provinsi as $provinsi_item)
             <option value="{{$provinsi_item->id}}">{{$provinsi_item->name}}</option>
             @endforeach                                                
@@ -149,14 +152,14 @@
 </div>
 
 
- <!-- Modal Tambah Alamat-->
+ <!-- Modal Ubah Alamat-->
  <div class="modal fade" id="ubahAlamat" tabindex="-1" role="dialog" aria-labelledby="ubahAlamat" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
             {!! Form::open([ 'route' => ['post-alamat'], 'method' => "POST"])!!}
   
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="addKategoriLabel">Alamat Baru</h5>
+          <h5 class="modal-title" id="addKategoriLabel">Ubah Alamat</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -166,22 +169,23 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="inputEmail4">Nama Penerima</label>
-            <input type="text" class="form-control" name="nama_penerima" placeholder="Masukan Nama Penerima" required>
+            <input type="text" class="form-control" name="unama_penerima" id="unama_penerima" required>
           </div>
           <div class="form-group col-md-6">
             <label for="inputPassword4">Nomor Hp</label>
-            <input type="number" class="form-control" name="nohp_penerima" placeholder="Masukan Nomor Hp" required>
+            <input type="number" class="form-control" name="unohp_penerima" id="unohp_penerima" required>
           </div>
         </div>
         <div class="form-group">
           <label>Alamat</label>
-          <textarea type="text" class="form-control" name="alamat" placeholder="Masukan Alamat" required></textarea>
+          <textarea type="text" class="form-control" name="ualamat" id="ualamat" required></textarea>
       </div>
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Provinsi</label>
-            <select class="form-control" name="provinsi" id="selectProvinsi" required="true">
-              <option selected value="">Pilih Provinsi</option>
+            <select class="form-control" name="uprovinsi" id="uselectProvinsi" required="true">
+                <option selected value="">Pilih Provinsi</option>
+
               @foreach ($provinsi as $provinsi_item)
               <option value="{{$provinsi_item->id}}">{{$provinsi_item->name}}</option>
               @endforeach                                                
@@ -189,8 +193,8 @@
           </div>
           <div class="form-group col-md-6">
             <label>Kota/Kabupaten</label>
-            <select class="form-control" name="kota_kabupaten" id="selectKotaKab" required disabled="disabled">
-              <option selected value="">Pilih Kota/Kabupaten</option>
+            <select class="form-control" name="ukota_kabupaten" id="uselectKotaKab" required disabled="disabled">
+                <option selected value="">Pilih Kota/Kabupaten</option>
         
           </select>       
          </div>
@@ -198,14 +202,14 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Kecamatan</label>
-            <select class="form-control" name="kecamatan" id="selectKecamatan" required disabled="disabled">
+            <select class="form-control" name="ukecamatan" id="uselectKecamatan" required disabled="disabled">
               <option selected value="">Pilih Kecamatan</option>
         
           </select>
           </div>
           <div class="form-group col-md-6">
             <label for="inputPassword4">Kelurahan/Desa</label>
-            <select class="form-control" name="kelurahan_desa" id="selectKelurahanDesa" required disabled="disabled">
+            <select class="form-control" name="ukelurahan_desa" id="uselectKelurahanDesa" required disabled="disabled">
               <option selected value="">Pilih Kelurahan/ Desa</option>
           
           </select>
@@ -272,6 +276,8 @@
       });
     });
 
+  
+
     $('select#selectKotaKab').on('change', function (e) {
     let optionSelected = $("option:selected", this);
     let valueSelected = this.value;
@@ -304,7 +310,7 @@
 
       });
     });
-
+  
     $('select#selectKecamatan').on('change', function (e) {
     let optionSelected = $("option:selected", this);
     let valueSelected = this.value;
@@ -337,6 +343,123 @@
 
       });
     });
+
+    //UBAH 
+    $('select#uselectProvinsi').on('change', function (e) {
+    let optionSelected = $("option:selected", this);
+    let valueSelected = this.value;
+    console.log(valueSelected)
+    if(valueSelected != 0){
+        $("#uselectKotaKab").prop('disabled', false);
+        $("#uselectKotaKab option").remove();
+
+    }else{
+        $("#uselectKotaKab").prop('disabled', true);
+        $("#uselectKotaKab option").remove();
+        $('#uselectKotaKab').append($('<option>', {value:'', text:'Pilih Kota/Kabupaten'}, '</option>'));
+        $("#uselectKecamatan").prop('disabled', true);
+        $("#uselectKecamatan option").remove();
+        $('#uselectKecamatan').append($('<option>', {value:'', text:'Pilih Kecamatan'}, '</option>'));
+    }
+
+    $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        contentType: "application/json",
+        dataType: "json",
+        type: 'GET',
+        url: "/ajax-kota-kab/" + valueSelected,
+        success: function (results) {
+          console.log(results);
+          $.each( results['data'], function(index, data) {
+                $('#uselectKotaKab').append($('<option>', {value:data['id'], text:data['name']}, '</option>'));
+           })
+          }
+
+      });
+    });
+
+    $('select#uselectKotaKab').on('change', function (e) {
+    let optionSelected = $("option:selected", this);
+    let valueSelected = this.value;
+
+    console.log(valueSelected)
+    if(valueSelected != 0){
+        $("#uselectKecamatan").prop('disabled', false);
+        $("#uselectKecamatan option").remove();
+
+    }else{
+        $("#uselectKecamatan").prop('disabled', true);
+        $('#uselectKecamatan').append($('<option>', {value:'', text:'Pilih Kecamatan'}, '</option>'));
+
+    }
+
+    $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        contentType: "application/json",
+        dataType: "json",
+        type: 'GET',
+        url: "/kecamatan/" + valueSelected,
+        success: function (results) {
+          console.log(results);
+          $.each( results['data'], function(index, data) {
+                $('#uselectKecamatan').append($('<option>', {value:data['id'], text:data['name']}, '</option>'));
+           })
+          }
+
+      });
+    });
+
+    $('select#uselectKecamatan').on('change', function (e) {
+    let optionSelected = $("option:selected", this);
+    let valueSelected = this.value;
+
+    console.log(valueSelected)
+    if(valueSelected != 0){
+        $("#uselectKelurahanDesa").prop('disabled', false);
+        $("#uselectKelurahanDesa option").remove();
+
+    }else{
+        $("#uselectKelurahanDesa").prop('disabled', true);
+        $('#uselectKelurahanDesa').append($('<option>', {value:'', text:'Pilih Kelurahan/Desa'}, '</option>'));
+
+    }
+
+    $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        contentType: "application/json",
+        dataType: "json",
+        type: 'GET',
+        url: "/kelurahan-desa/" + valueSelected,
+        success: function (results) {
+          console.log(results);
+          $.each( results['data'], function(index, data) {
+                $('#uselectKelurahanDesa').append($('<option>', {value:data['id'], text:data['name']}, '</option>'));
+           })
+          }
+
+      });
+    });
+    $("button#ubahAlamats").click(function () {
+            var uid = $(this).data('id');
+
+            var unama_penerima = $(this).data('unama_penerima');
+            var unohp_penerima = $(this).data('unohp_penerima');
+            var ualamat = $(this).data('ualamat');
+
+            
+            $('#uid').val(uid);
+            $('#unama_penerima').val(unama_penerima);
+            $('#unohp_penerima').val(unohp_penerima);
+            $('#ualamat').val(ualamat);
+
+
+        });
   
 });
 </script>
