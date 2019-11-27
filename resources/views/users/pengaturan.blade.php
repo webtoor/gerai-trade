@@ -28,7 +28,7 @@
                                         <th>Nama Penerima</th>
                                         <th>Alamat Pengiriman</th>
                                         <th>Daerah Pengiriman</th>
-                                        <th>Action</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -39,7 +39,27 @@
                                         </td>
                                         <td>{{$alamats->alamat}} </td>
                                         <td><div class="br">{{$alamats->provinsi->name}}, {{$alamats->kota_kabupatens->name}},</div> {{$alamats->kelurahan_desa->name}}, </div></td>
-                                        <td></td>
+                                        <td>
+
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item">
+                                                    <button id="ubahAlamat" data-toggle="modal" data-target="#ubahAlamats" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"><span class="ti-pencil"></span>
+                                                      Ubah
+                                                </button>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    {!! Form::open([
+                                                        'class'=>'delete',
+                                                        'url'  => route('admin-panel.delete-produk', $alamats->id), 
+                                                        'method' => 'DELETE',
+                                                        ]) 
+                                                    !!}
+                                                        <button class="btn btn-danger px-3 btn-sm" title="{{ trans('app.delete_title') }}"><i class="ti-trash"></i>Hapus</button>
+                                                        
+                                                    {!! Form::close() !!}
+                                                </li>
+                                        </ul>
+                                        </td>
                                         
                                       
                                     </tr>
