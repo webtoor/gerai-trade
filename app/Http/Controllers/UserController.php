@@ -13,14 +13,17 @@ class UserController extends Controller
     public function index(){
         $kategori = Kategori::with('sub_kategori')->get();
         $provinsi = Provinsi::all();
+        $user_id = Auth::user()->id;
 
-        return view('users.pengaturan', ['kategori' => $kategori, 'provinsi' => $provinsi]);
+        $alamat = Alamat::where(['user_id' => $user_id, 'jenis_alamat_id' => '2'])->get();
+
+        return view('users.pengaturan', ['kategori' => $kategori, 'provinsi' => $provinsi, 'alamat' => $alamat]);
     }
 
     public function postAlamat(Request $request){
         $data = $request->validate([
             'nama_penerima' => 'required',
-            'nomor_hp' => ['required', 'string','min:11', 'max:14'],
+            'nohp_penerima' => ['required', 'string','min:11', 'max:14'],
             'alamat' => ['required'],
             'provinsi' => ['required'],
             'kota_kabupaten' => ['required'],

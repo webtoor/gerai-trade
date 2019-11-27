@@ -14,7 +14,7 @@
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="wishlist" role="tabpanel" aria-labelledby="wishlist-tab">
+            <div class="tab-pane fade show active" id="pengaturan" role="tabpanel" aria-labelledby="wishlist-tab">
 
                     <div class="row" style="margin-top:40px;">
                       <div class="col-sm-12">
@@ -22,26 +22,28 @@
 
                         <button data-toggle="modal" data-target="#addAlamat" class="btn btn-dark btn-md" title="{{ trans('Tambah Alamat') }}">
                           <b><i class="fa fa-plus"></i> Tambah Alamat</b></button>                        <div class="mT-20">
-                            <table class="table table-bordered" cellspacing="0" width="100%">
+                            <table class="table" cellspacing="0" width="100%">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th width="150px">Penerima</th>
+                                        <th>Nama Penerima</th>
                                         <th>Alamat Pengiriman</th>
                                         <th>Daerah Pengiriman</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  
+                                  @foreach($alamat as $alamats)
                                     <tr>
-                                        <td></td>
-                                        
-                                        <td> </td>
-                                        <td></td>
+                                        <td><div class="br">{{$alamats->nama_penerima}}</div>
+                                          <div style="font-size:10px;">{{$alamats->nohp_penerima}}</div>
+                                        </td>
+                                        <td>{{$alamats->alamat}} </td>
+                                        <td><div class="br">{{$alamats->provinsi->name}}, {{$alamats->kota_kabupatens->name}},</div> {{$alamats->kelurahan_desa->name}}, </div></td>
                                         <td></td>
                                         
                                       
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
