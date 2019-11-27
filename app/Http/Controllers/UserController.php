@@ -22,9 +22,9 @@ class UserController extends Controller
     }
 
     public function postAlamat(Request $request){
-        $data = $request->validate([
+       return $data = $request->validate([
             'nama_penerima' => 'required',
-            'nohp_penerima' => ['required', 'string','min:11', 'max:14'],
+            'nohp_penerima' => ['required', 'string','min:11'],
             'alamat' => ['required'],
             'provinsi' => ['required'],
             'kota_kabupaten' => ['required'],
@@ -35,7 +35,7 @@ class UserController extends Controller
         try {
             Alamat::create([
                 'nama_penerima' => $data['nama_penerima'],
-                'nomor_hp' => $data['nomor_hp'],
+                'nohp_penerima' => $data['nohp_penerima'],
                 'user_id' => $user_id,
                 'alamat' => $data['alamat'],
                 'jenis_alamat_id' => '2',

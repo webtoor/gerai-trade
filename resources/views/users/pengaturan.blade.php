@@ -97,7 +97,7 @@
         </div>
         <div class="form-group col-md-6">
           <label for="inputPassword4">Nomor Hp</label>
-          <input type="number" class="form-control" name="nomor_hp" placeholder="Masukan Nomor Hp" required>
+          <input type="number" class="form-control" name="nohp_penerima" placeholder="Masukan Nomor Hp" required>
         </div>
       </div>
       <div class="form-group">
