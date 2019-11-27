@@ -22,7 +22,7 @@ class UserController extends Controller
     }
 
     public function postAlamat(Request $request){
-       return $data = $request->validate([
+       $data = $request->validate([
             'nama_penerima' => 'required',
             'nohp_penerima' => ['required', 'string','min:11'],
             'alamat' => ['required'],

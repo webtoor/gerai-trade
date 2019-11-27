@@ -35,7 +35,7 @@
                                   @foreach($alamat as $alamats)
                                     <tr>
                                         <td><div class="br">{{$alamats->nama_penerima}}</div>
-                                          <div style="font-size:10px;">{{$alamats->nohp_penerima}}</div>
+                                          <div style="font-size:12px;">{{$alamats->nohp_penerima}}</div>
                                         </td>
                                         <td>{{$alamats->alamat}} </td>
                                         <td><div class="br">{{$alamats->provinsi->name}}, {{$alamats->kota_kabupatens->name}},</div> {{$alamats->kelurahan_desa->name}}, </div></td>
@@ -43,7 +43,7 @@
 
                                             <ul class="list-inline">
                                                 <li class="list-inline-item">
-                                                    <button id="ubahAlamat" data-toggle="modal" data-target="#ubahAlamats" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"><span class="ti-pencil"></span>
+                                                    <button id="ubahAlamats" data-toggle="modal" data-target="#ubahAlamat" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"><span class="ti-pencil"></span>
                                                       Ubah
                                                 </button>
                                                 </li>
@@ -147,6 +147,79 @@
     </div>
   </div>
 </div>
+
+
+ <!-- Modal Tambah Alamat-->
+ <div class="modal fade" id="ubahAlamat" tabindex="-1" role="dialog" aria-labelledby="ubahAlamat" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+            {!! Form::open([ 'route' => ['post-alamat'], 'method' => "POST"])!!}
+  
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addKategoriLabel">Alamat Baru</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+              
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Nama Penerima</label>
+            <input type="text" class="form-control" name="nama_penerima" placeholder="Masukan Nama Penerima" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Nomor Hp</label>
+            <input type="number" class="form-control" name="nohp_penerima" placeholder="Masukan Nomor Hp" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Alamat</label>
+          <textarea type="text" class="form-control" name="alamat" placeholder="Masukan Alamat" required></textarea>
+      </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Provinsi</label>
+            <select class="form-control" name="provinsi" id="selectProvinsi" required="true">
+              <option selected value="">Pilih Provinsi</option>
+              @foreach ($provinsi as $provinsi_item)
+              <option value="{{$provinsi_item->id}}">{{$provinsi_item->name}}</option>
+              @endforeach                                                
+          </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label>Kota/Kabupaten</label>
+            <select class="form-control" name="kota_kabupaten" id="selectKotaKab" required disabled="disabled">
+              <option selected value="">Pilih Kota/Kabupaten</option>
+        
+          </select>       
+         </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Kecamatan</label>
+            <select class="form-control" name="kecamatan" id="selectKecamatan" required disabled="disabled">
+              <option selected value="">Pilih Kecamatan</option>
+        
+          </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Kelurahan/Desa</label>
+            <select class="form-control" name="kelurahan_desa" id="selectKelurahanDesa" required disabled="disabled">
+              <option selected value="">Pilih Kelurahan/ Desa</option>
+          
+          </select>
+          </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary btn-md">Submit</button>
+        </div>
+        {!! Form::close() !!}
+  
+      </div>
+    </div>
+  </div>
 @endsection
 @section('js')
 <script>
