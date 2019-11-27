@@ -44,8 +44,8 @@
                                             <ul class="list-inline">
                                                 <li class="list-inline-item">
                                                     <button id="ubahAlamats" data-toggle="modal" data-target="#ubahAlamat" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"
-                                                data-iud="{{$alamats->id}}" data-unama_penerima="{{$alamats->nama_penerima}}" data-unohp_penerima="{{$alamats->nohp_penerima}}" data-ualamat="{{$alamats->alamat}}"
-                                                data-uprovinsi="{{$alamats->provinsi->id}}" data-ukotakabs="{{$alamats->kota_kabupatens->id}}"><span class="ti-pencil"></span>
+                                                data-uid="{{$alamats->id}}" data-unama_penerima="{{$alamats->nama_penerima}}" data-unohp_penerima="{{$alamats->nohp_penerima}}" data-ualamat="{{$alamats->alamat}}"
+                                                data-uprovinsi="{{$alamats->provinsi->id}}"><span class="ti-pencil"></span>
                                                       Ubah
                                                 </button>
                                                 </li>
@@ -119,7 +119,7 @@
         </div>
         <div class="form-group col-md-6">
           <label>Kota/Kabupaten</label>
-          <select class="form-control" name="kota_kabupaten" id="selectKotaKab" required disabled="disabled">
+          <select class="form-control" name="kota_kabupaten" id="selectKotaKab" required="true" disabled="disabled">
             <option selected value="">Pilih Kota/Kabupaten</option>
       
         </select>       
@@ -128,14 +128,14 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label>Kecamatan</label>
-          <select class="form-control" name="kecamatan" id="selectKecamatan" required disabled="disabled">
+          <select class="form-control" name="kecamatan" id="selectKecamatan" required="true" disabled="disabled">
             <option selected value="">Pilih Kecamatan</option>
       
         </select>
         </div>
         <div class="form-group col-md-6">
           <label for="inputPassword4">Kelurahan/Desa</label>
-          <select class="form-control" name="kelurahan_desa" id="selectKelurahanDesa" required disabled="disabled">
+          <select class="form-control" name="kelurahan_desa" id="selectKelurahanDesa" required="true" disabled="disabled">
             <option selected value="">Pilih Kelurahan/ Desa</option>
         
         </select>
@@ -155,7 +155,7 @@
  <!-- Modal Ubah Alamat-->
  <div class="modal fade" id="ubahAlamat" tabindex="-1" role="dialog" aria-labelledby="ubahAlamat" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
-            {!! Form::open([ 'route' => ['post-alamat'], 'method' => "POST"])!!}
+            {!! Form::open([ 'route' => ['ubah-alamat'], 'method' => "PUT"])!!}
   
       <div class="modal-content">
         <div class="modal-header">
@@ -193,7 +193,7 @@
           </div>
           <div class="form-group col-md-6">
             <label>Kota/Kabupaten</label>
-            <select class="form-control" name="ukota_kabupaten" id="uselectKotaKab" required disabled="disabled">
+            <select class="form-control" name="ukota_kabupaten" id="uselectKotaKab" required="true" disabled="disabled">
                 <option selected value="">Pilih Kota/Kabupaten</option>
         
           </select>       
@@ -202,21 +202,21 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Kecamatan</label>
-            <select class="form-control" name="ukecamatan" id="uselectKecamatan" required disabled="disabled">
+            <select class="form-control" name="ukecamatan" id="uselectKecamatan" required="true">
               <option selected value="">Pilih Kecamatan</option>
         
           </select>
           </div>
           <div class="form-group col-md-6">
             <label for="inputPassword4">Kelurahan/Desa</label>
-            <select class="form-control" name="ukelurahan_desa" id="uselectKelurahanDesa" required disabled="disabled">
+            <select class="form-control" name="ukelurahan_desa" id="uselectKelurahanDesa" required="true" >
               <option selected value="">Pilih Kelurahan/ Desa</option>
           
           </select>
           </div>
         </div>
         </div>
-        <input type="hidden" id="uid" name="alamat_id">
+        <input type="hidden" id="uid" name="alamat_id" value="uid" required>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Tutup</button>
 
@@ -450,13 +450,13 @@
       });
     });
     $("button#ubahAlamats").click(function () {
-            var uid = $(this).data('id');
+            var uid = $(this).data('uid');
 
             var unama_penerima = $(this).data('unama_penerima');
             var unohp_penerima = $(this).data('unohp_penerima');
             var ualamat = $(this).data('ualamat');
 
-            
+              console.log(uid)
             $('#uid').val(uid);
             $('#unama_penerima').val(unama_penerima);
             $('#unohp_penerima').val(unohp_penerima);

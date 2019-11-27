@@ -55,6 +55,34 @@ class UserController extends Controller
         }
        
     }
+    public function ubahAlamat(Request $request){
+        $data = $request->validate([
+            'alamat_id' => 'required',
+            'unama_penerima' => 'required',
+            'unohp_penerima' => ['required', 'string','min:11'],
+            'ualamat' => ['required'],
+            'uprovinsi' => ['required'],
+            'ukota_kabupaten' => ['required'],
+            'ukecamatan' => ['required'],
+            'ukelurahan_desa' => ['required'],
+        ]); 
+       try {
+        Alamat::where('id', $data['alamat_id'])->update([
+            'nama_penerima' => $data['unama_penerima'],
+            'nohp_penerima' => $data['unohp_penerima'],
+            'alamat' => $data['ualamat'],
+            'provinsi_id' => $data['uprovinsi'],
+            'kota_kabupaten_id' => $data['ukota_kabupaten'],
+            'kecamatan_id' => $data['ukecamatan'],
+            'kelurahan_desa_id' => $data['ukelurahan_desa']
+
+        ]);
+        return back()->withSuccess(trans('Anda Berhasil Mengubah Alamat')); 
+       } catch (\Throwable $th) {
+           //throw $th;
+       }
+         
+    }
 
     public function deleteAlamat($alamat_id){
         $alamat = Alamat::findOrFail($alamat_id);
