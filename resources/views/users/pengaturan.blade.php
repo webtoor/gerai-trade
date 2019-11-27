@@ -59,7 +59,7 @@
 
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addKategoriLabel">Tambah Kategori</h5>
+        <h5 class="modal-title" id="addKategoriLabel">Alamat Baru</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -69,11 +69,11 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="inputEmail4">Nama Penerima</label>
-          <input type="text" class="form-control" placeholder="Masukan Nama Penerima">
+          <input type="text" class="form-control" name="nama_penerima" placeholder="Masukan Nama Penerima">
         </div>
         <div class="form-group col-md-6">
-          <label for="inputPassword4">No Hp</label>
-          <input type="number" class="form-control" placeholder="No Hp">
+          <label for="inputPassword4">Nomor Hp</label>
+          <input type="number" class="form-control" name="nomor_hp" placeholder="Masukan Nomor Hp">
         </div>
       </div>
       <div class="form-group">
