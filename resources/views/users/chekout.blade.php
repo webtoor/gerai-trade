@@ -145,7 +145,7 @@
                           @if(count($alamat) > 0)
                           {{$alamat[0]->nama_penerima}} <br>
                           {{$alamat[0]->nohp_penerima}} <br>
-                          {{$alamat[0]->provinsi->name}}, {{$alamat[0]->kota_kabupatens->name}}, {{$alamat[0]->kecamatans->name}}, {{$alamat[0]->kelurahan_desa->name}}
+                          {{$alamat[0]->provinsi->alamat}}, {{$alamat[0]->provinsi->name}}, {{$alamat[0]->kota_kabupatens->name}}, {{$alamat[0]->kecamatans->name}}, {{$alamat[0]->kelurahan_desa->name}}
 
                           @else
                           Anda belum mempunyai alamat pengiriman, silakan isi dulu <a href="" style="color:blue">disini</a>
