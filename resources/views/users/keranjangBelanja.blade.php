@@ -13,6 +13,7 @@
             </div>
         </div>
     </section>
+    <?php echo str_replace(',','',Cart::instance('default')->total()); ?>
     @if(count(Cart::instance('default')->content()))
         <div class="container" style="margin-top:-30px;">
           <div class="row bar">

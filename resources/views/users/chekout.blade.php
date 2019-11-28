@@ -261,6 +261,14 @@
                                           <td>Total Harga</td>
                                           <th><?php echo Cart::instance('default')->total(); ?></th>
                                       </tr>
+                                      <tr>
+                                          <td>Total Ongkos Kirim</td>
+                                          <th id="totalongkir">-</th>
+                                      </tr>
+                                    <tr>
+                                        <td>Total Tagihan</td>
+                                        <th id="totaltagihan">-</th>
+                                    </tr>
                                       </tbody>
                                     </table>
                   
@@ -318,9 +326,12 @@
           url : "{{ url('cek-ongkir') }}",
           data: JSON.stringify(params),
           success:function(datas){
-            console.log(datas.rajaongkir.results[0].costs[1].cost[0].value)
+            //console.log(datas.rajaongkir.results[0].costs[1].cost[0].value)
             $("#ongkir").val(datas.rajaongkir.results[0].costs[1].cost[0].value)
-
+            $("#totalongkir").html(datas.rajaongkir.results[0].costs[1].cost[0].value)
+            var totalharga = "<?php echo str_replace(',','',Cart::instance('default')->total()); ?>"
+            console.log(totalharga)
+            console.log(parseInt(totalharga) + parseInt(datas.rajaongkir.results[0].costs[1].cost[0].value))
           }
         });
       });
