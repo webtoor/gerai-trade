@@ -74,6 +74,10 @@
                         <label>Stok Produk <sup style="color:red"> *Wajib *Hanya Angka</sup></label> 
                         <input type="number" class="form-control" name="stok" id="stok_produk" aria-describedby="emailHelp" value="{{$produk->stok}}" required>
                     </div>
+                    <div class="form-group">
+                            <label>Berat Produk/Gram <sup style="color:red"> *Wajib *Hanya Angka</sup></label> 
+                    <input type="number" class="form-control" name="berat" id="berat_produk" aria-describedby="emailHelp" value="{{$produk->berat}}" required>
+                        </div>
                  <div class="form-group">
                         <label>Harga Produk<sup style="color:red"> *Wajib *Hanya Angka</sup></label>
                         <input type="number" class="form-control" name="harga" id="harga_produk" aria-describedby="emailHelp" value="{{$produk->harga}}" required>
