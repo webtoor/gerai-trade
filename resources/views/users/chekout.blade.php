@@ -188,16 +188,48 @@
                   </div>
               
               </div>
-              <p style="margin-left:10px;"><b>Ongkos Kirim</b></p>
-              <div class="border-top my-3">
-                <div class="form-group col-md-4" style="margin-top:20px; margin-bottom:100px;">
+              <p style="margin-left:10px; color:black"><b>Ongkos Kirim</b></p>
+              <div class="border-top my-3" >
+                <div style="margin-top:20px; margin-bottom:100px;">
+                  <div class="form-row" >
+                      <div class="form-group col-md-4">
+                          <label>Pilih Ekspedisi</label>
+                          <select class="form-control" name="eks">
+                            <option value="jne">JNE</option>
+                            <option value="pos">POS</option>
+                            <option value="tiki">TIKI</option>
+                          </select>
+                        </div>
+                <div class="form-group col-md-4" >
                   <label>Pilih Kota</label>
-                  <select class="form-control" name="provinsi" id="selectProvinsi" required="true">
-                      <option selected value="">Pilih Kota</option>                                                     
-                </select>
+                  <select class="form-control" onchange="check()" id="city" name="city" required="true">
+                      @php
+                      $city = city();
+                      $city = json_decode($city,true);
+                  @endphp
+                  @foreach($city['rajaongkir']['results'] as $citys)
+                    <option value="{{ $citys['city_id'] }}">{{ $citys['city_name'] }} </option>
+                    @endforeach           
+                       </select>
                 </div>
+                <div class="form-group col-md-4">
+                    <label>Provinsi</label>
+                     <input type="text" value="" class="form-control" id="provinsi" readonly="">
+                  </div>
+               
               </div>
-              
+              <div class="form-row">
+                  <div class="form-group col-md-4">
+                      <label for="zip">Kode POS</label>
+                      <input  type="text" class="form-control" name="portal_code" id="portal_code" readonly="">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="zip">Ongkos Kirim / 1Kg</label>
+                        <input  type="text" class="form-control" name="ongkir" id="ongkir" readonly="">
+                      </div>
+              </div>
+              </div>
+            </div>
             </div>
            
             <div class="col-lg-4" style="margin-top:10px;">
@@ -233,6 +265,19 @@
 
 
  
-    <script src="{{ mix('/js/app.js') }}"></script>
+    <script src="{{ mix('/js/app.js') }}"></script><script type="text/javascript">
+      function check (){
+        var id = $("#city").val();
+        $.ajax({
+          type: "GET",
+          url : "{{ url('citybyid/') }}/"+id,
+          dataType : "JSON",
+          success:function(data){
+            $("#provinsi").val(data.rajaongkir.results.province)
+            $("#portal_code").val(data.rajaongkir.results.postal_code)
+          }
+        });
+      }
+    </script>
 </body>
 </html>
