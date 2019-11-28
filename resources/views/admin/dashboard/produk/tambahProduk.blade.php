@@ -54,6 +54,10 @@
                         <label>Stok Produk <sup style="color:red"> *Wajib *Hanya Angka</sup></label> 
                         <input type="number" class="form-control" name="stok" id="stok_produk" aria-describedby="emailHelp" placeholder="Masukan Stok Produk" required>
                     </div>
+                    <div class="form-group">
+                            <label>Berat Produk/Gram <sup style="color:red"> *Wajib *Hanya Angka</sup></label> 
+                            <input type="number" class="form-control" name="berat" id="berat_produk" aria-describedby="emailHelp" placeholder="Masukan Berat Produk/Gram" required>
+                        </div>
                  <div class="form-group">
                         <label>Harga Produk<sup style="color:red"> *Wajib *Hanya Angka</sup></label>
                         <input type="number" class="form-control" name="harga" id="harga_produk" aria-describedby="emailHelp" placeholder="Masukan Harga Produk" required>
