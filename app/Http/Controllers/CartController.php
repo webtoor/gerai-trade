@@ -109,4 +109,8 @@ class CartController extends Controller
         return view('users.chekout', ['alamat' => $alamat]);
 
     }
+
+    public function cekOngkir(){
+        
+    }
 }

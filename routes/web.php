@@ -107,7 +107,8 @@ Route::group(['middleware' => 'member'], function(){
     Route::get('/checkout', 'CartController@checkout')->name('checkout');
     Route::get('citybyid/{id}',function($id){
 	return city($id);
-});
+    });
+    Route::get('cek-ongkir','CartController@cekOngkir');
 
 });
 Route::get('/single/{slug}', 'BlogController@singleBlog')->name('single-blog');

@@ -273,6 +273,7 @@
           url : "{{ url('citybyid/') }}/"+id,
           dataType : "JSON",
           success:function(data){
+            console.log(data)
             $("#provinsi").val(data.rajaongkir.results.province)
             $("#portal_code").val(data.rajaongkir.results.postal_code)
           }
