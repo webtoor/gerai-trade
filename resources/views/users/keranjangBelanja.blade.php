@@ -13,7 +13,6 @@
             </div>
         </div>
     </section>
-
     @if(count(Cart::instance('default')->content()))
         <div class="container" style="margin-top:-30px;">
           <div class="row bar">

@@ -216,16 +216,18 @@
                
               </div>
               <div class="form-row">
-                  <div class="form-group col-md-6">
+                  <div class="form-group col-md-12">
                       <label>Provinsi</label>
                        <input type="text" class="form-control" id="provinsi" name="provinsi" readonly="">
                        <input type="hidden" class="form-control" id="provinsi_id" name="provinsi_id">
 
                     </div>
-                  <div class="form-group col-md-6">
+                    <input  type="hidden" class="form-control" name="portal_code" id="portal_code" readonly="">
+
+                  {{-- <div class="form-group col-md-6">
                       <label for="zip">Kode POS</label>
                       <input  type="text" class="form-control" name="portal_code" id="portal_code" readonly="">
-                    </div>
+                    </div> --}}
                     
                     {{-- <div class="form-group col-md-4">
                         <label for="zip">Ongkos Kirim / 1Kg</label>
@@ -239,7 +241,7 @@
                     <button id="submitongkir" class="btn btn-secondary btn-block btn-md">CEK ONGKIR</button>
                   </div>
                     <div class="form-group col-md-6">
-                        <label for="zip">Hasil Ongkos Kirim / 1Kg</label>
+                        <label for="zip">Total Ongkos Kirim (Regular)</label>
                         <input  type="text" class="form-control" name="ongkir" id="ongkir" readonly="">
                       </div>
               </div>
@@ -289,7 +291,7 @@
           url : "{{ url('citybyid/') }}/"+id,
           dataType : "JSON",
           success:function(data){
-            console.log(data)
+           // console.log(data)
             $("#provinsi").val(data.rajaongkir.results.province)
             $("#portal_code").val(data.rajaongkir.results.postal_code)
             $("#provinsi_id").val(data.rajaongkir.results.province_id)
@@ -300,7 +302,7 @@
       }
       $("button#submitongkir").click(function () {
         var params = {
-        'eks_id': $('#eks').val(),
+        'eks': $('#eks').val(),
 
         'provinsi_id': $('#provinsi_id').val(),
         'city_id': $('#city').val(),
@@ -310,13 +312,15 @@
           headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-          type: "POST",
+          contentType: "application/json",
+          dataType: "json",
+          type: 'POST',
           url : "{{ url('cek-ongkir') }}",
-          dataType : "JSON",
           data: JSON.stringify(params),
           success:function(datas){
-            console.log(datas)
-            
+            console.log(datas.rajaongkir.results[0].costs[1].cost[0].value)
+            $("#ongkir").val(datas.rajaongkir.results[0].costs[1].cost[0].value)
+
           }
         });
       });

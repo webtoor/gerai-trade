@@ -111,14 +111,16 @@ class CartController extends Controller
     }
 
     public function cekOngkir(Request $request){
+        $weight = 0;
+        foreach (Cart::instance('default')->content() as $row) {
+            $produk = Produk::find($row->id);
+            $weight += ($produk->berat) * ($row->qty);
 
-       /*  $cost = Cost($key['city_id'],$req->city,$weight,$req->eks);
-                     $data = json_decode($cost,true); */
-        return response()->json([ 
-            'status' => '1',
-             'data' => $request['provinsi']
-             ]
-         );
+        }
+
+        $cost = Cost('153', $request->json('city_id'), $weight, $request->json('eks'));
+        $data = json_decode($cost, true);
+        return response()->json($data);
 
     }
 }
