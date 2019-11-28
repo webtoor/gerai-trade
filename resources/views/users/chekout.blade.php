@@ -192,7 +192,7 @@
               <div class="border-top my-3" >
                 <div style="margin-top:20px; margin-bottom:100px;">
                   <div class="form-row" >
-                      <div class="form-group col-md-4">
+                      <div class="form-group col-md-6">
                           <label>Pilih Ekspedisi</label>
                           <select class="form-control" name="eks">
                             <option value="jne">JNE</option>
@@ -200,7 +200,7 @@
                             <option value="tiki">TIKI</option>
                           </select>
                         </div>
-                <div class="form-group col-md-4" >
+                <div class="form-group col-md-6" >
                   <label>Pilih Kota</label>
                   <select class="form-control" onchange="check()" id="city" name="city" required="true">
                       @php
@@ -212,22 +212,36 @@
                     @endforeach           
                        </select>
                 </div>
-                <div class="form-group col-md-4">
-                    <label>Provinsi</label>
-                     <input type="text" value="" class="form-control" id="provinsi" readonly="">
-                  </div>
+               
                
               </div>
               <div class="form-row">
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-6">
+                      <label>Provinsi</label>
+                       <input type="text" value="" class="form-control" id="provinsi" name="provinsi" readonly="">
+                    </div>
+                  <div class="form-group col-md-6">
                       <label for="zip">Kode POS</label>
                       <input  type="text" class="form-control" name="portal_code" id="portal_code" readonly="">
                     </div>
-                    <div class="form-group col-md-4">
+                    
+                    {{-- <div class="form-group col-md-4">
+                        <label for="zip">Ongkos Kirim / 1Kg</label>
+                        <input  type="text" class="form-control" name="ongkir" id="ongkir" readonly="">
+                      </div> --}}
+              </div>
+              <div class="form-row">
+                  <div class="form-group col-md-6">
+                      <label for="zip">Cek Ongkir</label>
+
+                    <button class="btn btn-secondary btn-block btn-md">CEK ONGKIR</button>
+                  </div>
+                    <div class="form-group col-md-6">
                         <label for="zip">Ongkos Kirim / 1Kg</label>
                         <input  type="text" class="form-control" name="ongkir" id="ongkir" readonly="">
                       </div>
               </div>
+            
               </div>
             </div>
             </div>
@@ -276,6 +290,26 @@
             console.log(data)
             $("#provinsi").val(data.rajaongkir.results.province)
             $("#portal_code").val(data.rajaongkir.results.postal_code)
+          }
+        });
+        var params = {
+        'eks_id': $('#eks').val(),
+
+        'provinsi_id': $('#provinsi').val(),
+        'city_id': $('#city').val(),
+        }
+        console.log(params)
+        $.ajax({
+          headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+          type: "POST",
+          url : "{{ url('cek-ongkir') }}",
+          dataType : "JSON",
+          data: JSON.stringify(params),
+          success:function(datas){
+            console.log(datas)
+            
           }
         });
       }

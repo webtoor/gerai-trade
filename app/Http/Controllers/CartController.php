@@ -110,7 +110,15 @@ class CartController extends Controller
 
     }
 
-    public function cekOngkir(){
-        
+    public function cekOngkir(Request $request){
+
+       /*  $cost = Cost($key['city_id'],$req->city,$weight,$req->eks);
+                     $data = json_decode($cost,true); */
+        return response()->json([ 
+            'status' => '1',
+             'data' => $request['provinsi']
+             ]
+         );
+
     }
 }
