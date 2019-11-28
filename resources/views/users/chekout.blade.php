@@ -166,8 +166,7 @@
                           <th>Produk</th>
                           <th>Jumlah</th>
                           <th>Harga</th>
-                          <th></th>
-                          <th></th>
+                          <th>Berat</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -178,6 +177,7 @@
                             {{$row->qty}}
                           </td>
                           <td>Rp {{number_format($row->price,0, ".", ".")}}</td>
+                        <td>{{$row->options->weight}} gram</td>
                         </tr>
                         <?php endforeach;?>
                       </tbody>
@@ -259,7 +259,7 @@
                                       <tbody>
                                         <tr>
                                           <td>Total Harga</td>
-                                          <th><?php echo Cart::instance('default')->total(); ?></th>
+                                          <th>Rp. <?php echo Cart::instance('default')->total(); ?></th>
                                       </tr>
                                       <tr>
                                           <td>Total Ongkos Kirim</td>
@@ -327,11 +327,15 @@
           data: JSON.stringify(params),
           success:function(datas){
             //console.log(datas.rajaongkir.results[0].costs[1].cost[0].value)
-            $("#ongkir").val(datas.rajaongkir.results[0].costs[1].cost[0].value)
-            $("#totalongkir").html(datas.rajaongkir.results[0].costs[1].cost[0].value)
-            var totalharga = "<?php echo str_replace(',','',Cart::instance('default')->total()); ?>"
+            $("#ongkir").val(datas.rajaongkir.results[0].costs[1].cost[0].value);
+            $("#totalongkir").html('Rp. ' + datas.rajaongkir.results[0].costs[1].cost[0].value.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'));
+            var totalharga = "<?php echo str_replace(',','',Cart::instance('default')->total()); ?>";
             console.log(totalharga)
             console.log(parseInt(totalharga) + parseInt(datas.rajaongkir.results[0].costs[1].cost[0].value))
+            var totaltagihan = parseInt(totalharga) + parseInt(datas.rajaongkir.results[0].costs[1].cost[0].value)
+            $("#totaltagihan").html('Rp. ' + totaltagihan.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'));
+
+
           }
         });
       });

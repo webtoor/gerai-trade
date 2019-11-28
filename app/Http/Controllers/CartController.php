@@ -18,7 +18,7 @@ class CartController extends Controller
 
         }else{
             $produks = Produk::find($request->produk_id);
-    	    Cart::add($produks->id, $produks->nama_produk, $request->qty, $produks->harga, ['slug' => $produks->slug]);
+    	    Cart::add($produks->id, $produks->nama_produk, $request->qty, $produks->harga, ['slug' => $produks->slug, 'weight' => $produks->berat]);
             return redirect('keranjang-belanja'); 
         }
     	
@@ -31,7 +31,7 @@ class CartController extends Controller
 
         }else{
             $produks = Produk::find($produk_id);
-    	    Cart::add($produks->id, $produks->nama_produk, 1, $produks->harga, ['slug' => $produks->slug]);
+    	    Cart::add($produks->id, $produks->nama_produk, 1, $produks->harga, ['slug' => $produks->slug, 'weight' => $produks->berat]);
             return redirect('keranjang-belanja'); 
         }
     	
@@ -44,7 +44,7 @@ class CartController extends Controller
 
         }else{
             $produks = Produk::find($produk_id);
-    	    Cart::instance('wishlist')->add($produks->id, $produks->nama_produk, 1, $produks->harga, ['slug' => $produks->slug]);
+    	    Cart::instance('wishlist')->add($produks->id, $produks->nama_produk, 1, $produks->harga, ['slug' => $produks->slug, 'weight' => $produks->berat]);
             return redirect('wishlist'); 
         }
     	
@@ -74,7 +74,7 @@ class CartController extends Controller
 
         }else{
             $produks = Produk::find($request->produk_id);
-    	    Cart::instance('wishlist')->add($produks->id, $produks->nama_produk, $request->qty, $produks->harga, ['slug' => $produks->slug]);
+    	    Cart::instance('wishlist')->add($produks->id, $produks->nama_produk, $request->qty, $produks->harga, ['slug' => $produks->slug, 'weight' => $produks->berat]);
             return redirect('wishlist'); 
         }
     }
