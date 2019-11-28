@@ -103,10 +103,9 @@ class CartController extends Controller
     }
 
     public function checkout(){
-        return  city();
         $user_id = Auth::user()->id;
 
-        $alamat = Alamat::where(['user_id' => $user_id, 'jenis_alamat_id' => '2'])->orderBy('id', 'asc')->get();
+        $alamat = Alamat::where(['user_id' => $user_id, 'jenis_alamat_id' => '2'])->orderBy('id', 'asc')->first();
         return view('users.chekout', ['alamat' => $alamat]);
 
     }

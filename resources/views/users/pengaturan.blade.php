@@ -19,9 +19,11 @@
                     <div class="row" style="margin-top:40px;">
                       <div class="col-sm-12">
                           @include('admin.partials.messages') 
-
+                        @if(count($alamat) < 0)
                         <button data-toggle="modal" data-target="#addAlamat" class="btn btn-dark btn-md" title="{{ trans('Tambah Alamat') }}">
-                          <b><i class="fa fa-plus"></i> Tambah Alamat</b></button>                        <div class="mT-20">
+                          <b><i class="fa fa-plus"></i> Tambah Alamat</b></button> 
+                        @endif
+                                              <div class="mT-20">
                             <table class="table" cellspacing="0" width="100%">
                                 <thead class="thead-light">
                                     <tr>

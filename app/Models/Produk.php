@@ -21,6 +21,7 @@ class Produk extends Model
         'slug',
         'deskripsi',
         'stok',
+        'berat',
         'harga',
         'rating',
         'link_tokped',

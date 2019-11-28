@@ -142,10 +142,10 @@
                       <tbody>
                         <tr>
                           <td>
-                          @if(count($alamat) > 0)
-                          {{$alamat[0]->nama_penerima}} <br>
-                          {{$alamat[0]->nohp_penerima}} <br>
-                          {{$alamat[0]->provinsi->alamat}}, {{$alamat[0]->provinsi->name}}, {{$alamat[0]->kota_kabupatens->name}}, {{$alamat[0]->kecamatans->name}}, {{$alamat[0]->kelurahan_desa->name}}
+                          @if($alamat)
+                          {{$alamat->nama_penerima}} <br>
+                          {{$alamat->nohp_penerima}} <br>
+                          {{$alamat->alamat}}, {{$alamat->provinsi->name}}, {{$alamat->kota_kabupatens->name}}, {{$alamat->kecamatans->name}}, {{$alamat->kelurahan_desa->name}}
 
                           @else
                           Anda belum mempunyai alamat pengiriman, silakan isi dulu <a href="" style="color:blue">disini</a>
@@ -178,14 +178,6 @@
                             {{$row->qty}}
                           </td>
                           <td>Rp {{number_format($row->price,0, ".", ".")}}</td>
-                          {{-- <td>
-                            <button style="border: none;background: none;" type="submit"><i class="fas fa-sync-alt green-text"></i>
-                            </button>
-                          </td>
-                          <td>
-                             <a href="{{ url('/cart-delete/'.$row->rowId) }}"><i class="fa fa-trash red-text" aria-hidden="true"></i>
-                            </a>
-                          </td> --}}
                         </tr>
                         <?php endforeach;?>
                       </tbody>
@@ -196,7 +188,18 @@
                   </div>
               
               </div>
+              <p style="margin-left:10px;"><b>Ongkos Kirim</b></p>
+              <div class="border-top my-3">
+                <div class="form-group col-md-4" style="margin-top:20px; margin-bottom:100px;">
+                  <label>Pilih Kota</label>
+                  <select class="form-control" name="provinsi" id="selectProvinsi" required="true">
+                      <option selected value="">Pilih Kota</option>                                                     
+                </select>
+                </div>
+              </div>
+              
             </div>
+           
             <div class="col-lg-4" style="margin-top:10px;">
                     <div id="order-summary" class="card box mt-0 mb-4 p-0">
                             <div class="card-body">
