@@ -38,7 +38,7 @@ class AdminProdukController extends Controller
         $data = $request->validate([
             'mitra_id' => ['required'],
             'kategori_id' => ['required'],
-            'subkategori_id' => ['required','nullable'],
+            'subkategori_id' => ['nullable'],
             'nama_produk' => ['required'], 
             'deskripsi' => ['required'], 
             'stok' => ['required', 'numeric'],
@@ -106,7 +106,8 @@ class AdminProdukController extends Controller
             'subkategori_id' => ['nullable'],
             'nama_produk' => ['required'], 
             'deskripsi' => ['required'], 
-            'stok' => ['required'],
+            'stok' => ['required', 'numeric'],
+            'berat' => ['required','numeric'],
             'harga' => ['required'],
             'link_tokped' => ['nullable'],
             'link_shopee' => ['nullable'],
