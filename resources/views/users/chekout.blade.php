@@ -194,7 +194,7 @@
                   <div class="form-row" >
                       <div class="form-group col-md-6">
                           <label>Pilih Ekspedisi</label>
-                          <select class="form-control" name="eks">
+                          <select class="form-control" name="eks" id="eks">
                             <option value="jne">JNE</option>
                             <option value="pos">POS</option>
                             <option value="tiki">TIKI</option>
@@ -218,7 +218,9 @@
               <div class="form-row">
                   <div class="form-group col-md-6">
                       <label>Provinsi</label>
-                       <input type="text" value="" class="form-control" id="provinsi" name="provinsi" readonly="">
+                       <input type="text" class="form-control" id="provinsi" name="provinsi" readonly="">
+                       <input type="hidden" class="form-control" id="provinsi_id" name="provinsi_id">
+
                     </div>
                   <div class="form-group col-md-6">
                       <label for="zip">Kode POS</label>
@@ -234,10 +236,10 @@
                   <div class="form-group col-md-6">
                       <label for="zip">Cek Ongkir</label>
 
-                    <button class="btn btn-secondary btn-block btn-md">CEK ONGKIR</button>
+                    <button id="submitongkir" class="btn btn-secondary btn-block btn-md">CEK ONGKIR</button>
                   </div>
                     <div class="form-group col-md-6">
-                        <label for="zip">Ongkos Kirim / 1Kg</label>
+                        <label for="zip">Hasil Ongkos Kirim / 1Kg</label>
                         <input  type="text" class="form-control" name="ongkir" id="ongkir" readonly="">
                       </div>
               </div>
@@ -290,12 +292,17 @@
             console.log(data)
             $("#provinsi").val(data.rajaongkir.results.province)
             $("#portal_code").val(data.rajaongkir.results.postal_code)
+            $("#provinsi_id").val(data.rajaongkir.results.province_id)
+
           }
         });
+       
+      }
+      $("button#submitongkir").click(function () {
         var params = {
         'eks_id': $('#eks').val(),
 
-        'provinsi_id': $('#provinsi').val(),
+        'provinsi_id': $('#provinsi_id').val(),
         'city_id': $('#city').val(),
         }
         console.log(params)
@@ -312,7 +319,7 @@
             
           }
         });
-      }
+      });
     </script>
 </body>
 </html>
