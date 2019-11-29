@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('slug', 200);
             $table->string('deskripsi', 200);
             $table->integer('stok');
+            $table->integer('berat')->unsigned();
             $table->bigInteger('harga');
             $table->integer('rating')->unsigned();
             $table->timestamps();

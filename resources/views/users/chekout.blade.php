@@ -148,7 +148,7 @@
                           {{$alamat->alamat}}, {{$alamat->provinsi->name}}, {{$alamat->kota_kabupatens->name}}, {{$alamat->kecamatans->name}}, {{$alamat->kelurahan_desa->name}}
 
                           @else
-                          Anda belum mempunyai alamat pengiriman, silakan isi dulu <a href="" style="color:blue">disini</a>
+                          Anda belum mempunyai alamat pengiriman, silakan isi dulu <a href="{{route('index-pengaturan')}}" style="color:blue">disini</a>
                           @endif
                           </td>
                     

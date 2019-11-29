@@ -18,10 +18,8 @@ class CreateAlamatsTable extends Migration
             $table->string('alamat');
             $table->integer('user_id')->unsigned();
             $table->integer('jenis_alamat_id')->unsigned();
-           /*  $table->char('provinsi_id', 2);
-            $table->char('kota_kabupaten_id', 4);
-            $table->char('kecamatan_id', 7);
-            $table->char('kelurahan_desa_id', 10); */
+            $table->string('nama_penerima');
+            $table->string('nohp_penerima');
             $table->string('provinsi');
             $table->string('kota_kabupaten');
             $table->string('kecamatan');

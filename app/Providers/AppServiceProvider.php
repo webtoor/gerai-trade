@@ -15,7 +15,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        require_once App_path('Helper/rajaongkir.php');
+
     }
 
     /**

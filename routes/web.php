@@ -12,7 +12,12 @@
 */
 
 Route::get('/storage-link', function () {
-Artisan::call('storage:link');
+        Artisan::call('storage:link');
+        echo 'storage-link complete';
+});
+Route::get('/update-app', function () {
+        Artisan::call('dump-autoload');
+        echo 'dump-autoload complete';
 });
     Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
     Route::group(['middleware' => ['guest']], function(){
