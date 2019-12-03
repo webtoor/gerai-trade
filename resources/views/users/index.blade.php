@@ -294,46 +294,48 @@
                                     
 
             </div>
+            
         </div>
-    </div>
-</div>
-</div>
-    </div>
-</div>
-</div>
-
-</div>
-<section class="blog section_gap" style="padding-bottom:100px;">
-    <div class="container">
-      <div class="section-intro pb-20px" style="padding-bottom:40px;">
-        <h2>Info <span class="section-intro__style">Terbaru</span></h2> 
-      </div>
-
-      <div class="row">
-          @foreach($blog as $blogs)
-        <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-          <div class="card card-blog">
-            <div class="card-blog__img">
-                
-              <img class="card-img rounded-0" src="{{ asset('storage/' .$blogs->image)}}" alt="" style="height:200px;">
-            </div>
-            <div class="card-body">
-              <ul class="card-blog__info">
-                <li><a href="#">By {{$blogs->user->nama_depan}}</a></li>
-                <li><a href="#"><i class="ti-comments-smiley"></i> {{ date("j-M-Y", strtotime($blogs->created_at))}}</a></li>
-              </ul>
-              <h4 class="card-blog__title"><a href="{{ url('single/'.$blogs->slug) }}">{{$blogs->judul}}</a></h4>
-              <div style="padding-left:20px; height:100px;">
-                {!! \Illuminate\Support\Str::limit($blogs->konten, 100) !!}
+        <section class="blog section_gap" style="padding-bottom:100px;">
+            <div class="container">
+              <div class="section-intro pb-20px" style="padding-bottom:40px;">
+                <h2>Info <span class="section-intro__style">Terbaru</span></h2> 
+              </div>
+        
+              <div class="row">
+                  @foreach($blog as $blogs)
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+                  <div class="card card-blog">
+                    <div class="card-blog__img">
+                        
+                      <img class="card-img rounded-0" src="{{ asset('storage/' .$blogs->image)}}" alt="" style="height:200px;">
+                    </div>
+                    <div class="card-body">
+                      <ul class="card-blog__info">
+                        <li><a href="#">By {{$blogs->user->nama_depan}}</a></li>
+                        <li><a href="#"><i class="ti-comments-smiley"></i> {{ date("j-M-Y", strtotime($blogs->created_at))}}</a></li>
+                      </ul>
+                      <h4 class="card-blog__title"><a href="{{ url('single/'.$blogs->slug) }}">{{$blogs->judul}}</a></h4>
+                      <div style="padding-left:20px; height:100px;">
+                        {!! \Illuminate\Support\Str::limit($blogs->konten, 100) !!}
+                        </div>
+                      <a class="card-blog__link" href="{{ url('single/'.$blogs->slug) }}" style="padding-left:20px">Read More <i class="ti-arrow-right"></i></a>
+                    </div>
+                  </div>
                 </div>
-              <a class="card-blog__link" href="{{ url('single/'.$blogs->slug) }}" style="padding-left:20px">Read More <i class="ti-arrow-right"></i></a>
+                @endforeach
+              </div>
             </div>
-          </div>
-        </div>
-        @endforeach
-      </div>
+          </section>  
     </div>
-  </section>  
+</div>
+</div>
+    </div>
+</div>
+</div>
+
+</div>
+
 
 
 

@@ -353,14 +353,20 @@
                 @else
                 {{$produk_detail->kategori->kategori_name}}
                 @endif
-              </a></li>
+              </a>
+            </li>
               <li style="margin-left:-40px;"><a href="#"><span>Ketersediaan</span> : 
                 @if($produk_detail->stok > 0)
                 Tersedia
                 @else
                 Habis
               @endif
-          </a></li>
+          </a>
+        </li>
+        <li style="margin-left:-40px;"><a href="#"><span>Berat</span> : 
+          {{$produk_detail->berat}} gram
+        </a>
+      </li>
 						</ul>
             <div>
               {!! html_entity_decode($produk_detail->deskripsi) !!}
