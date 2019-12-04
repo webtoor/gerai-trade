@@ -316,7 +316,7 @@
                                 @if(count($produk_detail->produk_image) > 0)
                                 @foreach($produk_detail->produk_image as $key=> $images)
                                 <div class="carousel-item <?php if($key==0){echo "active";} ?>">
-                                  <img class="d-block w-100" src="{{ asset('storage/' .$images->image_path)}}" style="height:600px; width:555px">     
+                                  <img class="d-block w-100" src="{{ asset('storage/' .$images->image_path)}}" style="height:500px;">     
                                 </div>
                                 @endforeach
                                 @else

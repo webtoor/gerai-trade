@@ -694,7 +694,7 @@
                         <div class="br"></div>
                     </aside>
                     <aside class="single_sidebar_widget popular_post_widget">
-                        <h3 class="widget_title">Popular Posts</h3>
+                        <h3 class="widget_title">Terbaru</h3>
                         @foreach($blogAll as $allblog)
                         <div class="media post_item">
                             <img src="{{ asset('storage/' .$allblog->image)}}" alt="post" style="height:60px; width:100px;">

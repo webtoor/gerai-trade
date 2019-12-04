@@ -336,7 +336,9 @@
 
 </div>
 
-
+<footer class="ftco-footer ftco-section" style="background-color:#f8f9fa">
+    @include('users.partials.footer');
+</footer> 
 
 
 @endsection

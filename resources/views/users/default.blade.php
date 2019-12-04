@@ -2,13 +2,16 @@
 <html lang="{{ app()->getLocale() }}">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="keywords" content="geraitrade.com, Gerai Trade">
+  <meta name="description" content="geraitrade.com, Gerai Trade">
+  <meta name="author" content="geraitrade.com, Gerai Trade">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'TRADE') }}</title>
 
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600" rel="stylesheet">
@@ -36,7 +39,7 @@
 }
 .ftco-footer {
       font-size: 14px;
-      padding: 7em 0;
+      padding: 2em 0;
       color: #000000; }
       .ftco-footer .ftco-footer-logo {
         text-transform: uppercase;
@@ -58,7 +61,7 @@
     
     .ftco-footer-social li {
       list-style: none;
-      margin: 0 10px 0 0;
+      margin: 0 1px 0 0;
       display: inline-block; }
       .ftco-footer-social li a {
         height: 50px;

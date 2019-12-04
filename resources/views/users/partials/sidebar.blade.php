@@ -14,12 +14,12 @@
               </p>
 
            
-            <a href="{{route('home.showDaftarMitra')}}" class="list-group-item border-top-0">
+            {{-- <a href="{{route('home.showDaftarMitra')}}" class="list-group-item border-top-0">
               @if((Auth::user()->role->role_id == '1') && (Auth::user()->status_mitra != '1'))
             <button class="btn btn-primary btn-sm btn-block">Daftar Mitra</button>
               @else
               @endif
-            </a>
+            </a> --}}
 
 
             <p href="#" class="list-group-item border-bottom-0">
