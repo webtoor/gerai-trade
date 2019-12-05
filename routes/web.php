@@ -84,6 +84,7 @@ Route::get('/update-app', function () {
         Route::get('hub', 'AdminController@showMitra')->name('showMitra');
         Route::post('hub', 'AdminController@addMitra')->name('addMitra');
         Route::get('edit-hub/{user_id}', 'AdminController@editHub')->name('editHub');
+        Route::put('update-hub/{user_id}', 'AdminController@updateHub')->name('updateHub');
 
         Route::delete('mitra/{user_id}', 'AdminController@deleteMitra')->name('deleteMitra');
 

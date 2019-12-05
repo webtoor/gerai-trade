@@ -32,7 +32,7 @@ if( !function_exists('province')){
 }
 
 if( !function_exists('allcity')){
-	function allcity($province_id=null){
+	function allcity($province_id){
 		
 		$uri = "https://pro.rajaongkir.com/api/city?province=".$province_id;
 		

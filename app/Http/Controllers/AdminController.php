@@ -114,7 +114,24 @@ class AdminController extends Controller
     }
 
     public function editHub($user_id){
+        $hub = User::with('alamat')->where('id', $user_id)->first();
+        /* return allcity(12) */;
+        return view('admin.dashboard.editHub', ['hub' => $hub]);
+    }
 
+    public function updateHub(Request $request, $hub_id){
+        return $data = $request->validate([
+            'nama_hub' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:15'],
+            'nama_depan' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:15'],
+            'nama_belakang' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:20'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users,email,'.$hub_id ],
+            'nomor_ponsel' => ['required', 'string','min:10', 'max:14', 'unique:users'.$hub_id ],
+            'alamat' => ['required'],
+            'province_id' => ['required'],
+            'city_id' => ['required'],
+            'kecamatan_id' => ['required'],
+            'kodepos' => ['nullable']
+        ]); 
     }
 
     public function deleteMitra($user_id){

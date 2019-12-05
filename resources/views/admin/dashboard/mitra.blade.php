@@ -40,6 +40,11 @@
                                 </button>
                                 </li>
                                 <li class="list-inline-item">
+                                        <a href="{{route('admin-panel.editHub', ['user_id' => $mitras->user->id])}}" title="{{ trans('Edit Hub') }}" class="btn btn-secondary px-3 btn-sm">
+                                            <span class="ti-pencil"></span>
+                                        </a>
+                                    </li>
+                                <li class="list-inline-item">
                                         {!! Form::open([
                                             'class'=>'delete',
                                             'url'  => route('admin-panel.deleteMitra', $mitras->user->id), 
