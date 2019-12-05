@@ -3,11 +3,11 @@
 @section('content')
 <div class="text-center">
     <b>User</b>
-    <h4 class="c-blue-900"><b>Data Mitra</b></h4>
+    <h4 class="c-blue-900"><b>Data Hub</b></h4>
 </div>
 <div class="bgc-white p-20 bd">
     <button id="tambahMitras "data-toggle="modal" data-target="#addMitra" class="btn btn-primary btn-md" title="{{ trans('Tambah Mitra') }}">
-        <b><i class="fa fa-plus"></i> Tambah Mitra</b></button>
+        <b><i class="fa fa-plus"></i> Tambah Hub</b></button>
     <div class="mT-30">
         <table id="dataTable" class="table table-bordered" cellspacing="0" width="100%">
             <thead class="thead-light">
@@ -77,43 +77,49 @@
                 {!! Form::open([ 'route' => ['admin-panel.addMitra'], 'method' => "POST"])!!}
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="addMitraLabel">Tambah Mitra</h5>
+              <h5 class="modal-title" id="addMitraLabel">Tambah Hub</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
+                <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Nama Hub/Brand <sup style="color:red"> *Wajib</sup></label>
+                            <input type="text" class="form-control" name="nama_hub" placeholder="Masukan Nama Hub/Brand" required>
+                        </div>
+                </div>
             <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label>Nama Depan</label>
-                        <input type="text" class="form-control" name="nama_depan" placeholder="Masukan Nama depan" required>
+                        <label>Nama Depan <sup style="color:red"> *Wajib</sup></label>
+                        <input type="text" class="form-control" name="nama_depan" placeholder="Nama Depan" required>
                     </div>
                     <div class="form-group col-md-6">
-                        <label>Nama Belakang</label>
-                        <input type="text" class="form-control" name="nama_belakang" placeholder="Masukan Nama belakang" required>
+                        <label>Nama Belakang <sup style="color:red"> *Wajib</sup></label>
+                        <input type="text" class="form-control" name="nama_belakang" placeholder="Nama Belakang" required>
                     </div>
             </div>
             <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label>Email</label>
+                        <label>Email <sup style="color:red"> *Wajib</sup></label>
                         <input type="email" class="form-control" name="email" placeholder="Masukan Email" required>
                     </div>
                     <div class="form-group col-md-6">
-                        <label>Nomor Ponsel</label>
+                        <label>Nomor Ponsel <sup style="color:red"> *Wajib</sup></label>
                         <input type="number" name="nomor_ponsel" class="form-control" placeholder="Masukan Nomor Ponsel" required>
                     </div>
             </div>
             <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label>Alamat</label>
+                        <label>Alamat <sup style="color:red"> *Wajib</sup></label>
                         <input type="text" class="form-control" name="alamat" placeholder="Masukan Alamat" required>
                     </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label>Provinsi</label>
-                        <select class="form-control" name="provinsi" id="selectProvinsi" required>
-                        <option selected value="0">Pilih Provinsi</option>
+                    <label>Provinsi <sup style="color:red"> *Wajib</sup></label>
+                        <select class="form-control" name="province_id" id="selectProvinsi" required>
+                        <option selected value="">Pilih Provinsi</option>
                             @php
                             $province = province();
                             $province = json_decode($province,true);
@@ -124,34 +130,35 @@
                         </select>
                 </div>
                 <div class="form-group col-md-6">
-                        <label>Kota atau Kabupaten</label>
-                            <select class="form-control" name="kota_kabupaten" id="selectKotaKab" required disabled="disabled">
-                                <option selected value="0">Pilih Kota/Kabupaten</option>
+                        <label>Kota atau Kabupaten <sup style="color:red"> *Wajib</sup></label>
+                            <select class="form-control" name="city_id" id="selectKotaKab" required disabled="disabled">
+                                <option selected value="">Pilih Kota/Kabupaten</option>
                             </select>
                     </div>
               
             </div>
             <div class="form-row">
             <div class="form-group col-md-6">
-                <label>Kecamatan</label>
-                    <select class="form-control" name="kecamatan" id="selectKecamatan" required disabled="disabled">
-                        <option selected value="0">Pilih Kecamatan</option>
+                <label>Kecamatan <sup style="color:red"> *Wajib</sup></label>
+                    <select class="form-control" name="kecamatan_id" id="selectKecamatan" required disabled="disabled">
+                        <option selected value="">Pilih Kecamatan</option>
                     </select>
             </div>
             <div class="form-group col-md-6">
-                    <label>Kelurahan atau Desa</label>
-                        <select class="form-control" name="kelurahan_desa" id="selectKelurahanDesa" required disabled="disabled">
+                    <label>Kode Pos</label>
+                    <input type="text" id="kodepos" name="kodepos" class="form-control">
+                       {{--  <select class="form-control" name="kelurahan_desa" id="selectKelurahanDesa" required disabled="disabled">
                             <option selected value="0">Pilih Kelurahan/Desa</option>
-                        </select>
+                        </select> --}}
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label>Password</label>
+                        <label>Password <sup style="color:red"> *Wajib</sup></label>
                         <input type="password" class="form-control" name="password" placeholder="Password" required>
                     </div>
                     <div class="form-group col-md-6">
-                        <label>Ulangi Password</label>
+                        <label>Ulangi Password <sup style="color:red"> *Wajib</sup></label>
                         <input type="password" name="password_confirmation" class="form-control" placeholder="Ulangi Password" required>
                     </div>
                 </div>
@@ -173,17 +180,20 @@ $(document).ready(function () {
     let optionSelected = $("option:selected", this);
     let valueSelected = this.value;
     console.log(valueSelected)
-    if(valueSelected != 0){
+    if(valueSelected){
         $("#selectKotaKab").prop('disabled', false);
         $("#selectKotaKab option").remove();
+        $("#selectKecamatan").prop('disabled', true);
+        $("#selectKecamatan option").remove();
+        $('#selectKecamatan').append($('<option>', {value:'', text:'Pilih Kecamatan'}, '</option>'));
 
     }else{
         $("#selectKotaKab").prop('disabled', true);
         $("#selectKotaKab option").remove();
-        $('#selectKotaKab').append($('<option>', {value:'0', text:'Pilih Kota/Kabupaten'}, '</option>'));
+        $('#selectKotaKab').append($('<option>', {value:'', text:'Pilih Kota/Kabupaten'}, '</option>'));
         $("#selectKecamatan").prop('disabled', true);
         $("#selectKecamatan option").remove();
-        $('#selectKecamatan').append($('<option>', {value:'0', text:'Pilih Kecamatan'}, '</option>'));
+        $('#selectKecamatan').append($('<option>', {value:'', text:'Pilih Kecamatan'}, '</option>'));
     }
 
     $.ajax({
@@ -205,7 +215,7 @@ $(document).ready(function () {
     let valueSelected = this.value;
 
     console.log(valueSelected)
-    if(valueSelected != 0){
+    if(valueSelected != ''){
         $("#selectKecamatan").prop('disabled', false);
         $("#selectKecamatan option").remove();
 
@@ -216,23 +226,19 @@ $(document).ready(function () {
     }
 
     $.ajax({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        contentType: "application/json",
-        dataType: "json",
-        type: 'GET',
-        url: "/kecamatan/" + valueSelected,
-        success: function (results) {
-          console.log(results);
-          $.each( results['data'], function(index, data) {
-                $('#selectKecamatan').append($('<option>', {value:data['id'], text:data['name']}, '</option>'));
+          type: "GET",
+          url : "{{ url('kecamatans') }}/" + valueSelected,
+          dataType : "JSON",
+          success:function(results){
+            console.log(results)
+            $.each( results['rajaongkir']['results'], function(index, data) {
+                $('#selectKecamatan').append($('<option>', { value:data['subdistrict_id'], text:data['subdistrict_name']}, '</option>'));
            })
+
           }
-
-      });
+        });
     });
-
+/* 
     $('select#selectKecamatan').on('change', function (e) {
     let optionSelected = $("option:selected", this);
     let valueSelected = this.value;
@@ -264,7 +270,7 @@ $(document).ready(function () {
           }
 
       });
-    });
+    }); */
 
     $("button#showModalMitra").click(function () {
             var nama = $(this).data('nama');

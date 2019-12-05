@@ -20,10 +20,10 @@ class CreateAlamatsTable extends Migration
             $table->integer('jenis_alamat_id')->unsigned();
             $table->string('nama_penerima');
             $table->string('nohp_penerima');
-            $table->string('provinsi');
-            $table->string('kota_kabupaten');
-            $table->string('kecamatan');
-            $table->string('kelurahan_desa');
+            $table->string('province_id');
+            $table->string('city_id');
+            $table->string('kecamatan_id');
+            $table->integer('kodepos')->unsigned();
 
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

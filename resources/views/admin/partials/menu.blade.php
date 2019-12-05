@@ -60,7 +60,7 @@
         <a class='sidebar-link'href="{{ route('admin-panel.showMember') }}" style="font-size:14px;margin-left:10px;">Member</a>
       </li>                 
       <li>
-        <a class='sidebar-link'  href="{{ route('admin-panel.showMitra') }}"  style="font-size:14px;margin-left:10px;">Mitra</a>
+        <a class='sidebar-link'  href="{{ route('admin-panel.showMitra') }}"  style="font-size:14px;margin-left:10px;">Hub</a>
       </li>
     </ul>
   </li>

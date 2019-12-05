@@ -15,13 +15,13 @@ class Alamat extends Model
         'jenis_alamat_id',
         'nama_penerima',
         'nohp_penerima',
-        'provinsi_id',
-        'kota_kabupaten_id',
+        'province_id',
+        'city_id',
         'kecamatan_id',
-        'kelurahan_desa_id'
+        'kodepos'
     ];
 
-    public function provinsi(){
+   /*  public function provinsi(){
         return $this->hasOne('App\Models\Provinsi', 'id', 'provinsi_id');
     }
     public function kota_kabupatens(){
@@ -32,5 +32,5 @@ class Alamat extends Model
     }
     public function kelurahan_desa(){
         return $this->hasOne('App\Models\KelurahanDesa', 'id', 'kelurahan_desa_id');
-    }
+    } */
 }

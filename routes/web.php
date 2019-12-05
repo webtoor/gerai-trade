@@ -36,6 +36,9 @@ Route::get('/update-app', function () {
     Route::get('city/{id}',function($id){
 	return city($id);
     });
+    Route::get('kecamatans/{city_id}',function($city_id){
+	return kecamatan($city_id);
+    });
 
     //ADMIN PANEL
     Route::group(['prefix'=> 'admin-panel', 'as'=> 'admin-panel' . '.', 'middleware' => ['admin']], function(){

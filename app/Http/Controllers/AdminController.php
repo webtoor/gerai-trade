@@ -57,7 +57,7 @@ class AdminController extends Controller
       
         try {
             $mitra = User_role::with(['user', 'alamat' => function ($query) {
-                $query->with('provinsi', 'kota_kabupatens', 'kecamatans', 'kelurahan_desa')->where(['jenis_alamat_id' => '1']);
+                $query->where(['jenis_alamat_id' => '1']);
             } ])->where('role_id', '2')->OrderBy('id', 'desc')->get();
             $provinsi = province();
             return view('admin.dashboard.mitra', ['mitra' => $mitra, 'provinsi' => $provinsi]);
@@ -69,20 +69,22 @@ class AdminController extends Controller
 
     public function addMitra(Request $request){
         $data = $request->validate([
+            'nama_hub' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:15'],
             'nama_depan' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:15'],
             'nama_belakang' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
-            'nomor_ponsel' => ['required', 'string','min:11', 'max:14', 'unique:users'],
-            'alamat' => ['required'],
-            'provinsi' => ['required'],
-            'kota_kabupaten' => ['required'],
-            'kecamatan' => ['required'],
-            'kelurahan_desa' => ['required'],
+            'nomor_ponsel' => ['required', 'string','min:10', 'max:14', 'unique:users'],
             'password' => ['required', 'string', 'min:3', 'confirmed'],
+            'alamat' => ['required'],
+            'province_id' => ['required'],
+            'city_id' => ['required'],
+            'kecamatan_id' => ['required'],
+            'kodepos' => ['nullable']
         ]); 
 
         try {
             $result = User::create([
+                'nama_hub' => $data['nama_hub'],
                 'nama_depan' => $data['nama_depan'],
                 'nama_belakang' => $data['nama_belakang'],
                 'nomor_ponsel' => $data['nomor_ponsel'],
@@ -100,10 +102,10 @@ class AdminController extends Controller
                 'alamat' => $data['alamat'],
                 'user_id' => $result->id,
                 'jenis_alamat_id' => '1',
-                'provinsi_id' => $data['provinsi'],
-                'kota_kabupaten_id' => $data['kota_kabupaten'],
-                'kecamatan_id' => $data['kecamatan'],
-                'kelurahan_desa_id' => $data['kelurahan_desa']
+                'province_id' => $data['province_id'],
+                'city_id' => $data['city_id'],
+                'kecamatan_id' => $data['kecamatan_id'],
+                'kodepos' => $data['kodepos']
             ]);
             return back()->withSuccess(trans('Anda Berhasil menambahkan mitra')); 
         } catch (\Exception $e) {
