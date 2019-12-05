@@ -232,18 +232,23 @@
                                                                 {{ \Illuminate\Support\Str::limit($produk_unggulans->produk->nama_produk, 26)}}
                                                             </h6>
                                                             <!-- Text -->
-                                                            <div class="price">
+                                                            <div class="price" style="margin-top:-10px;">
                                                                     <h6>Rp {{number_format($produk_unggulans->produk->harga,0, ".", ".")}}</h6>
                                                                 </div>
-                                                                <div class="price">
-                                                                <h6>{{$produk_unggulans->produk->user->alamat}}</h6>
+                                                                <div>
+                                                                <h6 style="color:#90a4ae">{{$produk_unggulans->produk->user->alamat->city_name}}</h6>
                                                                     </div>
                                                             </a>
-                                                            {{-- <h6 style="color:#AEAEAE;">Jakarta</h6> --}}
 
                                                             
                                                             <div class="card-footer px-1" style="background:white">
-                                                                @if(Auth::user() && (Auth::user()->role->role_id != '2'))
+                                                                <span class="float-left">
+                                                                        <?php $nr = 2;?>
+                                                                        @for($i = 0; $i < 5; $i++)
+                                                                            <span style="color:#ffc200"><i class="{{ $nr <= $i ? 'far fa-star' : 'fas fa-star' }}" aria-hidden="true"></i></span>
+                                                                        @endfor
+
+                                                                </span>
 
                                                                 <span class="float-right">
                                                                         
@@ -286,7 +291,6 @@
                                                                     @endif 
 
                                                                 </span>
-                                                                @endif
 
                                                             </div>
 

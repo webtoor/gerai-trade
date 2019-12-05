@@ -13,12 +13,12 @@
                 <tr>
                     <th>Nama Hub</th>
                     <th width="150px">Foto Produk</th>
-                    <th>Nama Produk</th>
+                    <th width="200px">Nama Produk</th>
                     <th>Stok</th>
                     <th>Harga Dasar</th>
                     <th>Harga TRADE</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    <th width="100px">Action</th>
                 </tr>
             </thead>
             <tbody>

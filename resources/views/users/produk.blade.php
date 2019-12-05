@@ -345,10 +345,10 @@
             <div class="col-lg-5 offset-lg-1">
 					<div class="s_product_text">
             <h3>{{$produk_detail->nama_produk}}</h3>
-            <?php $nr = 6;?>
-            <div class="rating">
+            <?php $nr = 2;?>
+            <div class="tests">
                 @for($i = 0; $i < 5; $i++)
-                    <span><i class="fa fa-star{{ $nr <= $i ? '-o' : '' }}"></i></span>
+                    <span style="color:#ffc200"><i class="{{ $nr <= $i ? 'far fa-star' : 'fas fa-star' }}" aria-hidden="true"></i></span>
                 @endfor
             </div>
 						<h2>Rp {{number_format($produk_detail->harga,0, ".", ".")}}</h2>

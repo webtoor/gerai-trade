@@ -18,7 +18,7 @@
                     <th>Nomor Ponsel</th>
                     <th>Join</th>
                     <th>Action</th>
-                </tr>
+               </tr>
             </thead>
             <tbody>
                 <?php $i = 1; ?>
@@ -40,7 +40,7 @@
                                 </button>
                                 </li>
                                 <li class="list-inline-item">
-                                        <a href="{{route('admin-panel.editHub', ['user_id' => $mitras->user->id])}}" title="{{ trans('Edit Hub') }}" class="btn btn-secondary px-3 btn-sm">
+                                        <a href="{{route('admin-panel.editHub', ['user_id' => $mitras->user->id])}}" title="{{ trans('Edit Hub') }}" class="btn btn-info px-3 btn-sm">
                                             <span class="ti-pencil"></span>
                                         </a>
                                     </li>

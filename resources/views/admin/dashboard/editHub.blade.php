@@ -106,10 +106,10 @@
     
 </div>
 <div class="text-right">
-<input type="text" name="alamat_id" value="{{$hub->alamat->id}}">
-<input type="text" name="province_name" id="province_name" value="{{$hub->alamat->province_name}}">
-<input type="text" name="city_name" id="city_name" value="{{$hub->alamat->city_name}}">
-<input type="text" name="kecamatan_name" id="kecamatan_name" value="{{$hub->alamat->kecamatan_name}}">
+<input type="hidden" name="alamat_id" value="{{$hub->alamat->id}}">
+<input type="hidden" name="province_name" id="province_name" value="{{$hub->alamat->province_name}}">
+<input type="hidden" name="city_name" id="city_name" value="{{$hub->alamat->city_name}}">
+<input type="hidden" name="kecamatan_name" id="kecamatan_name" value="{{$hub->alamat->kecamatan_name}}">
         <button type="submit" class="btn btn-primary btn-md right">Submit</button>
 
 </div>

@@ -49,7 +49,7 @@
                                         </button>
                                         </li>
                                     <li class="list-inline-item">
-                                        <a style="border-radius:45%;" href="{{route('admin-panel.edit-blog', ['blog_id' => $blogs->id])}}" title="{{ trans('Edit Cerita') }}" class="btn btn-secondary px-3 btn-sm">
+                                        <a style="border-radius:45%;" href="{{route('admin-panel.edit-blog', ['blog_id' => $blogs->id])}}" title="{{ trans('Edit Cerita') }}" class="btn btn-info px-3 btn-sm">
                                             <span class="ti-pencil"></span>
                                         </a>
                                     </li>
