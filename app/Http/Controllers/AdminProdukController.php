@@ -16,14 +16,14 @@ use App\Models\ProdukImage;
 class AdminProdukController extends Controller
 {
     public function index(){
-        $produk = Produk::with('produk_image')->get();
+        $produk = Produk::with('user','produk_image')->orderBy('id', 'desc')->get();
         return view('admin.dashboard.produk.index', ['produk' => $produk]);
     }
 
     public function add(){
         $kategori = Kategori::all();
-        $mitra = User_role::where('role_id', 2)->get();
-        return view('admin.dashboard.produk.tambahProduk', ['kategori' => $kategori, 'mitra' => $mitra]);
+        $hub = User_role::where('role_id', 2)->get();
+        return view('admin.dashboard.produk.tambahProduk', ['kategori' => $kategori, 'hub' => $hub]);
     }
 
     public function getAjaxSubkategori($kategori_id){
@@ -36,34 +36,37 @@ class AdminProdukController extends Controller
     }
     public function insert(Request $request){
         $data = $request->validate([
-            'mitra_id' => ['required'],
+            'hub_id' => ['required'],
             'kategori_id' => ['required'],
             'subkategori_id' => ['nullable'],
             'nama_produk' => ['required'], 
             'deskripsi' => ['required'], 
             'stok' => ['required', 'numeric'],
             'berat' => ['required','numeric'],
-            'harga' => ['required'],
-            'link_tokped' => ['nullable'],
+            'harga_dasar' => ['required', 'numeric'],
+            'harga' => ['required', 'numeric'],
+          /*   'link_tokped' => ['nullable'],
             'link_shopee' => ['nullable'],
-            'link_bukalapak' => ['nullable'],
+            'link_bukalapak' => ['nullable'], */
             'image_produk' => 'required|array|min:1|max:3',
             'image_produk.*' => 'file|mimes:jpeg,jpg,png|max:8000'
         ]); 
         
         try {
             $post = Produk::create([
-            'mitra_id' => $data['mitra_id'],
+            'hub_id' => $data['hub_id'],
             'kategori_id' => $data['kategori_id'],
             'subkategori_id' => $data['subkategori_id'],
             'nama_produk' => $data['nama_produk'],
             'deskripsi' => $data['deskripsi'],
             'stok' => $data['stok'],
             'berat' => $data['berat'],
+            'harga_dasar' => $data['harga_dasar'],
             'harga' => $data['harga'],
-            'link_tokped' => $data['link_tokped'],
+            'status' => '1'
+       /*      'link_tokped' => $data['link_tokped'],
             'link_shopee' => $data['link_shopee'],
-            'link_bukalapak' => $data['link_bukalapak'],
+            'link_bukalapak' => $data['link_bukalapak'], */
 
         ]);
         
@@ -101,17 +104,19 @@ class AdminProdukController extends Controller
     public function updateProduk(Request $request, $produk_id){
         
         $data = $request->validate([
-            'mitra_id' => ['required'],
+            'hub_id' => ['required'],
             'kategori_id' => ['required'],
             'subkategori_id' => ['nullable'],
             'nama_produk' => ['required'], 
             'deskripsi' => ['required'], 
             'stok' => ['required', 'numeric'],
             'berat' => ['required','numeric'],
+            'harga_dasar' => ['required', 'numeric'],
             'harga' => ['required'],
-            'link_tokped' => ['nullable'],
+            'status' => 'required'
+           /*  'link_tokped' => ['nullable'],
             'link_shopee' => ['nullable'],
-            'link_bukalapak' => ['nullable'],
+            'link_bukalapak' => ['nullable'], */
         ]); 
         
         try {

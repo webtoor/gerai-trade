@@ -120,18 +120,39 @@ class AdminController extends Controller
     }
 
     public function updateHub(Request $request, $hub_id){
-        return $data = $request->validate([
+      $data = $request->validate([
             'nama_hub' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:15'],
             'nama_depan' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:15'],
             'nama_belakang' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:users,email,'.$hub_id ],
-            'nomor_ponsel' => ['required', 'string','min:10', 'max:14', 'unique:users'.$hub_id ],
+            'nomor_ponsel' => ['required', 'string','min:10', 'max:14', 'unique:users,nomor_ponsel,'.$hub_id ],
             'alamat' => ['required'],
             'province_id' => ['required'],
             'city_id' => ['required'],
             'kecamatan_id' => ['required'],
             'kodepos' => ['nullable']
         ]); 
+        try {
+            User::findOrFail($hub_id)->update([
+                'nama_hub' => $data['nama_hub'],
+                'nama_depan' => $data['nama_depan'],
+                'nama_belakang' => $data['nama_belakang'],
+                'nomor_ponsel' => $data['nomor_ponsel'],
+                'email' => $data['email'],
+            ]);
+            Alamat::where(['user_id' => $hub_id, 'jenis_alamat_id' => '1'])->update([
+                'alamat' => $data['alamat'],
+                'province_id' => $data['province_id'],
+                'city_id' => $data['city_id'],
+                'kecamatan_id' => $data['kecamatan_id'],
+                'kodepos' => $data['kodepos']
+            ]);
+            return redirect()->route('admin-panel.showMitra')->withSuccess(trans('Anda Berhasil mengedit Hub')); 
+        } catch (\Throwable $th) {
+        //throw $th;
+        }
+       
+
     }
 
     public function deleteMitra($user_id){

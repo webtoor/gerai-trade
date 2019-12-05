@@ -14,7 +14,7 @@ class Produk extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'mitra_id',
+        'hub_id',
         'kategori_id',
         'subkategori_id',
         'nama_produk',
@@ -22,8 +22,10 @@ class Produk extends Model
         'deskripsi',
         'stok',
         'berat',
+        'harga_dasar',
         'harga',
         'rating',
+        'status',
         'link_tokped',
         'link_shopee',
         'link_bukalapak'
@@ -40,6 +42,10 @@ class Produk extends Model
 
     public function produk_image(){
         return $this->hasMany('App\Models\ProdukImage', 'product_id', 'id');
+    }
+
+    public function user(){
+        return $this->belongsTo('App\Models\User', 'hub_id', 'id');
     }
 
     public function kategori(){

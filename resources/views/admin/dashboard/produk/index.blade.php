@@ -11,10 +11,13 @@
         <table id="dataTable" class="table table-bordered" cellspacing="0" width="100%">
             <thead class="thead-light">
                 <tr>
+                    <th>Nama Hub</th>
                     <th width="150px">Foto Produk</th>
                     <th>Nama Produk</th>
                     <th>Stok</th>
-                    <th>Harga</th>
+                    <th>Harga Dasar</th>
+                    <th>Harga TRADE</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -23,6 +26,7 @@
                    
               
                 <tr>
+                        <td>{{$produks->user->nama_hub}}</td>
                     <td> 
                         @if(count($produks->produk_image))
                         <img src="{{ asset('storage/' .$produks->produk_image[0]->image_path)}}" style="height:150px; width: 150px;">
@@ -33,7 +37,16 @@
                     </td>
                     <td>{{$produks->nama_produk}}</td>
                     <td>{{$produks->stok}}</td>
+                    <td>Rp {{number_format($produks->harga_dasar,0, ".", ".")}}</td>
                     <td>Rp {{number_format($produks->harga,0, ".", ".")}}</td>
+                    <td>
+                    @if($produks->status)
+                    Aktif
+                    @else
+                    Non-Aktif
+                    @endif    
+                    </td>
+
                     <td>
                             <ul class="list-inline">
                                     <li class="list-inline-item">

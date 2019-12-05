@@ -19,20 +19,27 @@
         <div class="masonry-sizer col-md-6"></div>
         <div class="masonry-item col-md-6">
 <div class="bgc-white p-20 bd">
-  <form action=" #" method="POST" enctype="multipart/form-data">
     {!! Form::open([
         'url'  => route('admin-panel.update-produk', $produk->id), 
         'method' => 'PUT',
         ]) !!}  
 
+
+<div class="form-group">
+        <label>Status</label>
+        <select class="form-control" name="status" id="subkategori">
+            <option value="0" {{ ( $produk->status == 0) ? 'selected' : '' }}>Non-Aktif</option>
+            <option value="1" {{ ( $produk->status == 1) ? 'selected' : '' }}>Aktif</option>
+        </select>
+</div>
     <div class="form-group">
-            <label>Mitra <sup style="color:red"> *Wajib</sup></label>
-            <select class="form-control" name="mitra_id" id="mitra_id" required>
+            <label>Hub <sup style="color:red"> *Wajib</sup></label>
+            <select class="form-control" name="hub_id" id="mitra_id" required>
                 @foreach ($mitra as $mitraes)
                 @if(($mitraes->user->id) == ($produk->mitra_id))
-                <option value="{{$mitraes->user->id}}" selected="selected">{{$mitraes->user->nama_depan}} {{$mitraes->user->nama_belakang}}</option>
+                <option value="{{$mitraes->user->id}}" selected="selected">{{$mitraes->user->nama_hub}}</option>
                 @else
-                <option value="{{$mitraes->user->id}}">{{$mitraes->user->nama_depan}} {{$mitraes->user->nama_belakang}}</option>
+                <option value="{{$mitraes->user->id}}">{{$mitraes->user->nama_hub}}</option>
                 @endif
                 @endforeach
             </select>
@@ -78,12 +85,16 @@
                             <label>Berat Produk/Gram <sup style="color:red"> *Wajib *Hanya Angka</sup></label> 
                     <input type="number" class="form-control" name="berat" id="berat_produk" aria-describedby="emailHelp" value="{{$produk->berat}}" required>
                         </div>
-                 <div class="form-group">
-                        <label>Harga Produk<sup style="color:red"> *Wajib *Hanya Angka</sup></label>
-                        <input type="number" class="form-control" name="harga" id="harga_produk" aria-describedby="emailHelp" value="{{$produk->harga}}" required>
-                    </div>
+                        <div class="form-group">
+                                <label>Harga Dasar<sup style="color:red"> *Wajib *Hanya Angka</sup></label>
+                                <input type="number" class="form-control" name="harga_dasar" id="harga_dasar" aria-describedby="emailHelp" value="{{$produk->harga_dasar}}" required>
+                            </div>
+                     <div class="form-group">
+                            <label>Harga TRADE<sup style="color:red"> *Wajib *Hanya Angka</sup></label>
+                            <input type="number" class="form-control" name="harga" id="harga_produk" aria-describedby="emailHelp" value="{{$produk->harga}}" required>
+                        </div>
 
-                <div class="form-group">
+              {{--   <div class="form-group">
                         <label>Link Tokopedia</label>
                         <input type="text" class="form-control" name="link_tokped" aria-describedby="emailHelp" value="{{$produk->link_tokped}}">
                       </div>
@@ -95,7 +106,7 @@
                 <div class="form-group">
                         <label>Link BukaLapak</label>
                         <input type="text" class="form-control" name="link_bukalapak" aria-describedby="emailHelp" value="{{$produk->link_bukalapak}}">
-                    </div>
+                    </div> --}}
 
                 <button type="submit" id="submit" class="btn btn-primary">Submit</button>
 

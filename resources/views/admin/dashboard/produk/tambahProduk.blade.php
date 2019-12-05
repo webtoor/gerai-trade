@@ -19,11 +19,11 @@
   {{ csrf_field() }}
 
     <div class="form-group">
-            <label>Mitra <sup style="color:red"> *Wajib</sup></label>
-            <select class="form-control" name="mitra_id" id="mitra_id" required>
-                <option value="">Pilih Mitra</option>
-                @foreach ($mitra as $mitraes)
-            <option value="{{$mitraes->user->id}}">{{$mitraes->user->nama_depan}} {{$mitraes->user->nama_belakang}}</option>
+            <label>Hub <sup style="color:red"> *Wajib</sup></label>
+            <select class="form-control" name="hub_id" id="hub_id" required>
+                <option value="">Pilih Hub</option>
+                @foreach ($hub as $hubs)
+            <option value="{{$hubs->user->id}}">{{$hubs->user->nama_hub}}</option>
                 @endforeach
             </select>
         </div>
@@ -58,9 +58,13 @@
                             <label>Berat Produk/Gram <sup style="color:red"> *Wajib *Hanya Angka</sup></label> 
                             <input type="number" class="form-control" name="berat" id="berat_produk" aria-describedby="emailHelp" placeholder="Masukan Berat Produk/Gram" required>
                         </div>
+                    <div class="form-group">
+                            <label>Harga Dasar<sup style="color:red"> *Wajib *Hanya Angka</sup></label>
+                            <input type="number" class="form-control" name="harga_dasar" id="harga_dasar" aria-describedby="emailHelp" placeholder="Masukan Harga Produk" required>
+                        </div>
                  <div class="form-group">
-                        <label>Harga Produk<sup style="color:red"> *Wajib *Hanya Angka</sup></label>
-                        <input type="number" class="form-control" name="harga" id="harga_produk" aria-describedby="emailHelp" placeholder="Masukan Harga Produk" required>
+                        <label>Harga TRADE<sup style="color:red"> *Wajib *Hanya Angka</sup></label>
+                        <input type="number" class="form-control" name="harga" id="harga_produk" aria-describedby="emailHelp" placeholder="Masukan Harga TRADE" required>
                     </div>
                     <div class="form-group">
                           <label>Pilih Foto Produk<sup style="color:red"> *Wajib *Maksimal 3</sup></label>
@@ -69,19 +73,7 @@
                          
                         </div>
 
-                <div class="form-group">
-                        <label>Link Tokopedia</label>
-                        <input type="text" class="form-control" name="link_tokped" aria-describedby="emailHelp" placeholder="Masukan Link Produk di Tokopedia">
-                      </div>
-                <div class="form-group">
-                    <label>Link Shopee</label>
-                    <input type="text" class="form-control" name="link_shopee" aria-describedby="emailHelp" placeholder="Masukan Link Produk di Shopee">
-                </div>
-
-                <div class="form-group">
-                        <label>Link BukaLapak</label>
-                        <input type="text" class="form-control" name="link_bukalapak" aria-describedby="emailHelp" placeholder="Masukan Link Produk di Bukalapak">
-                    </div>
+             
 
                 <button type="submit" id="submit" class="btn btn-primary">Submit</button>
 

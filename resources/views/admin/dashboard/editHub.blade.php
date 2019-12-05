@@ -8,11 +8,10 @@
 <br>
 
 <div class="bgc-white p-20 bd">
-  <form action=" #" method="POST" enctype="multipart/form-data">
-   {{--  {!! Form::open([
-        'url'  => #,
+    {!! Form::open([
+        'url'  => route('admin-panel.updateHub', $hub->id), 
         'method' => 'PUT',
-        ]) !!}   --}}
+        ]) !!}  
 
 <div class="form-row">
         <div class="form-group col-md-12">
@@ -103,9 +102,6 @@
 <div class="form-group col-md-6">
     <label>Kode Pos</label>
 <input type="text" id="kodepos" name="kodepos" class="form-control" value="{{$hub->alamat->kodepos}}">
-       {{--  <select class="form-control" name="kelurahan_desa" id="selectKelurahanDesa" required disabled="disabled">
-            <option selected value="0">Pilih Kelurahan/Desa</option>
-        </select> --}}
     </div>
     
 </div>
@@ -115,7 +111,7 @@
 </div>
 
 </div>
-{{-- {!! Form::close() !!}   --}}    
+{!! Form::close() !!}      
 
 @endsection
 @section('js')
