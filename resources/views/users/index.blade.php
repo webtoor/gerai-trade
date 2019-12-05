@@ -240,7 +240,7 @@
                                                                     </div>
                                                             </a>
 
-                                                            
+                                                            @guest
                                                             <div class="card-footer px-1" style="background:white">
                                                                 <span class="float-left">
                                                                         <?php $nr = 2;?>
@@ -293,7 +293,73 @@
                                                                 </span>
 
                                                             </div>
-
+                                                            @else
+                                                            @if(Auth::user()->role->role_id == '2')
+                                                            <div class="card-footer px-1" style="background:white">
+                                                                    <span class="float-left">
+                                                                            <?php $nr = 2;?>
+                                                                            @for($i = 0; $i < 5; $i++)
+                                                                                <span style="color:#ffc200"><i class="{{ $nr <= $i ? 'far fa-star' : 'fas fa-star' }}" aria-hidden="true"></i></span>
+                                                                            @endfor
+    
+                                                                    </span>
+                                                                </div>
+                                                            @elseif(Auth::user()->role->role_id == '1')
+                                                            <div class="card-footer px-1" style="background:white">
+                                                                    <span class="float-left">
+                                                                            <?php $nr = 2;?>
+                                                                            @for($i = 0; $i < 5; $i++)
+                                                                                <span style="color:#ffc200"><i class="{{ $nr <= $i ? 'far fa-star' : 'fas fa-star' }}" aria-hidden="true"></i></span>
+                                                                            @endfor
+    
+                                                                    </span>
+    
+                                                                    <span class="float-right">
+                                                                            
+                                                                        <a href="{{ url('/cart-shop/'.$produk_unggulans->produk->id) }}" class="material-tooltip-main"
+                                                                            data-toggle="tooltip" data-placement="top"
+                                                                            title="Masukan keranjang">
+                                                                            <i class="fas fa-shopping-cart grey-text ml-3"></i>
+                                                                        </a>
+    
+                                                                        @if(count(Cart::instance('wishlist')->content()) > 0)
+                                                                        <?php $checks = null ?>
+            
+                                                                        @foreach(Cart::instance('wishlist')->content() as $row)
+            
+                                                                        @if($produk_unggulans->produk->id == $row->id)
+                                                                        <?php $checks = 1 ?>
+            
+                                                                            <a href="{{ url('/delete-wishlist/'.$row->rowId) }}" class="material-tooltip-main"
+                                                                                data-toggle="tooltip" data-placement="top"
+                                                                                title="Hapus Wishlist">
+                                                                                <i class="fas fa-heart pink-text ml-3"></i>
+                                                                                </a>
+                                                                       
+                                                                        @endif
+                                                                        @endforeach
+            
+                                                                        @if($checks == null)
+                                                                        <a href="{{ url('/cart-wishlist/'.$produk_unggulans->produk->id) }}" class="material-tooltip-main"
+                                                                            data-toggle="tooltip" data-placement="top"
+                                                                            title="Tambah Wishlist">
+                                                                            <i class="fas fa-heart grey-text ml-3"></i>
+                                                                        </a>
+                                                                        @endif
+                                                                        @else
+                                                                        <a href="{{ url('/cart-wishlist/'.$produk_unggulans->produk->id) }}" class="material-tooltip-main"
+                                                                            data-toggle="tooltip" data-placement="top"
+                                                                            title="Tambah Wishlist">
+                                                                            <i class="fas fa-heart grey-text ml-3"></i>
+                                                                        </a>
+                                                                        @endif 
+    
+                                                                    </span>
+    
+                                                                </div>
+                                                            @endif
+                                                            
+                                                            @endguest
                                                         </div>
                                                     </div>
                                                     

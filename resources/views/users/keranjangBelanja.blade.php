@@ -19,8 +19,7 @@
             
             <div id="basket" class="col-lg-8">
               <div class="box mt-0 pb-0 no-horizontal-padding">
-                <form action="{{ url('cart/update') }}" method="POST">
-                  {{ @csrf_field() }}
+               
                   <div class="table-responsive">
                     <table class="table">
                       <thead>
@@ -33,10 +32,12 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <?php foreach(Cart::content() as $row) :?>
+                        <?php foreach(Cart::instance('default')->content() as $row) :?>
                         <tr>
                           <td><a href="{{route('produk-detail', ['slug_produk' => $row->options->slug])}}" style="color:#3f51b5; font-weight:bold"><?php echo $row->name; ?></a></td>
                           <td>
+                              <form action="{{ url('cart/update') }}" method="POST">
+                                {{ @csrf_field() }}
                             <input type="hidden" name="rowid" value="{{ $row->rowId }}">
                             <input type="number" min="0" value="<?php echo $row->qty; ?>" class="form-control" name="qty" style="width:60px; height:25px;">
                           </td>
@@ -44,6 +45,8 @@
                           <td>
                             <button style="border: none;background: none;" type="submit"><i class="fas fa-sync-alt green-text"></i>
                             </button>
+                          </form>
+
                           </td>
                           <td>
                              <a href="{{ url('/cart-delete/'.$row->rowId) }}"><i class="fa fa-trash red-text" aria-hidden="true"></i>
@@ -51,7 +54,6 @@
                           </td>
                         </tr>
                         <?php endforeach;?>
-                         </form>
                       </tbody>
                       <tfoot>
                        
