@@ -57,6 +57,7 @@ class AdminBlogController extends Controller
             'user_id' => ['required'],
             'judul' => ['required'],
             'konten' => ['required'],
+            'status' => 'required'
         ]); 
         try {
             $post = Blog::findOrFail($blog_id);
@@ -64,7 +65,8 @@ class AdminBlogController extends Controller
             $post->update([
                 'user_id' => $data['user_id'],
                 'judul' => $data['judul'],
-                'konten' => $data['konten']
+                'konten' => $data['konten'],
+                'status' => $data['status']
             ]);
             $newPost = $post->replicate();
     

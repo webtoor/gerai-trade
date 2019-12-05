@@ -24,6 +24,13 @@
             ]) !!}  
 
    
+<div class="form-group">
+    <label>Status</label>
+    <select class="form-control" name="status" id="subkategori">
+        <option value="0" {{ ( $blog->status == 0) ? 'selected' : '' }}>Non-Aktif</option>
+        <option value="1" {{ ( $blog->status == 1) ? 'selected' : '' }}>Aktif</option>
+    </select>
+</div>
                 <div class="form-group">
                   <label>Judul Cerita <sup style="color:red"> *Wajib</sup></label>
                 <input type="text" class="form-control" name="judul" id="judul" aria-describedby="emailHelp" value="{{$blog->judul}}" required>

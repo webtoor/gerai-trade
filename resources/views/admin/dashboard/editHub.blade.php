@@ -106,6 +106,10 @@
     
 </div>
 <div class="text-right">
+<input type="text" name="alamat_id" value="{{$hub->alamat->id}}">
+<input type="text" name="province_name" id="province_name" value="{{$hub->alamat->province_name}}">
+<input type="text" name="city_name" id="city_name" value="{{$hub->alamat->city_name}}">
+<input type="text" name="kecamatan_name" id="kecamatan_name" value="{{$hub->alamat->kecamatan_name}}">
         <button type="submit" class="btn btn-primary btn-md right">Submit</button>
 
 </div>
@@ -121,12 +125,19 @@ $(document).ready(function() {
     let optionSelected = $("option:selected", this);
     let valueSelected = this.value;
     console.log(valueSelected)
+
+    let provinceName = $("option:selected", this).text();
+    $("#province_name").val(provinceName);
     if(valueSelected){
         $("#selectKotaKab").prop('disabled', false);
         $("#selectKotaKab option").remove();
+        $('#selectKotaKab').append($('<option>', {value:'', text:'Pilih Kota/Kabupaten'}, '</option>'));
+        $("#city_name").val("");
+
         $("#selectKecamatan").prop('disabled', true);
         $("#selectKecamatan option").remove();
         $('#selectKecamatan').append($('<option>', {value:'', text:'Pilih Kecamatan'}, '</option>'));
+        $("#kecamatan_name").val("");
 
     }else{
         $("#selectKotaKab").prop('disabled', true);
@@ -154,15 +165,19 @@ $(document).ready(function() {
     $('select#selectKotaKab').on('change', function (e) {
     let optionSelected = $("option:selected", this);
     let valueSelected = this.value;
-
+    let cityName = $("option:selected", this).text();
+    $("#city_name").val(cityName);
     console.log(valueSelected)
     if(valueSelected != ''){
         $("#selectKecamatan").prop('disabled', false);
         $("#selectKecamatan option").remove();
+        $('#selectKecamatan').append($('<option>', {value:'', text:'Pilih Kecamatan'}, '</option>'));
+        $("#kecamatan_name").val("");
 
     }else{
         $("#selectKecamatan").prop('disabled', true);
         $('#selectKecamatan').append($('<option>', {value:'0', text:'Pilih Kecamatan'}, '</option>'));
+        $("#kecamatan_name").val("");
 
     }
 
@@ -178,6 +193,12 @@ $(document).ready(function() {
 
           }
         });
+    });
+
+    $('select#selectKecamatan').on('change', function (e) {
+        let kecamatanName = $("option:selected", this).text();
+        $("#kecamatan_name").val(kecamatanName);
+
     });
 });
     </script>

@@ -77,8 +77,11 @@ class AdminController extends Controller
             'password' => ['required', 'string', 'min:3', 'confirmed'],
             'alamat' => ['required'],
             'province_id' => ['required'],
+            'province_name' => ['required'],
             'city_id' => ['required'],
+            'city_name' => ['required'],
             'kecamatan_id' => ['required'],
+            'kecamatan_name' => ['required'],
             'kodepos' => ['nullable']
         ]); 
 
@@ -103,8 +106,11 @@ class AdminController extends Controller
                 'user_id' => $result->id,
                 'jenis_alamat_id' => '1',
                 'province_id' => $data['province_id'],
+                'province_name' => $data['province_name'],
                 'city_id' => $data['city_id'],
+                'city_name' => $data['city_name'],
                 'kecamatan_id' => $data['kecamatan_id'],
+                'kecamatan_name' => $data['kecamatan_name'],
                 'kodepos' => $data['kodepos']
             ]);
             return back()->withSuccess(trans('Anda Berhasil menambahkan mitra')); 
@@ -114,7 +120,7 @@ class AdminController extends Controller
     }
 
     public function editHub($user_id){
-        $hub = User::with('alamat')->where('id', $user_id)->first();
+       $hub = User::with('alamat')->where('id', $user_id)->first();
         /* return allcity(12) */;
         return view('admin.dashboard.editHub', ['hub' => $hub]);
     }
@@ -127,9 +133,13 @@ class AdminController extends Controller
             'email' => ['required', 'string', 'email', 'max:50', 'unique:users,email,'.$hub_id ],
             'nomor_ponsel' => ['required', 'string','min:10', 'max:14', 'unique:users,nomor_ponsel,'.$hub_id ],
             'alamat' => ['required'],
+            'alamat_id' => ['required'],
             'province_id' => ['required'],
+            'province_name' => ['required'],
             'city_id' => ['required'],
+            'city_name' => ['required'],
             'kecamatan_id' => ['required'],
+            'kecamatan_name' => ['required'],
             'kodepos' => ['nullable']
         ]); 
         try {
@@ -140,11 +150,14 @@ class AdminController extends Controller
                 'nomor_ponsel' => $data['nomor_ponsel'],
                 'email' => $data['email'],
             ]);
-            Alamat::where(['user_id' => $hub_id, 'jenis_alamat_id' => '1'])->update([
+            Alamat::where(['id' => $data['alamat_id'],'user_id' => $hub_id, 'jenis_alamat_id' => '1'])->update([
                 'alamat' => $data['alamat'],
                 'province_id' => $data['province_id'],
+                'province_name' => $data['province_name'],
                 'city_id' => $data['city_id'],
+                'city_name' => $data['city_name'],
                 'kecamatan_id' => $data['kecamatan_id'],
+                'kecamatan_name' => $data['kecamatan_name'],
                 'kodepos' => $data['kodepos']
             ]);
             return redirect()->route('admin-panel.showMitra')->withSuccess(trans('Anda Berhasil mengedit Hub')); 

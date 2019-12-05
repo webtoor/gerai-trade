@@ -21,7 +21,18 @@
               @endif
             </a> --}}
 
-
+            @if(Auth::user()->role->role_id == '2')
+            <p href="#" class="list-group-item border-bottom-0">
+                <b style="font-size:14px;">PRODUK</b>    
+            </p>
+            <a href="#" class="list-group-item border-top-0" style="font-size:14px;">Produk Saya</a>
+            @endif
+            @if(Auth::user()->role->role_id == '2')
+            <p href="#" class="list-group-item border-bottom-0">
+                <b style="font-size:14px;">PENJUALAN</b>    
+            </p>
+            <a href="#" class="list-group-item border-top-0" style="font-size:14px;">Penjualan Saya</a>
+            @endif
             <p href="#" class="list-group-item border-bottom-0">
                     <b style="font-size:14px;">PEMBELIAN</b>    
                 </p>

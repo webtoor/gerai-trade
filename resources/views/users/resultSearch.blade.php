@@ -77,7 +77,8 @@
                                     <div class="card-body">
 
                                         <!-- Title -->
-                                        <h6 class="card-title" style="margin-top:-10px;">{{$produk_item->nama_produk}}
+                                        <h6 class="card-title" style="margin-top:-10px;">{{ \Illuminate\Support\Str::limit($produk_item->nama_produk, 26)}}
+
                                         </h6>
                                         <!-- Text -->
                                         <div class="price">

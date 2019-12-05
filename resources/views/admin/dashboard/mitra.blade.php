@@ -33,7 +33,7 @@
                         <ul class="list-inline">
                                 <li class="list-inline-item">
                                     <button id="showModalMitra" data-toggle="modal" data-target="#showMitra" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"
-                                data-nama="{{$mitras->user->nama_depan}} {{$mitras->user->nama_belakang}}" data-alamat="{{$mitras->alamat['alamat']}}" data-city="{{$mitras->alamat['city_id']}}" data-kecamatan="{{$mitras->alamat['kecamatan_id']}}"
+                                data-nama="{{$mitras->user->nama_depan}} {{$mitras->user->nama_belakang}}" data-alamat="{{$mitras->alamat['alamat']}}" data-provinsi="{{$mitras->alamat['province_name']}}" data-city="{{$mitras->alamat['city_name']}}" data-kecamatan="{{$mitras->alamat['kecamatan_name']}}"
                                 data-kodeposs="{{$mitras->alamat['kodepos']}}"
                                 >
                                         <span class="ti-zoom-in"></span>
@@ -181,6 +181,10 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <input type="hidden" name="province_name" id="province_name">
+                <input type="hidden" name="city_name" id="city_name">
+                <input type="hidden" name="kecamatan_name" id="kecamatan_name">
+
               <button type="submit" class="btn btn-primary btn-md">Submit</button>
             </div>
             {!! Form::close() !!}
@@ -195,16 +199,24 @@ $(document).ready(function () {
    
     $('select#selectProvinsi').on('change', function (e) {
     let optionSelected = $("option:selected", this);
+    let provinceName = $("option:selected", this).text();
+    $("#province_name").val(provinceName);
+
     let valueSelected = this.value;
     console.log(valueSelected)
     if(valueSelected){
         $("#selectKotaKab").prop('disabled', false);
         $("#selectKotaKab option").remove();
+        $('#selectKotaKab').append($('<option>', {value:'', text:'Pilih Kota/Kabupaten'}, '</option>'));
+        $("#city_name").val("");
+
         $("#selectKecamatan").prop('disabled', true);
         $("#selectKecamatan option").remove();
         $('#selectKecamatan').append($('<option>', {value:'', text:'Pilih Kecamatan'}, '</option>'));
+        $("#kecamatan_name").val("");
 
     }else{
+
         $("#selectKotaKab").prop('disabled', true);
         $("#selectKotaKab option").remove();
         $('#selectKotaKab').append($('<option>', {value:'', text:'Pilih Kota/Kabupaten'}, '</option>'));
@@ -229,15 +241,21 @@ $(document).ready(function () {
     $('select#selectKotaKab').on('change', function (e) {
     let optionSelected = $("option:selected", this);
     let valueSelected = this.value;
+    let cityName = $("option:selected", this).text();
+    $("#city_name").val(cityName);
 
     console.log(valueSelected)
     if(valueSelected != ''){
         $("#selectKecamatan").prop('disabled', false);
         $("#selectKecamatan option").remove();
+        $('#selectKecamatan').append($('<option>', {value:'', text:'Pilih Kecamatan'}, '</option>'));
+        $("#kecamatan_name").val("");
 
     }else{
         $("#selectKecamatan").prop('disabled', true);
-        $('#selectKecamatan').append($('<option>', {value:'0', text:'Pilih Kecamatan'}, '</option>'));
+        $("#selectKecamatan option").remove();
+        $('#selectKecamatan').append($('<option>', {value:'', text:'Pilih Kecamatan'}, '</option>'));
+        $("#kecamatan_name").val("");
 
     }
 
@@ -253,6 +271,12 @@ $(document).ready(function () {
 
           }
         });
+    });
+
+    $('select#selectKecamatan').on('change', function (e) {
+        let kecamatanName = $("option:selected", this).text();
+        $("#kecamatan_name").val(kecamatanName);
+
     });
 /* 
     $('select#selectKecamatan').on('change', function (e) {
@@ -290,17 +314,17 @@ $(document).ready(function () {
 
     $("button#showModalMitra").click(function () {
             var alamat = $(this).data('alamat');
-
+            var provinsi = $(this).data('provinsi');
             var city = $(this).data('city');
             var kecamatan = $(this).data('kecamatan');
             var kodeposs = $(this).data('kodeposs')
 
             $('#alamat').html('Alamat : '+ alamat);
-            $('#provinsi').html('Provinsi : ');
-            $('#kota_kabs').html('Kota/Kabupaten : ');
-            $('#kecamatans').html('Kecamatan : ');
-            $('#kodeposs').html('Kode Pos : ');
-            if(city && kecamatan){
+            $('#provinsi').html('Provinsi : '+ provinsi);
+            $('#kota_kabs').html('Kota/Kabupaten : ' + city);
+            $('#kecamatans').html('Kecamatan : ' + kecamatan);
+            $('#kodeposs').html('Kode Pos : ' + kodeposs);
+            /* if(city && kecamatan){
                 $.ajax({
                     type: "GET",
                     url : "{{ url('show-alamat') }}/" + city + '/' + kecamatan,
@@ -321,7 +345,7 @@ $(document).ready(function () {
                 $('#kota_kabs').html('');
                 $('#kecamatans').html('');
                 $('#kodeposs').html('');
-            }
+            } */
            
         });
 });

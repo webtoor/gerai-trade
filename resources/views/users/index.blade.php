@@ -229,20 +229,24 @@
 
                                                             <!-- Title -->
                                                             <h6 class="card-title" style="margin-top:-10px;">
-                                                                {{$produk_unggulans->produk->nama_produk}}
+                                                                {{ \Illuminate\Support\Str::limit($produk_unggulans->produk->nama_produk, 26)}}
                                                             </h6>
                                                             <!-- Text -->
                                                             <div class="price">
                                                                     <h6>Rp {{number_format($produk_unggulans->produk->harga,0, ".", ".")}}</h6>
                                                                 </div>
+                                                                <div class="price">
+                                                                <h6>{{$produk_unggulans->produk->user->alamat}}</h6>
+                                                                    </div>
                                                             </a>
                                                             {{-- <h6 style="color:#AEAEAE;">Jakarta</h6> --}}
 
-                                                 
+                                                            
                                                             <div class="card-footer px-1" style="background:white">
-                                                     
+                                                                @if(Auth::user() && (Auth::user()->role->role_id != '2'))
+
                                                                 <span class="float-right">
-                                                                    
+                                                                        
                                                                     <a href="{{ url('/cart-shop/'.$produk_unggulans->produk->id) }}" class="material-tooltip-main"
                                                                         data-toggle="tooltip" data-placement="top"
                                                                         title="Masukan keranjang">
@@ -280,8 +284,12 @@
                                                                         <i class="fas fa-heart grey-text ml-3"></i>
                                                                     </a>
                                                                     @endif 
+
                                                                 </span>
+                                                                @endif
+
                                                             </div>
+
                                                         </div>
                                                     </div>
                                                     

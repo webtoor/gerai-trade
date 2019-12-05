@@ -16,8 +16,11 @@ class Alamat extends Model
         'nama_penerima',
         'nohp_penerima',
         'province_id',
+        'province_name',
         'city_id',
+        'city_name',
         'kecamatan_id',
+        'kecamatan_name',
         'kodepos'
     ];
 

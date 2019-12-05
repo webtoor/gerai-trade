@@ -62,7 +62,7 @@
         <ul class="navbar-nav ml-auto">
          
 
-       <li class="nav-item">
+       <li class="nav-item" style="margin-right:20px;">
           <a class="nav-link" href="{{route('cerita-kita')}}"><b>Cerita Kita</b></a>
       </li>
       @guest
@@ -109,11 +109,21 @@
               style="color:white">Daftar</a>
             </li>
              @else
+
+             @if(Auth::user()->role->role_id == '2')
              <div class="dropdown">
      
                  <!--Trigger-->
                  <a class="btn btn-outline-indigo btn-sm dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown"
-                     aria-haspopup="true" aria-expanded="false"><b> {{Auth::user()->nama_depan}} {{Auth::user()->nama_belakang}}</b></a>
+                     aria-haspopup="true" aria-expanded="false">
+                     <b> 
+                       @if(Auth::user()->role->role_id == '2')
+                       {{Auth::user()->nama_hub}} 
+                       @else
+                       {{Auth::user()->nama_depan}} 
+                       @endif
+                    </b>
+                  </a>
      
                  <!--Menu-->
                  <div class="dropdown-menu dropdown-menu-right" style=" width:250px;">
@@ -123,6 +133,28 @@
                      <a class="dropdown-item" href="/logout">Logout</a>
                  </div>
              </div>
+             @elseif(Auth::user()->role->role_id == '1')
+             <div class="dropdown">
+                <!--Trigger-->
+                <a class="btn btn-outline-indigo btn-sm dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <b> 
+                      @if(Auth::user()->role->role_id == '1')
+                      {{Auth::user()->nama_depan}} 
+                      @endif
+                   </b>
+                 </a>
+    
+                <!--Menu-->
+                <div class="dropdown-menu dropdown-menu-right" style=" width:250px;">
+                    <a class="dropdown-item" href="#">Pembelian</a>
+                    <a class="dropdown-item" href="{{route('wishlist')}}">Wishlist</a>
+                    <a class="dropdown-item" href="{{route('index-pengaturan')}}">Pengaturan</a>
+                    <a class="dropdown-item" href="/logout">Logout</a>
+                </div>
+            </div>
+
+             @endif
              @endguest
         </ul>
 

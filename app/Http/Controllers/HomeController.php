@@ -33,7 +33,7 @@ class HomeController extends Controller
     {
         $kategori =  Kategori::with('sub_kategori')->get();
         $produk_unggulan = ProdukUnggulan::with(['produk' => function ($query) {
-            $query->with('produk_image');
+            $query->with('user', 'produk_image');
         } ])->get();
         $blog = Blog::with('user')->orderBy('id', 'desc')->take(6)->get();
         return view('users.index', ['kategori' => $kategori, 'produk_unggulan' => $produk_unggulan, 'blog' => $blog]);
