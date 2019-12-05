@@ -6,7 +6,7 @@
     <h4 class="c-blue-900"><b>Data Mitra</b></h4>
 </div>
 <div class="bgc-white p-20 bd">
-    <button data-toggle="modal" data-target="#addMitra" class="btn btn-primary btn-md" title="{{ trans('Tambah Mitra') }}">
+    <button id="tambahMitras "data-toggle="modal" data-target="#addMitra" class="btn btn-primary btn-md" title="{{ trans('Tambah Mitra') }}">
         <b><i class="fa fa-plus"></i> Tambah Mitra</b></button>
     <div class="mT-30">
         <table id="dataTable" class="table table-bordered" cellspacing="0" width="100%">
@@ -74,7 +74,7 @@
 <!-- Modal -->
 <div class="modal fade" id="addMitra" tabindex="-1" role="dialog" aria-labelledby="addMitraLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-                {!! Form::open([ 'route' => ['admin-panel.insert-produk'], 'method' => "POST"])!!}
+                {!! Form::open([ 'route' => ['admin-panel.addMitra'], 'method' => "POST"])!!}
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="addMitraLabel">Tambah Mitra</h5>
@@ -113,10 +113,14 @@
                 <div class="form-group col-md-6">
                     <label>Provinsi</label>
                         <select class="form-control" name="provinsi" id="selectProvinsi" required>
-                            <option selected value="0">Pilih Provinsi</option>
-                            @foreach ($provinsi as $provinsi_item)
-                            <option value="{{$provinsi_item->id}}">{{$provinsi_item->name}}</option>
-                            @endforeach
+                        <option selected value="0">Pilih Provinsi</option>
+                            @php
+                            $province = province();
+                            $province = json_decode($province,true);
+                        @endphp
+                        @foreach($province['rajaongkir']['results'] as $provinces)
+                            <option value="{{ $provinces['province_id'] }}">{{ $provinces['province'] }} </option>
+                            @endforeach  
                         </select>
                 </div>
                 <div class="form-group col-md-6">
@@ -163,6 +167,8 @@
 @section('js')
 <script>
 $(document).ready(function () {
+
+   
     $('select#selectProvinsi').on('change', function (e) {
     let optionSelected = $("option:selected", this);
     let valueSelected = this.value;
@@ -181,21 +187,17 @@ $(document).ready(function () {
     }
 
     $.ajax({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        contentType: "application/json",
-        dataType: "json",
-        type: 'GET',
-        url: "/ajax-kota-kab/" + valueSelected,
-        success: function (results) {
-          console.log(results);
-          $.each( results['data'], function(index, data) {
-                $('#selectKotaKab').append($('<option>', {value:data['id'], text:data['name']}, '</option>'));
+          type: "GET",
+          url : "{{ url('all-city') }}/" + valueSelected,
+          dataType : "JSON",
+          success:function(results){
+            console.log(results['rajaongkir']['results'])
+            $.each( results['rajaongkir']['results'], function(index, data) {
+                $('#selectKotaKab').append($('<option>', { value:data['city_id'], text:data['type'] + " " + data['city_name']}, '</option>'));
            })
-          }
 
-      });
+          }
+        });
     });
 
     $('select#selectKotaKab').on('change', function (e) {

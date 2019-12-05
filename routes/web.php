@@ -30,7 +30,12 @@ Route::get('/update-app', function () {
     Route::get('ajax-kota-kab/{provinsi_id}', 'LokasiController@ajaxKotaKab');
     Route::get('kecamatan/{kotaKab_id}', 'LokasiController@ajaxKecamatan');
     Route::get('kelurahan-desa/{kecamatan_id}', 'LokasiController@ajaxKelurahanDesa');
-
+    Route::get('all-city/{province_id}',function($province_id){
+	return allcity($province_id);
+    });
+    Route::get('city/{id}',function($id){
+	return city($id);
+    });
 
     //ADMIN PANEL
     Route::group(['prefix'=> 'admin-panel', 'as'=> 'admin-panel' . '.', 'middleware' => ['admin']], function(){
@@ -110,9 +115,7 @@ Route::group(['middleware' => 'member'], function(){
     //KERANJANG BELANJA
     Route::get('/keranjang-belanja', 'CartController@keranjangBelanja')->name('keranjang-belanja');
     Route::get('/checkout', 'CartController@checkout')->name('checkout');
-    Route::get('citybyid/{id}',function($id){
-	return city($id);
-    });
+   
     Route::post('cek-ongkir','CartController@cekOngkir');
 
 });

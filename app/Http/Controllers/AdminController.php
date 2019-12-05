@@ -59,7 +59,7 @@ class AdminController extends Controller
             $mitra = User_role::with(['user', 'alamat' => function ($query) {
                 $query->with('provinsi', 'kota_kabupatens', 'kecamatans', 'kelurahan_desa')->where(['jenis_alamat_id' => '1']);
             } ])->where('role_id', '2')->OrderBy('id', 'desc')->get();
-            $provinsi = Provinsi::all();
+            $provinsi = province();
             return view('admin.dashboard.mitra', ['mitra' => $mitra, 'provinsi' => $provinsi]);
 
         } catch (\Exception $e) {

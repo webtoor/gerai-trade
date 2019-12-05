@@ -302,7 +302,7 @@
                             <ol class="carousel-indicators">
                                 @if(count($produk_detail->produk_image) > 0)
 
-                                @foreach($produk_detail->produk_image as $key=> $images)
+                                @foreach($produk_detail->produk_image as $key => $images)
                                 <li data-target="#carousel-example-1z" data-slide-to="{{$key}}" class="<?php if($key==0){echo "active";} ?>"></li>
                                 @endforeach
                                 @else
@@ -344,7 +344,13 @@
             </div>
             <div class="col-lg-5 offset-lg-1">
 					<div class="s_product_text">
-						<h3>{{$produk_detail->nama_produk}}</h3>
+            <h3>{{$produk_detail->nama_produk}}</h3>
+            <?php $nr = 6;?>
+            <div class="rating">
+                @for($i = 0; $i < 5; $i++)
+                    <span><i class="fa fa-star{{ $nr <= $i ? '-o' : '' }}"></i></span>
+                @endfor
+            </div>
 						<h2>Rp {{number_format($produk_detail->harga,0, ".", ".")}}</h2>
 						<ul style="list-style-type:none;" class="list">
               <li style="margin-left:-40px;"><a class="active" href="#"><span>Kategori</span> : 
@@ -357,7 +363,7 @@
             </li>
               <li style="margin-left:-40px;"><a href="#"><span>Ketersediaan</span> : 
                 @if($produk_detail->stok > 0)
-                Tersedia
+                {{$produk_detail->stok}}
                 @else
                 Habis
               @endif
