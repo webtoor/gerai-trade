@@ -113,5 +113,13 @@ class AdminController extends Controller
         }
     }
 
+    public function editHub($user_id){
+
+    }
+
+    public function deleteMitra($user_id){
+        return $user_id;
+    }
+
 
 }

@@ -12,7 +12,8 @@
         <table id="dataTable" class="table table-bordered" cellspacing="0" width="100%">
             <thead class="thead-light">
                 <tr>
-                    <th>Nama</th>
+                    <th>Nama Hub</th>
+                    <th>Nama Perwakilan Hub</th>
                     <th>Email</th>
                     <th>Nomor Ponsel</th>
                     <th>Join</th>
@@ -23,6 +24,7 @@
                 <?php $i = 1; ?>
                 @foreach ($mitra as $mitras)
                 <tr>
+                    <td>{{$mitras->user->nama_hub}}</td>
                     <td>{{$mitras->user->nama_depan}} {{$mitras->user->nama_belakang}}</td>
                     <td>{{$mitras->user->email}}</td>
                     <td>{{$mitras->user->nomor_ponsel}}</td>
@@ -31,12 +33,23 @@
                         <ul class="list-inline">
                                 <li class="list-inline-item">
                                     <button id="showModalMitra" data-toggle="modal" data-target="#showMitra" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"
-                                data-nama="{{$mitras->user->nama_depan}} {{$mitras->user->nama_belakang}}" data-alamat="{{$mitras->alamat['alamat']}}" data-provinsi="{{$mitras->alamat['provinsi']['name']}}"
-                                data-kota_kabs="{{$mitras->alamat['kota_kabupatens']['name']}}" data-kecamatans="{{$mitras->alamat['kecamatans']['name']}}" data-kel_dess="{{$mitras->alamat['kelurahan_desa']['name']}}"
+                                data-nama="{{$mitras->user->nama_depan}} {{$mitras->user->nama_belakang}}" data-alamat="{{$mitras->alamat['alamat']}}" data-city="{{$mitras->alamat['city_id']}}" data-kecamatan="{{$mitras->alamat['kecamatan_id']}}"
+                                data-kodeposs="{{$mitras->alamat['kodepos']}}"
                                 >
                                         <span class="ti-zoom-in"></span>
                                 </button>
                                 </li>
+                                <li class="list-inline-item">
+                                        {!! Form::open([
+                                            'class'=>'delete',
+                                            'url'  => route('admin-panel.deleteMitra', $mitras->user->id), 
+                                            'method' => 'DELETE',
+                                            ]) 
+                                        !!}
+                                            <button class="btn btn-danger px-3 btn-sm" title="{{ trans('Hapus Hub') }}"><i class="ti-trash"></i></button>
+                                            
+                                        {!! Form::close() !!}
+                                    </li>
                         </ul>
                     </td>
                   
@@ -51,18 +64,17 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="showMitraLabel">Detail Mitra</h5>
+              <h5 class="modal-title" id="showMitraLabel">Detail Hub</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-          <div id="nama"> </div>
           <div id="alamat"> </div>
           <div id="provinsi"> </div>
           <div id="kota_kabs"> </div>
           <div id="kecamatans"> </div>
-          <div id="kel_dess"> </div>
+          <div id="kodeposs"> </div>
           </div>
         <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Tutup</button>
@@ -273,22 +285,40 @@ $(document).ready(function () {
     }); */
 
     $("button#showModalMitra").click(function () {
-            var nama = $(this).data('nama');
             var alamat = $(this).data('alamat');
-            var provinsi = $(this).data('provinsi');
-            var kota_kabs = $(this).data('kota_kabs');
-            var kecamatans = $(this).data('kecamatans');
-            var kel_dess = $(this).data('kel_dess');
 
-            $('#nama').html('Nama : '+ nama);
+            var city = $(this).data('city');
+            var kecamatan = $(this).data('kecamatan');
+            var kodeposs = $(this).data('kodeposs')
+
             $('#alamat').html('Alamat : '+ alamat);
-            $('#provinsi').html('Provinsi : '+ provinsi);
-            $('#kota_kabs').html('Kota/Kabupaten : '+ kota_kabs);
-            $('#kecamatans').html('Kecamatan : '+ kecamatans);
-            $('#kel_dess').html('Kelurahan/Desa : '+ kel_dess);
-
-
-
+            $('#provinsi').html('Provinsi : ');
+            $('#kota_kabs').html('Kota/Kabupaten : ');
+            $('#kecamatans').html('Kecamatan : ');
+            $('#kodeposs').html('Kode Pos : ');
+            if(city && kecamatan){
+                $.ajax({
+                    type: "GET",
+                    url : "{{ url('show-alamat') }}/" + city + '/' + kecamatan,
+                    dataType : "JSON",
+                    success:function(results){
+                    console.log(results)
+                    if(results.rajaongkir){
+                    $('#provinsi').html('Provinsi : '+ results.rajaongkir.results.province);
+                    $('#kota_kabs').html('Kota/Kabupaten : '+ results.rajaongkir.results.city);
+                    $('#kecamatans').html('Kecamatan : '+ results.rajaongkir.results.subdistrict_name);
+                    $('#kodeposs').html('Kode Pos : '+ kodeposs);
+                    }
+                }
+            });
+            }else{
+                $('#alamat').html('');
+                $('#provinsi').html('Gagal Mendapatkan Data, Silakan Coba Lagi Nanti');
+                $('#kota_kabs').html('');
+                $('#kecamatans').html('');
+                $('#kodeposs').html('');
+            }
+           
         });
 });
 </script>

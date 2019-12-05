@@ -30,6 +30,10 @@ Route::get('/update-app', function () {
     Route::get('ajax-kota-kab/{provinsi_id}', 'LokasiController@ajaxKotaKab');
     Route::get('kecamatan/{kotaKab_id}', 'LokasiController@ajaxKecamatan');
     Route::get('kelurahan-desa/{kecamatan_id}', 'LokasiController@ajaxKelurahanDesa');
+
+    Route::get('show-alamat/{city_id}/{kecamatan_id}',function($city_id, $kecamatan_id){
+	return showAlamat($city_id, $kecamatan_id);
+    });
     Route::get('all-city/{province_id}',function($province_id){
 	return allcity($province_id);
     });
@@ -77,8 +81,12 @@ Route::get('/update-app', function () {
 
         // USER
         Route::get('member', 'AdminController@showMember')->name('showMember');
-        Route::get('mitra', 'AdminController@showMitra')->name('showMitra');
-        Route::post('mitra', 'AdminController@addMitra')->name('addMitra');
+        Route::get('hub', 'AdminController@showMitra')->name('showMitra');
+        Route::post('hub', 'AdminController@addMitra')->name('addMitra');
+        Route::get('edit-hub/{user_id}', 'AdminController@editHub')->name('editHub');
+
+        Route::delete('mitra/{user_id}', 'AdminController@deleteMitra')->name('deleteMitra');
+
    });  
   
 
