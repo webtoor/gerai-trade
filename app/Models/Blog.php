@@ -16,6 +16,7 @@ class Blog extends Model
         'konten',
         'image',
         'user_id',
+        'status',
         'created_at',
         'updated_at'
     ];

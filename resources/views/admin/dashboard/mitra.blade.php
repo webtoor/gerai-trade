@@ -222,7 +222,6 @@ $(document).ready(function () {
             $.each( results['rajaongkir']['results'], function(index, data) {
                 $('#selectKotaKab').append($('<option>', { value:data['city_id'], text:data['type'] + " " + data['city_name']}, '</option>'));
            })
-
           }
         });
     });
