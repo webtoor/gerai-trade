@@ -25,7 +25,7 @@
             <p href="#" class="list-group-item border-bottom-0">
                 <b style="font-size:14px;">PRODUK</b>    
             </p>
-            <a href="#" class="list-group-item border-top-0" style="font-size:14px;">Produk Saya</a>
+            <a href="{{route('home.produk-saya')}}" class="list-group-item border-top-0" style="font-size:14px;">Produk Saya</a>
            
             <p href="#" class="list-group-item border-bottom-0">
                 <b style="font-size:14px;">PENJUALAN</b>    
