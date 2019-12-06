@@ -145,5 +145,8 @@ Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']
                 Route::get('daftar-mitra', 'HomeController@showDaftarMitra')->name('showDaftarMitra');
                 Route::post('daftar-mitra', 'HomeController@insertDaftarMitra')->name('insertDaftarMitra');
         });  
+        Route::group(['middleware' => ['mitra']], function(){
+            Route::get('produk-saya', 'HubController@index')->name('showProdukSaya');
+    });  
 
 });  

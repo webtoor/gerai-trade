@@ -76,6 +76,8 @@
             </li>
 
               @else
+              @if(Auth::user()->role->role_id == '1')
+
               <li class="nav-item" style="margin-right:20px;">
                 <a class="nav-link" href="{{ url('/keranjang-belanja') }}">
                     <div class="up-item">
@@ -93,6 +95,7 @@
 							</div> 
                 </a>
             </li>
+            @endif
 							
 
               @endguest
