@@ -58,7 +58,7 @@
                                     <li class="list-inline-item">
                                             {!! Form::open([
                                                 'class'=>'delete',
-                                                'url'  => route('admin-panel.delete-blog', $blogs->id), 
+                                                'url'  => route('home.delete-cerita', $blogs->id), 
                                                 'method' => 'DELETE',
                                                 ]) 
                                             !!}

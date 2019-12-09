@@ -166,6 +166,7 @@ Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']
                 Route::get('edit-cerita-saya/{cerita_id}', 'HubController@editCerita')->name('edit-cerita');
                 Route::put('update-cerita-saya/{cerita_id}', 'HubController@updateCerita')->name('update-cerita');
                 Route::put('update-image-cerita', 'HubController@updateImageCerita')->name('update-image');
+                Route::delete('cerita-saya/{cerita_id}', 'HubController@deleteCerita')->name('delete-cerita');
 
 
 

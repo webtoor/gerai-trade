@@ -258,4 +258,15 @@ class HubController extends Controller
         }
        
     }
+
+    function deleteCerita($cerita_id){
+        $cerita_image = Blog::findOrFail($cerita_id);
+        Storage::disk('public')->delete($cerita_image->image);
+        $cerita_image->delete();
+        
+        DB::statement("ALTER TABLE blogs AUTO_INCREMENT = 1");
+
+        return back()->withSuccess(trans('Anda Berhasil Menghapus Cerita')); 
+
+    }
 }
