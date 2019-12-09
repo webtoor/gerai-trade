@@ -138,7 +138,7 @@
             </div>
             <div class="modal fade" id="addFotoProduk" tabindex="-1" role="dialog" aria-labelledby="ShowModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
-                <form action=" {!! action('AdminProdukController@tambahImage') !!}" method="POST" enctype="multipart/form-data">
+                <form action=" {!! action('HubController@tambahImage') !!}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                       <div class="modal-content">
                         <div class="modal-header">

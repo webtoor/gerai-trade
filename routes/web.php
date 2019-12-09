@@ -154,6 +154,7 @@ Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']
                 Route::post('tambah-produk-saya', 'HubController@insertProduk')->name('insert-produk');
                 Route::get('edit-produk-saya/{produk_id}', 'HubController@editProduk')->name('edit-produk-saya');
                 Route::put('edit-produk-saya/{produk_id}', 'HubController@updateProduk')->name('update-produk-saya');
+                Route::post('edit-produk-saya/tambah-foto', 'HubController@tambahImage')->name('tambah-image');
 
     });  
 
