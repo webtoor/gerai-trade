@@ -115,7 +115,7 @@
                                                     <li class="list-inline-item">
                                                             {!! Form::open([
                                                               'class'=>'delete',
-                                                              'url'  => route('admin-panel.delete-image', $item->id), 
+                                                              'url'  => route('home.delete-image', $item->id), 
                                                               'method' => 'DELETE',
                                                               ]) 
                                                           !!} 
