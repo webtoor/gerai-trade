@@ -21,4 +21,13 @@ class HubController extends Controller
         $kategori = Kategori::with('sub_kategori')->get();
         return view('users.hub.tambahProduk',  ['kategori' => $kategori]);
     }
+
+    public function getAjaxSubkategori($kategori_id){
+        $subkategori = SubKategori::where('kategori_id', $kategori_id)->get();
+
+        return response()->json(
+            [ 'status' => '1',
+             'data' => $subkategori]
+         );
+    }
 }
