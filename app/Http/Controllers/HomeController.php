@@ -32,11 +32,9 @@ class HomeController extends Controller
     public function index()
     {
         $kategori =  Kategori::with('sub_kategori')->get();
-        $produk_unggulan = ProdukUnggulan::with(['produk' => function ($query) {
-            $query->with('user', 'produk_image');
-        } ])->get();
+        $produk_terbaru = Produk::with('user', 'produk_image')->orderBy('id', 'asc')->take('12')->get();
         $blog = Blog::with('user')->orderBy('id', 'desc')->take(6)->get();
-        return view('users.index', ['kategori' => $kategori, 'produk_unggulan' => $produk_unggulan, 'blog' => $blog]);
+        return view('users.index', ['kategori' => $kategori, 'produk_terbaru' => $produk_terbaru, 'blog' => $blog]);
     }
 
     public function showDaftarMitra()

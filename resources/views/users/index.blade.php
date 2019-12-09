@@ -199,44 +199,44 @@
                                 <div class="row justify-content-left">
                                     <div class="col-lg-6 text-left">
                                         <div class="section-title">
-                                            <h3 class="my-4">Produk Unggulan</h3>
+                                            <h3 class="my-4">Produk Terbaru</h3>
                                             <p></p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                     @foreach ($produk_unggulan as $produk_unggulans)
+                                     @foreach ($produk_terbaru as $produk_terbarus)
                                          
                                             <div class="col-lg-3 col-sm-4">
                                         <div class="single-product">
                                                 <div class="card">
                                                     <div class="view overlay maxs">
-                                                            @if(count($produk_unggulans->produk->produk_image) > 0)
-                                                            <img class="img-fluid card-img-top maxs-img" src="{{ asset('storage/' .$produk_unggulans->produk->produk_image[0]->image_path)}}" alt="Card image cap" style="height:230px;">
+                                                            @if(count($produk_terbarus->produk_image) > 0)
+                                                            <img class="img-fluid card-img-top maxs-img" src="{{ asset('storage/' .$produk_terbarus->produk_image[0]->image_path)}}" alt="Card image cap" style="height:230px;">
                                                             @else
                                                             <img class="img-fluid card-img-top maxs-img" src="http://placehold.it/700x700" alt="Card image cap" style="height:230px;>
                                                             @endif                                                           
-                                                        <a href="{{route('produk-detail', ['slug_produk' => $produk_unggulans->produk->slug])}}">
+                                                        <a href="{{route('produk-detail', ['slug_produk' => $produk_terbarus->slug])}}">
                                                                     <div class="mask rgba-white-slight"></div>
                                                         </a>
                                                     </div>
                                                     <div class="product-details">
-                                                            <a href="{{route('produk-detail', ['slug_produk' => $produk_unggulans->produk->slug])}}">
+                                                            <a href="{{route('produk-detail', ['slug_produk' => $produk_terbarus->slug])}}">
 
                                                         <!-- Card content -->
                                                         <div class="card-body">
 
                                                             <!-- Title -->
                                                             <h6 class="card-title" style="margin-top:-10px;">
-                                                                {{ \Illuminate\Support\Str::limit($produk_unggulans->produk->nama_produk, 26)}}
+                                                                {{ \Illuminate\Support\Str::limit($produk_terbarus->nama_produk, 26)}}
                                                             </h6>
                                                             <!-- Text -->
                                                             <div class="price" style="margin-top:-10px;">
-                                                                    <h6>Rp {{number_format($produk_unggulans->produk->harga,0, ".", ".")}}</h6>
+                                                                    <h6>Rp {{number_format($produk_terbarus->harga,0, ".", ".")}}</h6>
                                                                 </div>
                                                                 <div>
-                                                                <h6 style="color:#90a4ae">{{$produk_unggulans->produk->user->alamat->city_name}}</h6>
+                                                                <h6 style="color:#90a4ae">{{$produk_terbarus->user->alamat->city_name}}</h6>
                                                                     </div>
                                                             </a>
 
@@ -252,7 +252,7 @@
 
                                                                 <span class="float-right">
                                                                         
-                                                                    <a href="{{ url('/cart-shop/'.$produk_unggulans->produk->id) }}" class="material-tooltip-main"
+                                                                    <a href="{{ url('/cart-shop/'.$produk_terbarus->id) }}" class="material-tooltip-main"
                                                                         data-toggle="tooltip" data-placement="top"
                                                                         title="Masukan keranjang">
                                                                         <i class="fas fa-shopping-cart grey-text ml-3"></i>
@@ -263,7 +263,7 @@
         
                                                                     @foreach(Cart::instance('wishlist')->content() as $row)
         
-                                                                    @if($produk_unggulans->produk->id == $row->id)
+                                                                    @if($produk_terbarus->id == $row->id)
                                                                     <?php $checks = 1 ?>
         
                                                                         <a href="{{ url('/delete-wishlist/'.$row->rowId) }}" class="material-tooltip-main"
@@ -276,14 +276,14 @@
                                                                     @endforeach
         
                                                                     @if($checks == null)
-                                                                    <a href="{{ url('/cart-wishlist/'.$produk_unggulans->produk->id) }}" class="material-tooltip-main"
+                                                                    <a href="{{ url('/cart-wishlist/'.$produk_terbarus->id) }}" class="material-tooltip-main"
                                                                         data-toggle="tooltip" data-placement="top"
                                                                         title="Tambah Wishlist">
                                                                         <i class="fas fa-heart grey-text ml-3"></i>
                                                                     </a>
                                                                     @endif
                                                                     @else
-                                                                    <a href="{{ url('/cart-wishlist/'.$produk_unggulans->produk->id) }}" class="material-tooltip-main"
+                                                                    <a href="{{ url('/cart-wishlist/'.$produk_terbarus->id) }}" class="material-tooltip-main"
                                                                         data-toggle="tooltip" data-placement="top"
                                                                         title="Tambah Wishlist">
                                                                         <i class="fas fa-heart grey-text ml-3"></i>
@@ -316,7 +316,7 @@
     
                                                                     <span class="float-right">
                                                                             
-                                                                        <a href="{{ url('/cart-shop/'.$produk_unggulans->produk->id) }}" class="material-tooltip-main"
+                                                                        <a href="{{ url('/cart-shop/'.$produk_terbarus->id) }}" class="material-tooltip-main"
                                                                             data-toggle="tooltip" data-placement="top"
                                                                             title="Masukan keranjang">
                                                                             <i class="fas fa-shopping-cart grey-text ml-3"></i>
@@ -327,7 +327,7 @@
             
                                                                         @foreach(Cart::instance('wishlist')->content() as $row)
             
-                                                                        @if($produk_unggulans->produk->id == $row->id)
+                                                                        @if($produk_terbarus->id == $row->id)
                                                                         <?php $checks = 1 ?>
             
                                                                             <a href="{{ url('/delete-wishlist/'.$row->rowId) }}" class="material-tooltip-main"
@@ -340,14 +340,14 @@
                                                                         @endforeach
             
                                                                         @if($checks == null)
-                                                                        <a href="{{ url('/cart-wishlist/'.$produk_unggulans->produk->id) }}" class="material-tooltip-main"
+                                                                        <a href="{{ url('/cart-wishlist/'.$produk_terbarus->id) }}" class="material-tooltip-main"
                                                                             data-toggle="tooltip" data-placement="top"
                                                                             title="Tambah Wishlist">
                                                                             <i class="fas fa-heart grey-text ml-3"></i>
                                                                         </a>
                                                                         @endif
                                                                         @else
-                                                                        <a href="{{ url('/cart-wishlist/'.$produk_unggulans->produk->id) }}" class="material-tooltip-main"
+                                                                        <a href="{{ url('/cart-wishlist/'.$produk_terbarus->id) }}" class="material-tooltip-main"
                                                                             data-toggle="tooltip" data-placement="top"
                                                                             title="Tambah Wishlist">
                                                                             <i class="fas fa-heart grey-text ml-3"></i>
