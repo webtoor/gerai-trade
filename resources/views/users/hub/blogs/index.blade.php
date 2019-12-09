@@ -16,7 +16,7 @@
     <div class="bgc-white p-10 bd">
     @include('users.partials.messages') 
 
-    <a href="{{route('admin-panel.add-blog')}}" class="btn btn-primary btn-md" title="{{ trans('Tambah Cerita') }}"><b><i class="fa fa-plus"></i> Tambah Cerita</b></a>
+    <a href="{{route('home.tambah-cerita')}}" class="btn btn-primary btn-md" title="{{ trans('Tambah Cerita') }}"><b><i class="fa fa-plus"></i> Tambah Cerita</b></a>
     <div class="mT-30">
         <table id="dataTable" class="table table-bordered" cellspacing="0" width="100%">
             <thead class="thead-light">

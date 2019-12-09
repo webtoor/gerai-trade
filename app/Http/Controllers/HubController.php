@@ -173,4 +173,9 @@ class HubController extends Controller
         $blog = Blog::where('user_id', $hub_id)->orderBy('id', 'desc')->get();
         return view ('users.hub.blogs.index', ['blog' => $blog, 'kategori' => $kategori]);
     }
+
+    function tambahCerita(){
+        $kategori = Kategori::all();
+        return view ('users.hub.blogs.tambahCerita', ['kategori' => $kategori]);
+    }
 }

@@ -161,6 +161,7 @@ Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']
               // CERITA SAYA  
 
                 Route::get('cerita-saya', 'HubController@getCeritaSaya')->name('cerita-saya');
+                Route::get('tambah-cerita-saya', 'HubController@tambahCerita')->name('tambah-cerita');
 
 
 
