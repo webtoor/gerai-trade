@@ -88,6 +88,7 @@ class HubController extends Controller
         
         $produk = Produk::with('produk_image')->where('id', $produk_id)->first();
         $kategori = Kategori::all();
+        $subkategori = SubKategori::where('kategori_id', $produk->kategori_id)->get();
 
         return view('users.hub.edit-produk', ['produk' => $produk, 'kategori' => $kategori, 'subkategori' => $subkategori]);
     }

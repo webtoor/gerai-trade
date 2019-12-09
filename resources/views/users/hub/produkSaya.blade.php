@@ -57,7 +57,7 @@
                      <td>
                              <ul class="list-inline">
                                      <li class="list-inline-item">
-                                         <a href="{{route('admin-panel.edit-produk', ['produk_id' => $produks->id])}}" title="{{ trans('Edit Produk') }}" class="btn btn-info px-3 btn-sm">
+                                         <a href="{{route('home.edit-produk-saya', ['produk_id' => $produks->id])}}" title="{{ trans('Edit Produk') }}" class="btn btn-info px-3 btn-sm">
                                              <span class="ti-pencil"></span>
                                          </a>
                                      </li>
