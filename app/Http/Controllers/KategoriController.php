@@ -106,13 +106,13 @@ class KategoriController extends Controller
             $kategori_menu = $kategori_menu;
             $sort = request()->sort;
             if($sort == 'desc'){
-                $produk = Produk::with('produk_image')->where('kategori_id', $kategori_menu->id)->orderBy('id', 'desc')->paginate(20);
+                $produk = Produk::with('produk_image')->where(['kategori_id' => $kategori_menu->id, 'status' => '1'])->orderBy('id', 'desc')->paginate(20);
             }elseif($sort == 'murah'){
-                $produk = Produk::with('produk_image')->where('kategori_id', $kategori_menu->id)->orderBy('harga', 'asc')->paginate(20);
+                $produk = Produk::with('produk_image')->where(['kategori_id' => $kategori_menu->id, 'status' => '1'])->orderBy('harga', 'asc')->paginate(20);
             }elseif($sort == 'mahal'){
-                $produk = Produk::with('produk_image')->where('kategori_id', $kategori_menu->id)->orderBy('harga', 'desc')->paginate(20);
+                $produk = Produk::with('produk_image')->where(['kategori_id' => $kategori_menu->id, 'status' => '1'])->orderBy('harga', 'desc')->paginate(20);
             }else{
-                $produk = Produk::with('produk_image')->where('kategori_id', $kategori_menu->id)->orderBy('id', 'desc')->paginate(20);
+                $produk = Produk::with('produk_image')->where(['kategori_id' => $kategori_menu->id, 'status' => '1'])->orderBy('id', 'desc')->paginate(20);
             }
 
 
@@ -120,13 +120,13 @@ class KategoriController extends Controller
             $kategori_menu = SubKategori::with('kategori')->where('slug', $slug)->first();
             $sort = request()->sort;
             if($sort == 'desc'){
-                $produk = Produk::with('produk_image')->where('subkategori_id', $kategori_menu->id)->orderBy('id', 'desc')->paginate(20);
+                $produk = Produk::with('produk_image')->where(['subkategori_id' => $kategori_menu->id, 'status' => '1'])->orderBy('id', 'desc')->paginate(20);
             }elseif($sort == 'murah'){
-                $produk = Produk::with('produk_image')->where('subkategori_id', $kategori_menu->id)->orderBy('harga', 'asc')->paginate(20);
+                $produk = Produk::with('produk_image')->where(['subkategori_id' => $kategori_menu->id, 'status' => '1'])->orderBy('harga', 'asc')->paginate(20);
             }elseif($sort == 'mahal'){
-                $produk = Produk::with('produk_image')->where('subkategori_id', $kategori_menu->id)->orderBy('harga', 'desc')->paginate(20);
+                $produk = Produk::with('produk_image')->where(['subkategori_id' => $kategori_menu->id, 'status' => '1'])->orderBy('harga', 'desc')->paginate(20);
             }else{
-                $produk = Produk::with('produk_image')->where('subkategori_id', $kategori_menu->id)->orderBy('id', 'desc')->paginate(20);
+                $produk = Produk::with('produk_image')->where(['subkategori_id' => $kategori_menu->id, 'status' => '1'])->orderBy('id', 'desc')->paginate(20);
             }
 
         }

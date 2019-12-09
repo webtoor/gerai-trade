@@ -3,7 +3,7 @@
 @section('content')
 
 
-<div class="single-product-slider">
+<div class="single-product-slider" >
 
     <div class="container-fluid">
 
@@ -49,7 +49,7 @@
                      @if($produks->status)
                      Aktif
                      @else
-                     Non-Aktif
+                     Belum Aktif
                      @endif    
                      </td>
  
@@ -90,7 +90,7 @@
     </div>
 
 </div>
-<footer class="ftco-footer ftco-section" style="background-color:#f8f9fa">
+<footer class="ftco-footer ftco-section" style="background-color:#f8f9fa; margin-top:100px;">
     @include('users.partials.footer');
 </footer> 
 
