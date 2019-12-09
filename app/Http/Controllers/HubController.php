@@ -147,4 +147,20 @@ class HubController extends Controller
         DB::statement("ALTER TABLE product_images AUTO_INCREMENT = 1");
         return back()->withSuccess(trans('Anda Berhasil menghapus Foto Produk')); 
     }
+
+    public function deleteProduk($produk_id){
+        $produk_image = ProdukImage::where('product_id', $produk_id)->get();
+        if(count($produk_image) > 0 ){
+            foreach($produk_image as $images){
+                Storage::disk('public')->delete($images->image_path);
+            }
+        }
+       
+        DB::statement("ALTER TABLE product_images AUTO_INCREMENT = 1");
+
+        $produk = Produk::findOrFail($produk_id)->delete();
+        DB::statement("ALTER TABLE products AUTO_INCREMENT = 1");
+        return back()->withSuccess(trans('Anda Berhasil menghapus Produk')); 
+
+    }
 }

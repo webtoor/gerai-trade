@@ -64,7 +64,7 @@
                                      <li class="list-inline-item">
                                              {!! Form::open([
                                                  'class'=>'delete',
-                                                 'url'  => route('admin-panel.delete-produk', $produks->id), 
+                                                 'url'  => route('home.delete-produk-saya', $produks->id), 
                                                  'method' => 'DELETE',
                                                  ]) 
                                              !!}
