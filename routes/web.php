@@ -158,6 +158,11 @@ Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']
                 Route::delete('delete-image/{produk_id}', 'HubController@deleteImage')->name('delete-image');
                 Route::delete('produk-saya/{produk_id}', 'HubController@deleteProduk')->name('delete-produk-saya');
 
+              // CERITA SAYA  
+
+                 Route::get('cerita-saya', 'HubController@getCeritaSaya')->name('cerita-saya');
+
+
 
     });  
 
