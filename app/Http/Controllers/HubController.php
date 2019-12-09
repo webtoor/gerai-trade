@@ -181,28 +181,29 @@ class HubController extends Controller
 
     function insertCerita(Request $request){
         $data = $request->validate([
-            'user_id' => ['required'],
             'judul' => ['required'],
             'konten' => ['required'],
             'images' => 'required|mimes:jpeg,jpg,png|max:5000'
         ]); 
-        
+        $hub_id = Auth::user()->id;
+
         try{
             $files = $request->file('images');
             $imageName = 'blog_'.time().Str::random(10).'.png';
             $path = Storage::disk('public')->putFileAs('blog', $files, $imageName);
                 $post = Blog::create([
-                'user_id' => $data['user_id'],
+                'user_id' => $hub_id,
                 'judul' => $data['judul'],
                 'konten' => $data['konten'],
+                'status' => '0',
                 'image' => $path
                 ]);
             $newPost = $post->replicate();
 
-            return redirect()->route('users.hub.blogs.cerita-saya')->withSuccess(trans('Berhasil Menambahkan Cerita'));
+            return redirect()->route('home.cerita-saya')->withSuccess(trans('Berhasil Menambahkan Cerita'));
 
         } catch (\Exception $e) {
-            $e;
+            return $e;
         }
 
     }

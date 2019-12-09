@@ -17,6 +17,7 @@ class Blog extends Model
         'image',
         'user_id',
         'status',
+        'dtapproved',
         'created_at',
         'updated_at'
     ];

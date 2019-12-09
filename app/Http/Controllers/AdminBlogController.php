@@ -26,7 +26,8 @@ class AdminBlogController extends Controller
             'konten' => ['required'],
             'images' => 'required|mimes:jpeg,jpg,png|max:5000'
         ]); 
-        
+        $now = date("Y-m-d H:i:s", strtotime('now'));
+
         try{
             $files = $request->file('images');
             $imageName = 'blog_'.time().Str::random(10).'.png';
@@ -35,6 +36,8 @@ class AdminBlogController extends Controller
                 'user_id' => $data['user_id'],
                 'judul' => $data['judul'],
                 'konten' => $data['konten'],
+                'status' => '1',
+                'dtapproved' => $now,
                 'image' => $path
                 ]);
             $newPost = $post->replicate();
