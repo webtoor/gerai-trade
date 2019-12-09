@@ -12,6 +12,7 @@ use App\Models\Kategori;
 use App\Models\SubKategori;
 use App\Models\Produk;
 use App\Models\ProdukImage;
+use App\Models\Blog;
 
 class HubController extends Controller
 {
@@ -163,5 +164,13 @@ class HubController extends Controller
         DB::statement("ALTER TABLE products AUTO_INCREMENT = 1");
         return back()->withSuccess(trans('Anda Berhasil menghapus Produk')); 
 
+    }
+
+    public function getCeritaSaya(){
+        $hub_id = Auth::user()->id;
+        $kategori = Kategori::all();
+
+        $blog = Blog::where('user_id', $hub_id)->orderBy('id', 'desc')->get();
+        return view ('users.hub.blogs.index', ['blog' => $blog, 'kategori' => $kategori]);
     }
 }
