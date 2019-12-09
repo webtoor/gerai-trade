@@ -156,6 +156,8 @@ Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']
                 Route::put('edit-produk-saya/{produk_id}', 'HubController@updateProduk')->name('update-produk-saya');
                 Route::post('edit-produk-saya/tambah-foto', 'HubController@tambahImage')->name('tambah-image');
                 Route::delete('delete-image/{produk_id}', 'HubController@deleteImage')->name('delete-image');
+                Route::delete('produk-saya/{produk_id}', 'HubController@deleteProduk')->name('delete-produk-saya');
+
 
     });  
 

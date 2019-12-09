@@ -12,6 +12,7 @@ use App\Models\Kategori;
 use App\Models\SubKategori;
 use App\Models\Produk;
 use App\Models\ProdukImage;
+
 class HubController extends Controller
 {
     public function index(){

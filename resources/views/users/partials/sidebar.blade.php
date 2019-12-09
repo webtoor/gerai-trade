@@ -31,6 +31,11 @@
                 <b style="font-size:14px;">PENJUALAN</b>    
             </p>
             <a href="#" class="list-group-item border-top-0" style="font-size:14px;">Penjualan Saya</a>
+
+            <p href="#" class="list-group-item border-bottom-0">
+                <b style="font-size:14px;">CERITA</b>    
+            </p>
+            <a href="#" class="list-group-item border-top-0" style="font-size:14px;">Cerita Saya</a>
             @endif
 
             @if(Auth::user()->role->role_id == '1')
