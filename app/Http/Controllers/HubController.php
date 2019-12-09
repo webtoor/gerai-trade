@@ -207,4 +207,11 @@ class HubController extends Controller
         }
 
     }
+
+    function edit($blog_id){
+        $kategori = Kategori::all();
+
+        $blog = Blog::where('id', $blog_id)->first();
+        return view('users.hub.blogs.editCerita', ['blog' => $blog, 'kategori' => $kategori]);
+    } 
 }
