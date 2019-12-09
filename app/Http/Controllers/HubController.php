@@ -214,4 +214,27 @@ class HubController extends Controller
         $blog = Blog::where('id', $cerita_id)->first();
         return view('users.hub.blogs.editCerita', ['blog' => $blog, 'kategori' => $kategori]);
     } 
+
+    function updateCerita(Request $request, $cerita_id){
+        $data = $request->validate([
+            'judul' => ['required'],
+            'konten' => ['required'],
+        ]); 
+        try {
+            $post = Blog::findOrFail($cerita_id);
+            $post->slug = null;
+            $post->update([
+                'judul' => $data['judul'],
+                'konten' => $data['konten'],
+            ]);
+            $newPost = $post->replicate();
+    
+    
+            return back()->withSuccess(trans('Anda Berhasil Memperbarui')); 
+            
+        }catch (\Exception $e) {
+            //$e;
+        }
+      
+    } 
 }
