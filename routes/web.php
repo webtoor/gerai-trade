@@ -147,6 +147,8 @@ Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']
         });  
         Route::group(['middleware' => ['mitra']], function(){
                 Route::get('produk-saya', 'HubController@index')->name('produk-saya');
+                Route::post('produk-saya', 'HubController@tambahProduk')->name('tambah-produk-saya');
+
     });  
 
 });  
