@@ -382,7 +382,7 @@
         
               <div class="row">
                   @foreach($blog as $blogs)
-                <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-0" style="padding-bottom:50px;">
                   <div class="card card-blog">
                     <div class="card-blog__img">
                         
