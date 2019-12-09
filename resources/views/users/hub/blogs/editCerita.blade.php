@@ -61,7 +61,44 @@
     </div>
 </div>
 </div>
-</div>
+</div>   
+<div class="modal fade" id="replaceImage" tabindex="-1" role="dialog" aria-labelledby="replaceImage" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            {!! Form::open([
+                'url'  => route('home.update-image'), 
+                'method' => 'PUT',
+                'enctype' => 'multipart/form-data'
+                ]) !!}  
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title c-grey-900">Ganti Foto</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                    <div class="col-sm-9">
+                        <input type="file" name="image_blog" required>
+                    </div>
+  
+                </div>
+              </div>
+          
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="blog_id" id="dataBlogId" required>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+  
+          </div>
+
+        </div>
+        {!! Form::close() !!}
+
+      </div>
                        
 
 <footer class="ftco-footer ftco-section" style="background-color:#f8f9fa; margin-top:100px;">
@@ -75,10 +112,19 @@
 <script>
 $(document).ready(function() {
 
+    $(document).ready(function() {
+
 $('#konten').summernote({
 height: 200
 });
 
+$("button#replacesImage").click(function () {
+            var blog_id =  $(this).data('blog_id');
+            $('#dataBlogId').val(blog_id);
+            console.log(blog_id)
+        });
+
+});
 });
 </script>
 @endsection

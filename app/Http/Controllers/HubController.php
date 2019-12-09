@@ -238,7 +238,7 @@ class HubController extends Controller
       
     } 
 
-    function updateImageBlog(Request $request){
+    function updateImageCerita(Request $request){
         $data = $request->validate([
             'blog_id' => 'required',
             'image_blog' => 'required|mimes:jpeg,jpg,png|max:5000'
