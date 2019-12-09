@@ -22,8 +22,10 @@
 
 
     <div class="col-sm-10" style="margin-top:30px;">
+    
     <div class="bgc-white p-10 bd">
-        <form action="#" method="POST" enctype="multipart/form-data">
+
+        <form action="{!! action('HubController@insertProduk') !!}" method="POST" enctype="multipart/form-data">
             {{ csrf_field() }}
           
                   <div class="form-group">
@@ -81,6 +83,7 @@
     </div>
     </div>
 </div>
+
 <footer class="ftco-footer ftco-section" style="background-color:#f8f9fa; margin-top:100px;">
     @include('users.partials.footer');
 </footer> 

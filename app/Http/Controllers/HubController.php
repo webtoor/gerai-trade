@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use App\Models\Kategori;
 use App\Models\SubKategori;
 use App\Models\Produk;
@@ -13,7 +17,7 @@ class HubController extends Controller
     public function index(){
         $hub_id = Auth::user()->id;
         $kategori = Kategori::with('sub_kategori')->get();
-        $produk = Produk::where('hub_id', $hub_id)->get();
+        $produk = Produk::where('hub_id', $hub_id)->orderBy('id','desc')->get();
         return view ('users.hub.produkSaya', ['kategori' => $kategori, 'produk' => $produk]);
     }
 
@@ -29,5 +33,54 @@ class HubController extends Controller
             [ 'status' => '1',
              'data' => $subkategori]
          );
+    }
+
+    public function insertProduk(Request $request){
+        $hub_id = Auth::user()->id;
+        $data = $request->validate([
+            'kategori_id' => ['required'],
+            'subkategori_id' => ['nullable'],
+            'nama_produk' => ['required'], 
+            'deskripsi' => ['required'], 
+            'stok' => ['required', 'numeric'],
+            'berat' => ['required','numeric'],
+            'harga_dasar' => ['required', 'numeric'],
+            'image_produk' => 'required|array|min:1|max:3',
+            'image_produk.*' => 'file|mimes:jpeg,jpg,png|max:8000'
+        ]); 
+        
+        try {
+            $post = Produk::create([
+            'hub_id' => $hub_id,
+            'kategori_id' => $data['kategori_id'],
+            'subkategori_id' => $data['subkategori_id'],
+            'nama_produk' => $data['nama_produk'],
+            'deskripsi' => $data['deskripsi'],
+            'stok' => $data['stok'],
+            'berat' => $data['berat'],
+            'harga_dasar' => $data['harga_dasar'],
+            'harga' => null,
+            'status' => '0'
+        ]);
+        
+            $newPost = $post->replicate();
+        
+            $files = $request->file('image_produk');
+            if(!empty($files)) :
+                foreach ($files as $file) :
+                $imageName = 'image_'.time().Str::random(10).'.png';
+                $path = Storage::disk('public')->putFileAs('produk', $file, $imageName);
+                    ProdukImage::create([
+                    'product_id' => $post->id,
+                    'image_path' => $path,
+                    ]);
+                endforeach;
+            endif;
+
+            return redirect()->route('home.produk-saya')->withSuccess(trans('Berhasil Menambahkan Produk'));
+
+        }catch(\Exception $e){
+            return $e;
+        }
     }
 }
