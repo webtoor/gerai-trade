@@ -83,4 +83,12 @@ class HubController extends Controller
             return $e;
         }
     }
+
+    public function editProduk($produk_id){
+        
+        $produk = Produk::with('produk_image')->where('id', $produk_id)->first();
+        $kategori = Kategori::all();
+
+        return view('users.hub.edit-produk', ['produk' => $produk, 'kategori' => $kategori, 'subkategori' => $subkategori]);
+    }
 }
