@@ -116,4 +116,27 @@ class HubController extends Controller
         }
  
     }
+
+    public function tambahImage(Request $request){
+        $data = $request->validate([
+            'produk_id' => 'required',
+            'image_produk' => 'required|file|mimes:jpeg,jpg,png|max:8000'
+        ]); 
+        
+        try {
+            $file = $request->file('image_produk');
+            $imageName = 'image_'.time().Str::random(10).'.png';
+            $path = Storage::disk('public')->putFileAs('produk', $file, $imageName);
+                ProdukImage::create([
+                'product_id' => $data['produk_id'],
+                'image_path' => $path,
+            ]);
+
+            return back()->withSuccess(trans('Anda Berhasil Menambah Foto Produk')); 
+
+        } catch (\Exception $e) {
+            
+        }
+      
+    }
 }
