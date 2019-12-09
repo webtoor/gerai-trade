@@ -163,6 +163,7 @@ Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']
                 Route::get('cerita-saya', 'HubController@getCeritaSaya')->name('cerita-saya');
                 Route::get('tambah-cerita-saya', 'HubController@tambahCerita')->name('tambah-cerita');
                 Route::post('tambah-cerita-saya', 'HubController@insertCerita')->name('insert-cerita');
+                Route::get('edit-cerita-saya/{produk_id}', 'HubController@editCerita')->name('edit-cerita');
 
 
 
