@@ -24,7 +24,7 @@
                 <div class="bgc-white p-20 bd">
 
                         {!! Form::open([
-                            'url'  => route('admin-panel.update-blog', $blog->id), 
+                            'url'  => route('home.update-cerita', $blog->id), 
                             'method' => 'PUT',
                             ]) !!} 
 
@@ -36,8 +36,6 @@
                                         <label>Konten <sup style="color:red"> *Wajib *Hanya Karakter/String</sup> </label>
                                        <textarea  id="konten" name="konten" class="form-control" required> {{$blog->konten}}</textarea>
                                 </div>
-                    
-                                <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
                                 <button type="submit" id="submit" class="btn btn-primary">Submit</button>
                 
                                 {!! Form::close() !!}

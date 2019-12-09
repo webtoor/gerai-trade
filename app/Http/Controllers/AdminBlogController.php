@@ -57,7 +57,7 @@ class AdminBlogController extends Controller
 
     function updateBlog(Request $request, $blog_id){
         $data = $request->validate([
-            'user_id' => ['required'],
+            /* 'user_id' => ['required'], */
             'judul' => ['required'],
             'konten' => ['required'],
             'status' => 'required'
@@ -66,7 +66,7 @@ class AdminBlogController extends Controller
             $post = Blog::findOrFail($blog_id);
             $post->slug = null;
             $post->update([
-                'user_id' => $data['user_id'],
+                /* 'user_id' => $data['user_id'], */
                 'judul' => $data['judul'],
                 'konten' => $data['konten'],
                 'status' => $data['status']

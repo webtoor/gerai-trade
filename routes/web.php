@@ -164,7 +164,8 @@ Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']
                 Route::get('tambah-cerita-saya', 'HubController@tambahCerita')->name('tambah-cerita');
                 Route::post('tambah-cerita-saya', 'HubController@insertCerita')->name('insert-cerita');
                 Route::get('edit-cerita-saya/{cerita_id}', 'HubController@editCerita')->name('edit-cerita');
-                Route::get('update-cerita-saya/{cerita_id}', 'HubController@updateCerita')->name('update-cerita');
+                Route::put('update-cerita-saya/{cerita_id}', 'HubController@updateCerita')->name('update-cerita');
+                Route::put('update-cerita-saya/edit-banner', 'HubController@updateImageBlog')->name('update-image-cerita');
 
 
 
