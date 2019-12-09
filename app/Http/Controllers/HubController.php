@@ -92,4 +92,28 @@ class HubController extends Controller
 
         return view('users.hub.edit-produk', ['produk' => $produk, 'kategori' => $kategori, 'subkategori' => $subkategori]);
     }
+
+    public function updateProduk(Request $request, $produk_id){
+        $data = $request->validate([
+            'kategori_id' => ['required'],
+            'subkategori_id' => ['nullable'],
+            'nama_produk' => ['required'], 
+            'deskripsi' => ['required'], 
+            'stok' => ['required', 'numeric'],
+            'berat' => ['required','numeric'],
+            'harga_dasar' => ['required', 'numeric'],
+        ]); 
+        
+        try {
+            $post = Produk::findOrFail($produk_id);
+            $post->slug = null;
+            $post->update($data);
+            $newPost = $post->replicate();
+
+            return back()->withSuccess(trans('Anda Berhasil mengubah produk')); 
+        } catch (\Exception $e) {
+            
+        }
+ 
+    }
 }

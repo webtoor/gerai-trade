@@ -22,13 +22,14 @@
 
 
     <div class="col-sm-10" style="margin-top:30px;">
-    
+            @include('users.partials.messages') 
+
             <div class="row gap-20 masonry pos-r">
                     <div class="masonry-sizer col-md-6"></div>
                     <div class="masonry-item col-md-6">
             <div class="bgc-white p-20 bd">
                 {!! Form::open([
-                    'url'  => route('admin-panel.update-produk', $produk->id), 
+                    'url'  => route('home.update-produk-saya', $produk->id), 
                     'method' => 'PUT',
                     ]) !!}  
             
@@ -210,7 +211,7 @@ height: 200
         contentType: "application/json",
         dataType: "json",
         type: 'GET',
-        url: "../get-subkategori/" + valueSelected,
+        url: "../produk-saya/" + valueSelected,
         success: function (results) {
           console.log(results);
           if(results['data'].length > 0){
