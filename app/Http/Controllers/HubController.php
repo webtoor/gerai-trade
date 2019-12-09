@@ -178,4 +178,32 @@ class HubController extends Controller
         $kategori = Kategori::all();
         return view ('users.hub.blogs.tambahCerita', ['kategori' => $kategori]);
     }
+
+    function insertCerita(Request $request){
+        $data = $request->validate([
+            'user_id' => ['required'],
+            'judul' => ['required'],
+            'konten' => ['required'],
+            'images' => 'required|mimes:jpeg,jpg,png|max:5000'
+        ]); 
+        
+        try{
+            $files = $request->file('images');
+            $imageName = 'blog_'.time().Str::random(10).'.png';
+            $path = Storage::disk('public')->putFileAs('blog', $files, $imageName);
+                $post = Blog::create([
+                'user_id' => $data['user_id'],
+                'judul' => $data['judul'],
+                'konten' => $data['konten'],
+                'image' => $path
+                ]);
+            $newPost = $post->replicate();
+
+            return redirect()->route('users.hub.blogs.cerita-saya')->withSuccess(trans('Berhasil Menambahkan Cerita'));
+
+        } catch (\Exception $e) {
+            $e;
+        }
+
+    }
 }
