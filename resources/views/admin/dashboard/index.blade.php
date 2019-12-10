@@ -159,6 +159,62 @@
             {!! Form::close() !!}
         </div>
     </div>
+
+<br>
+    <div class="bgc-white p-20 bd">
+            <h4>Verifikasi Produk</h4>
+               <div class="mT-30">
+                   <table id="dataTable2" class="table table-bordered" cellspacing="0" width="100%">
+                       <thead class="thead-light">
+                           <tr>
+                               <th width="100px">Nama Hub</th>
+                               <th width="200px">Nama Produk</th>
+                               <th>Harga Dasar</th>
+                               <th>Stok</th>
+                               <th>Berat</th>
+                               <th>Tanggal Pembuatan</th>
+                               <th width="130px">Action</th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           @foreach ($request_produk as $itemz)
+                               
+                           <tr>
+                           <td>{{$itemz->user->nama_hub}}</td>
+                           <td> {{-- @if($itemz->image)
+                                   <img src="{{ asset('storage/' .$itemz->image)}}" style="height:150px; width: 200px;">
+                                   @else
+                                   <img src="http://placehold.it/150x150" style="height:150px; width: 200px;"> 
+                                   @endif --}}
+                                   {{$itemz->nama_produk}}
+                           </td>
+                           <td>Rp {{number_format($itemz->harga_dasar,0, ".", ".")}}</td>
+                           <td>{{$itemz->stok}}</td>
+                           <td>{{$itemz->berat}} / gram</td>
+
+                           <td>{{ date("j-M-Y, H:i", strtotime($itemz->created_at))}}</td>
+                            <td><ul class="list-inline">
+                                   <li class="list-inline-item">
+                                           <button id="showModalCerita" data-toggle="modal" data-target="#showCerita" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"
+                                           data-komentarx="{{$items->komentar}}" data-judulx="{{$items->judul}}" data-kontens="{{$items->konten}}">
+                                               <span class="ti-zoom-in"></span>
+                                       </button>
+                                   </li>
+                                   <li class="list-inline-item">
+                                   <button data-id="{{$items->id}}" id="updateModalStatus" data-toggle="modal" data-target="#updateStatusCerita" title="{{ trans('Verifikasikan') }}" class="btn btn-success px-3 btn-sm">
+                                               <span class="fas fa-exclamation-triangle"></span>
+                                       </button>
+                                   </li>
+                           </ul>
+                               </td>
+                             
+                           </tr>
+                           @endforeach
+   
+                       </tbody>
+                   </table>
+               </div>
+           </div>
 @endsection
 @section('js')
 <script>

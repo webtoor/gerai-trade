@@ -9,6 +9,12 @@ export default (function () {
 		"oSearch": {"bSmart": false},
 	});
 
+	$('#dataTable2').DataTable({
+		aaSorting: [],
+		responsive:true,
+		"oSearch": {"bSmart": false},
+	});
+
 	$('#kelolaKategori').DataTable({
 		aaSorting: [],
 		responsive:true,

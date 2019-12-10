@@ -12,6 +12,8 @@ use App\Models\Alamat;
 use App\Models\Kategori;
 use App\Models\SubKategori;
 use App\Models\Blog;
+use App\Models\Produk;
+use App\Models\ProdukImage;
 
 class AdminController extends Controller
 {
@@ -23,7 +25,8 @@ class AdminController extends Controller
             $query->with('provinsi', 'kota_kabupatens', 'kecamatans', 'kelurahan_desa')->where(['jenis_alamat_id' => '1']);
         } ])->where(['status_mitra' => '2'])->get(); */
         $blog = Blog::where('status', '0')->get();
-        return view('admin.dashboard.index', ['jumlah_member' => count($member), 'jumlah_mitra' => count($mitra), 'request_blog' => $blog]);
+        $produk = Produk::where('status', '0')->get();
+        return view('admin.dashboard.index', ['request_produk' => $produk,'jumlah_member' => count($member), 'jumlah_mitra' => count($mitra), 'request_blog' => $blog]);
     }
 
     public function updateStatusMitra(Request $request){
@@ -42,7 +45,7 @@ class AdminController extends Controller
         $data = $request->validate([
             'status_id' => ['required'],
             'cerita_id' => 'required',
-            'komentar' => ['required']
+            'komentar' => ['nullable']
         ]); 
         try {
             $now = date("Y-m-d H:i:s", strtotime('now'));
