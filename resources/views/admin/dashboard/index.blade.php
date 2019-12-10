@@ -161,6 +161,9 @@
     </div>
 
 <br>
+
+
+<!-- VERIFIKASI CERITA -->
     <div class="bgc-white p-20 bd">
             <h4>Verifikasi Produk</h4>
                <div class="mT-30">
@@ -195,8 +198,8 @@
                            <td>{{ date("j-M-Y, H:i", strtotime($itemz->created_at))}}</td>
                             <td><ul class="list-inline">
                                    <li class="list-inline-item">
-                                           <button id="showModalCerita" data-toggle="modal" data-target="#showCerita" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"
-                                           data-komentarx="{{$items->komentar}}" data-judulx="{{$items->judul}}" data-kontens="{{$items->konten}}">
+                                           <button id="showModalProduk" data-toggle="modal" data-target="#showProduk" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"
+                                           data-deskripsi="{{$itemz->deskripsi}}" data-nama_produk="{{$itemz->nama_produk}}" data-komentart="{{$itemz->komentar}}">
                                                <span class="ti-zoom-in"></span>
                                        </button>
                                    </li>
@@ -215,11 +218,35 @@
                    </table>
                </div>
            </div>
+
+<!-- SHOW CERITA KITA -->
+<div class="modal fade" id="showProduk" tabindex="-1" role="dialog" aria-labelledby="showMitraLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="nama_produk"></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div id="deskripsi">
+
+                </div>
+                <div id="komentart">
+
+                </div>
+          </div>
+        <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 @section('js')
 <script>
 $(document).ready(function () {
-
 
     $("button#showModalCerita").click(function () {
             var judulx = $(this).data('judulx');
@@ -240,6 +267,22 @@ $(document).ready(function () {
         $('#cerita_id').val(cerita_id);
 
     });
+
+    $("button#showModalProduk").click(function () {
+            var nama_produk = $(this).data('nama_produk');
+            var deskripsi = $(this).data('deskripsi');
+            var komentart = $(this).data('komentart');
+
+
+            $('#nama_produk').html(nama_produk);
+
+            $('#deskripsi').html(deskripsi);
+            if(komentart){
+                $('#komentart').html('Komentar : ' + komentart);
+
+            }
+
+        });
 });
 </script>
 
