@@ -83,7 +83,7 @@
                                 </li>
                                 <li class="list-inline-item">
                                 <button data-id="{{$items->id}}" id="updateModalMitra" data-toggle="modal" data-target="#updateStatusMitra" title="{{ trans('Verifikasikan') }}" class="btn btn-success px-3 btn-sm">
-                                            <span class="ti-check"></span>
+                                            <span class="fas fa-exclamation-triangle"></span>
                                     </button>
                                 </li>
                         </ul>
@@ -108,7 +108,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body text-center">
+            <div class="modal-body">
         
           </div>
         <div class="modal-footer">
@@ -120,7 +120,7 @@
 
         <div class="modal fade" id="updateStatusMitra" tabindex="-1" role="dialog" aria-labelledby="updateStatusMitraLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
-             {!! Form::open([ 'route' => ['admin-panel.verifikasi'], 'method' => "PUT"])!!}
+            {{--  {!! Form::open([ 'route' => ['admin-panel.verifikasi'], 'method' => "PUT"])!!} --}}
 
               <div class="modal-content">
                 <div class="modal-header">
@@ -130,7 +130,20 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                    <p>Apakah Anda setuju user ini menjadi Mitra?</p>
+                <div class="form-group">
+                        <label>Apakah Anda setuju untuk menerbitkan cerita ini?<sup style="color:red"> *Wajib</sup></label>
+                        <select class="form-control" name="status_id" required>
+                            <option value="">Pilih</option>
+                            <option value="1">Ya</option>
+                            <option value="0">Tidak</option>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                            <label>Komentar </label>
+                           <textarea name="komentar" class="form-control" ></textarea>
+                    </div>
               </div>
             <div class="modal-footer">
                     <input type="hidden" id="user_id" name="user_id">
@@ -138,7 +151,7 @@
                     <button type="submit" class="btn btn-primary btn-md">Ya</button>
                 </div>
             </div>
-            {!! Form::close() !!}
+            {{-- {!! Form::close() !!} --}}
         </div>
     </div>
 @endsection
