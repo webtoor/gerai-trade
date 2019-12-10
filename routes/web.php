@@ -49,6 +49,7 @@ Route::get('/update-app', function () {
 
         Route::get('/', 'AdminController@index')->name('admin');
         Route::put('verifikasi', 'AdminController@updateStatusMitra')->name('verifikasi');
+        Route::put('verifikasi-cerita', 'AdminController@verifikasiCerita')->name('verifikasiCerita');
 
         //KATEGORI 
         Route::get('kelola-kategori', 'AdminController@kelolaKategori')->name('kelola-kategori');
@@ -85,7 +86,6 @@ Route::get('/update-app', function () {
         Route::post('hub', 'AdminController@addMitra')->name('addMitra');
         Route::get('edit-hub/{user_id}', 'AdminController@editHub')->name('editHub');
         Route::put('update-hub/{hub_id}', 'AdminController@updateHub')->name('updateHub');
-        Route::put('update-status-cerita/{cerita_id}', 'AdminController@updateStatusCerita')->name('updateStatusCerita');
 
         Route::delete('mitra/{user_id}', 'AdminController@deleteMitra')->name('deleteMitra');
 

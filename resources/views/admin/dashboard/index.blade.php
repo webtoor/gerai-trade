@@ -120,7 +120,7 @@
 
         <div class="modal fade" id="updateStatusCerita" tabindex="-1" role="dialog" aria-labelledby="updateStatusMitraLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
-            {{--  {!! Form::open([ 'route' => ['admin-panel.verifikasi'], 'method' => "PUT"])!!} --}}
+             {!! Form::open([ 'route' => ['admin-panel.verifikasiCerita'], 'method' => "PUT"])!!}
 
               <div class="modal-content">
                 <div class="modal-header">
@@ -146,12 +146,12 @@
                     </div>
               </div>
             <div class="modal-footer">
-                    <input type="hidden" id="user_id" name="user_id">
+                    <input type="hidden" id="cerita_id" name="cerita_id">
                     <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary btn-md">Submit</button>
                 </div>
             </div>
-            {{-- {!! Form::close() !!} --}}
+            {!! Form::close() !!}
         </div>
     </div>
 @endsection
@@ -170,8 +170,8 @@ $(document).ready(function () {
         });
 
     $("button#updateModalStatus").click(function () {
-        var user_id = $(this).data('id');
-        $('#user_id').val(user_id);
+        var cerita_id = $(this).data('id');
+        $('#cerita_id').val(cerita_id);
 
     });
 });

@@ -38,6 +38,16 @@ class AdminController extends Controller
 
     }
 
+    public function verifikasiCerita(Request $request){
+        $data = $request->validate([
+            'status_id' => ['required'],
+            'cerita_id' => 'required',
+            'komentar' => ['required']
+        ]); 
+
+        
+    }
+
     public function kelolaKategori(){
         $kategori = Kategori::all();
         $sub_kategori = SubKategori::with('kategori')->get();
