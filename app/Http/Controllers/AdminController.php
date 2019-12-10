@@ -44,8 +44,33 @@ class AdminController extends Controller
             'cerita_id' => 'required',
             'komentar' => ['required']
         ]); 
+        try {
+            $now = date("Y-m-d H:i:s", strtotime('now'));
 
         
+            if($data['status_id'] == '1'){
+                Blog::findOrFail($data['cerita_id'])->update([
+                    'status' => '1',
+                    'komentar' => $data['komentar'],
+                    'dtapproved' => $now,
+                ]);
+
+            }else{
+                Blog::findOrFail($data['cerita_id'])->update([
+                    'status' => '0',
+                    'komentar' => $data['komentar']
+                ]);
+
+            }
+            return back()->withSuccess(trans('Berhasil')); 
+
+
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    
+
     }
 
     public function kelolaKategori(){

@@ -77,7 +77,7 @@
                          <td><ul class="list-inline">
                                 <li class="list-inline-item">
                                         <button id="showModalCerita" data-toggle="modal" data-target="#showCerita" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"
-                                        data-judulx="{{$items->judul}}" data-kontens="{{$items->konten}}">
+                                        data-komentarx="{{$items->komentar}}" data-judulx="{{$items->judul}}" data-kontens="{{$items->konten}}">
                                             <span class="ti-zoom-in"></span>
                                     </button>
                                 </li>
@@ -108,8 +108,13 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body" id="modal-body">
-        
+            <div class="modal-body">
+                <div id="kontenx">
+
+                </div>
+                <div id="komentarx">
+
+                </div>
           </div>
         <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Tutup</button>
@@ -163,9 +168,14 @@ $(document).ready(function () {
     $("button#showModalCerita").click(function () {
             var judulx = $(this).data('judulx');
             var kontens = $(this).data('kontens');
+            var komentars = $(this).data('komentarx');
 
             $('#showCeritaLabel').html(judulx);
-            $('#modal-body').html(kontens);
+            $('#kontenx').html(kontens);
+            if(komentars){
+                $('#komentarx').html('Komentar : ' + komentars);
+
+            }
 
         });
 
