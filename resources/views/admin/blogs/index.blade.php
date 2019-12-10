@@ -23,7 +23,6 @@
               
                 <tr>
                     <td>{{$blogs->judul}}</td>
-                    
                    {{--  <td> {!! \Illuminate\Support\Str::limit(html_entity_decode($blogs->konten),100) !!}</td> --}}
                     <td>
                         @if($blogs->user->nama_hub)

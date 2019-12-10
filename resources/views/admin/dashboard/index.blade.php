@@ -77,12 +77,12 @@
                          <td><ul class="list-inline">
                                 <li class="list-inline-item">
                                         <button id="showModalCerita" data-toggle="modal" data-target="#showCerita" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"
-                                        data-juduls="{{$items->judul}}" data-kontens="{{$items->konten}}">
+                                        data-judulx="{{$items->judul}}" data-kontens="{{$items->konten}}">
                                             <span class="ti-zoom-in"></span>
                                     </button>
                                 </li>
                                 <li class="list-inline-item">
-                                <button data-id="{{$items->id}}" id="updateModalMitra" data-toggle="modal" data-target="#updateStatusMitra" title="{{ trans('Verifikasikan') }}" class="btn btn-success px-3 btn-sm">
+                                <button data-id="{{$items->id}}" id="updateModalStatus" data-toggle="modal" data-target="#updateStatusCerita" title="{{ trans('Verifikasikan') }}" class="btn btn-success px-3 btn-sm">
                                             <span class="fas fa-exclamation-triangle"></span>
                                     </button>
                                 </li>
@@ -108,7 +108,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" id="modal-body">
         
           </div>
         <div class="modal-footer">
@@ -118,7 +118,7 @@
     </div>
 </div>
 
-        <div class="modal fade" id="updateStatusMitra" tabindex="-1" role="dialog" aria-labelledby="updateStatusMitraLabel" aria-hidden="true">
+        <div class="modal fade" id="updateStatusCerita" tabindex="-1" role="dialog" aria-labelledby="updateStatusMitraLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
             {{--  {!! Form::open([ 'route' => ['admin-panel.verifikasi'], 'method' => "PUT"])!!} --}}
 
@@ -148,7 +148,7 @@
             <div class="modal-footer">
                     <input type="hidden" id="user_id" name="user_id">
                     <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary btn-md">Ya</button>
+                    <button type="submit" class="btn btn-primary btn-md">Submit</button>
                 </div>
             </div>
             {{-- {!! Form::close() !!} --}}
@@ -161,16 +161,15 @@ $(document).ready(function () {
 
 
     $("button#showModalCerita").click(function () {
-            var juduls = $(this).data('juduls');
+            var judulx = $(this).data('judulx');
             var kontens = $(this).data('kontens');
 
-            $('#showCeritaLabel').html(juduls);
-            $('.modal-body').html(kontens);
-
+            $('#showCeritaLabel').html(judulx);
+            $('#modal-body').html(kontens);
 
         });
 
-    $("button#updateModalMitra").click(function () {
+    $("button#updateModalStatus").click(function () {
         var user_id = $(this).data('id');
         $('#user_id').val(user_id);
 
