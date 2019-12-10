@@ -56,6 +56,8 @@
     </div>
 
 </div>
+
+
 <footer class="ftco-footer ftco-section" style="background-color:#f8f9fa; margin-top:100px;">
     @include('users.partials.footer');
 </footer> 

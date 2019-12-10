@@ -116,7 +116,6 @@
 <script>
 $(document).ready(function() {
 
-    $(document).ready(function() {
 
 $('#konten').summernote({
 height: 200
@@ -128,7 +127,7 @@ $("button#replacesImage").click(function () {
             console.log(blog_id)
         });
 
-});
+
 });
 </script>
 @endsection
