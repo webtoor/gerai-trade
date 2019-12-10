@@ -20,6 +20,9 @@ class CreateBlogsTable extends Migration
             $table->string('konten');
             $table->string('image');
             $table->integer('user_id')->unsigned();
+            $table->enum('status', ['0', '1']);
+            $table->string('komentar')->nullable();
+            $table->dateTime('dtapproved');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

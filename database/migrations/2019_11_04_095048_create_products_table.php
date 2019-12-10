@@ -23,8 +23,11 @@ class CreateProductsTable extends Migration
             $table->string('deskripsi', 200);
             $table->integer('stok');
             $table->integer('berat')->unsigned();
-            $table->bigInteger('harga');
+            $table->bigInteger('harga_dasar')->nullable();
+            $table->bigInteger('harga')->nullable();
             $table->integer('rating')->unsigned();
+            $table->enum('status', ['0', '1']);
+            $table->string('komentar')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

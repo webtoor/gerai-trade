@@ -13,7 +13,12 @@
 
 
     <div class="col-sm-10" style="margin-top:30px;">
+      
     <div class="bgc-white p-10 bd">
+        <div class="text-center">
+                <b>Produk</b>
+                <h4 class="c-blue-900"><b>Produk Saya</b></h4>
+            </div>
     @include('users.partials.messages') 
 
     <a href="{{route('home.tambah-produk')}}" class="btn btn-dark btn-md" title="{{ trans('Tambah Produk') }}"><b><i class="fa fa-plus"></i> Tambah Produk</b></a>

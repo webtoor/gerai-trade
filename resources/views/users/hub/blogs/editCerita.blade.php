@@ -17,6 +17,10 @@
 
 
     <div class="col-sm-10" style="margin-top:30px;">
+        <div class="text-center">
+            <b>Cerita</b>
+            <h4 class="c-blue-900"><b>Edit Cerita</b></h4>
+        </div>
             @include('users.partials.messages') 
             <div class="row gap-20 masonry pos-r">
                     <div class="masonry-sizer col-md-6"></div>

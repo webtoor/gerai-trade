@@ -21,10 +21,14 @@ class CreateAlamatsTable extends Migration
             $table->string('nama_penerima');
             $table->string('nohp_penerima');
             $table->string('province_id');
+            $table->string('province_name');
             $table->string('city_id');
-            $table->string('kecamatan_id');
-            $table->integer('kodepos')->unsigned();
+            $table->string('city_name');
 
+            $table->string('kecamatan_id');
+            $table->string('kecamatan_name');
+
+            $table->string('kodepos');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('jenis_alamat_id')->references('id')->on('rf_alamats')->onDelete('cascade');

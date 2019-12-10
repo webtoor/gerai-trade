@@ -22,6 +22,10 @@
 
 
     <div class="col-sm-10" style="margin-top:30px;">
+            <div class="text-center">
+                    <b>Produk</b>
+                    <h4 class="c-blue-900"><b>Edit Produk</b></h4>
+                </div>
             @include('users.partials.messages') 
 
             <div class="row gap-20 masonry pos-r">
