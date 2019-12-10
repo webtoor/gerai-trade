@@ -76,9 +76,10 @@
 
                          <td><ul class="list-inline">
                                 <li class="list-inline-item">
-                                    <button id="showModalMitra" data-toggle="modal" data-target="#showMitra" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm">
-                                        <span class="ti-zoom-in"></span>
-                                </button>
+                                        <button id="showModalCerita" data-toggle="modal" data-target="#showCerita" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"
+                                        data-juduls="{{$items->judul}}" data-kontens="{{$items->konten}}">
+                                            <span class="ti-zoom-in"></span>
+                                    </button>
                                 </li>
                                 <li class="list-inline-item">
                                 <button data-id="{{$items->id}}" id="updateModalMitra" data-toggle="modal" data-target="#updateStatusMitra" title="{{ trans('Verifikasikan') }}" class="btn btn-success px-3 btn-sm">
@@ -95,29 +96,27 @@
                 </table>
             </div>
         </div>
-        <div class="modal fade" id="showMitra" tabindex="-1" role="dialog" aria-labelledby="showMitraLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="showMitraLabel">Detail Informasi</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                  <div id="nama"> </div>
-                  <div id="alamat"> </div>
-                  <div id="provinsi"> </div>
-                  <div id="kota_kabs"> </div>
-                  <div id="kecamatans"> </div>
-                  <div id="kel_dess"> </div>
-                  </div>
-                <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Tutup</button>
-                    </div>
-                </div>
+       
+
+        <!-- SHOW CERITA KITA -->
+<div class="modal fade" id="showCerita" tabindex="-1" role="dialog" aria-labelledby="showMitraLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="showCeritaLabel"></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body text-center">
+        
+          </div>
+        <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Tutup</button>
             </div>
         </div>
+    </div>
+</div>
 
         <div class="modal fade" id="updateStatusMitra" tabindex="-1" role="dialog" aria-labelledby="updateStatusMitraLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -148,20 +147,13 @@
 $(document).ready(function () {
 
 
-    $("button#showModalMitra").click(function () {
-            var nama = $(this).data('nama');
-            var alamat = $(this).data('alamat');
-            var provinsi = $(this).data('provinsi');
-            var kota_kabs = $(this).data('kota_kabs');
-            var kecamatans = $(this).data('kecamatans');
-            var kel_dess = $(this).data('kel_dess');
+    $("button#showModalCerita").click(function () {
+            var juduls = $(this).data('juduls');
+            var kontens = $(this).data('kontens');
 
-            $('#nama').html('Nama : '+ nama);
-            $('#alamat').html('Alamat : '+ alamat);
-            $('#provinsi').html('Provinsi : '+ provinsi);
-            $('#kota_kabs').html('Kota/Kabupaten : '+ kota_kabs);
-            $('#kecamatans').html('Kecamatan : '+ kecamatans);
-            $('#kel_dess').html('Kelurahan/Desa : '+ kel_dess);
+            $('#showCeritaLabel').html(juduls);
+            $('.modal-body').html(kontens);
+
 
         });
 
