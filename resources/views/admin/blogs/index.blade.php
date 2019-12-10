@@ -37,7 +37,7 @@
                         @if($blogs->status)
                         Aktif
                         @else
-                        Non-Aktif
+                        Belum Aktif
                         @endif
                     </td>
                     <td>

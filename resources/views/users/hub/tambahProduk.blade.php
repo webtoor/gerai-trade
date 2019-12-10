@@ -22,12 +22,12 @@
 
 
     <div class="col-sm-10" style="margin-top:30px;">
-    
-    <div class="bgc-white p-10 bd">
             <div class="text-center">
                     <b>Produk</b>
                     <h4 class="c-blue-900"><b>Tambah Produk</b></h4>
                 </div>
+    <div class="bgc-white p-10 bd">
+            
             @include('users.partials.messages') 
 
         <form action="{!! action('HubController@insertProduk') !!}" method="POST" enctype="multipart/form-data">

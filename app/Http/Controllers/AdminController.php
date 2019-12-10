@@ -11,6 +11,7 @@ use App\Models\Provinsi;
 use App\Models\Alamat;
 use App\Models\Kategori;
 use App\Models\SubKategori;
+use App\Models\Blog;
 
 class AdminController extends Controller
 {
@@ -18,10 +19,11 @@ class AdminController extends Controller
     {
         $member = User_role::where('role_id', '1')->get();
         $mitra = User_role::where('role_id', '2')->get();
-        $reqMitra = User::with(['alamat' => function ($query) {
+        /* $reqMitra = User::with(['alamat' => function ($query) {
             $query->with('provinsi', 'kota_kabupatens', 'kecamatans', 'kelurahan_desa')->where(['jenis_alamat_id' => '1']);
-        } ])->where(['status_mitra' => '2'])->get();
-        return view('admin.dashboard.index', ['jumlah_member' => count($member), 'jumlah_mitra' => count($mitra), 'request_mitra' => $reqMitra]);
+        } ])->where(['status_mitra' => '2'])->get(); */
+        $blog = Blog::where('status', '0')->get();
+        return view('admin.dashboard.index', ['jumlah_member' => count($member), 'jumlah_mitra' => count($mitra), 'request_blog' => $blog]);
     }
 
     public function updateStatusMitra(Request $request){

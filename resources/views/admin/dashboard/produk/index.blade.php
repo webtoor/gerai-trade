@@ -43,7 +43,7 @@
                     @if($produks->status)
                     Aktif
                     @else
-                    Non-Aktif
+                    Belum Aktif
                     @endif    
                     </td>
 

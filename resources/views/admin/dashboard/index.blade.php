@@ -48,31 +48,35 @@
     </div>
     <br>
     <div class="bgc-white p-20 bd">
-         <h4>Menunggu Verifikasi</h4>
+         <h4>Verifikasi Cerita</h4>
             <div class="mT-30">
                 <table id="dataTable" class="table table-bordered" cellspacing="0" width="100%">
                     <thead class="thead-light">
                         <tr>
-                            <th>Nama</th>
-                            <th>Email</th>
-                            <th>Nomor Ponsel</th>
-                            <th>Action</th>
+                            <th width="100px">Nama Hub</th>
+                            <th width="200px">Foto Banner</th>
+                            <th>Judul Cerita</th>
+                            <th>Tanggal Pembuatan</th>
+                            <th width="130px">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($request_mitra as $items)
+                        @foreach ($request_blog as $items)
                             
                         <tr>
-                        <td>{{$items->nama_depan}} {{$items->nama_belakang}}</td>
-                        <td>{{$items->email}}</td>
-                        <td>{{$items->nomor_ponsel}}</td>
-                            <td>
-                         <ul class="list-inline">
+                        <td>{{$items->user->nama_hub}}</td>
+                        <td> @if($items->image)
+                                <img src="{{ asset('storage/' .$items->image)}}" style="height:150px; width: 200px;">
+                                @else
+                                <img src="http://placehold.it/150x150" style="height:150px; width: 200px;"> 
+                                @endif
+                        </td>
+                        <td>{{$items->judul}}</td>
+                        <td>{{ date("j-M-Y, H:i", strtotime($items->created_at))}}</td>
+
+                         <td><ul class="list-inline">
                                 <li class="list-inline-item">
-                                    <button id="showModalMitra" data-toggle="modal" data-target="#showMitra" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"
-                                data-nama="{{$items->nama_depan}} {{$items->nama_belakang}}" data-alamat="{{$items->alamat['alamat']}}" data-provinsi="{{$items->alamat['provinsi']['name']}}"
-                                data-kota_kabs="{{$items->alamat['kota_kabupatens']['name']}}" data-kecamatans="{{$items->alamat['kecamatans']['name']}}" data-kel_dess="{{$items->alamat['kelurahan_desa']['name']}}"
-                                >
+                                    <button id="showModalMitra" data-toggle="modal" data-target="#showMitra" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm">
                                         <span class="ti-zoom-in"></span>
                                 </button>
                                 </li>
