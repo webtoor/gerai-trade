@@ -129,7 +129,7 @@
 
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="updateStatusMitraLabel">Konfirmasi</h5>
+                  <h5 class="modal-title" id="updateStatusMitraLabel">Verifikasi Cerita</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -193,18 +193,18 @@
                            </td>
                            <td>Rp {{number_format($itemz->harga_dasar,0, ".", ".")}}</td>
                            <td>{{$itemz->stok}}</td>
-                           <td>{{$itemz->berat}} / gram</td>
+                           <td>{{$itemz->berat}} gram</td>
 
                            <td>{{ date("j-M-Y, H:i", strtotime($itemz->created_at))}}</td>
                             <td><ul class="list-inline">
                                    <li class="list-inline-item">
                                            <button id="showModalProduk" data-toggle="modal" data-target="#showProduk" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"
-                                           data-deskripsi="{{$itemz->deskripsi}}" data-nama_produk="{{$itemz->nama_produk}}" data-komentart="{{$itemz->komentar}}">
+                                   data-foto="{{$itemz->produk_image}}" data-deskripsi="{{$itemz->deskripsi}}" data-nama_produk="{{$itemz->nama_produk}}" data-komentart="{{$itemz->komentar}}">
                                                <span class="ti-zoom-in"></span>
                                        </button>
                                    </li>
                                    <li class="list-inline-item">
-                                   <button data-id="{{$items->id}}" id="updateModalStatus" data-toggle="modal" data-target="#updateStatusCerita" title="{{ trans('Verifikasikan') }}" class="btn btn-success px-3 btn-sm">
+                                   <button data-produk_id="{{$itemz->id}}" id="updateStatusProduk" data-toggle="modal" data-target="#updateStatusProduks" title="{{ trans('Verifikasikan') }}" class="btn btn-success px-3 btn-sm">
                                                <span class="fas fa-exclamation-triangle"></span>
                                        </button>
                                    </li>
@@ -230,6 +230,10 @@
               </button>
             </div>
             <div class="modal-body">
+
+                <div id="foto_produk" style="padding-bottom: 10px;">
+
+                </div>
                 <div id="deskripsi">
 
                 </div>
@@ -242,6 +246,47 @@
             </div>
         </div>
     </div>
+</div>
+
+
+<div class="modal fade" id="updateStatusProduks" tabindex="-1" role="dialog" aria-labelledby="updateStatusMitraLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+{{--          {!! Form::open([ 'route' => ['admin-panel.verifikasiProduk'], 'method' => "PUT"])!!}
+ --}}
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="updateStatusMitraLabel">Verifikasi Produk</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+            <div class="form-group">
+                    <label>Apakah Anda setuju untuk menerbitkan produk ini?<sup style="color:red"> *Wajib</sup></label>
+                    <select class="form-control" name="status_id" required>
+                        <option value="">Pilih</option>
+                        <option value="1">Ya</option>
+                        <option value="0">Tidak</option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                        <label>Harga TRADE <sup style="color:red"> *Wajib *Angka</sup></label>
+                       <input type="number" name="harga_trade" class="form-control" required>
+                </div>
+                <div class="form-group">
+                        <label>Komentar </label>
+                       <textarea name="komentar" class="form-control" ></textarea>
+                </div>
+          </div>
+        <div class="modal-footer">
+                <input type="hidden" id="produk_id" name="produk_id">
+                <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary btn-md">Submit</button>
+            </div>
+        </div>
+{{--         {!! Form::close() !!}
+ --}}    </div>
 </div>
 @endsection
 @section('js')
@@ -270,11 +315,28 @@ $(document).ready(function () {
 
     $("button#showModalProduk").click(function () {
             var nama_produk = $(this).data('nama_produk');
+            var foto_produk = $(this).data('foto');
+
             var deskripsi = $(this).data('deskripsi');
             var komentart = $(this).data('komentart');
+            var theImg1 = "/storage/" + foto_produk[0]['image_path'];
+            if(foto_produk[1]){
+                var theImg2 = "/storage/" + foto_produk[1]['image_path'];
+            }else{
+                var theImg2 = "http://placehold.it/200x200";
+            }
 
+            if(foto_produk[2]){
+                var theImg3 = "/storage/" + foto_produk[2]['image_path'];
+            }else{
+                var theImg3 = "http://placehold.it/200x200";
+            }
+/*          
+            console.log(foarr);
+            console.log(foto_produk[0]['image_path']); */
 
             $('#nama_produk').html(nama_produk);
+            $('#foto_produk').html('<img id="theImg1" src="'+theImg1 +'" style="height:200px; width:200px;"/>' + '<img id="theImg2" src="'+theImg2+'" style="margin-left:30px; height:200px; width:200px;"/>' + '<img id="theImg3" src="'+theImg3+'" style="margin-left:30px; height:200px; width:200px;"/>')
 
             $('#deskripsi').html(deskripsi);
             if(komentart){
@@ -283,6 +345,14 @@ $(document).ready(function () {
             }
 
         });
+
+        $("button#updateStatusProduk").click(function () {
+        var produk_id = $(this).data('produk_id');
+        $('#produk_id').val(produk_id);
+
+        console.log(produk_id)
+
+    });
 });
 </script>
 

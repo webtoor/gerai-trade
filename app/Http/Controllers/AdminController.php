@@ -42,24 +42,24 @@ class AdminController extends Controller
     }
 
     public function verifikasiCerita(Request $request){
+        /* return $request; */
         $data = $request->validate([
             'status_id' => ['required'],
             'cerita_id' => 'required',
-            'komentar' => ['nullable']
+            'komentar' => 'nullable'
         ]); 
         try {
             $now = date("Y-m-d H:i:s", strtotime('now'));
 
-        
             if($data['status_id'] == '1'){
-                Blog::findOrFail($data['cerita_id'])->update([
+                Blog::where('id', $data['cerita_id'])->update([
                     'status' => '1',
                     'komentar' => $data['komentar'],
                     'dtapproved' => $now,
                 ]);
 
             }else{
-                Blog::findOrFail($data['cerita_id'])->update([
+                Blog::where('id', $data['cerita_id'])->update([
                     'status' => '0',
                     'komentar' => $data['komentar']
                 ]);
@@ -70,7 +70,7 @@ class AdminController extends Controller
 
 
         } catch (\Throwable $th) {
-            throw $th;
+            //throw $th;
         }
     
 
