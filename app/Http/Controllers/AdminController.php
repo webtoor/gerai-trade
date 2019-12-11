@@ -76,6 +76,41 @@ class AdminController extends Controller
 
     }
 
+    public function verifikasiProduk(Request $request){
+        /* return $request; */
+        $data = $request->validate([
+            'status_id' => 'required',
+            'produk_id' => 'required',
+            'komentar' => 'nullable'
+        ]); 
+        try {
+            $now = date("Y-m-d H:i:s", strtotime('now'));
+
+            if($data['status_id'] == '1'){
+                Produk::where('id', $data['produk_id'])->update([
+                    'status' => '1',
+                    'komentar' => $data['komentar'],
+                    'dtapproved' => $now,
+                ]);
+
+            }else{
+                Produk::where('id', $data['produk_id'])->update([
+                    'status' => '0',
+                    'komentar' => $data['komentar']
+                ]);
+
+            }
+            return back()->withSuccess(trans('Berhasil')); 
+
+
+
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    
+
+    }
+
     public function kelolaKategori(){
         $kategori = Kategori::all();
         $sub_kategori = SubKategori::with('kategori')->get();

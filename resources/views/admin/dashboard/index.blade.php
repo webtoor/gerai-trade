@@ -251,8 +251,8 @@
 
 <div class="modal fade" id="updateStatusProduks" tabindex="-1" role="dialog" aria-labelledby="updateStatusMitraLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-{{--          {!! Form::open([ 'route' => ['admin-panel.verifikasiProduk'], 'method' => "PUT"])!!}
- --}}
+         {!! Form::open([ 'route' => ['admin-panel.verifikasiProduk'], 'method' => "PUT"])!!}
+
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="updateStatusMitraLabel">Verifikasi Produk</h5>
@@ -285,8 +285,8 @@
                 <button type="submit" class="btn btn-primary btn-md">Submit</button>
             </div>
         </div>
-{{--         {!! Form::close() !!}
- --}}    </div>
+        {!! Form::close() !!}
+    </div>
 </div>
 @endsection
 @section('js')
