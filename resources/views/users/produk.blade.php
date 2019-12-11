@@ -375,7 +375,7 @@
       </li>
 						</ul>
             <div>
-              {!! html_entity_decode($produk_detail->deskripsi) !!}
+              {{-- {!! html_entity_decode($produk_detail->deskripsi) !!} --}}
             
             </div>
             <form action="{{ url('cart') }}" method="POST">
@@ -396,34 +396,42 @@
                 <button type="submit" class="btn btn-primary" href="#">Masukan Keranjang</button>
                   </form>
                </div>
-							<div><a class="btn btn-success" href="{{$produk_detail->link_tokped}}">Beli di Tokopedia</a></div>
+							{{-- <div><a class="btn btn-success" href="{{$produk_detail->link_tokped}}">Beli di Tokopedia</a></div>
 
               </div>
               <div class="card_area d-flex align-items-center">
                       <div><a class="btn btn-warning" href="{{$produk_detail->link_shopee}}">Beli di Shopee</a></div>
                       <div><a class="btn btn-danger" href="{{$produk_detail->link_bukalapak}}">Beli di Bukalapak</a> </div>
 
-              </div>
+              </div> --}}
 					
 					</div>
 				</div>
         </div>
     </div>
 </div>
-{{-- <section class="product_description_area">
+<section class="">
 		<div class="container">
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
 				<li class="nav-item" style="margin-left: 30px;">
-					<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Deskripsi</a>
+					<a class="nav-link active" id="home-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="true">Informasi Produk</a>
         </li>
+
+          <li class="nav-item" style="margin-left: 30px;">
+              <a class="nav-link" id="ulasan-tab" data-toggle="tab" href="#ulasan" role="tab" aria-controls="ulasan" aria-selected="true">Ulasan</a>
+            </li>
 			</ul>
 			<div class="tab-content" id="myTabContent">
-				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-				</div>
-				
-			</div>
+				<div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+            {!! html_entity_decode($produk_detail->deskripsi) !!}
+
+        </div>
+        <div class="tab-pane fade" id="ulasan" role="tabpanel" aria-labelledby="ulasan-tab">
+            <p>Deskripsi Detail/Cerita Kita Deskripsi Detail/Cerita Kita Deskripsi Detail/Cerita Kita Deskripsi Detail/Cerita Kita Deskripsi Detail/Cerita Kita Deskripsi Detail/Cerita Kita </p>
+            
+          </div>
 		</div>
-	</section> --}}
+	</section>
 @endsection
 @section('js')
 
