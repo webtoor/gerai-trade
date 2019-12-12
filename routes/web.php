@@ -107,6 +107,7 @@ Route::group(['prefix'=> 'p', 'as'=> 'p' . '.', ], function(){
 
 // PRODUK DETAIL
 Route::get('/produk/{slug_produk}', 'HomeController@produkDetail')->name('produk-detail');
+Route::get('/produk/pagination/{produk_id}','HomeController@produkDetailPagination');
 
 //CART
 Route::group(['middleware' => 'member'], function(){

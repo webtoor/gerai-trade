@@ -9,6 +9,7 @@ use App\Models\Alamat;
 use App\Models\User;
 use App\Models\Kategori;
 use App\Models\Produk;
+use App\Models\ProdukUlasan;
 use App\Models\ProdukUnggulan;
 use App\Models\Blog;
 
@@ -70,9 +71,19 @@ class HomeController extends Controller
     }
 
     public function produkDetail($slug_produk){
+   
         $kategori =  Kategori::with('sub_kategori')->get();
-        $produk_detail = Produk::with(['produk_ulasan','produk_image', 'kategori' , 'subkategori'])->where('slug', $slug_produk)->orderBy('id', 'desc')->first();
-        return view('users.produk', ['kategori' => $kategori, 'produk_detail' => $produk_detail]);
+        $produk_detail = Produk::with(['produk_image', 'kategori' , 'subkategori'])->where('slug', $slug_produk)->orderBy('id', 'desc')->first();
+        $produk_ulasan = ProdukUlasan::with('user')->where('produk_id', $produk_detail->id)->orderBy('id', 'desc')->paginate(1);
+      
+        return view('users.produk', ['kategori' => $kategori, 'produk_detail' => $produk_detail, 'produk_ulasan' => $produk_ulasan]);
+    }
+
+    public function produkDetailPagination($produk_id){
+       
+            $produk_ulasan = ProdukUlasan::with('user')->where('produk_id', $produk_id)->orderBy('id', 'desc')->paginate(1);
+            return view('users.pagination.produkUlasan', ['produk_ulasan' => $produk_ulasan])->render();
+        
     }
 
     public function siapaKita(){

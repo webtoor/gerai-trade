@@ -45,7 +45,7 @@ class Produk extends Model
     }
 
     public function produk_ulasan(){
-        return $this->hasMany('App\Models\ProdukImage', 'produk_id', 'id');
+        return $this->hasMany('App\Models\ProdukUlasan', 'produk_id', 'id');
     }
 
     public function user(){
