@@ -439,7 +439,7 @@
                       <div class="box_total">
                         <h5>Overall</h5>
                         <h4>4.0</h4>
-                        <h6>(03 Reviews)</h6>
+                      <h6>({{$produk_ulasan->total()}} Ulasan)</h6>
                       </div>
                     </div>
                    {{--  <div class="col-6">
@@ -464,7 +464,6 @@
                   <div class="review_list">
                    <div class="ajaxPaginationProduk">
                       @include('users.pagination.produkUlasan')
-
                    </div>
     
                   </div>
@@ -485,6 +484,8 @@
             });
             
             }); */
+
+        // PAGINATION Page Produk
       $('.ajaxPaginationProduk').on('click', '.pagination a', function (e) {
         e.preventDefault();
         var page = $(this).attr('href').split('page=')[1];
