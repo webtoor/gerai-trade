@@ -189,7 +189,7 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Provinsi <sup style="color:red"> *Wajib</sup></label>
-            <select class="form-control" name="province_id" id="selectProvinsi" required>
+            <select class="form-control" name="uprovince_id" id="uselectProvinsi" required>
                 <option selected value="">Pilih Provinsi</option>
                     @php
                     $province = province();
@@ -225,6 +225,10 @@
         </div>
         <input type="hidden" id="uid" name="alamat_id" value="uid" required>
         <div class="modal-footer">
+
+            <input type="hidden" name="uprovince_name" id="uprovince_name">
+          <input type="hidden" name="ucity_name" id="ucity_name">
+          <input type="hidden" name="ukecamatan_name" id="ukecamatan_name">
             <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Tutup</button>
 
             <button type="submit" class="btn btn-primary btn-md">Submit</button>
@@ -331,6 +335,92 @@
     $('select#selectKecamatan').on('change', function (e) {
         let kecamatanName = $("option:selected", this).text();
         $("#kecamatan_name").val(kecamatanName);
+
+    });
+
+
+
+    // UBAH ALAMAT
+
+    $('select#uselectProvinsi').on('change', function (e) {
+    let optionSelected = $("option:selected", this);
+    let provinceName = $("option:selected", this).text();
+    $("#uprovince_name").val(provinceName);
+
+    let valueSelected = this.value;
+    console.log(valueSelected)
+    if(valueSelected){
+        $("#uselectKotaKab").prop('disabled', false);
+        $("#uselectKotaKab option").remove();
+        $('#uselectKotaKab').append($('<option>', {value:'', text:'Pilih Kota/Kabupaten'}, '</option>'));
+        $("#ucity_name").val("");
+
+        $("#uselectKecamatan").prop('disabled', true);
+        $("#uselectKecamatan option").remove();
+        $('#uselectKecamatan').append($('<option>', {value:'', text:'Pilih Kecamatan'}, '</option>'));
+        $("#ukecamatan_name").val("");
+
+    }else{
+
+        $("#uselectKotaKab").prop('disabled', true);
+        $("#uselectKotaKab option").remove();
+        $('#uselectKotaKab').append($('<option>', {value:'', text:'Pilih Kota/Kabupaten'}, '</option>'));
+        $("#uselectKecamatan").prop('disabled', true);
+        $("#uselectKecamatan option").remove();
+        $('#uselectKecamatan').append($('<option>', {value:'', text:'Pilih Kecamatan'}, '</option>'));
+    }
+
+    $.ajax({
+          type: "GET",
+          url : "{{ url('all-city') }}/" + valueSelected,
+          dataType : "JSON",
+          success:function(results){
+            console.log(results['rajaongkir']['results'])
+            $.each( results['rajaongkir']['results'], function(index, data) {
+                $('#uselectKotaKab').append($('<option>', { value:data['city_id'], text:data['type'] + " " + data['city_name']}, '</option>'));
+           })
+          }
+        });
+    });
+
+    $('select#uselectKotaKab').on('change', function (e) {
+    let optionSelected = $("option:selected", this);
+    let valueSelected = this.value;
+    let cityName = $("option:selected", this).text();
+    $("#ucity_name").val(cityName);
+
+    console.log(valueSelected)
+    if(valueSelected != ''){
+        $("#uselectKecamatan").prop('disabled', false);
+        $("#uselectKecamatan option").remove();
+        $('#uselectKecamatan').append($('<option>', {value:'', text:'Pilih Kecamatan'}, '</option>'));
+        $("#ukecamatan_name").val("");
+
+    }else{
+        $("#uselectKecamatan").prop('disabled', true);
+        $("#uselectKecamatan option").remove();
+        $('#selectKecamatan').append($('<option>', {value:'', text:'Pilih Kecamatan'}, '</option>'));
+        $("#ukecamatan_name").val("");
+
+    }
+
+    $.ajax({
+          type: "GET",
+          url : "{{ url('kecamatans') }}/" + valueSelected,
+          dataType : "JSON",
+          success:function(results){
+            console.log(results)
+            $.each( results['rajaongkir']['results'], function(index, data) {
+                $('#uselectKecamatan').append($('<option>', { value:data['subdistrict_id'], text:data['subdistrict_name']}, '</option>'));
+           })
+
+          }
+        });
+    });
+
+    $('select#selectKecamatan').on('change', function (e) {
+        let kecamatanName = $("option:selected", this).text();
+        $("#ukecamatan_name").val(kecamatanName);
 
     });
     $("button#ubahAlamats").click(function () {
