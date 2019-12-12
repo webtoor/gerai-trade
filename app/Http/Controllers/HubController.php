@@ -14,6 +14,7 @@ use App\Models\Produk;
 use App\Models\ProdukImage;
 use App\Models\Blog;
 use App\Models\Alamat;
+use App\Models\User;
 
 class HubController extends Controller
 {
@@ -279,5 +280,43 @@ class HubController extends Controller
         $alamat = Alamat::with('user')->where(['user_id' => $user_id, 'jenis_alamat_id' => '1'])->get();
 
         return view('users.hub.pengaturan', ['kategori' => $kategori, 'alamat' => $alamat]);
+    }
+
+    public function ubahAlamat(Request $request){
+       $data = $request->validate([
+            'alamat_id' => 'required',
+            'user_id' => 'required',
+            'unomor_ponsel' => ['required', 'string','min:11'],
+            'ualamat' => ['required'],
+            'uprovince_id' => ['required'],
+            'uprovince_name' => ['required'],
+            'ucity_id' => ['required'],
+            'ucity_name' => ['required'],
+            'ukecamatan_id' => ['required'],
+            'ukecamatan_name' => ['required'],
+            'ukodepos' => ['nullable']
+        ]); 
+
+        try {
+            Alamat::where('id', $data['alamat_id'])->update([
+                'alamat' => $data['ualamat'],
+                'province_id' => $data['uprovince_id'],
+                'province_name' => $data['uprovince_name'],
+                'city_id' => $data['ucity_id'],
+                'city_name' => $data['ucity_name'],
+                'kecamatan_id' => $data['ukecamatan_id'],
+                'kecamatan_name' => $data['ukecamatan_name'],
+                'kodepos' => $data['ukodepos']
+            ]);
+
+            User::find($data['user_id'])->update([
+                'nomor_ponsel' => $data['unomor_ponsel']
+            ]);
+
+            return back()->withSuccess(trans('Anda Berhasil Mengubah Alamat')); 
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }

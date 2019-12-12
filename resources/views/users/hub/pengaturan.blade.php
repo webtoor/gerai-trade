@@ -37,7 +37,7 @@
                                   @foreach($alamat as $alamats)
                                     <tr>
                                         <td><div class="br">{{$alamats->user->nama_hub}}</div>
-                                          <div style="font-size:12px;">{{$alamats->nohp_penerima}}</div>
+                                          <div style="font-size:12px;">{{$alamats->user->nomor_ponsel}}</div>
                                         </td>
                                         <td>{{$alamats->alamat}} </td>
                                         <td><div class="br">{{$alamats->province_name}}, {{$alamats->city_name}}</div> {{$alamats->kecamatan_name}}, {{$alamats->kodepos}}</div></td>
@@ -46,12 +46,12 @@
                                             <ul class="list-inline">
                                                 <li class="list-inline-item">
                                                     <button id="ubahAlamats" data-toggle="modal" data-target="#ubahAlamat" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"
-                                                data-uid="{{$alamats->id}}" data-unama_penerima="{{$alamats->nama_penerima}}" data-unohp_penerima="{{$alamats->nohp_penerima}}" data-ualamat="{{$alamats->alamat}}"
+                                                    data-user_id = "{{$alamats->user->id}}" data-uid="{{$alamats->id}}" data-unomor_ponsel="{{$alamats->user->nomor_ponsel}}" data-ualamat="{{$alamats->alamat}}"
                                                 ><span class="ti-pencil"></span>
                                                       Ubah
                                                 </button>
                                                 </li>
-                                                <li class="list-inline-item">
+                                              {{--   <li class="list-inline-item">
                                                     {!! Form::open([
                                                         'class'=>'delete',
                                                         'url'  => route('delete-alamat', $alamats->id), 
@@ -61,7 +61,7 @@
                                                         <button class="btn btn-danger px-3 btn-sm" title="{{ trans('app.delete_title') }}"><i class="ti-trash"></i>Hapus</button>
                                                         
                                                     {!! Form::close() !!}
-                                                </li>
+                                                </li> --}}
                                         </ul>
                                         </td>
                                         
@@ -85,7 +85,7 @@
  <!-- Modal Ubah Alamat-->
  <div class="modal fade" id="ubahAlamat" tabindex="-1" role="dialog" aria-labelledby="ubahAlamat" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
-            {!! Form::open([ 'route' => ['ubah-alamat'], 'method' => "PUT"])!!}
+            {!! Form::open([ 'route' => ['home.ubah-alamat'], 'method' => "PUT"])!!}
   
       <div class="modal-content">
         <div class="modal-header">
@@ -97,13 +97,9 @@
         <div class="modal-body">
               
         <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="inputEmail4">Nama Penerima <sup style="color:red"> *Wajib</sup></label>
-            <input type="text" class="form-control" name="unama_penerima" id="unama_penerima" required>
-          </div>
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-12">
             <label for="inputPassword4">Nomor Hp <sup style="color:red"> *Wajib</sup></label>
-            <input type="number" class="form-control" name="unohp_penerima" id="unohp_penerima" required>
+            <input type="number" class="form-control" name="unomor_ponsel" id="unomor_ponsel" required>
           </div>
         </div>
         <div class="form-group">
@@ -149,10 +145,11 @@
         </div>
         <div class="modal-footer">
             <input type="hidden" id="uid" name="alamat_id" value="uid" required>
+            <input type="hidden" id="user_id" name="user_id" value="user_id" required>
 
             <input type="hidden" name="uprovince_name" id="uprovince_name">
-          <input type="hidden" name="ucity_name" id="ucity_name">
-          <input type="hidden" name="ukecamatan_name" id="ukecamatan_name">
+            <input type="hidden" name="ucity_name" id="ucity_name">
+            <input type="hidden" name="ukecamatan_name" id="ukecamatan_name">
             <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Tutup</button>
 
             <button type="submit" class="btn btn-primary btn-md">Submit</button>
@@ -266,15 +263,15 @@
     });
     $("button#ubahAlamats").click(function () {
             var uid = $(this).data('uid');
-
-            var unama_penerima = $(this).data('unama_penerima');
-            var unohp_penerima = $(this).data('unohp_penerima');
+            var user_id = $(this).data('user_id');
+            var unomor_ponsel = $(this).data('unomor_ponsel');
             var ualamat = $(this).data('ualamat');
 
-              console.log(uid)
+              console.log(unomor_ponsel)
             $('#uid').val(uid);
-            $('#unama_penerima').val(unama_penerima);
-            $('#unohp_penerima').val(unohp_penerima);
+            $('#user_id').val(user_id);
+
+            $('#unomor_ponsel').val(unomor_ponsel);
             $('#ualamat').val(ualamat);
 
 
