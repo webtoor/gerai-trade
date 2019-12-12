@@ -211,20 +211,20 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Kecamatan <sup style="color:red"> *Wajib</sup></label>
-            <select class="form-control" name="ukecamatan" id="uselectKecamatan" required="true">
+            <select class="form-control" name="ukecamatan_id" id="uselectKecamatan" required="true">
               <option selected value="">Pilih Kecamatan</option>
         
           </select>
           </div>
           <div class="form-group col-md-6">
               <label>Kode Pos</label>
-              <input type="text" id="kodepos" name="kodepos" class="form-control">
+              <input type="text" id="ukodepos" name="ukodepos" class="form-control">
         
               </div>
         </div>
         </div>
-        <input type="hidden" id="uid" name="alamat_id" value="uid" required>
         <div class="modal-footer">
+            <input type="hidden" id="uid" name="alamat_id" value="uid" required>
 
             <input type="hidden" name="uprovince_name" id="uprovince_name">
           <input type="hidden" name="ucity_name" id="ucity_name">
@@ -418,7 +418,7 @@
         });
     });
 
-    $('select#selectKecamatan').on('change', function (e) {
+    $('select#uselectKecamatan').on('change', function (e) {
         let kecamatanName = $("option:selected", this).text();
         $("#ukecamatan_name").val(kecamatanName);
 

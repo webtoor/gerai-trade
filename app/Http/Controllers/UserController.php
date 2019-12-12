@@ -61,30 +61,36 @@ class UserController extends Controller
        
     }
     public function ubahAlamat(Request $request){
-        $data = $request->validate([
+       $data = $request->validate([
             'alamat_id' => 'required',
             'unama_penerima' => 'required',
             'unohp_penerima' => ['required', 'string','min:11'],
             'ualamat' => ['required'],
-            'uprovinsi' => ['required'],
-            'ukota_kabupaten' => ['required'],
-            'ukecamatan' => ['required'],
-            'ukelurahan_desa' => ['required'],
+            'uprovince_id' => ['required'],
+            'uprovince_name' => ['required'],
+            'ucity_id' => ['required'],
+            'ucity_name' => ['required'],
+            'ukecamatan_id' => ['required'],
+            'ukecamatan_name' => ['required'],
+            'ukodepos' => ['nullable']
         ]); 
        try {
         Alamat::where('id', $data['alamat_id'])->update([
             'nama_penerima' => $data['unama_penerima'],
             'nohp_penerima' => $data['unohp_penerima'],
             'alamat' => $data['ualamat'],
-            'provinsi_id' => $data['uprovinsi'],
-            'kota_kabupaten_id' => $data['ukota_kabupaten'],
-            'kecamatan_id' => $data['ukecamatan'],
-            'kelurahan_desa_id' => $data['ukelurahan_desa']
+            'province_id' => $data['uprovince_id'],
+            'province_name' => $data['uprovince_name'],
+            'city_id' => $data['ucity_id'],
+            'city_name' => $data['ucity_name'],
+            'kecamatan_id' => $data['ukecamatan_id'],
+            'kecamatan_name' => $data['ukecamatan_name'],
+            'kodepos' => $data['ukodepos']
 
         ]);
         return back()->withSuccess(trans('Anda Berhasil Mengubah Alamat')); 
        } catch (\Throwable $th) {
-           //throw $th;
+           throw $th;
        }
          
     }
