@@ -28,10 +28,13 @@ class UserController extends Controller
             'nama_penerima' => 'required',
             'nohp_penerima' => ['required', 'string','min:11'],
             'alamat' => ['required'],
-            'provinsi' => ['required'],
-            'kota_kabupaten' => ['required'],
-            'kecamatan' => ['required'],
-            'kelurahan_desa' => ['required'],
+            'province_id' => ['required'],
+            'province_name' => ['required'],
+            'city_id' => ['required'],
+            'city_name' => ['required'],
+            'kecamatan_id' => ['required'],
+            'kecamatan_name' => ['required'],
+            'kodepos' => ['nullable']
         ]); 
         $user_id = Auth::user()->id;
         try {
@@ -41,16 +44,19 @@ class UserController extends Controller
                 'user_id' => $user_id,
                 'alamat' => $data['alamat'],
                 'jenis_alamat_id' => '2',
-                'provinsi_id' => $data['provinsi'],
-                'kota_kabupaten_id' => $data['kota_kabupaten'],
-                'kecamatan_id' => $data['kecamatan'],
-                'kelurahan_desa_id' => $data['kelurahan_desa']
+                'province_id' => $data['province_id'],
+                'province_name' => $data['province_name'],
+                'city_id' => $data['city_id'],
+                'city_name' => $data['city_name'],
+                'kecamatan_id' => $data['kecamatan_id'],
+                'kecamatan_name' => $data['kecamatan_name'],
+                'kodepos' => $data['kodepos']
     
             ]);
             return back()->withSuccess(trans('Anda Berhasil Menambah Alamat baru')); 
 
         } catch (\Exception $e) {
-            //throw $e;
+            throw $e;
         }
        
     }

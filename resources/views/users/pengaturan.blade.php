@@ -28,8 +28,8 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th>Nama Penerima</th>
-                                        <th>Alamat Pengiriman</th>
-                                        <th>Daerah Pengiriman</th>
+                                        <th>Alamat Penerima</th>
+                                        <th>Daerah Penerima</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -40,7 +40,7 @@
                                           <div style="font-size:12px;">{{$alamats->nohp_penerima}}</div>
                                         </td>
                                         <td>{{$alamats->alamat}} </td>
-                                        <td><div class="br">,</div> {{$alamats->kelurahan_desa->name}}, </div></td>
+                                        <td><div class="br">{{$alamats->province_name}}, {{$alamats->city_name}}</div> {{$alamats->kecamatan_name}}, {{$alamats->kodepos}}</div></td>
                                         <td>
 
                                             <ul class="list-inline">
@@ -124,7 +124,7 @@
         </div>
         <div class="form-group col-md-6">
           <label>Kota/Kabupaten <sup style="color:red"> *Wajib</sup></label>
-          <select class="form-control" name="kota_kabupaten" id="selectKotaKab" required="true" disabled="disabled">
+          <select class="form-control" name="city_id" id="selectKotaKab" required="true" disabled="disabled">
             <option selected value="">Pilih Kota/Kabupaten</option>
       
         </select>       
@@ -133,7 +133,7 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label>Kecamatan <sup style="color:red"> *Wajib</sup></label>
-          <select class="form-control" name="kecamatan" id="selectKecamatan" required="true" disabled="disabled">
+          <select class="form-control" name="kecamatan_id" id="selectKecamatan" required="true" disabled="disabled">
             <option selected value="">Pilih Kecamatan</option>
       
         </select>
@@ -146,6 +146,9 @@
       </div>
       </div>
       <div class="modal-footer">
+          <input type="hidden" name="province_name" id="province_name">
+          <input type="hidden" name="city_name" id="city_name">
+          <input type="hidden" name="kecamatan_name" id="kecamatan_name">
         <button type="submit" class="btn btn-primary btn-md">Submit</button>
       </div>
       {!! Form::close() !!}
@@ -199,7 +202,7 @@
           </div>
           <div class="form-group col-md-6">
             <label>Kota/Kabupaten <sup style="color:red"> *Wajib</sup></label>
-            <select class="form-control" name="ukota_kabupaten" id="uselectKotaKab" required="true" disabled="disabled">
+            <select class="form-control" name="ucity_id" id="uselectKotaKab" required="true" disabled="disabled">
                 <option selected value="">Pilih Kota/Kabupaten</option>
         
           </select>       
