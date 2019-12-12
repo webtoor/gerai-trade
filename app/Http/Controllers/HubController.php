@@ -13,6 +13,7 @@ use App\Models\SubKategori;
 use App\Models\Produk;
 use App\Models\ProdukImage;
 use App\Models\Blog;
+use App\Models\Alamat;
 
 class HubController extends Controller
 {
@@ -268,5 +269,16 @@ class HubController extends Controller
 
         return back()->withSuccess(trans('Anda Berhasil Menghapus Cerita')); 
 
+    }
+
+
+    public function getPengaturan(){
+        $kategori = Kategori::with('sub_kategori')->get();
+        $provinsi = province();
+        $user_id = Auth::user()->id;
+
+        $alamat = Alamat::where(['user_id' => $user_id, 'jenis_alamat_id' => '1'])->get();
+
+        return view('users.hub.pengaturan', ['kategori' => $kategori, 'provinsi' => $provinsi, 'alamat' => $alamat]);
     }
 }

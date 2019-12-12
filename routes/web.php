@@ -170,6 +170,8 @@ Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']
                 Route::put('update-cerita-saya/{cerita_id}', 'HubController@updateCerita')->name('update-cerita');
                 Route::put('update-image-cerita', 'HubController@updateImageCerita')->name('update-image');
                 Route::delete('cerita-saya/{cerita_id}', 'HubController@deleteCerita')->name('delete-cerita');
+                Route::get('/pengaturan', 'HubController@getPengaturan')->name('index-pengaturan');
+                Route::put('/pengaturan-alamat/ubah', 'HubController@ubahAlamat')->name('ubah-alamat');
 
 
 
