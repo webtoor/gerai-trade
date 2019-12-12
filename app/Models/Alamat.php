@@ -36,4 +36,8 @@ class Alamat extends Model
     public function kelurahan_desa(){
         return $this->hasOne('App\Models\KelurahanDesa', 'id', 'kelurahan_desa_id');
     } */
+
+    public function user(){
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
+    }
 }
