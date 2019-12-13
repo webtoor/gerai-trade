@@ -10,6 +10,7 @@ use App\Models\Provinsi;
 use App\Models\KotaKabupaten;
 
 use App\Models\Alamat;
+use App\Models\Pesan;
 
 class UserController extends Controller
 {
