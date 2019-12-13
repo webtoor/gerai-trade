@@ -171,8 +171,8 @@
                                 <!-- Chat Send -->
                                 <div class="p-20 bdT bgc-white">
                                   <div class="pos-r">
-                                    <input type="text" class="form-control bdrs-10em m-0" placeholder="Say something...">
-                                    <button type="button" class="btn btn-primary bdrs-50p w-2r p-0 h-2r pos-a r-1 t-1">
+                                    <input type="text" id="pesan" name="pesan" class="form-control bdrs-10em m-0" placeholder="Tulis Pesan...">
+                                    <button type="button" id="send" class="btn btn-primary bdrs-50p w-2r p-0 h-2r pos-a r-1 t-1">
                                       <i class="fas fa-paper-plane"></i>
                                     </button>
                                   </div>
@@ -185,4 +185,35 @@
         </div>
         </div>
 </div>
-  @endsection
+@endsection
+
+@section('js')
+<script>
+$(document).ready(function () {
+
+    $('button#send').click(function () {
+        var user_id = "{{Auth::user()->id}}"
+        var pesan = $("#pesan").val();
+
+        console.log(user_id)
+
+        $.ajax({
+            headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            contentType: "application/json",
+            dataType: "json",
+            type: 'GET',
+            url: '/produk/pagination/' + produk_id + '?page=' + page
+        }).done(function (data) {
+            console.log(data)
+            $('.ajaxPaginationProduk').html(data);
+            location.hash = page;
+        }).fail(function(jqXHR, ajaxOptions, thrownError){
+              alert('Gagal Mengirim Pesan, Silakan Coba Lagi Nanti');
+        });
+    });
+});
+</script>
+
+@endsection
