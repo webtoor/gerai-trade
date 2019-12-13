@@ -10,6 +10,7 @@ class Pesan extends Model
     protected $fillable = [
         'from',
         'to_role',
+        'admin_read',
         'created_at',
         'updated_at'
     ];

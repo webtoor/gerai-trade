@@ -255,6 +255,9 @@ class AdminController extends Controller
         }])->orderBy('updated_at', 'desc')->get();
         if(count($pesan) > 0){
             $id_pesan = $pesan[0]->id;
+            Pesan::where('id', $id_pesan)->update([
+                'admin_read' => '1'
+            ]);
         }else{
             $id_pesan = null;
         }
@@ -262,17 +265,23 @@ class AdminController extends Controller
     }
 
     public function getPesanById($pesan_id){
+        Pesan::where('id', $pesan_id)->update([
+            'admin_read' => '1'
+        ]);
         $pesan = Pesan::with(['user', 'pesan_detail' => function ($query) {
             $query->orderBy('created_at');
         }])->orderBy('updated_at', 'desc')->get();
+       
         $keys = null;
         foreach($pesan as $key => $value){
             if(($value->id) == ($pesan_id)){
                 $keys = $key;
+              
             }
           
         }
         $id_pesan = $pesan_id;
+       
         return view('admin.dashboard.pesan', ['pesan' => $pesan, 'id_pesan' => $id_pesan, 'key_array' => $keys]);
 
     }

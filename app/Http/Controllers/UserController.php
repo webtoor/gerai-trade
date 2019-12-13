@@ -124,16 +124,17 @@ class UserController extends Controller
         ]);
         
         $check->update([
-            'updated_at' => date("Y-m-d H:i:s", strtotime('now'))
+            'updated_at' => date("Y-m-d H:i:s", strtotime('now')),
+            'admin_read' => '0'
         ]);
         $pesans = PesanDetail::create([
             'pesan_id' => $check->id,
             'pesan' => $request->pesan,
             'admin_id' => null
         ]);
-
-        //$pesans = PesanDetail::find(1);
         
-        return response()->json($pesans);
+        return response()->json([
+            'status' => 200,
+        ]);
     }
 }

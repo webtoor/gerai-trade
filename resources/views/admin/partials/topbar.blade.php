@@ -1,3 +1,7 @@
+<?php 
+use App\Models\Pesan;
+ ?>
+
 <div class="header navbar" style="box-shadow: none;">
     <div class="header-container">
         <ul class="nav-left">
@@ -14,17 +18,25 @@
                 <a href="" class="dropdown-toggle no-after" data-toggle="dropdown">
                     <i class="ti-bell"></i>
                 </a>
-
+--}}
               
             </li>
             <li class="notifications dropdown">
-                <span class="counter bgc-blue">3</span>
-                <a href="" class="dropdown-toggle no-after" data-toggle="dropdown">
+                    <?php $pesan_count = Pesan::where('admin_read', '0')->get(); ?>
+            <?php if(count($pesan_count) > 0){ ?>
+                <span class="counter bgc-blue">
+                   
+                   <?php echo count($pesan_count); ?>
+
+                </span>
+            <?php }
+               
+                ?>
+                <a href="{{route('admin-panel.getPesan')}}" >
                     <i class="ti-email"></i>
                 </a>
 
-              
-            </li> --}}
+            </li> 
             <li class="dropdown">
                 <a href="" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown">
                     <div class="peer mR-10">
@@ -45,7 +57,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+                    <a href="" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
                             <i class="ti-email mR-10"></i>
                             <span>Messages</span>
                         </a>
