@@ -72,3 +72,12 @@
         <span class="title">Kelola Cerita</span>
     </a>
 </li>
+
+<li class="nav-item">
+        <a class="sidebar-link" href="{{ route('admin-panel.getPesan') }}">
+            <span class="icon-holder">
+                <i class="c-gray-500 ti-layout-placeholder"></i>
+            </span>
+            <span class="title">Pesan</span>
+        </a>
+    </li>

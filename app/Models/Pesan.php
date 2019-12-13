@@ -18,4 +18,8 @@ class Pesan extends Model
         return $this->hasMany('App\Models\PesanDetail', 'pesan_id', 'id');
     }
 
+    public function user(){
+        return $this->belongsTo('App\Models\User', 'from', 'id');
+    }
+
 }

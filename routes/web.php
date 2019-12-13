@@ -51,6 +51,8 @@ Route::get('/update-app', function () {
         Route::put('verifikasi', 'AdminController@updateStatusMitra')->name('verifikasi');
         Route::put('verifikasi-cerita', 'AdminController@verifikasiCerita')->name('verifikasiCerita');
         Route::put('verifikasi-produk', 'AdminController@verifikasiProduk')->name('verifikasiProduk');
+        Route::get('pesan', 'AdminController@getPesan')->name('getPesan');
+        Route::get('pesan/{pesan_id}', 'AdminController@getPesanById')->name('getPesanById');
 
         //KATEGORI 
         Route::get('kelola-kategori', 'AdminController@kelolaKategori')->name('kelola-kategori');

@@ -14,6 +14,8 @@ use App\Models\SubKategori;
 use App\Models\Blog;
 use App\Models\Produk;
 use App\Models\ProdukImage;
+use App\Models\Pesan;
+use App\Models\PesanDetail;
 
 class AdminController extends Controller
 {
@@ -245,6 +247,34 @@ class AdminController extends Controller
 
     public function deleteMitra($user_id){
         return $user_id;
+    }
+
+    public function getPesan(){
+        $pesan = Pesan::with(['user', 'pesan_detail' => function ($query) {
+            $query->orderBy('created_at');
+        }])->orderBy('updated_at', 'desc')->get();
+        if(count($pesan) > 0){
+            $id_pesan = $pesan[0]->id;
+        }else{
+            $id_pesan = null;
+        }
+        return view('admin.dashboard.pesan', ['pesan' => $pesan, 'id_pesan' => $id_pesan, 'key_array' => 0]);
+    }
+
+    public function getPesanById($pesan_id){
+        $pesan = Pesan::with(['user', 'pesan_detail' => function ($query) {
+            $query->orderBy('created_at');
+        }])->orderBy('updated_at', 'desc')->get();
+        $keys = null;
+        foreach($pesan as $key => $value){
+            if(($value->id) == ($pesan_id)){
+                $keys = $key;
+            }
+          
+        }
+        $id_pesan = $pesan_id;
+        return view('admin.dashboard.pesan', ['pesan' => $pesan, 'id_pesan' => $id_pesan, 'key_array' => $keys]);
+
     }
 
 

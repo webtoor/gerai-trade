@@ -87,7 +87,7 @@
                                     <div class="peer peer-greed ord-0">
                                        
                                       <div class="layers ai-fe gapY-10 newPesan">
-                                          
+                                          @if($pesan > 0)
                                             <?php $dates = null; ?>
                                             @foreach ($pesan->pesan_detail as $details)
 
@@ -126,7 +126,7 @@
                                       
                                      
                                       @endforeach
-
+                                        @endif
                                      
                                     </div>
 

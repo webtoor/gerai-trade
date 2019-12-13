@@ -123,7 +123,9 @@ class UserController extends Controller
             'to_role' => 3
         ]);
         
-
+        $check->update([
+            'updated_at' => date("Y-m-d H:i:s", strtotime('now'))
+        ]);
         $pesans = PesanDetail::create([
             'pesan_id' => $check->id,
             'pesan' => $request->pesan,
