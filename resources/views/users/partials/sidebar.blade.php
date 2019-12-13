@@ -42,7 +42,7 @@
             <p href="#" class="list-group-item border-bottom-0">
               <b style="font-size:14px;">KOTAK MASUK</b>    
           </p>
-              <a href="{{route('home.getChat')}}" class="list-group-item border-top-0" style="font-size:14px;">Chat</a>
+              <a href="{{route('home.getChat')}}" class="list-group-item border-top-0" style="font-size:14px;">Pesan</a>
 
 
             <p href="#" class="list-group-item border-bottom-0">
