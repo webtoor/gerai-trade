@@ -14,4 +14,8 @@ class Pesan extends Model
         'updated_at'
     ];
 
+    public function pesan_detail(){
+        return $this->hasMany('App\Models\PesanDetail', 'pesan_id', 'id');
+    }
+
 }

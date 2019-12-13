@@ -143,29 +143,29 @@
                                     <div class="peer peer-greed ord-0">
                                       <div class="layers ai-fe gapY-10 newPesan">
                                        
+                                        <?php $dates = null; ?>
+                                       @foreach ($pesan->pesan_detail as $details)
+                                           @if($dates != date("Y-m-d", strtotime($details->created_at)))
+                                           <?php $dates = date("Y-m-d", strtotime($details->created_at)); ?>
+                                           <div style="margin-right:50%;">
+                                                <small>{{ date("j-M-Y", strtotime($details->created_at))}}</small>
+                                              </div>
 
-                                       
+                                           @endif
                                         <div class="layer">
                                           <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
                                             <div class="peer mL-10 ord-1">
-                                              <small>10:00 AM</small>
+                                              <small>{{ date("H:i", strtotime($details->created_at))}}</small>
                                             </div>
                                             <div class="peer-greed ord-0">
-                                              <span id="baru">??</span>
+                                              <span id="baru">{{$details->pesan}}</span>
                                             </div>
                                         </div>
                                       </div>
+ 
+                                      @endforeach
 
-                                      <div class="layer">
-                                            <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
-                                              <div class="peer mL-10 ord-1">
-                                                <small>10:00 AM</small>
-                                              </div>
-                                              <div class="peer-greed ord-0">
-                                                <span id="baru">??</span>
-                                              </div>
-                                          </div>
-                                        </div>
+                                     
                                     </div>
 
                                   </div>
@@ -196,10 +196,9 @@
 <script>
 
 $(document).ready(function () {
-    $("#toDown").animate({ scrollTop: $("#toDown")[0].scrollHeight }, 1000);
-
+    $('#toDown').scrollTop($('#toDown').height()); 
     $('button#send').click(function () {
-        $("#toDown").animate({ scrollTop: $("#toDown")[0].scrollHeight }, 1000);
+        
 
         var user_id = "{{Auth::user()->id}}"
         var pesan = $("#pesan").val();
@@ -213,9 +212,10 @@ $(document).ready(function () {
         var hours = nows.getHours().toString();
         var minutes = nows.getMinutes().toString();
         $('.newPesan').append("<div class='layer'><div class='peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2'><div class='peer mL-10 ord-1'><small> "+ hours + ":" +  minutes +" </small>  </div><div class='peer-greed ord-0'><span>"+ pesan +"</span></div></div>");
-  
+        $("#toDown").animate({ scrollTop: $("#toDown")[0].scrollHeight }, 1000);
 
-       /*  $.ajax({
+
+        $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
@@ -230,7 +230,7 @@ $(document).ready(function () {
         }).fail(function(jqXHR, ajaxOptions, thrownError){
               alert('Gagal Mengirim Pesan, Silakan Coba Lagi Nanti');
               //console.log(thrownError)
-        }); */
+        });
     });
 });
 </script>
