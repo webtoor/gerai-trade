@@ -7,7 +7,7 @@
         <div class="row">
         @include('users.partials.sidebar')
         <div class="col-sm-10">
-                <div class="bd" style="margin-top:10px;">
+                <div class="bd" style="margin-top:20px;">
                         <div class="peers fxw-nw pos-r">
                           <!-- Sidebar -->
                           <div class="peer bdR" id="chat-sidebar">
@@ -59,99 +59,46 @@
                                 <!-- Chat Box -->
                                 <div class="p-20 gapY-15">
                                   <!-- Chat Conversation -->
-                                  <div class="peers fxw-nw">
+                                 {{--  <div class="peers fxw-nw">
                                
                                     <div class="peer peer-greed">
                                       <div class="layers ai-fs gapY-5">
+
+                                           
                                         <div class="layer">
                                           <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
                                             <div class="peer mR-10">
                                               <small>10:00 AM</small>
                                             </div>
                                             <div class="peer-greed">
-                                              <span>Lorem Ipsum is simply dummy text of</span>
+                                            <span>sdadas</span>
                                             </div>
                                           </div>
                                         </div>
-                                        <div class="layer">
-                                                <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
-                                                  <div class="peer mR-10">
-                                                    <small>10:00 AM</small>
-                                                  </div>
-                                                  <div class="peer-greed">
-                                                    <span>Lorem Ipsum is simply dummy text of</span>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                              <div class="layer">
-                                                    <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
-                                                      <div class="peer mR-10">
-                                                        <small>10:00 AM</small>
-                                                      </div>
-                                                      <div class="peer-greed">
-                                                        <span>Lorem Ipsum is simply dummy text of</span>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                  <div class="layer">
-                                                        <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
-                                                          <div class="peer mR-10">
-                                                            <small>10:00 AM</small>
-                                                          </div>
-                                                          <div class="peer-greed">
-                                                            <span>Lorem Ipsum is simply dummy text of</span>
-                                                          </div>
-                                                        </div>
-                                                      </div>
-                                                      <div class="layer">
-                                                            <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
-                                                              <div class="peer mR-10">
-                                                                <small>10:00 AM</small>
-                                                              </div>
-                                                              <div class="peer-greed">
-                                                                <span>Lorem Ipsum is simply dummy text of</span>
-                                                              </div>
-                                                            </div>
-                                                          </div>
-                                        <div class="layer">
-                                          <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
-                                            <div class="peer mR-10">
-                                              <small>10:00 AM</small>
-                                            </div>
-                                            <div class="peer-greed">
-                                              <span>the printing and typesetting industry.</span>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="layer">
-                                          <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
-                                            <div class="peer mR-10">
-                                              <small>10:00 AM</small>
-                                            </div>
-                                            <div class="peer-greed">
-                                              <span>Lorem Ipsum has been the industry's</span>
-                                            </div>
-                                          </div>
-                                        </div>
+                                     
                                       </div>
                                     </div>
-                                  </div>
+                                  </div> --}}
           
                                   <!-- Chat Conversation -->
+                                
                                   <div class="peers fxw-nw ai-fe">
                                  
                                     <div class="peer peer-greed ord-0">
-                                      <div class="layers ai-fe gapY-10 newPesan">
                                        
-                                        <?php $dates = null; ?>
-                                       @foreach ($pesan->pesan_detail as $details)
-                                           @if($dates != date("Y-m-d", strtotime($details->created_at)))
-                                           <?php $dates = date("Y-m-d", strtotime($details->created_at)); ?>
-                                           <div style="margin-right:50%;">
-                                                <small>{{ date("j-M-Y", strtotime($details->created_at))}}</small>
-                                              </div>
+                                      <div class="layers ai-fe gapY-10 newPesan">
+                                          
+                                            <?php $dates = null; ?>
+                                            @foreach ($pesan->pesan_detail as $details)
 
-                                           @endif
+                                                @if($dates != date("Y-m-d", strtotime($details->created_at)))
+
+                                                <?php $dates = date("Y-m-d", strtotime($details->created_at)); ?>
+                                                <div style="margin-right:50%;">
+                                                     <small>{{ date("j-M-Y", strtotime($details->created_at))}}</small>
+                                                   </div>
+                                                @endif
+                                     @if($details->admin_id == null)
                                         <div class="layer">
                                           <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
                                             <div class="peer mL-10 ord-1">
@@ -162,14 +109,31 @@
                                             </div>
                                         </div>
                                       </div>
- 
+                                      @else
+                                      <div class="layer" style="margin-right:87%;">
+                                            <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
+                                              <div class="peer mL-10 ord-1">
+                                                <small>{{ date("H:i", strtotime($details->created_at))}}</small>
+                                              </div>
+                                              <div class="peer-greed ord-0">
+                                                <span id="baru">{{$details->pesan}}</span>
+                                              </div>
+                                          </div>
+                                        </div>
+
+                                        
+                                      @endif
+                                      
+                                     
                                       @endforeach
 
                                      
                                     </div>
 
                                   </div>
+                                  
                                 </div>
+                                
                               </div>
                               </div>
                               <div class="layer w-100">

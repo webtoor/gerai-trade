@@ -174,8 +174,6 @@ Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']
                 Route::get('/pengaturan', 'HubController@getPengaturan')->name('index-pengaturan');
                 Route::put('/pengaturan-alamat/ubah', 'HubController@ubahAlamat')->name('ubah-alamat');
 
-
-
     });  
 
 });  
