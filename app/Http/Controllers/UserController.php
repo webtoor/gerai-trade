@@ -106,9 +106,9 @@ class UserController extends Controller
     }
 
     public function getChat(){
-
+        $user_id = Auth::user()->id;
         $kategori = Kategori::with('sub_kategori')->get();
-
-        return view('users.chat', ['kategori' => $kategori]);
+        $pesan = Pesan::where('from', $user_id)->first();
+        return view('users.chat', ['kategori' => $kategori, 'pesan' => $pesan]);
     }
 }

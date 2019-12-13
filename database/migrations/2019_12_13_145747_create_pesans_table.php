@@ -16,11 +16,11 @@ class CreatePesansTable extends Migration
         Schema::create('pesans', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('from')->unsigned();
-            $table->integer('role')->unsigned();
+            $table->integer('to_role')->unsigned();
             $table->timestamps();
 
             $table->foreign('from')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('role')->references('id')->on('rf_roles')->onDelete('cascade');
+            $table->foreign('to_role')->references('id')->on('rf_roles')->onDelete('cascade');
         });
     }
 

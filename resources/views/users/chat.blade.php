@@ -204,11 +204,9 @@ $(document).ready(function () {
             contentType: "application/json",
             dataType: "json",
             type: 'GET',
-            url: '/produk/pagination/' + produk_id + '?page=' + page
+            url: '#'
         }).done(function (data) {
             console.log(data)
-            $('.ajaxPaginationProduk').html(data);
-            location.hash = page;
         }).fail(function(jqXHR, ajaxOptions, thrownError){
               alert('Gagal Mengirim Pesan, Silakan Coba Lagi Nanti');
         });
