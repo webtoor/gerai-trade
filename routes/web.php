@@ -149,10 +149,8 @@ Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']
                 Route::post('daftar-mitra', 'HomeController@insertDaftarMitra')->name('insertDaftarMitra');
                 Route::get('chat', 'UserController@getChat')->name('getChat');
                 Route::post('chat', 'UserController@ajaxPostChat')->name('ajaxPostChat');
-
         });  
         Route::group(['middleware' => ['mitra']], function(){
-
             // PRODUK
                 Route::get('produk-saya', 'HubController@index')->name('produk-saya');
                 Route::get('tambah-produk-saya', 'HubController@tambahProduk')->name('tambah-produk');

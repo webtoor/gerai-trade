@@ -111,4 +111,16 @@ class UserController extends Controller
         $pesan = Pesan::where('from', $user_id)->first();
         return view('users.chat', ['kategori' => $kategori, 'pesan' => $pesan]);
     }
+
+    public function ajaxPostChat(Request $request){
+        $check = Pesan::where('from', $request->user_id)->first();
+        if(!$check)
+        Pesan::create([
+            'from' => $request->user_id,
+            'to_role' => 3
+        ]);
+
+        
+        return response()->json($check);
+    }
 }

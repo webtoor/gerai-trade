@@ -194,21 +194,28 @@ $(document).ready(function () {
     $('button#send').click(function () {
         var user_id = "{{Auth::user()->id}}"
         var pesan = $("#pesan").val();
-
+        var params = {
+                'user_id' : user_id,
+                'pesan' : pesan
+            }
         console.log(user_id)
+        $('#pesan').val('');
 
         $.ajax({
             headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             contentType: "application/json",
             dataType: "json",
-            type: 'GET',
-            url: '#'
+            type: 'POST',
+            url: 'chat',
+            data: JSON.stringify(params),
         }).done(function (data) {
+            
             console.log(data)
         }).fail(function(jqXHR, ajaxOptions, thrownError){
-              alert('Gagal Mengirim Pesan, Silakan Coba Lagi Nanti');
+              /* alert('Gagal Mengirim Pesan, Silakan Coba Lagi Nanti'); */
+              console.log(thrownError)
         });
     });
 });
