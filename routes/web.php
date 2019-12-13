@@ -147,7 +147,7 @@ Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']
         Route::group(['middleware' => ['onlymember']], function(){
                 Route::get('daftar-mitra', 'HomeController@showDaftarMitra')->name('showDaftarMitra');
                 Route::post('daftar-mitra', 'HomeController@insertDaftarMitra')->name('insertDaftarMitra');
-                Route::post('chat', 'UserController@getChat')->name('getChat');
+                Route::get('chat', 'UserController@getChat')->name('getChat');
 
         });  
         Route::group(['middleware' => ['mitra']], function(){

@@ -103,4 +103,11 @@ class UserController extends Controller
 
         return back()->withSuccess(trans('Anda Berhasil Alamat Pengiriman')); 
     }
+
+    public function getChat(){
+
+        $kategori = Kategori::with('sub_kategori')->get();
+
+        return view('users.chat', ['kategori' => $kategori]);
+    }
 }
