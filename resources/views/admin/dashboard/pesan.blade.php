@@ -69,9 +69,11 @@
                     <!-- Chat Box -->
                     <div class="p-20 gapY-15">
                       <!-- Chat Conversation -->
-                      <div class="peers fxw-nw">
-                        <div class="peer peer-greed">
-                          <div class="layers ai-fs gapY-5">
+                      <div class="peers fxw-nw ai-fe">
+                                 
+                            <div class="peer peer-greed ord-0">
+                               
+                              <div class="layers ai-fe gapY-10 newPesan">
                             <?php $dates = null; ?>
 
                             @foreach($pesan[$key_array]->pesan_detail as $details)
@@ -79,13 +81,13 @@
                             @if($dates != date("Y-m-d", strtotime($details->created_at)))
 
                             <?php $dates = date("Y-m-d", strtotime($details->created_at)); ?>
-                            <div style="margin-left:50%;">
+                            <div style="margin-right:50%;">
                                     <small>{{ date("j-M-Y", strtotime($details->created_at))}}</small>
                                 </div>
                             @endif
                             @if($details->admin_id == null)
 
-                            <div class="layer">
+                            <div class="layer" style="margin-right:87%;">
                               <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
                                 <div class="peer mR-10">
                                     <small>{{ date("H:i", strtotime($details->created_at))}}</small>
@@ -96,7 +98,7 @@
                               </div>
                             </div>
                             @else
-                            <div class="layer" style="margin-left:87%;">
+                            <div class="layer">
                                 <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
                                     <div class="peer mR-10">
                                         <small>{{ date("H:i", strtotime($details->created_at))}}</small>
@@ -140,7 +142,7 @@
 
 $(document).ready(function () {
     $('#toDown').scrollTop($('#toDown').height()); 
-    /* $('button#send').click(function () {
+    $('button#send').click(function () {
         
 
         var user_id = "{{Auth::user()->id}}"
@@ -150,7 +152,7 @@ $(document).ready(function () {
                 'pesan' : pesan
             }
         $('#pesan').val('');
-  
+        console.log(params)
         var nows = new Date();
         var hours = nows.getHours().toString();
         var minutes = nows.getMinutes().toString();
@@ -165,7 +167,7 @@ $(document).ready(function () {
             contentType: "application/json",
             dataType: "json",
             type: 'POST',
-            url: 'chat',
+            url: 'pesan',
             data: JSON.stringify(params),
         }).done(function (data) {
             
@@ -174,7 +176,7 @@ $(document).ready(function () {
               alert('Gagal Mengirim Pesan, Silakan Coba Lagi Nanti');
               //console.log(thrownError)
         });
-    }); */
+    });
 });
 </script>
 

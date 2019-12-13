@@ -286,5 +286,12 @@ class AdminController extends Controller
 
     }
 
+    public function postAjaxPesan(Request $request){
+        
+        return response()->json([
+            'status' => 200,
+        ]);
+    }
+
 
 }

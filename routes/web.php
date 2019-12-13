@@ -53,6 +53,7 @@ Route::get('/update-app', function () {
         Route::put('verifikasi-produk', 'AdminController@verifikasiProduk')->name('verifikasiProduk');
         Route::get('pesan', 'AdminController@getPesan')->name('getPesan');
         Route::get('pesan/{pesan_id}', 'AdminController@getPesanById')->name('getPesanById');
+        Route::post('pesan', 'AdminController@postAjaxPesan')->name('postAjaxPesan');
 
         //KATEGORI 
         Route::get('kelola-kategori', 'AdminController@kelolaKategori')->name('kelola-kategori');
