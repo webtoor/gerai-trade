@@ -39,12 +39,19 @@
             @endif
 
             @if(Auth::user()->role->role_id == '1')
+            <p href="#" class="list-group-item border-bottom-0">
+              <b style="font-size:14px;">KOTAK MASUK</b>    
+          </p>
+              <a href="#" class="list-group-item border-top-0" style="font-size:14px;">Chat</a>
 
+              
             <p href="#" class="list-group-item border-bottom-0">
                     <b style="font-size:14px;">PEMBELIAN</b>    
                 </p>
                     <a href="#" class="list-group-item border-top-0" style="font-size:14px;">Daftar Transaksi</a>
-                    @endif
+
+                    
+            @endif
 
             <p href="#" class="list-group-item">
                     <b style="font-size:14px;">PROFIL SAYA</b>    

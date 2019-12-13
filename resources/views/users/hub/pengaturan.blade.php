@@ -16,7 +16,7 @@
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="pengaturan" role="tabpanel" aria-labelledby="wishlist-tab">
 
-                    <div class="row" style="margin-top:40px;">
+                    <div class="row" style="margin-top:20px;">
                       <div class="col-sm-12">
                           @include('admin.partials.messages') 
                        {{--  @if(count($alamat) < 1)
