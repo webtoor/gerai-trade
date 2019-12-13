@@ -116,25 +116,33 @@ class UserController extends Controller
     }
 
     public function ajaxPostChat(Request $request){
-        $check = Pesan::where('from', $request->user_id)->first();
-        if(!$check)
-        $check = Pesan::create([
-            'from' => $request->user_id,
-            'to_role' => 3
-        ]);
-        
-        $check->update([
-            'updated_at' => date("Y-m-d H:i:s", strtotime('now')),
-            'admin_read' => '0'
-        ]);
-        $pesans = PesanDetail::create([
-            'pesan_id' => $check->id,
-            'pesan' => $request->pesan,
-            'admin_id' => null
-        ]);
-        
-        return response()->json([
-            'status' => 200,
-        ]);
+        try {
+            $check = Pesan::where('from', $request->user_id)->first();
+            if(!$check)
+            $check = Pesan::create([
+                'from' => $request->user_id,
+                'to_role' => 3
+            ]);
+            
+            $check->update([
+                'updated_at' => date("Y-m-d H:i:s", strtotime('now')),
+                'admin_read' => '0'
+            ]);
+            $pesans = PesanDetail::create([
+                'pesan_id' => $check->id,
+                'pesan' => $request->pesan,
+                'admin_id' => null
+            ]);
+            
+            return response()->json([
+                'status' => 200,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+       
     }
 }

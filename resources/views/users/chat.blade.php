@@ -84,21 +84,22 @@
                                 
                                   <div class="peers fxw-nw ai-fe">
                                  
-                                    <div class="peer peer-greed ord-0">
-                                       
-                                      <div class="layers ai-fe gapY-10 newPesan">
-                                          @if($pesan > 0)
+                                    {{-- <div class="peer peer-greed ord-0"> --}}
+                                        <div class="peer peer-greed ord-0 newPesan">
+                                          @if($pesan)
                                             <?php $dates = null; ?>
                                             @foreach ($pesan->pesan_detail as $details)
 
                                                 @if($dates != date("Y-m-d", strtotime($details->created_at)))
 
                                                 <?php $dates = date("Y-m-d", strtotime($details->created_at)); ?>
-                                                <div style="margin-right:50%;">
+                                                <div class="" style="margin-left:50%; padding-bottom:5px;">
                                                      <small>{{ date("j-M-Y", strtotime($details->created_at))}}</small>
                                                    </div>
                                                 @endif
                                      @if($details->admin_id == null)
+                                     <div class="layers ai-fe gapY-20">
+
                                         <div class="layer">
                                           <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
                                             <div class="peer mL-10 ord-1">
@@ -109,8 +110,11 @@
                                             </div>
                                         </div>
                                       </div>
+                                     </div>
                                       @else
-                                      <div class="layer" style="margin-right:87%;">
+                                      <div class="layers ai-fs gapY-20">
+
+                                      <div class="layer">
                                             <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
                                               <div class="peer mL-10 ord-1">
                                                 <small>{{ date("H:i", strtotime($details->created_at))}}</small>
@@ -120,15 +124,13 @@
                                               </div>
                                           </div>
                                         </div>
-
+                                      </div>
                                         
                                       @endif
                                       
                                      
                                       @endforeach
-                                        @endif
-                                     
-                                    </div>
+                                     @endif
 
                                   </div>
                                   
@@ -175,7 +177,7 @@ $(document).ready(function () {
         var nows = new Date();
         var hours = nows.getHours().toString();
         var minutes = nows.getMinutes().toString();
-        $('.newPesan').append("<div class='layer'><div class='peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2'><div class='peer mL-10 ord-1'><small> "+ hours + ":" +  minutes +" </small>  </div><div class='peer-greed ord-0'><span>"+ pesan +"</span></div></div>");
+        $('.newPesan').append(" <div class='layers ai-fe gapY-10'><div class='layer'><div class='peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2'><div class='peer mL-10 ord-1'><small> "+ hours + ":" +  minutes +" </small>  </div><div class='peer-greed ord-0'><span>"+ pesan +"</span></div></div>");
         $("#toDown").animate({ scrollTop: $("#toDown")[0].scrollHeight }, 1000);
 
 
@@ -190,7 +192,12 @@ $(document).ready(function () {
             data: JSON.stringify(params),
         }).done(function (data) {
             
-            console.log(data)
+          if(data.status == 200){
+                console.log(data)
+            }else{
+                alert('Gagal Mengirim Pesan, Silakan Coba Lagi Nanti');
+
+            }
         }).fail(function(jqXHR, ajaxOptions, thrownError){
               alert('Gagal Mengirim Pesan, Silakan Coba Lagi Nanti');
               //console.log(thrownError)

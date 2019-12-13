@@ -287,10 +287,22 @@ class AdminController extends Controller
     }
 
     public function postAjaxPesan(Request $request){
+        try {
+            PesanDetail::create([
+                'pesan_id' => $request->pesan_id,
+                'pesan' => $request->pesan,
+                'admin_id' => $request->user_id
+            ]);     
+            return response()->json([
+                'status' => 200,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
         
-        return response()->json([
-            'status' => 200,
-        ]);
     }
 
 
