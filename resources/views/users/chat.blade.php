@@ -55,7 +55,7 @@
     
                                 </div>
                               </div>
-                              <div class="layer w-100 fxg-1 bgc-grey-200 scrollable pos-r">
+                              <div class="layer w-100 fxg-1 bgc-grey-200 scrollable pos-r" id="toDown" >
                                 <!-- Chat Box -->
                                 <div class="p-20 gapY-15">
                                   <!-- Chat Conversation -->
@@ -141,28 +141,33 @@
                                   <div class="peers fxw-nw ai-fe">
                                  
                                     <div class="peer peer-greed ord-0">
-                                      <div class="layers ai-fe gapY-10">
+                                      <div class="layers ai-fe gapY-10 newPesan">
+                                       
+
+                                       
                                         <div class="layer">
                                           <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
                                             <div class="peer mL-10 ord-1">
                                               <small>10:00 AM</small>
                                             </div>
                                             <div class="peer-greed ord-0">
-                                              <span>Heloo</span>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="layer">
-                                          <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
-                                            <div class="peer mL-10 ord-1">
-                                              <small>10:00 AM</small>
-                                            </div>
-                                            <div class="peer-greed ord-0">
-                                              <span>??</span>
+                                              <span id="baru">??</span>
                                             </div>
                                         </div>
                                       </div>
+
+                                      <div class="layer">
+                                            <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
+                                              <div class="peer mL-10 ord-1">
+                                                <small>10:00 AM</small>
+                                              </div>
+                                              <div class="peer-greed ord-0">
+                                                <span id="baru">??</span>
+                                              </div>
+                                          </div>
+                                        </div>
                                     </div>
+
                                   </div>
                                 </div>
                               </div>
@@ -189,19 +194,28 @@
 
 @section('js')
 <script>
+
 $(document).ready(function () {
+    $("#toDown").animate({ scrollTop: $("#toDown")[0].scrollHeight }, 1000);
 
     $('button#send').click(function () {
+        $("#toDown").animate({ scrollTop: $("#toDown")[0].scrollHeight }, 1000);
+
         var user_id = "{{Auth::user()->id}}"
         var pesan = $("#pesan").val();
         var params = {
                 'user_id' : user_id,
                 'pesan' : pesan
             }
-        console.log(user_id)
         $('#pesan').val('');
+  
+        var nows = new Date();
+        var hours = nows.getHours().toString();
+        var minutes = nows.getMinutes().toString();
+        $('.newPesan').append("<div class='layer'><div class='peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2'><div class='peer mL-10 ord-1'><small> "+ hours + ":" +  minutes +" </small>  </div><div class='peer-greed ord-0'><span>"+ pesan +"</span></div></div>");
+  
 
-        $.ajax({
+       /*  $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
@@ -214,9 +228,9 @@ $(document).ready(function () {
             
             console.log(data)
         }).fail(function(jqXHR, ajaxOptions, thrownError){
-              /* alert('Gagal Mengirim Pesan, Silakan Coba Lagi Nanti'); */
-              console.log(thrownError)
-        });
+              alert('Gagal Mengirim Pesan, Silakan Coba Lagi Nanti');
+              //console.log(thrownError)
+        }); */
     });
 });
 </script>

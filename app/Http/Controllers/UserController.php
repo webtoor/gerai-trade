@@ -11,6 +11,7 @@ use App\Models\KotaKabupaten;
 
 use App\Models\Alamat;
 use App\Models\Pesan;
+use App\Models\PesanDetail;
 
 class UserController extends Controller
 {
@@ -115,12 +116,20 @@ class UserController extends Controller
     public function ajaxPostChat(Request $request){
         $check = Pesan::where('from', $request->user_id)->first();
         if(!$check)
-        Pesan::create([
+        $check = Pesan::create([
             'from' => $request->user_id,
             'to_role' => 3
         ]);
-
         
-        return response()->json($check);
+
+        $pesans = PesanDetail::create([
+            'pesan_id' => $check->id,
+            'pesan' => $request->pesan,
+            'admin_id' => null
+        ]);
+
+        //$pesans = PesanDetail::find(1);
+        
+        return response()->json($pesans);
     }
 }
