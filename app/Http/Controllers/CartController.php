@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Cart;
 use App\Models\Produk;
 use App\Models\Kategori;
 use App\Models\Alamat;
+use App\Models\Wishlist;
 
 class CartController extends Controller
 {
@@ -43,8 +45,13 @@ class CartController extends Controller
             return redirect('login'); 
 
         }else{
+            $user_id = Auth::user()->id;
             $produks = Produk::find($produk_id);
-    	    Cart::instance('wishlist')->add($produks->id, $produks->nama_produk, 1, $produks->harga, ['slug' => $produks->slug, 'weight' => $produks->berat]);
+            $wishlist = Cart::instance('wishlist')->add($produks->id, $produks->nama_produk, 1, $produks->harga, ['slug' => $produks->slug, 'weight' => $produks->berat]);
+            Wishlist::create([
+                'user_id' => $user_id,
+                'produk_id' => $produk_id
+            ]);
             return redirect('wishlist'); 
         }
     	
@@ -74,7 +81,7 @@ class CartController extends Controller
 
         }else{
             $produks = Produk::find($request->produk_id);
-    	    Cart::instance('wishlist')->add($produks->id, $produks->nama_produk, $request->qty, $produks->harga, ['slug' => $produks->slug, 'weight' => $produks->berat]);
+    	    return Cart::instance('wishlist')->add($produks->id, $produks->nama_produk, $request->qty, $produks->harga, ['slug' => $produks->slug, 'weight' => $produks->berat]);
             return redirect('wishlist'); 
         }
     }
@@ -97,7 +104,11 @@ class CartController extends Controller
     }
 
     public function deleteWishlist($rowId){
+        $wishlist =  Cart::instance('wishlist')->get($rowId);
+        Wishlist::where(['user_id' => Auth::user()->id, 'produk_id' => $wishlist->id])->delete();
         Cart::instance('wishlist')->remove($rowId);
+        DB::statement("ALTER TABLE wishlist AUTO_INCREMENT = 1");
+
         $kategori = Kategori::with('sub_kategori')->get();
         return back(); 
     }

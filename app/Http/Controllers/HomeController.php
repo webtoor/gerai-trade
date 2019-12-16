@@ -12,6 +12,9 @@ use App\Models\Produk;
 use App\Models\ProdukUlasan;
 use App\Models\ProdukUnggulan;
 use App\Models\Blog;
+use App\Models\Wishlist;
+use Cart;
+
 
 class HomeController extends Controller
 {
@@ -35,6 +38,17 @@ class HomeController extends Controller
         $kategori =  Kategori::with('sub_kategori')->get();
         $produk_terbaru = Produk::with('user', 'produk_image')->where('status', '1')->orderBy('id', 'desc')->take('12')->get();
         $blog = Blog::with('user')->where('status', '1')->orderBy('id', 'desc')->take(6)->get();
+        if(!Auth::guest()){
+            if(Auth::user()->role->role_id == '1'){
+                $wislist = Wishlist::with('produk')->where('user_id', Auth::user()->id)->get();
+                foreach($wislist as $wislists){
+                    Cart::instance('wishlist')->add($wislists->produk->id, $wislists->produk->nama_produk, 1, $wislists->produk->harga, ['slug' => $wislists->produk->slug, 'weight' => $wislists->produk->berat]);
+
+                }
+            }
+           
+
+        }
         return view('users.index', ['kategori' => $kategori, 'produk_terbaru' => $produk_terbaru, 'blog' => $blog]);
     }
 
