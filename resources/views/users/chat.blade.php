@@ -25,7 +25,11 @@
                                   </div>
                                   <div class="peer peer-greed pL-20">
                                     <h6 class="mB-0 lh-1 fw-400">Admin</h6>
-                                    <small class="lh-1 c-green-500">Online</small>
+                                    <small class="lh-1 c-green-500">
+                                      @if($pesan->client_read == '0')
+                                      Pesan Baru
+                                      @endif
+                                  </small>
                                   </div>
                                 </div>
                               

@@ -11,6 +11,7 @@ class Pesan extends Model
         'from',
         'to_role',
         'admin_read',
+        'client_read',
         'created_at',
         'updated_at'
     ];

@@ -288,6 +288,13 @@ class AdminController extends Controller
 
     public function postAjaxPesan(Request $request){
         try {
+
+            $check = Pesan::where('id', $request->pesan_id)->first();
+            if($check){
+                $check->update([
+                   'client_read' => '0'
+                ]);
+            }
             PesanDetail::create([
                 'pesan_id' => $request->pesan_id,
                 'pesan' => $request->pesan,

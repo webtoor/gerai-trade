@@ -1,3 +1,6 @@
+<?php 
+use App\Models\Pesan;
+ ?>
 <div class="col-sm-2 my-2">
     <div class="card">
         <div class="list-group">
@@ -42,7 +45,16 @@
             <p href="#" class="list-group-item border-bottom-0">
               <b style="font-size:14px;">KOTAK MASUK</b>    
           </p>
-              <a href="{{route('home.getChat')}}" class="list-group-item border-top-0" style="font-size:14px;">Pesan</a>
+
+          
+              <a href="{{route('home.getChat')}}" class="list-group-item border-top-0" style="font-size:14px;">Pesan
+                <?php $pesan_count = Pesan::where(['from' => Auth::user()->id,'client_read' => '0'])->first(); ?>
+                <?php if($pesan_count){ ?>
+                  <span class="badge badge-danger">pesan baru</span>
+              <?php }
+                 
+                  ?>
+              </a>
 
 
             <p href="#" class="list-group-item border-bottom-0">
