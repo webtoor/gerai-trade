@@ -59,6 +59,11 @@ class Produk extends Model
         return $this->belongsTo('App\Models\SubKategori');
     }
 
+    public function origin(){
+        return $this->hasOne('App\Models\Alamat', 'user_id', 'hub_id');
+    }
+
+
    /*  public function getBuyableIdentifier($options = null) {
         return $this->id;
     }

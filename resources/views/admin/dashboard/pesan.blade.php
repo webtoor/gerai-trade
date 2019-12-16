@@ -20,7 +20,7 @@
                       <a style="text-decoration: none; color:black" href="{{route('admin-panel.getPesanById', ['pesan_id' => $pesans->id])}}">
                     <div class="peers fxw-nw ai-c p-20 bdB bgcH-grey-50 cur-p {{ $id_pesan == $pesans->id ? 'bgc-green-100' : 'bgc-white' }}">
                       <div class="peer">
-                        <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="" class="w-3r h-3r bdrs-50p">
+                        <img src="/images/profiluser.png" alt="" class="w-3r h-3r bdrs-50p">
                       </div>
                       <div class="peer peer-greed pL-20">
                         <h6 class="mB-0 lh-1 fw-400">{{$pesans->user->nama_depan}}</h6>
@@ -52,7 +52,7 @@
                                     </a>
                                   </div>
                                   <div class="peer mR-20">
-                                    <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="" class="w-3r h-3r bdrs-50p">
+                                    <img src="/images/profiluser.png" alt="" class="w-3r h-3r bdrs-50p">
                                   </div>
                                   <div class="peer">
                                     <h6 class="lh-1 mB-0">{{$pesan[$key_array]->user->nama_depan}}</h6>

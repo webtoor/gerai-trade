@@ -311,7 +311,6 @@
                                                                             @for($i = 0; $i < 5; $i++)
                                                                                 <span style="color:#ffc200"><i class="{{ $nr <= $i ? 'far fa-star' : 'fas fa-star' }}" aria-hidden="true"></i></span>
                                                                             @endfor
-    
                                                                     </span>
     
                                                                     <span class="float-right">

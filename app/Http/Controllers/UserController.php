@@ -114,10 +114,13 @@ class UserController extends Controller
         }])->where('from', $user_id)->first();
 
         $check = Pesan::where('from', $user_id)->first();
-        $check->update([
-            'updated_at' => date("Y-m-d H:i:s", strtotime('now')),
-            'client_read' => '1'
-        ]);
+        if($check){
+            $check->update([
+                'updated_at' => date("Y-m-d H:i:s", strtotime('now')),
+                'client_read' => '1'
+            ]);
+        }
+      
         return view('users.chat', ['kategori' => $kategori, 'pesan' => $pesan]);
     }
 

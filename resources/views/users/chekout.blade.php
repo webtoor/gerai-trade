@@ -127,7 +127,7 @@
     </section>
 
     @if(count(Cart::instance('default')->content()))
-        <div class="container" style="margin-top:-30px;">
+        <div class="container" style="margin-top:-30px; padding-bottom:100px;">
           <div class="row bar">
             
             <div id="basket" class="col-lg-8">
@@ -145,7 +145,7 @@
                           @if($alamat)
                           {{$alamat->nama_penerima}} <br>
                           {{$alamat->nohp_penerima}} <br>
-                          {{$alamat->alamat}}, {{$alamat->provinsi->name}}, {{$alamat->kota_kabupatens->name}}, {{$alamat->kecamatans->name}}, {{$alamat->kelurahan_desa->name}}
+                          {{$alamat->alamat}}, {{$alamat->province_name}}, {{$alamat->city_name}}, {{$alamat->kecamatan_name}}, {{$alamat->kodepos}}
 
                           @else
                           Anda belum mempunyai alamat pengiriman, silakan isi dulu <a href="{{route('index-pengaturan')}}" style="color:blue">disini</a>
@@ -160,6 +160,7 @@
                     </table>
                   </div>
                   <div class="table-responsive">
+                      @foreach($origin as $hub)
                     <table class="table">
                       <thead>
                         <tr>
@@ -170,7 +171,8 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <?php foreach(Cart::content() as $row) :?>
+                          <?php foreach(Cart::content('default') as $row) :?>
+                          @if($hub->user_id == $row->options->hub_id)
                         <tr>
                           <td><a href="{{route('produk-detail', ['slug_produk' => $row->options->slug])}}" style="color:#3f51b5; font-weight:bold"><?php echo $row->name; ?></a></td>
                           <td>
@@ -178,17 +180,47 @@
                           </td>
                           <td>Rp {{number_format($row->price,0, ".", ".")}}</td>
                         <td>{{$row->options->weight}} gram</td>
+                        
                         </tr>
-                        <?php endforeach;?>
+                        @endif
+                    <?php endforeach;?>
                       </tbody>
                       <tfoot>
                        
                       </tfoot>
                     </table>
+                 
+                    @if($alamat)
+                    <div class="form-row">
+
+                    <div class="form-group col-sm-4">
+                          <label>Pilih Ekspedisi</label>
+                          <select class="form-control" name="eks" id="eks" data-target="{{$hub->user_id}}" required>
+                            <option value="">Pilih Ekspedisi</option>
+                            <option value="jne">JNE</option>
+                            <option value="jnt">J&T</option>
+                            <option value="pos">POS</option>
+                            <option value="tiki">TIKI</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-sm-8">
+                            <label>Pilih Durasi Pengiriman</label>
+                            <select class="form-control selectDurasi" id="selectDurasi{{$hub->user_id}}" name="selectDurasi" data-target="{{$hub->user_id}}" required="true" disabled>   
+                                <option value="">Pilih Durasi Pengiriman</option>
+                            </select>
+                          </div>
+                          <input type="hidden" value="{{$hub->kecamatan_id}}" id="districts_origin{{$hub->user_id}}">
+                        <input type="hidden" value="{{$hub->user_id}}" id="hub_id{{$hub->user_id}}">
+
+                    </div>
+                    @endif
+
+                    @endforeach
+                  <input type="hidden" id="districts_destination" value="{{$alamat->kecamatan_id}}" name="districts_destination">
                   </div>
               
               </div>
-              <p style="margin-left:10px; color:black"><b>Ongkos Kirim</b></p>
+            {{--   <p style="margin-left:10px; color:black"><b>Ongkos Kirim</b></p>
               <div class="border-top my-3" >
                 <div style="margin-top:20px; margin-bottom:100px;">
                   <div class="form-row" >
@@ -199,8 +231,8 @@
                             <option value="pos">POS</option>
                             <option value="tiki">TIKI</option>
                           </select>
-                        </div>
-                <div class="form-group col-md-6" >
+                        </div> --}}
+       {{--          <div class="form-group col-md-6" >
                   <label>Pilih Kota</label>
                   <select class="form-control" onchange="check()" id="city" name="city" required="true">
                       @php
@@ -222,7 +254,7 @@
                        <input type="hidden" class="form-control" id="provinsi_id" name="provinsi_id">
 
                     </div>
-                    <input  type="hidden" class="form-control" name="portal_code" id="portal_code" readonly="">
+                    <input  type="hidden" class="form-control" name="portal_code" id="portal_code" readonly=""> --}}
 
                   {{-- <div class="form-group col-md-6">
                       <label for="zip">Kode POS</label>
@@ -233,7 +265,7 @@
                         <label for="zip">Ongkos Kirim / 1Kg</label>
                         <input  type="text" class="form-control" name="ongkir" id="ongkir" readonly="">
                       </div> --}}
-              </div>
+              {{-- </div>
               <div class="form-row">
                   <div class="form-group col-md-6">
                       <label for="zip">Cek Ongkir</label>
@@ -247,7 +279,7 @@
               </div>
             
               </div>
-            </div>
+            </div> --}}
             </div>
            
             <div class="col-lg-4" style="margin-top:10px;">
@@ -292,7 +324,112 @@
 
  
     <script src="{{ mix('/js/app.js') }}"></script><script type="text/javascript">
-      function check (){
+
+      $(document).ready(function () {
+
+        $('select#eks').on('change', function (e) {
+           var counts = $(this).attr('data-target');
+
+           if(counts){
+            let optionSelected = $("option:selected", this);
+            let valueSelected = this.value;
+            var params = {
+              'hub_id' : $('#hub_id' + counts).val(),
+              'districts_origin': $('#districts_origin' + counts).val(),
+              'districts_destination': $('#districts_destination').val(),
+              'eks' : valueSelected
+            }
+
+            console.log(params)
+            //var idDinamic = "#selectDurasi"+counts+" option";
+              if(valueSelected != ''){
+              $("#selectDurasi" + counts).prop('disabled', false);
+              $("#selectDurasi"+counts+" option").remove();
+              $("#selectDurasi"+counts).append($('<option>', {value:'', text:'Pilih Durasi Pengiriman'}, '</option>'));
+
+              }else{
+              $("#selectDurasi" + counts).prop('disabled', true);
+              $("#selectDurasi"+counts+" option").remove();
+              $("#selectDurasi"+counts).append($('<option>', {value:'', text:'Pilih Durasi Pengiriman'}, '</option>'));
+
+              }
+
+            if(params['eks'] && params['districts_origin'] && params['districts_destination'] && params['hub_id']){
+              $.ajax({
+              headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              },
+              contentType: "application/json",
+              dataType: "json",
+              type: 'POST',
+              url : "{{ url('cek-ongkir') }}",
+              data: JSON.stringify(params),
+              success:function(results){
+              console.log(results)
+              $.each(results.rajaongkir.results[0].costs, function(index, data) {
+                $("#selectDurasi"+ counts).prop('disabled', false);
+                $('#selectDurasi'+ counts).append($('<option>', {value:data['cost'][0]['value'] + '#' + data['service'], text:data['service'] + ' (' + data['cost'][0]['etd'] + ' Hari) ' + ' (Rp '  +  data['cost'][0]['value'] + ')'}, '</option>'));
+              })
+
+              }
+            });
+          }
+
+           }
+            
+          });
+         
+          let selectById = [];
+          $('select.selectDurasi').on('change', function (e) {
+            var total_ongkir = 0;
+
+            var data_val = $(this).attr('id');  
+            if( $('select#' + data_val)){
+              let optionSelected = $("option:selected", this);
+              let valueSelected = this.value;
+              if(valueSelected != ''){
+                var arrays = valueSelected.split("#");
+                var res = {
+                  'uniq' : data_val,
+                  'ongkir' : parseInt(arrays[0]),
+                  'courier' : arrays[1]
+                };
+          
+                var index = selectById.findIndex(x => x.uniq == data_val)
+                if (index === -1){
+                  selectById.push({
+                    'uniq' : data_val,
+                    'ongkir' : parseInt(arrays[0]),
+                    'courier' : arrays[1]
+                    })
+                }else{
+                  selectById[index] = {
+                    'uniq' : data_val,
+                    'ongkir' : parseInt(arrays[0]),
+                    'courier' : arrays[1]
+                    }
+                }
+                console.log(selectById)
+                $.each(selectById, function(index, data) {
+                  total_ongkir += data['ongkir']
+                }) 
+
+                $("#totalongkir").html('Rp. ' + total_ongkir);
+             
+                totalharga = "<?php echo str_replace(',','',Cart::instance('default')->total()); ?>";
+            //console.log(parseInt(totalharga)+ parseInt(arrays[0]))
+            var totaltagihan = parseInt(totalharga)+ parseInt(arrays[0])
+            $("#totaltagihan").html('Rp. ' + totaltagihan.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'));
+              }
+         
+            
+            }
+          });
+
+      });
+
+
+      function check(){
         var id = $("#city").val();
         $.ajax({
           type: "GET",
@@ -308,6 +445,8 @@
         });
        
       }
+
+
       $("button#submitongkir").click(function () {
         var params = {
         'eks': $('#eks').val(),

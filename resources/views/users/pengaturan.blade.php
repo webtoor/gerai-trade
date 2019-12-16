@@ -399,7 +399,7 @@
     }else{
         $("#uselectKecamatan").prop('disabled', true);
         $("#uselectKecamatan option").remove();
-        $('#selectKecamatan').append($('<option>', {value:'', text:'Pilih Kecamatan'}, '</option>'));
+        $('#uselectKecamatan').append($('<option>', {value:'', text:'Pilih Kecamatan'}, '</option>'));
         $("#ukecamatan_name").val("");
 
     }

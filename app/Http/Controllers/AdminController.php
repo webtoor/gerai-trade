@@ -265,12 +265,16 @@ class AdminController extends Controller
     }
 
     public function getPesanById($pesan_id){
-        Pesan::where('id', $pesan_id)->update([
-            'admin_read' => '1'
-        ]);
+       
         $pesan = Pesan::with(['user', 'pesan_detail' => function ($query) {
             $query->orderBy('created_at');
         }])->orderBy('updated_at', 'desc')->get();
+        if(count($pesan) > 0){
+            Pesan::where('id', $pesan_id)->update([
+                'admin_read' => '1',
+                'updated_at' => $pesan[0]->updated_at
+            ]);
+        }
        
         $keys = null;
         foreach($pesan as $key => $value){

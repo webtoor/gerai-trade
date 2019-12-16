@@ -21,13 +21,15 @@
                               <div class="layer w-100 fxg-1 scrollable pos-r">
                                 <div class="peers fxw-nw ai-c p-20 bdB bgc-white bgcH-grey-50 cur-p">
                                   <div class="peer">
-                                    <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="" class="w-3r h-3r bdrs-50p">
+                                    <img src="/images/admin.png" alt="" class="w-3r h-3r bdrs-50p">
                                   </div>
                                   <div class="peer peer-greed pL-20">
                                     <h6 class="mB-0 lh-1 fw-400">Admin</h6>
+                                    @if($pesan)
                                     <small class="lh-1 c-green-500">
                                       @if($pesan->client_read == '0')
                                       Pesan Baru
+                                      @endif
                                       @endif
                                   </small>
                                   </div>
@@ -50,7 +52,7 @@
                                       </a>
                                     </div>
                                     <div class="peer mR-20">
-                                      <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="" class="w-3r h-3r bdrs-50p">
+                                      <img src="/images/admin.png" alt="" class="w-3r h-3r bdrs-50p">
                                     </div>
                                     <div class="peer">
                                       <h6 class="lh-1 mB-0">Admin</h6>

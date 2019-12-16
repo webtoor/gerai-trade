@@ -20,7 +20,7 @@ class CartController extends Controller
 
         }else{
             $produks = Produk::find($request->produk_id);
-    	    Cart::add($produks->id, $produks->nama_produk, $request->qty, $produks->harga, ['slug' => $produks->slug, 'weight' => $produks->berat]);
+    	    Cart::add($produks->id, $produks->nama_produk, $request->qty, $produks->harga, ['slug' => $produks->slug, 'weight' => $produks->berat, 'hub_id' => $produks->hub_id]);
             return redirect('keranjang-belanja'); 
         }
     	
@@ -33,7 +33,7 @@ class CartController extends Controller
 
         }else{
             $produks = Produk::find($produk_id);
-    	    Cart::add($produks->id, $produks->nama_produk, 1, $produks->harga, ['slug' => $produks->slug, 'weight' => $produks->berat]);
+    	    Cart::add($produks->id, $produks->nama_produk, 1, $produks->harga, ['slug' => $produks->slug, 'weight' => $produks->berat, 'hub_id' => $produks->hub_id]);
             return redirect('keranjang-belanja'); 
         }
     	
@@ -47,7 +47,7 @@ class CartController extends Controller
         }else{
             $user_id = Auth::user()->id;
             $produks = Produk::find($produk_id);
-            $wishlist = Cart::instance('wishlist')->add($produks->id, $produks->nama_produk, 1, $produks->harga, ['slug' => $produks->slug, 'weight' => $produks->berat]);
+            $wishlist = Cart::instance('wishlist')->add($produks->id, $produks->nama_produk, 1, $produks->harga, ['slug' => $produks->slug, 'weight' => $produks->berat, 'hub_id' => $produks->hub_id]);
             Wishlist::create([
                 'user_id' => $user_id,
                 'produk_id' => $produk_id
@@ -116,23 +116,39 @@ class CartController extends Controller
     public function checkout(){
         //city();
         /* Cart::update($request->rowid, $request->qty); */
+        $produk_id = [];
+        foreach (Cart::instance('default')->content() as $row) {
+            $produk_id[] = Produk::with('origin')->where('id', $row->id)->first();
+        }
+
+        $dataOrigin = [];
+        foreach($produk_id as $data){
+            $dataOrigin[] = $data->origin;
+        }
+
+        $origin = collect($dataOrigin)->unique('user_id');
 
         $user_id = Auth::user()->id;
 
         $alamat = Alamat::where(['user_id' => $user_id, 'jenis_alamat_id' => '2'])->orderBy('id', 'asc')->first();
-        return view('users.chekout', ['alamat' => $alamat]);
+
+        return view('users.chekout', ['alamat' => $alamat, 'origin' => $origin]);
 
     }
 
     public function cekOngkir(Request $request){
         $weight = 0;
         foreach (Cart::instance('default')->content() as $row) {
-            $produk = Produk::find($row->id);
-            $weight += ($produk->berat) * ($row->qty);
+            if($row->options->hub_id == $request->json('hub_id')){
+                $produk = Produk::find($row->id);
+                $weight += ($produk->berat) * ($row->qty);
+            }
 
         }
 
-        $cost = Cost('153', $request->json('city_id'), $weight, $request->json('eks'));
+         //return response()->json($weight); 
+
+        $cost = Cost($request->json('districts_origin'), $request->json('districts_destination'), $weight, $request->json('eks'));
         $data = json_decode($cost, true);
         return response()->json($data);
 
