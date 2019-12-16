@@ -127,7 +127,7 @@
     </section>
 
     @if(count(Cart::instance('default')->content()))
-        <div class="container" style="margin-top:-30px; padding-bottom:100px;">
+        <div class="container" style="margin-top:-30px; margin-bottom:100px;">
           <div class="row bar">
             
             <div id="basket" class="col-lg-8">
@@ -174,7 +174,7 @@
                           <?php foreach(Cart::content('default') as $row) :?>
                           @if($hub->user_id == $row->options->hub_id)
                         <tr>
-                          <td><a href="{{route('produk-detail', ['slug_produk' => $row->options->slug])}}" style="color:#3f51b5; font-weight:bold"><?php echo $row->name; ?></a></td>
+                          <td><a href="{{route('produk-detail', ['slug_produk' => $row->options->slug])}}" style="color:#3f51b5; font-weight:bold"><?php echo \Illuminate\Support\Str::limit($row->name, 20) ?></a></td>
                           <td>
                             {{$row->qty}}
                           </td>
@@ -282,7 +282,7 @@
             </div> --}}
             </div>
            
-            <div class="col-lg-4" style="margin-top:10px;">
+            <div class="col-lg-4" style="margin-top:100px;">
                     <div id="order-summary" class="card box mt-0 mb-4 p-0">
                             <div class="card-body">
                               <h6 class="card-title"><b>Ringkasan Belanja</b></h6>
@@ -382,7 +382,7 @@
           let selectById = [];
           $('select.selectDurasi').on('change', function (e) {
             var total_ongkir = 0;
-
+            var total_tagihan = 0;
             var data_val = $(this).attr('id');  
             if( $('select#' + data_val)){
               let optionSelected = $("option:selected", this);
@@ -416,10 +416,9 @@
 
                 $("#totalongkir").html('Rp. ' + total_ongkir);
              
-                totalharga = "<?php echo str_replace(',','',Cart::instance('default')->total()); ?>";
-            //console.log(parseInt(totalharga)+ parseInt(arrays[0]))
-            var totaltagihan = parseInt(totalharga)+ parseInt(arrays[0])
-            $("#totaltagihan").html('Rp. ' + totaltagihan.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'));
+                var totalharga = "<?php echo str_replace(',','',Cart::instance('default')->total()); ?>";
+                totaltagihan = parseInt(totalharga)+ parseInt(total_ongkir)
+                $("#totaltagihan").html('Rp. ' + totaltagihan.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'));
               }
          
             
