@@ -191,7 +191,12 @@
 
                                      
                                                 <div class="card-footer px-1" style="background:white">
-                                         
+                                                    <span class="float-left">
+                                                        <?php $nr = 4;?>
+                                                        @for($i = 0; $i < 5; $i++)
+                                                            <span style="color:#ffc200; font-size:15px;"><i class="{{ $nr <= $i ? 'far fa-star' : 'fas fa-star' }}" aria-hidden="true"></i></span>
+                                                        @endfor
+                                                    </span>
                                                     <span class="float-right">
                                                             
                                                             <a href="{{ url('/cart-shop/'.$produk_item->id) }}" class="material-tooltip-main"

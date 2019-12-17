@@ -216,7 +216,10 @@
                     @endif
 
                     @endforeach
+                    @if($alamat)
+
                   <input type="hidden" id="districts_destination" value="{{$alamat->kecamatan_id}}" name="districts_destination">
+                  @endif
                   </div>
               
               </div>

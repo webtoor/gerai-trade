@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Models\User_role;
 use App\Models\Provinsi;
@@ -192,6 +193,9 @@ class AdminController extends Controller
                 'kecamatan_name' => $data['kecamatan_name'],
                 'kodepos' => $data['kodepos']
             ]);
+
+           
+
             return back()->withSuccess(trans('Anda Berhasil menambahkan mitra')); 
         } catch (\Exception $e) {
             
@@ -239,6 +243,19 @@ class AdminController extends Controller
                 'kecamatan_name' => $data['kecamatan_name'],
                 'kodepos' => $data['kodepos']
             ]);
+
+            $new_hub = new \stdClass();
+            $new_hub->full_name = $data['nama_depan'] .' ' .$data['nama_belakang'];
+            $new_hub->email = $data['email'];
+            $new_hub->subject = 'Informasi Login Akun Trade';  
+            $new_hub->nomor_ponsel = $data['nomor_ponsel'];  
+            $new_hub->password = '12312312';  
+    
+    
+            return Mail::send('admin.partials.mail.hubbaru', ['full_name' => $new_hub->full_name, 'email' => $new_hub->email, 'subject' => $new_hub->subject, 'password' => $new_hub->password, 'nomor_ponsel' => $new_hub->nomor_ponsel  ], function($mail) use ($new_hub){
+                $mail->from('admin@geraitrade.com','Trade');
+                $mail->to($new_hub->email, 'webtoor')->subject($new_hub->subject);
+            });
             return redirect()->route('admin-panel.showMitra')->withSuccess(trans('Anda Berhasil mengedit Hub')); 
         } catch (\Throwable $th) {
         //throw $th;
