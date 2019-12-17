@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Models\User_role;
@@ -194,7 +195,18 @@ class AdminController extends Controller
                 'kodepos' => $data['kodepos']
             ]);
 
-           
+            $new_hub = new \stdClass();
+            $new_hub->full_name = $data['nama_depan'] .' ' .$data['nama_belakang'];
+            $new_hub->email = $data['email'];
+            $new_hub->subject = 'Informasi Login Akun Trade';  
+            $new_hub->nomor_ponsel = $data['nomor_ponsel'];  
+            $new_hub->password = $data['password'];  
+    
+    
+            Mail::send('admin.partials.mail.hubbaru', ['full_name' => $new_hub->full_name, 'email' => $new_hub->email, 'subject' => $new_hub->subject, 'password' => $new_hub->password, 'nomor_ponsel' => $new_hub->nomor_ponsel  ], function($mail) use ($new_hub){
+                $mail->from('_donotreply@geraitrade.com','Trade');
+                $mail->to($new_hub->email)->subject($new_hub->subject);
+            });
 
             return back()->withSuccess(trans('Anda Berhasil menambahkan mitra')); 
         } catch (\Exception $e) {
@@ -244,18 +256,6 @@ class AdminController extends Controller
                 'kodepos' => $data['kodepos']
             ]);
 
-            $new_hub = new \stdClass();
-            $new_hub->full_name = $data['nama_depan'] .' ' .$data['nama_belakang'];
-            $new_hub->email = $data['email'];
-            $new_hub->subject = 'Informasi Login Akun Trade';  
-            $new_hub->nomor_ponsel = $data['nomor_ponsel'];  
-            $new_hub->password = '12312312';  
-    
-    
-            return Mail::send('admin.partials.mail.hubbaru', ['full_name' => $new_hub->full_name, 'email' => $new_hub->email, 'subject' => $new_hub->subject, 'password' => $new_hub->password, 'nomor_ponsel' => $new_hub->nomor_ponsel  ], function($mail) use ($new_hub){
-                $mail->from('admin@geraitrade.com','Trade');
-                $mail->to($new_hub->email, 'webtoor')->subject($new_hub->subject);
-            });
             return redirect()->route('admin-panel.showMitra')->withSuccess(trans('Anda Berhasil mengedit Hub')); 
         } catch (\Throwable $th) {
         //throw $th;
@@ -265,7 +265,17 @@ class AdminController extends Controller
     }
 
     public function deleteMitra($user_id){
-        return $user_id;
+        $user_table = User::findOrFail($user_id);
+        $user_table->delete();
+        DB::statement("ALTER TABLE users AUTO_INCREMENT = 1");
+        DB::statement("ALTER TABLE user_roles AUTO_INCREMENT = 1");
+        DB::statement("ALTER TABLE blogs AUTO_INCREMENT = 1");  
+        DB::statement("ALTER TABLE products AUTO_INCREMENT = 1");
+        DB::statement("ALTER TABLE product_images AUTO_INCREMENT = 1");
+        DB::statement("ALTER TABLE pesan_details AUTO_INCREMENT = 1");
+        DB::statement("ALTER TABLE alamats AUTO_INCREMENT = 1");
+
+        return back()->withSuccess(trans('Anda Berhasil menghapus Hub')); 
     }
 
     public function getPesan(){
