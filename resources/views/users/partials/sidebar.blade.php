@@ -69,8 +69,8 @@ use App\Models\Pesan;
                     <b style="font-size:14px;">PROFIL SAYA</b>    
             </p>
             <div style="font-size: 14px;">
+              @if(Auth::user()->role->role_id == '1')
                 <a href="{{route('wishlist')}}" class="list-group-item border-top-0" style="margin-bottom:-10px;">Wishlist</a>
-                @if(Auth::user()->role->role_id == '1')
                 <a href="{{route('index-pengaturan')}}" class="list-group-item border-top-0" style="margin-top:-14px;">Pengaturan</a>
                 @elseif(Auth::user()->role->role_id == '2')
                 <a href="{{route('home.index-pengaturan')}}" class="list-group-item border-top-0" style="margin-top:-14px;">Pengaturan</a>

@@ -130,10 +130,17 @@
      
                  <!--Menu-->
                  <div class="dropdown-menu dropdown-menu-right" style=" width:250px;">
+                  @if(Auth::user()->role->role_id == 1)
                      <a class="dropdown-item" href="#">Pembelian</a>
                      <a class="dropdown-item" href="{{route('wishlist')}}">Wishlist</a>
                      <a class="dropdown-item" href="{{route('index-pengaturan')}}">Pengaturan</a>
                      <a class="dropdown-item" href="/logout">Logout</a>
+                  @elseif(Auth::user()->role->role_id == 2)
+                  <a class="dropdown-item" href="#">Penjualan</a>
+                  <a class="dropdown-item" href="{{route('index-pengaturan')}}">Pengaturan</a>
+                  <a class="dropdown-item" href="/logout">Logout</a>
+                  @endif
+
                  </div>
              </div>
              @elseif(Auth::user()->role->role_id == '1')

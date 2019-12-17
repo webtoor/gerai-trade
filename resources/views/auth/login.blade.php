@@ -53,8 +53,8 @@
     </div>
 </div>
 </div>
-{{url()->full()}}
-{{ Request::get('message') }}
+{{-- {{url()->full()}}
+{{ Request::get('message') }} --}}
 
 @endsection
 @section('js')
@@ -62,7 +62,7 @@
     <script>
     $(document).ready(function () {
         console.log("ready")
-       params = "{{ Request::get('message') }}";
+        params = "{{ Request::get('message') }}";
         if(params == 1){
             alert('Anda Berhasil Daftar, Silakan Login')
         }

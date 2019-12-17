@@ -79,15 +79,15 @@ class RegisterController extends Controller
     }
     public function register(Request $request){
         /* return $request; */
-       /*  $data = $request->validate([
+        $data = $request->validate([
             'nama_depan' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:15'],
             'nama_belakang' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
             'nomor_ponsel' => ['required', 'string','min:11', 'max:14', 'unique:users'],
             'password' => ['required', 'string', 'min:5', 'confirmed'],
-        ]);  */
+        ]); 
         try {
-         /*   $result = User::create([
+           $result = User::create([
                 'nama_depan' => $data['nama_depan'],
                 'nama_belakang' => $data['nama_belakang'],
                 'nomor_ponsel' => $data['nomor_ponsel'],
@@ -99,7 +99,7 @@ class RegisterController extends Controller
             User_role::create([
                 'user_id' => $result->id,
                 'role_id' => '1'
-            ]); */
+            ]);
             
             return redirect()->route('login', ['message' => 1]);
         } catch (\Throwable $th) {

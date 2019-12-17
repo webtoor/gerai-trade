@@ -5,6 +5,7 @@
 /* Single Product Area css
 ============================================================================================ */
 
+
 .product_image_area {
   padding-top: 120px; }
 
@@ -288,6 +289,7 @@
 
 /* End Single Product Area css
 ============================================================================================ */
+
     </style>
 @endsection
 @extends('users.default')
@@ -315,8 +317,8 @@
                                 <!--First slide-->
                                 @if(count($produk_detail->produk_image) > 0)
                                 @foreach($produk_detail->produk_image as $key=> $images)
-                                <div class="carousel-item <?php if($key==0){echo "active";} ?>">
-                                  <img class="d-block w-100" src="{{ asset('storage/' .$images->image_path)}}" style="height:500px;">     
+                                <div class="carousel-item  <?php if($key==0){echo "active";} ?>">
+                                  <img class="d-block w-100 " src="{{ asset('storage/' .$images->image_path)}}" style="max-height:500px; min-height:300px;;">     
                                 </div>
                                 @endforeach
                                 @else
@@ -378,6 +380,7 @@
               {{-- {!! html_entity_decode($produk_detail->deskripsi) !!} --}}
             
             </div>
+            <br>
             <form action="{{ url('cart') }}" method="POST">
                 {{ @csrf_field() }}
 						<div class="product_count">
@@ -414,11 +417,11 @@
 		<div class="container">
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
 				<li class="nav-item" style="margin-left: 30px;">
-					<a class="nav-link active" id="home-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="true">Informasi Produk</a>
+					<a class="nav-link active" id="home-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="true">INFORMASI PRODUK</a>
         </li>
 
-          <li class="nav-item" style="margin-left: 30px;">
-              <a class="nav-link" id="ulasan-tab" data-toggle="tab" href="#ulasan" role="tab" aria-controls="ulasan" aria-selected="true">Ulasan</a>
+          <li class="nav-item">
+              <a class="nav-link" id="ulasan-tab" data-toggle="tab" href="#ulasan" role="tab" aria-controls="ulasan" aria-selected="true">ULASAN</a>
             </li>
 			</ul>
 			<div class="tab-content" id="myTabContent">
@@ -437,7 +440,7 @@
                   <div class="row total_rate">
                     <div class="col-6">
                       <div class="box_total">
-                        <h5>Overall</h5>
+                        <h5>Rating</h5>
                         <h4>4.0</h4>
                       <h6>({{$produk_ulasan->total()}} Ulasan)</h6>
                       </div>

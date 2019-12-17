@@ -168,6 +168,7 @@
 <script>
 
 $(document).ready(function () {
+       
     $('#toDown').scrollTop($('#toDown').height()); 
     $('button#send').click(function () {
         

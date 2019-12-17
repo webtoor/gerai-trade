@@ -11,7 +11,7 @@
             <div class="col-md">
               <div class="ftco-footer-widget mb-4">
                 <h2 class="ftco-heading-2">TRADE</h2>
-                <p>Deskripsi Deskripsi </p>
+                {{-- <p>Deskripsi Deskripsi </p> --}}
                 <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-0">
                   <li class="ftco-animate"><a href="javascript:void(0)"><span class="fab fa-twitter"></span></a></li>
                   <li class="ftco-animate"><a href="javascript:void(0)"><span class="fab fa-facebook"></span></a></li>
@@ -31,7 +31,7 @@
             </div>
             <div class="col-md-4">
                <div class="ftco-footer-widget mb-4">
-                <h2 class="ftco-heading-2">Help</h2>
+                <h2 class="ftco-heading-2">Bantuan</h2>
                 <div class="d-flex">
                     <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
                       <li><a href="#" class="py-2 d-block">Informasi Pembelian</a></li>
