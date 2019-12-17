@@ -123,7 +123,9 @@ class AdminController extends Controller
 
     public function showMember(){
         try {
-            $member = User_role::with('user')->where('role_id', '1')->get();
+            $member = User_role::with(['user', 'alamat' => function ($query) {
+                $query->where(['jenis_alamat_id' => '2']);
+            }])->where('role_id', '1')->OrderBy('id', 'desc')->get();
             return view('admin.dashboard.member', ['member' => $member]);
 
         } catch (\Exception $e) {
