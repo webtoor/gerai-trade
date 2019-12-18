@@ -50,8 +50,8 @@
                   <h2 class="ftco-heading-2">Kontak</h2>
                   <div class="block-23 mb-3">
                     <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
-                      <li><a href='https://api.whatsapp.com/send?phone=6287786668767' target="_blank">
-                        <img style='max-width:15%;height:auto; padding-right:5px;' alt='Hubungi kami melalui Whatsapp' src='/img/wa.png'/>  Whatsapp
+                      <li><a href='https://api.whatsapp.com/send?phone=6287871214284' target="_blank">
+                        <img style='max-width:15%;height:auto; padding-right:5px;' alt='Hubungi kami melalui Whatsapp' src='/img/wa.png'/> +6287871214284
                       </a></span></li>
                     </ul>
                   </div>

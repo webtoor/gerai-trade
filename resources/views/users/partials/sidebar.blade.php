@@ -13,7 +13,7 @@ use App\Models\Pesan;
           </div>
           
               <p class="list-group-item border-top-0 text-center" style="margin-top:-10px;">
-                <img src="/images/profiluser.png" style="width: 152px;">
+                <img src="/images/profiluser.png" style="width: 110px; height:100px;">
               </p>
 
            

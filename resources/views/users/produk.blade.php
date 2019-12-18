@@ -426,7 +426,10 @@
 			</ul>
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
-            {!! html_entity_decode($produk_detail->deskripsi) !!}
+          <div style="color:black">
+              {!! html_entity_decode($produk_detail->deskripsi) !!}
+
+          </div>
 
         </div>
        {{--  <div class="tab-pane fade" id="ulasan" role="tabpanel" aria-labelledby="ulasan-tab">

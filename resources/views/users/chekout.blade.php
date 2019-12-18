@@ -125,7 +125,7 @@
             </div>
         </div>
     </section>
-
+    {{Cart::instance('default')->content()}}
     @if(count(Cart::instance('default')->content()))
         <div class="container" style="margin-top:-30px; margin-bottom:100px;">
           <div class="row bar">
@@ -182,8 +182,11 @@
                         <td>{{$row->options->weight}} gram</td>
                         
                         </tr>
+                        <input type="text" name="result_id[]" value="{{$row->id}}" id="id_produkselectDurasi{{$row->options->hub_id}}">
                         @endif
                     <?php endforeach;?>
+                   
+
                       </tbody>
                       <tfoot>
                        
@@ -191,8 +194,8 @@
                     </table>
                  
                     @if($alamat)
+                    <form>
                     <div class="form-row">
-
                     <div class="form-group col-sm-4">
                           <label>Pilih Ekspedisi</label>
                           <select class="form-control" name="eks" id="eks" data-target="{{$hub->user_id}}" required>
@@ -223,66 +226,7 @@
                   </div>
               
               </div>
-            {{--   <p style="margin-left:10px; color:black"><b>Ongkos Kirim</b></p>
-              <div class="border-top my-3" >
-                <div style="margin-top:20px; margin-bottom:100px;">
-                  <div class="form-row" >
-                      <div class="form-group col-md-6">
-                          <label>Pilih Ekspedisi</label>
-                          <select class="form-control" name="eks" id="eks">
-                            <option value="jne">JNE</option>
-                            <option value="pos">POS</option>
-                            <option value="tiki">TIKI</option>
-                          </select>
-                        </div> --}}
-       {{--          <div class="form-group col-md-6" >
-                  <label>Pilih Kota</label>
-                  <select class="form-control" onchange="check()" id="city" name="city" required="true">
-                      @php
-                      $city = city();
-                      $city = json_decode($city,true);
-                  @endphp
-                  @foreach($city['rajaongkir']['results'] as $citys)
-                    <option value="{{ $citys['city_id'] }}">{{ $citys['city_name'] }} </option>
-                    @endforeach           
-                       </select>
-                </div>
-               
-               
-              </div>
-              <div class="form-row">
-                  <div class="form-group col-md-12">
-                      <label>Provinsi</label>
-                       <input type="text" class="form-control" id="provinsi" name="provinsi" readonly="">
-                       <input type="hidden" class="form-control" id="provinsi_id" name="provinsi_id">
-
-                    </div>
-                    <input  type="hidden" class="form-control" name="portal_code" id="portal_code" readonly=""> --}}
-
-                  {{-- <div class="form-group col-md-6">
-                      <label for="zip">Kode POS</label>
-                      <input  type="text" class="form-control" name="portal_code" id="portal_code" readonly="">
-                    </div> --}}
-                    
-                    {{-- <div class="form-group col-md-4">
-                        <label for="zip">Ongkos Kirim / 1Kg</label>
-                        <input  type="text" class="form-control" name="ongkir" id="ongkir" readonly="">
-                      </div> --}}
-              {{-- </div>
-              <div class="form-row">
-                  <div class="form-group col-md-6">
-                      <label for="zip">Cek Ongkir</label>
-
-                    <button id="submitongkir" class="btn btn-secondary btn-block btn-md">CEK ONGKIR</button>
-                  </div>
-                    <div class="form-group col-md-6">
-                        <label for="zip">Total Ongkos Kirim (Regular)</label>
-                        <input  type="text" class="form-control" name="ongkir" id="ongkir" readonly="">
-                      </div>
-              </div>
-            
-              </div>
-            </div> --}}
+          
             </div>
            
             <div class="col-lg-4" style="margin-top:100px;">
@@ -308,15 +252,16 @@
                                     </table>
                   
                                   </div>
-                              <a href="#" class="btn btn-outline-dark btn-block"><b>BAYAR SEKARANG</b></a>
-
+                              <button id="submit" class="btn btn btn-info btn-block"><b>BAYAR SEKARANG</b></button>
                             </div>
                           </div>
+                        </form>
             
             </div>
             
           </div>
         </div>
+       
         @else
         <div class="text-center">
             <p>Wah, keranjang Anda kosong nih </p>
@@ -329,7 +274,15 @@
     <script src="{{ mix('/js/app.js') }}"></script><script type="text/javascript">
 
       $(document).ready(function () {
-
+        $("button#submit").click(function () {
+         /*  var checkout = {
+            'courier': $('#eks').val(),
+            'id_produk': $("#id_produkselectDurasi9").attr("name"),
+          } */
+          var values = $("input[name='result_id[]']")
+              .map(function(){return $(this).val();}).get();
+            console.log(values)
+          });
         $('select#eks').on('change', function (e) {
            var counts = $(this).attr('data-target');
 
@@ -388,14 +341,19 @@
             var total_tagihan = 0;
             var data_val = $(this).attr('id');  
             if( $('select#' + data_val)){
+              //var id_produk = $('#id_produk'+data_val).val();
+              var id_produk = $("input[id='id_produk"+data_val+"']").map(function(){return $(this).val();}).get();
+              console.log(id_produk)
               let optionSelected = $("option:selected", this);
               let valueSelected = this.value;
               if(valueSelected != ''){
                 var arrays = valueSelected.split("#");
+                /* var id_produk[] = "";
+                console.log(id_produk) */
                 var res = {
                   'uniq' : data_val,
                   'ongkir' : parseInt(arrays[0]),
-                  'courier' : arrays[1]
+                  'courier' : arrays[1],
                 };
           
                 var index = selectById.findIndex(x => x.uniq == data_val)
@@ -403,13 +361,15 @@
                   selectById.push({
                     'uniq' : data_val,
                     'ongkir' : parseInt(arrays[0]),
-                    'courier' : arrays[1]
+                    'courier' : arrays[1],
+                    'id_produk' : id_produk,
                     })
                 }else{
                   selectById[index] = {
                     'uniq' : data_val,
                     'ongkir' : parseInt(arrays[0]),
-                    'courier' : arrays[1]
+                    'courier' : arrays[1],
+                    'id_produk' : id_produk,
                     }
                 }
                 console.log(selectById)
@@ -479,6 +439,9 @@
 
           }
         });
+
+
+      
       });
     </script>
 </body>
