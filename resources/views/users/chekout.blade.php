@@ -125,7 +125,7 @@
             </div>
         </div>
     </section>
-    {{Cart::instance('default')->content()}}
+   {{--  {{Cart::instance('default')->content()}} --}}
     @if(count(Cart::instance('default')->content()))
         <div class="container" style="margin-top:-30px; margin-bottom:100px;">
           <div class="row bar">
@@ -180,9 +180,9 @@
                           </td>
                           <td>Rp {{number_format($row->price,0, ".", ".")}}</td>
                         <td>{{$row->options->weight}} gram</td>
-                        
                         </tr>
-                        <input type="text" name="result_id[]" value="{{$row->id}}" id="id_produkselectDurasi{{$row->options->hub_id}}">
+                        <input type="text" name="harga_produk[]" value="{{$row->price}}" id="harga_produkselectDurasi{{$row->options->hub_id}}">
+                        <input type="hidden" name="result_id[]" value="{{$row->id}}" id="id_produkselectDurasi{{$row->options->hub_id}}">
                         @endif
                     <?php endforeach;?>
                    
@@ -279,9 +279,10 @@
             'courier': $('#eks').val(),
             'id_produk': $("#id_produkselectDurasi9").attr("name"),
           } */
-          var values = $("input[name='result_id[]']")
+          var values = $("input[id='harga_produkselectDurasi9']")
               .map(function(){return $(this).val();}).get();
-            console.log(values)
+          var harga_produk = values.map(parseFloat);
+          console.log(harga_produk)
           });
         $('select#eks').on('change', function (e) {
            var counts = $(this).attr('data-target');
@@ -343,6 +344,12 @@
             if( $('select#' + data_val)){
               //var id_produk = $('#id_produk'+data_val).val();
               var id_produk = $("input[id='id_produk"+data_val+"']").map(function(){return $(this).val();}).get();
+              var hargaById = $("input[id='harga_produk"+data_val+"']").map(function(){return $(this).val();}).get();
+              var harga_produk = hargaById.map(parseFloat);
+              var harga_total = 0;
+              $.each(harga_produk,function(){harga_total+=parseFloat(this) || 0;});
+              console.log(harga_total)
+              console.log(harga_produk)
               console.log(id_produk)
               let optionSelected = $("option:selected", this);
               let valueSelected = this.value;
@@ -363,6 +370,7 @@
                     'ongkir' : parseInt(arrays[0]),
                     'courier' : arrays[1],
                     'id_produk' : id_produk,
+                    'total_harga' : harga_total + parseInt(arrays[0])
                     })
                 }else{
                   selectById[index] = {
@@ -370,6 +378,7 @@
                     'ongkir' : parseInt(arrays[0]),
                     'courier' : arrays[1],
                     'id_produk' : id_produk,
+                    'total_harga' : harga_total + parseInt(arrays[0])
                     }
                 }
                 console.log(selectById)

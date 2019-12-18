@@ -17,6 +17,7 @@ class CreateTransactionsTable extends Migration
             $table->increments('id');
             $table->string('kode')->unique();
             $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->integer('produk_id')->unsigned();
             $table->integer('alamat_id')->unsigned();
             $table->string('ekspedisi');
@@ -26,6 +27,8 @@ class CreateTransactionsTable extends Migration
             $table->bigInteger('subtotal')->unsigned();
             $table->timestamps();
 
+
+            $table->foreign('hub_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('produk_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('alamat_id')->references('id')->on('alamats')->onDelete('cascade');
