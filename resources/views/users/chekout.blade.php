@@ -181,7 +181,7 @@
                           <td>Rp {{number_format($row->price,0, ".", ".")}}</td>
                         <td>{{$row->options->weight}} gram</td>
                         </tr>
-                        <input type="text" name="harga_produk[]" value="{{$row->price}}" id="harga_produkselectDurasi{{$row->options->hub_id}}">
+                        <input type="hidden" name="harga_produk[]" value="{{$row->price}}" id="harga_produkselectDurasi{{$row->options->hub_id}}">
                         <input type="hidden" name="result_id[]" value="{{$row->id}}" id="id_produkselectDurasi{{$row->options->hub_id}}">
                         @endif
                     <?php endforeach;?>
@@ -194,7 +194,7 @@
                     </table>
                  
                     @if($alamat)
-                    <form>
+                    <form action="javascript:void(0);">
                     <div class="form-row">
                     <div class="form-group col-sm-4">
                           <label>Pilih Ekspedisi</label>
@@ -282,7 +282,25 @@
           var values = $("input[id='harga_produkselectDurasi9']")
               .map(function(){return $(this).val();}).get();
           var harga_produk = values.map(parseFloat);
-          console.log(harga_produk)
+          if(selectById.length > 0){
+            $.ajax({
+              headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              },
+              contentType: "application/json",
+              dataType: "json",
+              type: 'POST',
+              url : "{{ url('post-checkout') }}",
+              data: JSON.stringify(selectById),
+              success:function(results){
+              console.log(results)
+             
+
+              }
+            });
+          }
+
+
           });
         $('select#eks').on('change', function (e) {
            var counts = $(this).attr('data-target');
@@ -322,10 +340,10 @@
               url : "{{ url('cek-ongkir') }}",
               data: JSON.stringify(params),
               success:function(results){
-              console.log(results)
+              console.log(results.rajaongkir.results[0])
               $.each(results.rajaongkir.results[0].costs, function(index, data) {
                 $("#selectDurasi"+ counts).prop('disabled', false);
-                $('#selectDurasi'+ counts).append($('<option>', {value:data['cost'][0]['value'] + '#' + data['service'], text:data['service'] + ' (' + data['cost'][0]['etd'] + ' Hari) ' + ' (Rp '  +  data['cost'][0]['value'] + ')'}, '</option>'));
+                $('#selectDurasi'+ counts).append($('<option>', {value:data['cost'][0]['value'] + '#' + data['service'] + '#' + results.rajaongkir.results[0].code, text:data['service'] + ' (' + data['cost'][0]['etd'] + ' Hari) ' + ' (Rp '  +  data['cost'][0]['value'] + ')'}, '</option>'));
               })
 
               }
@@ -342,7 +360,6 @@
             var total_tagihan = 0;
             var data_val = $(this).attr('id');  
             if( $('select#' + data_val)){
-              //var id_produk = $('#id_produk'+data_val).val();
               var id_produk = $("input[id='id_produk"+data_val+"']").map(function(){return $(this).val();}).get();
               var hargaById = $("input[id='harga_produk"+data_val+"']").map(function(){return $(this).val();}).get();
               var harga_produk = hargaById.map(parseFloat);
@@ -353,6 +370,7 @@
               console.log(id_produk)
               let optionSelected = $("option:selected", this);
               let valueSelected = this.value;
+              console.log(valueSelected)
               if(valueSelected != ''){
                 var arrays = valueSelected.split("#");
                 /* var id_produk[] = "";
@@ -368,7 +386,8 @@
                   selectById.push({
                     'uniq' : data_val,
                     'ongkir' : parseInt(arrays[0]),
-                    'courier' : arrays[1],
+                    'service' : arrays[1],
+                    'courier' : arrays[2],
                     'id_produk' : id_produk,
                     'total_harga' : harga_total + parseInt(arrays[0])
                     })
@@ -376,7 +395,8 @@
                   selectById[index] = {
                     'uniq' : data_val,
                     'ongkir' : parseInt(arrays[0]),
-                    'courier' : arrays[1],
+                    'service' : arrays[1],
+                    'courier' : arrays[2],
                     'id_produk' : id_produk,
                     'total_harga' : harga_total + parseInt(arrays[0])
                     }
@@ -417,7 +437,7 @@
        
       }
 
-
+/* 
       $("button#submitongkir").click(function () {
         var params = {
         'eks': $('#eks').val(),
@@ -436,7 +456,7 @@
           url : "{{ url('cek-ongkir') }}",
           data: JSON.stringify(params),
           success:function(datas){
-            //console.log(datas.rajaongkir.results[0].costs[1].cost[0].value)
+            console.log(datas.rajaongkir.results[0].costs[1].cost[0].value)
             $("#ongkir").val(datas.rajaongkir.results[0].costs[1].cost[0].value);
             $("#totalongkir").html('Rp. ' + datas.rajaongkir.results[0].costs[1].cost[0].value.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'));
             var totalharga = "<?php echo str_replace(',','',Cart::instance('default')->total()); ?>";
@@ -444,14 +464,12 @@
             console.log(parseInt(totalharga) + parseInt(datas.rajaongkir.results[0].costs[1].cost[0].value))
             var totaltagihan = parseInt(totalharga) + parseInt(datas.rajaongkir.results[0].costs[1].cost[0].value)
             $("#totaltagihan").html('Rp. ' + totaltagihan.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'));
-
-
           }
         });
 
 
       
-      });
+      }); */
     </script>
 </body>
 </html>
