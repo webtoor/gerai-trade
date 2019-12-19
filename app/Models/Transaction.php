@@ -19,7 +19,9 @@ class Transaction extends Model
         'no_resi',
         'status_id',
         'total_ongkir',
-        'total_pembayaran'
+        'total_pembayaran',
+        'created_at',
+        'updated_at'
     ];
 
 }

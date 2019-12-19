@@ -181,7 +181,7 @@
                           <td>Rp {{number_format($row->price,0, ".", ".")}}</td>
                         <td>{{$row->options->weight}} gram</td>
                         </tr>
-                        <input type="hidden" name="harga_produk[]" value="{{$row->price}}" id="harga_produkselectDurasi{{$row->options->hub_id}}">
+                       {{--  <input type="hidden" name="harga_produk[]" value="{{$row->price}}" id="harga_produkselectDurasi{{$row->options->hub_id}}"> --}}
                         <input type="hidden" name="result_id[]" value="{{$row->id}}" id="id_produkselectDurasi{{$row->options->hub_id}}">
                         @endif
                     <?php endforeach;?>
@@ -290,7 +290,7 @@
               contentType: "application/json",
               dataType: "json",
               type: 'POST',
-              url : "{{ url('post-checkout') }}",
+              url : "{{ route('home.ajaxPostCheckout')}}",
               data: JSON.stringify(selectById),
               success:function(results){
               console.log(results)
@@ -359,14 +359,16 @@
             var total_ongkir = 0;
             var total_tagihan = 0;
             var data_val = $(this).attr('id');  
+            var count = $(this).attr('data-target');
+
             if( $('select#' + data_val)){
               var id_produk = $("input[id='id_produk"+data_val+"']").map(function(){return $(this).val();}).get();
-              var hargaById = $("input[id='harga_produk"+data_val+"']").map(function(){return $(this).val();}).get();
+              /* var hargaById = $("input[id='harga_produk"+data_val+"']").map(function(){return $(this).val();}).get();
               var harga_produk = hargaById.map(parseFloat);
-              var harga_total = 0;
-              $.each(harga_produk,function(){harga_total+=parseFloat(this) || 0;});
+              var harga_total = 0; */
+             /*  $.each(harga_produk,function(){harga_total+=parseFloat(this) || 0;});
               console.log(harga_total)
-              console.log(harga_produk)
+              console.log(harga_produk) */
               console.log(id_produk)
               let optionSelected = $("option:selected", this);
               let valueSelected = this.value;
@@ -389,7 +391,7 @@
                     'service' : arrays[1],
                     'courier' : arrays[2],
                     'id_produk' : id_produk,
-                    'total_harga' : harga_total + parseInt(arrays[0])
+                    'hub_id' : $('#hub_id' + count).val(),
                     })
                 }else{
                   selectById[index] = {
@@ -398,7 +400,7 @@
                     'service' : arrays[1],
                     'courier' : arrays[2],
                     'id_produk' : id_produk,
-                    'total_harga' : harga_total + parseInt(arrays[0])
+                    'hub_id' : $('#hub_id' + count).val(),
                     }
                 }
                 console.log(selectById)
