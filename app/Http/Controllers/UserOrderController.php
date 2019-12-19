@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Cart;
 use App\Models\Transaction;
+use App\Models\Transaction_detail;
 use App\Models\Alamat;
 use App\Models\Produk;
 
@@ -37,6 +38,7 @@ class UserOrderController extends Controller
 
             foreach($data as $row){
                 $sum_harga = 0;
+                $qty = 0;
                 foreach(Cart::content('default') as $cart){
                  if($cart->options->hub_id == $row['hub_id']){
                     $sum_harga += ($cart->price) * ($cart->qty);
@@ -54,6 +56,17 @@ class UserOrderController extends Controller
                     'total_ongkir' => $row['ongkir'],
                     'total_pembayaran' =>  $sum_harga
                 ]);
+
+                foreach (Cart::content('default') as $cartz) {
+                    if ($cartz->options->hub_id == $row['hub_id']) {
+                        $transaction_detail = Transaction_detail::create([
+                        'transaction_id' => $transaction->id,
+                        'produk_id' => $cartz->id,
+                        'qty' => $cartz->qty
+                    ]);
+                    }
+                }
+              
             }
             return response()->json([
                 'status' => 1,
