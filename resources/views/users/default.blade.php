@@ -14,7 +14,7 @@
     <title>{{ config('app.name', 'TRADE') }}</title>
 
     <!-- Styles -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600" rel="stylesheet">
+   {{--  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600" rel="stylesheet"> --}}
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
   	<link rel="stylesheet" href="/css/flaticon.css"/>
 

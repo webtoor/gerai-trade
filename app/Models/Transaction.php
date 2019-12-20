@@ -18,7 +18,7 @@ class Transaction extends Model
         'service',
         'no_resi',
         'status_id',
-        'total_ongkir',
+        'ongkir',
         'total_harga',
         'created_at',
         'updated_at'

@@ -53,7 +53,7 @@ class UserOrderController extends Controller
                     'service' => $row['service'],
                     'no_resi' => null,
                     'status_id' => "0",
-                    'total_ongkir' => $row['ongkir'],
+                    'ongkir' => $row['ongkir'],
                     'total_harga' =>  $sum_harga
                 ]);
 
@@ -85,7 +85,7 @@ class UserOrderController extends Controller
     public function getWaitPayment(){
         $kategori = Kategori::with('sub_kategori')->get();
         $user_id = Auth::user()->id;
-        $order = Transaction::where(['user_id' => $user_id, 'status_id' => '0'])->get();
+        $order = Transaction::where(['user_id' => $user_id, 'status_id' => '0'])->orderBy('created_at', 'desc')->get();
 
         $new_order = collect($order)->unique('kode');
         $order_array = [];
@@ -94,7 +94,7 @@ class UserOrderController extends Controller
             $totals = 0;
             $total = Transaction::where(['user_id' => $user_id, 'status_id' => '0', 'kode' => $data->kode])->get();
             foreach($total as $data_check){
-                $totals +=  $data_check->total_ongkir + $data_check->total_harga; 
+                $totals +=  $data_check->ongkir + $data_check->total_harga; 
             }
             array_push($order_array, (object)[
                 'order' => $total,
@@ -103,7 +103,7 @@ class UserOrderController extends Controller
         }
        
 
-        /* return $order_array[0]->order; */
+        /* return $order_array; */
 
 
 

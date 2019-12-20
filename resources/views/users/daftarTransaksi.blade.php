@@ -10,7 +10,7 @@
 
     <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top:10px;">
             <li class="nav-item">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#wishlist" role="tab" aria-controls="wishlist" aria-selected="true">Alamat Penerima</a>
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#wishlist" role="tab" aria-controls="wishlist" aria-selected="true">Menunggu Pembayaran</a>
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
@@ -19,51 +19,22 @@
                     <div class="row" style="margin-top:40px;">
                       <div class="col-sm-12">
                           @include('admin.partials.messages') 
-                      
-                                              <div class="mT-20">
-                            <table class="table" cellspacing="0" width="100%">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th>Nama Penerima</th>
-                                        <th>Alamat Penerima</th>
-                                        <th>Daerah Penerima</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                
-                                    <tr>
-                                        <td><div class="br"></div>
-                                          <div style="font-size:12px;"></div>
-                                        </td>
-                                        <td> </td>
-                                        <td><div class="br">{</div></td>
-                                        <td>
+                        @foreach($array_order as $list)
+                          <div class="card" style="margin-bottom:20px;">
+                            <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><b>{{ date("j-M-Y H:i", strtotime($list->order[0]->created_at))}}</b>
+                            <button href="http://" class="float-right btn btn-info btn-md"><b>Konfirmasi Pembayaran</b></button>
+                            <button href="http://" class="float-right btn btn-danger btn-md"><b>Batalkan</b></button>
 
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item">
-                                                    <button id="ubahAlamats" data-toggle="modal" data-target="#ubahAlamat" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"><span class="ti-pencil"></span>
-                                                      Ubah
-                                                </button>
-                                                </li>
-                                               {{--  <li class="list-inline-item">
-                                                    {!! Form::open([
-                                                        'class'=>'delete',
-                                                        'url'  => route('delete-alamat', $alamats->id), 
-                                                        'method' => 'DELETE',
-                                                        ]) 
-                                                    !!}
-                                                        <button class="btn btn-danger px-3 btn-sm" title="{{ trans('app.delete_title') }}"><i class="ti-trash"></i>Hapus</button>
-                                                        
-                                                    {!! Form::close() !!}
-                                                </li> --}}
-                                        </ul>
-                                        </td>
-                                        
-                                      
-                                    </tr>
-                                </tbody>
-                            </table>
+                            </li>
+                              <li class="list-group-item">Bank Tujuan Pembayaran : BRI</li>
+                              <li class="list-group-item">Nomor Tujuan Pembayaran : 037601001110308</li>
+                              <li class="list-group-item">a/n Koperasi Kemitraan Daya Mandiri</li>
+                            </ul>
+                          </div>
+
+                          @endforeach
+
                         </div>
                     </div>
                              
