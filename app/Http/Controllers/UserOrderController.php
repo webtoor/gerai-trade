@@ -10,7 +10,7 @@ use App\Models\Transaction;
 use App\Models\Transaction_detail;
 use App\Models\Alamat;
 use App\Models\Produk;
-
+use App\Models\Kategori;
 
 class UserOrderController extends Controller
 {
@@ -82,7 +82,31 @@ class UserOrderController extends Controller
     }
 
 
-    public function getAllTransaction(){
-        return 'asdasd';
+    public function getWaitPayment(){
+        $kategori = Kategori::with('sub_kategori')->get();
+        $user_id = Auth::user()->id;
+        $order = Transaction::where(['user_id' => $user_id, 'status_id' => '0'])->get();
+
+        $new_order = collect($order)->unique('kode');
+        $order_array = [];
+        $foo = [];
+        foreach($new_order as $data){
+            $totals = 0;
+            $total = Transaction::where(['user_id' => $user_id, 'status_id' => '0', 'kode' => $data->kode])->get();
+            foreach($total as $data_check){
+                $totals +=  $data_check->total_ongkir + $data_check->total_harga; 
+            }
+            array_push($order_array, (object)[
+                'order' => $total,
+                'total_pembayaran' => $totals
+            ]);
+        }
+       
+
+        /* return $order_array[0]->order; */
+
+
+
+        return view('users.daftarTransaksi', ['kategori' => $kategori, 'array_order' => $order_array]);
     }
 }

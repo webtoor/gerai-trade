@@ -42,9 +42,7 @@
 
                                             <ul class="list-inline">
                                                 <li class="list-inline-item">
-                                                    <button id="ubahAlamats" data-toggle="modal" data-target="#ubahAlamat" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"
-                                                data-uid="{{$alamats->id}}" data-unama_penerima="{{$alamats->nama_penerima}}" data-unohp_penerima="{{$alamats->nohp_penerima}}" data-ualamat="{{$alamats->alamat}}"
-                                                ><span class="ti-pencil"></span>
+                                                    <button id="ubahAlamats" data-toggle="modal" data-target="#ubahAlamat" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"><span class="ti-pencil"></span>
                                                       Ubah
                                                 </button>
                                                 </li>
@@ -64,7 +62,6 @@
                                         
                                       
                                     </tr>
-                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
