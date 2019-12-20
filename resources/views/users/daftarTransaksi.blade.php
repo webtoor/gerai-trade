@@ -22,14 +22,32 @@
                         @foreach($array_order as $list)
                           <div class="card" style="margin-bottom:20px;">
                             <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><b>{{ date("j-M-Y H:i", strtotime($list->order[0]->created_at))}}</b>
-                            <button href="http://" class="float-right btn btn-info btn-md"><b>Konfirmasi Pembayaran</b></button>
-                            <button href="http://" class="float-right btn btn-danger btn-md"><b>Batalkan</b></button>
+                            <li class="list-group-item"> <b> <i class="flaticon-bag fa-lg"></i> Pembelian{{-- {{ date("j-M-Y H:i", strtotime($list->order[0]->created_at))}} --}}</b>
+                            {{-- <button href="http://" class="float-right btn btn-info btn-md"><b>Unggah Bukti Pembayaran</b></button>
+                            <button href="http://" class="float-right btn btn-danger btn-md"><b>Batalkan</b></button> --}}
 
                             </li>
-                              <li class="list-group-item">Bank Tujuan Pembayaran : BRI</li>
-                              <li class="list-group-item">Nomor Tujuan Pembayaran : 037601001110308</li>
-                              <li class="list-group-item">a/n Koperasi Kemitraan Daya Mandiri</li>
+                              <li class="list-group-item">
+                                <div class="row">
+                                <div class="col-sm-6" style="margin-left:50px;">
+                                <div style="font-size:14px;margin-bottom:10px;">Total : <b  style="color:#fa591d; margin-right:10px;" >Rp {{number_format($list->total_pembayaran,0, "", ".")}}</b> Tanggal Pembelian : {{ date("j-M-Y H:i", strtotime($list->order[0]->created_at))}} WIB</div>
+                                <div style="background:#f8f9fa; font-size:13px; margin-bottom:10px; height:40px;">
+                                  <div style="padding:10px;">Bayar sebelum {{ date("j-M-Y, H:i", strtotime($list->order[0]->created_at .  ' +2 day'))}} WIB</div>
+                                </div>
+
+                                <div style="font-size:14px;margin-bottom:5px;">Rekening Trade : 037601001110308 a.n Koperasi Kemitraan Daya Mandiri</div>
+                                </div>
+                                <div class="col-sm-5 text-center">
+                                  <div class="peer">
+                                    <img src="/images/bank/bri.png" alt="" style="width:100px;">
+                                  </div>
+                                  <div style="margin-top:20px;">
+                                    <button href="http://" class="btn btn-outline-dark btn-md"><b>Unggah Bukti Pembayaran</b></button>
+                                  </div>
+                                </div>
+                                </div>
+                              </li>
+      
                             </ul>
                           </div>
 
