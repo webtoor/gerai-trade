@@ -80,4 +80,9 @@ class UserOrderController extends Controller
       
        
     }
+
+
+    public function getAllTransaction(){
+        return 'asdasd';
+    }
 }

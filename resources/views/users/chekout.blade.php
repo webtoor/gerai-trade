@@ -295,7 +295,7 @@
               success:function(results){
                 if(results.status == 1){
                   console.log(results)
-                  location.replace("{{route('home')}}");
+                  location.replace("{{route('home.getAllTransaction')}}");
 
                 }else{
                   alert('Maaf, Terjadi kesalahan, silakan coba lagi nanti')
