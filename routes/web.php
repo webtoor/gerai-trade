@@ -153,6 +153,7 @@ Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']
                 Route::get('chat', 'UserController@getChat')->name('getChat');
                 Route::post('chat', 'UserController@ajaxPostChat')->name('ajaxPostChat');
                 Route::post('post-checkout', 'UserOrderController@postCheckout')->name('ajaxPostCheckout');
+                Route::get('daftar-transaksi', 'UserOrderController@getAll')->name('getAllTransaksi');
 
         });  
         Route::group(['middleware' => ['mitra']], function(){

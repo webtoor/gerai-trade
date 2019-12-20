@@ -54,7 +54,7 @@ class UserOrderController extends Controller
                     'no_resi' => null,
                     'status_id' => "0",
                     'total_ongkir' => $row['ongkir'],
-                    'total_pembayaran' =>  $sum_harga
+                    'total_harga' =>  $sum_harga
                 ]);
 
                 foreach (Cart::content('default') as $cartz) {
@@ -70,7 +70,6 @@ class UserOrderController extends Controller
             }
             return response()->json([
                 'status' => 1,
-                'message' => $sum_harga,
             ]);
         } catch (\Exception $e) {
             return response()->json([

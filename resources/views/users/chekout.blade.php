@@ -252,7 +252,7 @@
                                     </table>
                   
                                   </div>
-                              <button id="submit" class="btn btn btn-info btn-block"><b>BAYAR SEKARANG</b></button>
+                              <button id="submit" class="btn btn btn-info btn-block" disabled="true"><b>BAYAR SEKARANG</b></button>
                             </div>
                           </div>
                         </form>
@@ -293,7 +293,13 @@
               url : "{{ route('home.ajaxPostCheckout')}}",
               data: JSON.stringify(selectById),
               success:function(results){
-              console.log(results)
+                if(results.status == 1){
+                  console.log(results)
+                  location.replace("{{route('home')}}");
+
+                }else{
+                  alert('Maaf, Terjadi kesalahan, silakan coba lagi nanti')
+                }
              
 
               }
@@ -321,11 +327,13 @@
               $("#selectDurasi" + counts).prop('disabled', false);
               $("#selectDurasi"+counts+" option").remove();
               $("#selectDurasi"+counts).append($('<option>', {value:'', text:'Pilih Durasi Pengiriman'}, '</option>'));
+              $("#submit").prop('disabled', false);
 
               }else{
               $("#selectDurasi" + counts).prop('disabled', true);
               $("#selectDurasi"+counts+" option").remove();
               $("#selectDurasi"+counts).append($('<option>', {value:'', text:'Pilih Durasi Pengiriman'}, '</option>'));
+              $("#submit").prop('disabled', true);
 
               }
 
@@ -341,6 +349,8 @@
               data: JSON.stringify(params),
               success:function(results){
               console.log(results.rajaongkir.results[0])
+              $("#submit").prop('disabled', true);
+
               $.each(results.rajaongkir.results[0].costs, function(index, data) {
                 $("#selectDurasi"+ counts).prop('disabled', false);
                 $('#selectDurasi'+ counts).append($('<option>', {value:data['cost'][0]['value'] + '#' + data['service'] + '#' + results.rajaongkir.results[0].code, text:data['service'] + ' (' + data['cost'][0]['etd'] + ' Hari) ' + ' (Rp '  +  data['cost'][0]['value'] + ')'}, '</option>'));
@@ -374,6 +384,7 @@
               let valueSelected = this.value;
               console.log(valueSelected)
               if(valueSelected != ''){
+                $("#submit").prop('disabled', false);
                 var arrays = valueSelected.split("#");
                 /* var id_produk[] = "";
                 console.log(id_produk) */
@@ -413,6 +424,9 @@
                 var totalharga = "<?php echo str_replace(',','',Cart::instance('default')->total()); ?>";
                 totaltagihan = parseInt(totalharga)+ parseInt(total_ongkir)
                 $("#totaltagihan").html('Rp. ' + totaltagihan.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'));
+              }else{
+                $("#submit").prop('disabled', true);
+
               }
          
             
