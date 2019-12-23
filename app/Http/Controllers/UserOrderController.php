@@ -109,4 +109,13 @@ class UserOrderController extends Controller
 
         return view('users.daftarTransaksi', ['kategori' => $kategori, 'array_order' => $order_array]);
     }
+
+    public function transaksiBatalkan(Request $request){
+        Transaction::where('kode', $request->transaksi_kode)->update([
+            'status_id' => '3'
+        ]);
+
+        return back()->withSuccess(trans('Anda Berhasil Membatalkan Pesanan')); 
+
+    }
 }
