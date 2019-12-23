@@ -43,7 +43,7 @@
                                     <img src="/images/bank/bri.png" alt="" style="width:100px;">
                                   </div>
                                   <div style="margin-top:20px;">
-                                    <button href="http://" class="btn btn-outline-dark btn-md"><b>Unggah Bukti Pembayaran</b></button>
+                                    <button class="btn btn-outline-dark btn-md" id="buktiPembayarans" data-toggle="modal" data-target="#buktiPembayaran" ><b>Unggah Bukti Pembayaran</b></button>
                                   </div>
                                 </div>
                                 </div>
@@ -65,6 +65,7 @@
     </div>       
 </div>
 
+<!-- BATALKAN PESANAN -->
 <div class="modal fade" id="batalkan" tabindex="-1" role="dialog" aria-labelledby="batalkanLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
     {!! Form::open([ 'route' => ['home.transaksiBatalkan'], 'method' => "POST"])!!}
@@ -88,6 +89,55 @@
       </div>
     </div>
     {!! Form::close() !!}
+
+  </div>
+</div>
+
+
+<!-- BUKTI PESANAN -->
+
+<div class="modal fade" id="buktiPembayaran" tabindex="-1" role="dialog" aria-labelledby="batalkanLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md" role="document">
+    {{-- {!! Form::open([ 'route' => ['home.transaksiBatalkan'], 'method' => "POST"])!!} --}}
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Unggah Bukti Pembayaran</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+              <label for="inputEmail4">Jumlah Transfer <sup style="color:red"> *Wajib</sup></label>
+              <input type="text" class="form-control" name="jumlah_transfer" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Bank Pengirim <sup style="color:red"> *Wajib</sup></label>
+            <input type="text" class="form-control" name="bank_pengirim" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="inputEmail4">Nama Pengirim <sup style="color:red"> *Wajib</sup></label>
+          <input type="text" class="form-control" name="nama_pengirim" required>
+        </div>
+    </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputEmail4">Pilih Gambar <sup style="color:red"> *Wajib</sup></label>
+            <input type="file" name="image_pembayaran" required>
+          </div>
+      </div>
+
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Tutup</button>
+        <button type="submit" class="btn btn-primary btn-sm" >Submit</button>
+      </div>
+    </div>
+   {{--  {!! Form::close() !!} --}}
 
   </div>
 </div>
