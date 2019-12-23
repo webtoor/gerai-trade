@@ -25,7 +25,7 @@
                             <li class="list-group-item"> <b> <i class="flaticon-bag fa-lg"></i> Pembelian{{-- {{ date("j-M-Y H:i", strtotime($list->order[0]->created_at))}} --}}</b>
                             {{-- <button href="http://" class="float-right btn btn-info btn-md"><b>Unggah Bukti Pembayaran</b></button>
                             <button href="http://" class="float-right btn btn-danger btn-md"><b>Batalkan</b></button> --}}
-
+                              <a href="http://" class="float-right text-danger" style="font-size:14px;">Batalkan</a>
                             </li>
                               <li class="list-group-item">
                                 <div class="row">
@@ -35,7 +35,7 @@
                                   <div style="padding:10px;">Bayar sebelum {{ date("j-M-Y, H:i", strtotime($list->order[0]->created_at .  ' +2 day'))}} WIB</div>
                                 </div>
 
-                                <div style="font-size:14px;margin-bottom:5px;">Rekening Trade : 037601001110308 a.n Koperasi Kemitraan Daya Mandiri</div>
+                                <div style="font-size:14px;margin-bottom:5px;">No Rekening Trade : 037601001110308 a.n Koperasi Kemitraan Daya Mandiri</div>
                                 </div>
                                 <div class="col-sm-5 text-center">
                                   <div class="peer">

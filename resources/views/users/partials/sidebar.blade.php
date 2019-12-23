@@ -1,5 +1,7 @@
 <?php 
 use App\Models\Pesan;
+use App\Models\Transaction;
+
  ?>
 <div class="col-sm-2 my-2">
     <div class="card">
@@ -60,7 +62,29 @@ use App\Models\Pesan;
             <p href="#" class="list-group-item border-bottom-0">
                     <b style="font-size:14px;">PEMBELIAN</b>    
                 </p>
-                    <a href="#" class="list-group-item border-top-0" style="font-size:14px;">Daftar Transaksi</a>
+                    <a href="#" class="list-group-item border-top-0" style="font-size:14px;">
+                        Daftar Transaksi
+                      <?php 
+                        $order_count = Transaction::where(['user_id' => Auth::user()->id, 'status_id' => '0'])->orderBy('created_at', 'desc')->get();
+
+                      $new_order_count = collect($order_count)->unique('kode');
+                      $order_array_count = [];
+                      foreach($new_order_count as $data){
+                          $totals = 0;
+                          $total = Transaction::where(['user_id' => Auth::user()->id, 'status_id' => '0', 'kode' => $data->kode])->get();
+                          foreach($total as $data_check){
+                              $totals +=  $data_check->ongkir + $data_check->total_harga; 
+                          }
+                          array_push($order_array_count, (object)[
+                              'order' => $total,
+                              'total_pembayaran' => $totals
+                          ]);
+                      }
+                      ?>
+                        @if(count($order_array_count) > 0)
+                        <span class="badge badge-danger">{{count($order_array_count)}}</span>
+                        @endif
+                    </a>
 
                     
             @endif
