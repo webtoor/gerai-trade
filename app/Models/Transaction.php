@@ -24,4 +24,8 @@ class Transaction extends Model
         'updated_at'
     ];
 
+    public function transaction_bukti(){
+        return $this->hasOne('App\Models\TransactionBukti', 'kode_id', 'kode');
+    }
+
 }

@@ -10,11 +10,23 @@
 
     <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top:10px;">
             <li class="nav-item">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#wishlist" role="tab" aria-controls="wishlist" aria-selected="true">Menunggu Pembayaran</a>
+              <a class="nav-link active" id="menunggu-pembayaran" data-toggle="tab" href="#menunggu_pembayaran" role="tab" aria-controls="menunggu_pembayaran" aria-selected="true">Menunggu Pembayaran  
+                @if(count($array_order) > 0)
+                <span class="badge badge-danger">{{count($array_order)}}</span>
+                @endif
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="menunggu-konfirmasi" data-toggle="tab" href="#menunggu_konfirmasi" role="tab" aria-controls="menunggu_konfirmasi" aria-selected="true">Menunggu Konfirmasi
+
+                @if(count($order_bukti) > 0)
+                <span class="badge badge-danger">{{count($order_bukti)}}</span>
+                @endif
+              </a>
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="pengaturan" role="tabpanel" aria-labelledby="wishlist-tab">
+            <div class="tab-pane fade show active" id="menunggu_pembayaran" role="tabpanel" aria-labelledby="menunggu_pembayaran-tab">
             
                     <div class="row" style="margin-top:40px;">
                       <div class="col-sm-12">
@@ -22,9 +34,7 @@
                         @foreach($array_order as $list)
                           <div class="card" style="margin-bottom:20px;">
                             <ul class="list-group list-group-flush">
-                            <li class="list-group-item"> <b> <i class="flaticon-bag fa-lg"></i> Pembelian{{-- {{ date("j-M-Y H:i", strtotime($list->order[0]->created_at))}} --}}</b>
-                            {{-- <button href="http://" class="float-right btn btn-info btn-md"><b>Unggah Bukti Pembayaran</b></button>
-                            <button href="http://" class="float-right btn btn-danger btn-md"><b>Batalkan</b></button> --}}
+                            <li class="list-group-item"> <b> <i class="flaticon-bag fa-lg"></i> Pembelian</b>
                           
                               <a id="clickBatal" class="float-right text-danger" style="font-size:14px;" data-toggle="modal" data-target="#batalkan" data-trans_kode="{{$list->order[0]->kode}}">Batalkan</a>
                             </li>
@@ -58,6 +68,45 @@
                     </div>
                              
                      </div>
+                     <!-- MENUNGGU KONFIRMASI -->
+                     <div class="tab-pane fade" id="menunggu_konfirmasi" role="tabpanel" aria-labelledby="menunggu_konfirmasi">
+                      <div class="row" style="margin-top:40px;">
+                        <div class="col-sm-12">
+                            @include('admin.partials.messages') 
+                          @foreach($order_bukti as $list_bukti)
+                            <div class="card" style="margin-bottom:20px;">
+                              <ul class="list-group list-group-flush">
+                              <li class="list-group-item"> <b> <i class="flaticon-bag fa-lg"></i> Menunggu Konfirmasi</b>
+                            
+                              </li>
+                                <li class="list-group-item">
+                                  <div class="row">
+                                  <div class="col-sm-6" style="margin-left:50px;">
+                                  <div style="font-size:14px;margin-bottom:10px;"><b  style="color:#fa591d; margin-right:10px;" ></b> Tanggal Unggah Bukti Pembayaran: {{ date("j-M-Y H:i", strtotime($list_bukti->transaction_bukti->created_at))}} WIB</div>
+                                  <div style="background:#f8f9fa; font-size:13px; margin-bottom:10px; height:100px;">
+                                    <div style="padding:10px;">
+                                      Nama Bank Pengirim: {{$list_bukti->transaction_bukti->nama_pengirim}} <br>
+                                      Nama Pengirim : {{$list_bukti->transaction_bukti->nama_bank}} <br>
+                                      Jumlah Transfer : <b  style="color:#fa591d;" > Rp {{number_format($list_bukti->transaction_bukti->jumlah_transfer,0, "", ".")}}</b> <br>
+
+
+                                    </div>
+                                  </div>
+  
+                                  </div>
+            
+                                  </div>
+                                </li>
+        
+                              </ul>
+                            </div>
+  
+                            @endforeach
+  
+                          </div>
+                      </div>
+
+                      </div>
                            
             </div>
           </div>    
@@ -68,7 +117,7 @@
 <!-- BATALKAN PESANAN -->
 <div class="modal fade" id="batalkan" tabindex="-1" role="dialog" aria-labelledby="batalkanLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
-    {!! Form::open([ 'route' => ['home.transaksiBatalkan'], 'method' => "POST", 'enctype' => 'multipart/form-data'])!!}
+    {!! Form::open([ 'route' => ['home.transaksiBatalkan'], 'method' => "POST"])!!}
 
     <div class="modal-content">
       <div class="modal-header">
@@ -98,7 +147,7 @@
 
 <div class="modal fade" id="buktiPembayaran" tabindex="-1" role="dialog" aria-labelledby="batalkanLabel" aria-hidden="true">
   <div class="modal-dialog modal-md" role="document">
-    {!! Form::open([ 'route' => ['home.transaksiUnggah'], 'method' => "POST"])!!}
+    {!! Form::open([ 'route' => ['home.transaksiUnggah'], 'method' => "POST", 'enctype' => 'multipart/form-data'])!!}
 
     <div class="modal-content">
       <div class="modal-header">

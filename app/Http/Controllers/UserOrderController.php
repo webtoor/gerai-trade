@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use Cart;
 use App\Models\Transaction;
 use App\Models\Transaction_detail;
@@ -92,7 +94,6 @@ class UserOrderController extends Controller
 
         $new_order = collect($order)->unique('kode');
         $order_array = [];
-        $foo = [];
         foreach($new_order as $data){
             $totals = 0;
             $total = Transaction::where(['user_id' => $user_id, 'status_id' => '0', 'kode' => $data->kode])->get();
@@ -106,22 +107,50 @@ class UserOrderController extends Controller
         }
        
 
-        /* return $order_array; */
+       /*  return $order_array; */
+
+        $order_bukti = Transaction::with('transaction_bukti')->where(['user_id' => $user_id, 'status_id' => '1'])->orderBy('created_at', 'desc')->get();
 
 
 
-        return view('users.daftarTransaksi', ['kategori' => $kategori, 'array_order' => $order_array]);
+
+        return view('users.daftarTransaksi', ['kategori' => $kategori, 'array_order' => $order_array, 'order_bukti' => $order_bukti]);
     }
 
     public function transaksiBatalkan(Request $request){
         Transaction::where('kode', $request->transaksi_kode)->update([
-            'status_id' => '3'
+            'status_id' => '4'
         ]);
 
         return back()->withSuccess(trans('Anda Berhasil Membatalkan Pesanan')); 
     }
 
     public function transaksiUnggah(Request $request){
-       return $request->all();
+        $data = $request->validate([
+            'transaksi_kode_bukti' => 'required',
+            'jumlah_transfer' => 'required',
+            'bank_pengirim' => 'required',
+            'nama_pengirim' => 'required',
+            'image_pembayaran' => 'required|file|mimes:jpeg,jpg,png|max:5000'
+        ]); 
+       
+        $file = $request->file('image_pembayaran');
+        $imageName = 'image_'.time().Str::random(10).'.png';
+        $path = Storage::disk('public')->putFileAs('bukti_pembayaran', $file, $imageName);
+            TransactionBukti::create([
+            'kode_id' => $data['transaksi_kode_bukti'],
+            'img_path' => $path,
+            'jumlah_transfer' => $data['jumlah_transfer'],
+            'nama_bank' => $data['bank_pengirim'],
+            'nama_pengirim' => $data['nama_pengirim'],
+            'status' => '0'
+        ]);
+
+        Transaction::where('kode', $data['transaksi_kode_bukti'])->update([
+            'status_id' => '1'
+        ]);
+
+        return back()->withSuccess(trans('Anda Berhasil Mengunggah Bukti Pembayaran')); 
+
     }
 }
