@@ -67,6 +67,8 @@
 
 <div class="modal fade" id="batalkan" tabindex="-1" role="dialog" aria-labelledby="batalkanLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
+    {!! Form::open([ 'route' => ['home.transaksiBatalkan'], 'method' => "POST"])!!}
+
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Pembatalan</h5>
@@ -82,6 +84,7 @@
         <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Ya</button>
       </div>
     </div>
+      {!! Form::close() !!}
   </div>
 </div>
     <!-- Modal Tambah Alamat-->
