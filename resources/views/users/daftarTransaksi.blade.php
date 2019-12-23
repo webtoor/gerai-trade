@@ -43,7 +43,7 @@
                                     <img src="/images/bank/bri.png" alt="" style="width:100px;">
                                   </div>
                                   <div style="margin-top:20px;">
-                                    <button class="btn btn-outline-dark btn-md" id="buktiPembayarans" data-toggle="modal" data-target="#buktiPembayaran" ><b>Unggah Bukti Pembayaran</b></button>
+                                    <button class="btn btn-outline-dark btn-md" id="clickBukti"  data-toggle="modal" data-target="#buktiPembayaran" data-trans_kode_bukti="{{$list->order[0]->kode}}" ><b>Unggah Bukti Pembayaran</b></button>
                                   </div>
                                 </div>
                                 </div>
@@ -68,7 +68,7 @@
 <!-- BATALKAN PESANAN -->
 <div class="modal fade" id="batalkan" tabindex="-1" role="dialog" aria-labelledby="batalkanLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
-    {!! Form::open([ 'route' => ['home.transaksiBatalkan'], 'method' => "POST"])!!}
+    {!! Form::open([ 'route' => ['home.transaksiBatalkan'], 'method' => "POST", 'enctype' => 'multipart/form-data'])!!}
 
     <div class="modal-content">
       <div class="modal-header">
@@ -98,7 +98,7 @@
 
 <div class="modal fade" id="buktiPembayaran" tabindex="-1" role="dialog" aria-labelledby="batalkanLabel" aria-hidden="true">
   <div class="modal-dialog modal-md" role="document">
-    {{-- {!! Form::open([ 'route' => ['home.transaksiBatalkan'], 'method' => "POST"])!!} --}}
+    {!! Form::open([ 'route' => ['home.transaksiUnggah'], 'method' => "POST"])!!}
 
     <div class="modal-content">
       <div class="modal-header">
@@ -110,8 +110,8 @@
       <div class="modal-body">
         <div class="form-row">
           <div class="form-group col-md-6">
-              <label for="inputEmail4">Jumlah Transfer <sup style="color:red"> *Wajib</sup></label>
-              <input type="text" class="form-control" name="jumlah_transfer" required>
+              <label for="inputEmail4">Jumlah Transfer <sup style="color:red">*Hanya Angka</sup></label>
+              <input type="number" class="form-control" name="jumlah_transfer" required>
           </div>
           <div class="form-group col-md-6">
             <label for="inputEmail4">Bank Pengirim <sup style="color:red"> *Wajib</sup></label>
@@ -135,9 +135,11 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Tutup</button>
         <button type="submit" class="btn btn-primary btn-sm" >Submit</button>
+        <input type="hidden" id="transaksi_kode_bukti" name="transaksi_kode_bukti">
+
       </div>
     </div>
-   {{--  {!! Form::close() !!} --}}
+    {!! Form::close() !!}
 
   </div>
 </div>
@@ -151,6 +153,12 @@
             var trans_kode = $(this).data('trans_kode');
             console.log(trans_kode)
             $('#transaksi_kode').val(trans_kode);
+        });
+
+        $("button#clickBukti").click(function () {
+            var trans_kode_bukti = $(this).data('trans_kode_bukti');
+            console.log(trans_kode_bukti)
+            $('#transaksi_kode_bukti').val(trans_kode_bukti);
         });
     });
 </script>

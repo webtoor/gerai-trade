@@ -8,9 +8,12 @@ use Illuminate\Support\Str;
 use Cart;
 use App\Models\Transaction;
 use App\Models\Transaction_detail;
+use App\Models\TransactionBukti;
+
 use App\Models\Alamat;
 use App\Models\Produk;
 use App\Models\Kategori;
+
 
 class UserOrderController extends Controller
 {
@@ -116,6 +119,9 @@ class UserOrderController extends Controller
         ]);
 
         return back()->withSuccess(trans('Anda Berhasil Membatalkan Pesanan')); 
+    }
 
+    public function transaksiUnggah(Request $request){
+       return $request->all();
     }
 }
