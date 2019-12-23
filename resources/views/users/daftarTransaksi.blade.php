@@ -194,14 +194,14 @@
                             @foreach($order_batal as $list_batal)
                               <div class="card" style="margin-bottom:20px;">
                                 <ul class="list-group list-group-flush">
-                                <li class="list-group-item"> <b class="text-danger"><i class="flaticon-bag fa-lg"></i> Pesanan Dibatalkan</b> 
+                                <li class="list-group-item"> <div class="text-danger"><i class="flaticon-bag fa-lg"></i> Pesanan Dibatalkan</div> 
                                    <p style="font-size:14px; margin-bottom:-10px;">Tanggal Pembelian : {{ date("j-M-Y H:i", strtotime($list_batal->created_at))}} WIB </p>
                                 </li>
                                 
                                   @foreach($list_batal->transaction_detail as $produk_batal)
                                   <li class="list-group-item">
                                     @foreach($produk_batal->produk as $batal_detail)
-                                    {{$batal_detail->nama_produk}}, Rp {{number_format($batal_detail->harga,0, "", ".")}}, {{$produk_batal->qty}} Produk
+                                    <a href="{{route('produk-detail', ['slug_produk' => $batal_detail->slug])}}">{{$batal_detail->nama_produk}}</a>, Rp {{number_format($batal_detail->harga,0, "", ".")}}, {{$produk_batal->qty}} Produk
                                     @endforeach
                                   </li>
                                   @endforeach

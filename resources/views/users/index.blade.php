@@ -215,7 +215,7 @@
                                                             @if(count($produk_terbarus->produk_image) > 0)
                                                             <img class="img-fluid card-img-top maxs-img" src="{{ asset('storage/' .$produk_terbarus->produk_image[0]->image_path)}}" alt="Card image cap" style="height:230px;">
                                                             @else
-                                                            <img class="img-fluid card-img-top maxs-img" src="http://placehold.it/700x700" alt="Card image cap" style="height:230px;>
+                                                            <img class="img-fluid card-img-top maxs-img" src="http://placehold.it/700x700" alt="Card image cap" style="height:230px;">
                                                             @endif                                                           
                                                         <a href="{{route('produk-detail', ['slug_produk' => $produk_terbarus->slug])}}">
                                                                     <div class="mask rgba-white-slight"></div>
