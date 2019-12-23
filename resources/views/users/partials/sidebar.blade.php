@@ -62,7 +62,7 @@ use App\Models\Transaction;
             <p href="#" class="list-group-item border-bottom-0">
                     <b style="font-size:14px;">PEMBELIAN</b>    
                 </p>
-                    <a href="#" class="list-group-item border-top-0" style="font-size:14px;">
+                    <a href="{{route('home.getWaitPayment')}}" class="list-group-item border-top-0" style="font-size:14px;">
                         Daftar Transaksi
                       <?php 
                         $order_count = Transaction::where(['user_id' => Auth::user()->id, 'status_id' => '0'])->orderBy('created_at', 'desc')->get();

@@ -25,7 +25,8 @@
                             <li class="list-group-item"> <b> <i class="flaticon-bag fa-lg"></i> Pembelian{{-- {{ date("j-M-Y H:i", strtotime($list->order[0]->created_at))}} --}}</b>
                             {{-- <button href="http://" class="float-right btn btn-info btn-md"><b>Unggah Bukti Pembayaran</b></button>
                             <button href="http://" class="float-right btn btn-danger btn-md"><b>Batalkan</b></button> --}}
-                              <a href="http://" class="float-right text-danger" style="font-size:14px;">Batalkan</a>
+                          
+                              <a href="http://" class="float-right text-danger" style="font-size:14px;" data-toggle="modal" data-target="#batalkan">Batalkan</a>
                             </li>
                               <li class="list-group-item">
                                 <div class="row">
@@ -62,6 +63,26 @@
           </div>    
     </div>
     </div>       
+</div>
+
+<div class="modal fade" id="batalkan" tabindex="-1" role="dialog" aria-labelledby="batalkanLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Pembatalan</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Batalkan transaksi Anda?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light btn-sm">Tidak</button>
+        <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Ya</button>
+      </div>
+    </div>
+  </div>
 </div>
     <!-- Modal Tambah Alamat-->
 {{-- <div class="modal fade" id="addAlamat" tabindex="-1" role="dialog" aria-labelledby="addKategoriLabel" aria-hidden="true">
