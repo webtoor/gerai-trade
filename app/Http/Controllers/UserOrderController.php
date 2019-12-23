@@ -11,7 +11,6 @@ use Cart;
 use App\Models\Transaction;
 use App\Models\Transaction_detail;
 use App\Models\TransactionBukti;
-
 use App\Models\Alamat;
 use App\Models\Produk;
 use App\Models\Kategori;
@@ -92,6 +91,7 @@ class UserOrderController extends Controller
         $user_id = Auth::user()->id;
         $order = Transaction::where(['user_id' => $user_id, 'status_id' => '0'])->orderBy('created_at', 'desc')->get();
 
+        // MENUNGGU PEMBAYARAN
         $new_order = collect($order)->unique('kode');
         $order_array = [];
         foreach($new_order as $data){
@@ -107,14 +107,28 @@ class UserOrderController extends Controller
         }
        
 
-       /*  return $order_array; */
-
+        // MENUNGGU KONFIRMASI
         $order_bukti = Transaction::with('transaction_bukti')->where(['user_id' => $user_id, 'status_id' => '1'])->orderBy('created_at', 'desc')->get();
+        $new_order_bukti = collect($order_bukti)->unique('kode');
 
 
+        // PESANAN DIPROSES
+        $order_proses = Transaction::with('transaction_detail')->where(['user_id' => $user_id, 'status_id' => '2'])->orderBy('created_at', 'desc')->get();
 
-
-        return view('users.daftarTransaksi', ['kategori' => $kategori, 'array_order' => $order_array, 'order_bukti' => $order_bukti]);
+         // PESANAN DIBATALKAN
+        $order_batal = Transaction::with(['transaction_detail' => function ($query) {
+            $query->with('produk');
+        }])->where(['user_id' => $user_id, 'status_id' => '4'])->orderBy('created_at', 'desc')->get();
+        if(count($order_array) > 0){
+            $tabName = 'mbayar';
+        }elseif(count($order_bukti) > 0){
+            $tabName = 'mkonfirmasi';
+        }elseif(count($order_proses) > 0){
+            $tabName = 'mproses';
+        }elseif(count($order_batal) > 0){
+            $tabName = 'mbatal';
+        }
+        return view('users.daftarTransaksi', ['order_batal' => $order_batal,'order_proses' => $order_proses,'kategori' => $kategori, 'array_order' => $order_array, 'order_bukti' => $new_order_bukti, 'tabName' => $tabName]);
     }
 
     public function transaksiBatalkan(Request $request){
@@ -149,6 +163,7 @@ class UserOrderController extends Controller
         Transaction::where('kode', $data['transaksi_kode_bukti'])->update([
             'status_id' => '1'
         ]);
+        
 
         return back()->withSuccess(trans('Anda Berhasil Mengunggah Bukti Pembayaran')); 
 

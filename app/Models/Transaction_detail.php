@@ -15,4 +15,8 @@ class Transaction_detail extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function produk(){
+        return $this->hasMany('App\Models\Produk', 'id', 'produk_id');
+    }
 }

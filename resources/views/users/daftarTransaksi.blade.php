@@ -10,27 +10,53 @@
 
     <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top:10px;">
             <li class="nav-item">
-              <a class="nav-link active" id="menunggu-pembayaran" data-toggle="tab" href="#menunggu_pembayaran" role="tab" aria-controls="menunggu_pembayaran" aria-selected="true">Menunggu Pembayaran  
+              <a class="nav-link {{ empty($tabName) || $tabName == 'mbayar' ? 'active' : '' }}" id="menunggu-pembayaran" data-toggle="tab" href="#menunggu_pembayaran" role="tab" aria-controls="menunggu_pembayaran" aria-selected="true">Menunggu Pembayaran  
                 @if(count($array_order) > 0)
                 <span class="badge badge-danger">{{count($array_order)}}</span>
                 @endif
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="menunggu-konfirmasi" data-toggle="tab" href="#menunggu_konfirmasi" role="tab" aria-controls="menunggu_konfirmasi" aria-selected="true">Menunggu Konfirmasi
+              <a class="nav-link {{ empty($tabName) || $tabName == 'mkonfirmasi' ? 'active' : '' }}" id="menunggu-konfirmasi" data-toggle="tab" href="#menunggu_konfirmasi" role="tab" aria-controls="menunggu_konfirmasi" aria-selected="true">Menunggu Konfirmasi
 
                 @if(count($order_bukti) > 0)
                 <span class="badge badge-danger">{{count($order_bukti)}}</span>
                 @endif
               </a>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link {{ empty($tabName) || $tabName == 'mproses' ? 'active' : '' }}" id="pesanan-proses" data-toggle="tab" href="#proses" role="tab" aria-controls="proses" aria-selected="true">Pesanan Diproses
+
+                @if(count($order_proses) > 0)
+                <span class="badge badge-danger">{{count($order_proses)}}</span>
+                @endif
+              </a>
+            </li>
+           {{--  <li class="nav-item">
+              <a class="nav-link {{ empty($tabName) || $tabName == 'mdikirim' ? 'active' : '' }}" id="pesanan-dikirim" data-toggle="tab" href="#pesanan_dikirim" role="tab" aria-controls="pesanan_dikirim" aria-selected="true">Pesanan Dikirim
+
+                @if(count($order_bukti) > 0)
+                <span class="badge badge-danger">{{count($order_bukti)}}</span>
+                @endif
+              </a>
+            </li> --}}
+            <li class="nav-item">
+              <a class="nav-link {{ empty($tabName) || $tabName == 'mbatal' ? 'active' : '' }}" id="pesanan-batal" data-toggle="tab" href="#pesanan_batal" role="tab" aria-controls="pesanan_batal" aria-selected="true">Pesanan Dibatalkan
+              </a>
+            </li>
           </ul>
           <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="menunggu_pembayaran" role="tabpanel" aria-labelledby="menunggu_pembayaran-tab">
+            <div style="margin-top:10px;">
+              @include('admin.partials.messages') 
+
+            </div>
+
+            <div class="tab-pane fade {{ !empty($tabName) && $tabName == 'mbayar' ? 'show active' : '' }}" id="menunggu_pembayaran" role="tabpanel" aria-labelledby="menunggu_pembayaran-tab">
             
                     <div class="row" style="margin-top:40px;">
                       <div class="col-sm-12">
-                          @include('admin.partials.messages') 
+                        @if(count($array_order) > 0)
                         @foreach($array_order as $list)
                           <div class="card" style="margin-bottom:20px;">
                             <ul class="list-group list-group-flush">
@@ -61,18 +87,23 @@
       
                             </ul>
                           </div>
-
                           @endforeach
+                          @else
+                          <div class="text-center">
+                            <button class="btn btn-dark btn-md">Tidak Ada Transaksi</button>
+                          </div>
+                          @endif
 
                         </div>
                     </div>
                              
                      </div>
                      <!-- MENUNGGU KONFIRMASI -->
-                     <div class="tab-pane fade" id="menunggu_konfirmasi" role="tabpanel" aria-labelledby="menunggu_konfirmasi">
+                     <div class="tab-pane fade {{ !empty($tabName) && $tabName == 'mkonfirmasi' ? 'show active' : '' }}" id="menunggu_konfirmasi" role="tabpanel" aria-labelledby="menunggu_konfirmasi">
                       <div class="row" style="margin-top:40px;">
                         <div class="col-sm-12">
-                            @include('admin.partials.messages') 
+                          @if(count($order_bukti) > 0)
+
                           @foreach($order_bukti as $list_bukti)
                             <div class="card" style="margin-bottom:20px;">
                               <ul class="list-group list-group-flush">
@@ -83,13 +114,11 @@
                                   <div class="row">
                                   <div class="col-sm-6" style="margin-left:50px;">
                                   <div style="font-size:14px;margin-bottom:10px;"><b  style="color:#fa591d; margin-right:10px;" ></b> Tanggal Unggah Bukti Pembayaran: {{ date("j-M-Y H:i", strtotime($list_bukti->transaction_bukti->created_at))}} WIB</div>
-                                  <div style="background:#f8f9fa; font-size:13px; margin-bottom:10px; height:100px;">
+                                  <div style="background:#f8f9fa; font-size:13px; margin-bottom:10px; height:80px;">
                                     <div style="padding:10px;">
                                       Nama Bank Pengirim: {{$list_bukti->transaction_bukti->nama_pengirim}} <br>
                                       Nama Pengirim : {{$list_bukti->transaction_bukti->nama_bank}} <br>
                                       Jumlah Transfer : <b  style="color:#fa591d;" > Rp {{number_format($list_bukti->transaction_bukti->jumlah_transfer,0, "", ".")}}</b> <br>
-
-
                                     </div>
                                   </div>
   
@@ -102,10 +131,92 @@
                             </div>
   
                             @endforeach
-  
+                            @else
+                            <div class="text-center">
+                              <button class="btn btn-dark btn-md">Tidak Ada Transaksi</button>
+                            </div>
+                            @endif
                           </div>
                       </div>
 
+                      </div>
+
+                      
+                      <!-- PESANAN DIPROSES -->
+
+                      {{-- <div class="tab-pane fade {{ !empty($tabName) && $tabName == 'mproses' ? 'show active' : '' }}" id="proses" role="tabpanel" aria-labelledby="proses">
+                        <div class="row" style="margin-top:40px;">
+                          <div class="col-sm-12">
+                            @if(count($order_proses) > 0)
+  
+                            @foreach($order_proses as $list_proses)
+                              <div class="card" style="margin-bottom:20px;">
+                                <ul class="list-group list-group-flush">
+                                <li class="list-group-item"> <b> <i class="flaticon-bag fa-lg"></i> Diproses</b>
+                              
+                                </li>
+                                  <li class="list-group-item">
+                                    <div class="row">
+                                    <div class="col-sm-6" style="margin-left:50px;">
+                                    <div style="font-size:14px;margin-bottom:10px;"><b  style="color:#fa591d; margin-right:10px;" ></b> </div>
+                                    <div style="background:#f8f9fa; font-size:13px; margin-bottom:10px; height:80px;">
+                                      <div style="padding:10px;">
+                                        
+                                      </div>
+                                    </div>
+    
+                                    </div>
+              
+                                    </div>
+                                  </li>
+          
+                                </ul>
+                              </div>
+    
+                              @endforeach
+                              @else
+                              <div class="text-center">
+                                <button class="btn btn-dark btn-md">Tidak Ada Transaksi</button>
+                              </div>
+                              @endif
+                            </div>
+                        </div>
+                      </div> --}}
+
+
+                      <!-- PESANAN DIBATALKAN -->
+
+                      <div class="tab-pane fade {{ !empty($tabName) && $tabName == 'mbatal' ? 'show active' : '' }}" id="pesanan_batal" role="tabpanel" aria-labelledby="pesanan_batal">
+                        <div class="row" style="margin-top:40px;">
+                          <div class="col-sm-12">
+                            @if(count($order_batal) > 0)
+  
+                            @foreach($order_batal as $list_batal)
+                              <div class="card" style="margin-bottom:20px;">
+                                <ul class="list-group list-group-flush">
+                                <li class="list-group-item"> <b class="text-danger"><i class="flaticon-bag fa-lg"></i> Pesanan Dibatalkan</b> 
+                                   <p style="font-size:14px; margin-bottom:-10px;">Tanggal Pembelian : {{ date("j-M-Y H:i", strtotime($list_batal->created_at))}} WIB </p>
+                                </li>
+                                
+                                  @foreach($list_batal->transaction_detail as $produk_batal)
+                                  <li class="list-group-item">
+                                    @foreach($produk_batal->produk as $batal_detail)
+                                    {{$batal_detail->nama_produk}}, Rp {{number_format($batal_detail->harga,0, "", ".")}}, {{$produk_batal->qty}} Produk
+                                    @endforeach
+                                  </li>
+                                  @endforeach
+          
+                                </ul>
+                              </div>
+    
+                              @endforeach
+                              @else
+                              <div class="text-center">
+                                <button class="btn btn-dark btn-md">Tidak Adas Transaksi</button>
+                              </div>
+                              @endif
+                            </div>
+                        </div>
                       </div>
                            
             </div>

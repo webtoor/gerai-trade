@@ -28,4 +28,9 @@ class Transaction extends Model
         return $this->hasOne('App\Models\TransactionBukti', 'kode_id', 'kode');
     }
 
+    public function transaction_detail(){
+        return $this->hasMany('App\Models\Transaction_detail', 'transaction_id', 'id');
+    }
+    
+
 }
