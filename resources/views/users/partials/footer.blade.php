@@ -1,3 +1,11 @@
+<?php 
+use App\Models\Transaction;
+
+Transaction::where(['status_id' => '0'])->where('created_at', '<', \Carbon\Carbon::now()->subDays(2))->update([
+  'status_id' => '4'
+]);
+?>
+
 <!-- start footer Area -->
     <div class="container">
             <div class="row">

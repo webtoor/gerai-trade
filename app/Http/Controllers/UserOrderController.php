@@ -113,7 +113,9 @@ class UserOrderController extends Controller
 
 
         // PESANAN DIPROSES
-        $order_proses = Transaction::with('transaction_detail')->where(['user_id' => $user_id, 'status_id' => '2'])->orderBy('created_at', 'desc')->get();
+        $order_proses = Transaction::with(['transaction_detail' => function ($query) {
+            $query->with('produk');
+        }])->where(['user_id' => $user_id, 'status_id' => '2'])->orderBy('created_at', 'desc')->get();
 
          // PESANAN DIBATALKAN
         $order_batal = Transaction::with(['transaction_detail' => function ($query) {
@@ -127,6 +129,9 @@ class UserOrderController extends Controller
             $tabName = 'mproses';
         }elseif(count($order_batal) > 0){
             $tabName = 'mbatal';
+        }else{
+            $tabName = 'mproses';
+
         }
         return view('users.daftarTransaksi', ['order_batal' => $order_batal,'order_proses' => $order_proses,'kategori' => $kategori, 'array_order' => $order_array, 'order_bukti' => $new_order_bukti, 'tabName' => $tabName]);
     }

@@ -1,3 +1,11 @@
+<?php 
+use App\Models\Transaction;
+
+Transaction::where(['status_id' => '0'])->where('created_at', '<', \Carbon\Carbon::now()->subDays(2))->update([
+  'status_id' => '4'
+]);
+?>
+
 
 <nav class="navbar navbar-expand-sm sticky-top navbar-light" style="background-color: #FFFFFF">
     <a class="navbar-brand" href="/">            

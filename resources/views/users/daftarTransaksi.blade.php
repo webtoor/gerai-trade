@@ -144,7 +144,7 @@
                       
                       <!-- PESANAN DIPROSES -->
 
-                      {{-- <div class="tab-pane fade {{ !empty($tabName) && $tabName == 'mproses' ? 'show active' : '' }}" id="proses" role="tabpanel" aria-labelledby="proses">
+                      <div class="tab-pane fade {{ !empty($tabName) && $tabName == 'mproses' ? 'show active' : '' }}" id="proses" role="tabpanel" aria-labelledby="proses">
                         <div class="row" style="margin-top:40px;">
                           <div class="col-sm-12">
                             @if(count($order_proses) > 0)
@@ -152,10 +152,18 @@
                             @foreach($order_proses as $list_proses)
                               <div class="card" style="margin-bottom:20px;">
                                 <ul class="list-group list-group-flush">
-                                <li class="list-group-item"> <b> <i class="flaticon-bag fa-lg"></i> Diproses</b>
+                                <li class="list-group-item"> 
+                                  <b> <i class="flaticon-bag fa-lg"></i> Diproses</b>
+                                  <a class="float-right" style="color:#fa591d;"> 
+                                    Total Belanja
+                                    <?php $subtotal = $list_proses->total_harga + $list_proses->ongkir; ?>
+                                    Rp {{number_format($subtotal,0, "", ".")}}
+                                  </a>
+                                
+                                  
                               
                                 </li>
-                                  <li class="list-group-item">
+                               {{--    <li class="list-group-item">
                                     <div class="row">
                                     <div class="col-sm-6" style="margin-left:50px;">
                                     <div style="font-size:14px;margin-bottom:10px;"><b  style="color:#fa591d; margin-right:10px;" ></b> </div>
@@ -168,7 +176,14 @@
                                     </div>
               
                                     </div>
+                                  </li> --}}
+                                  @foreach($list_proses->transaction_detail as $produk_proses)
+                                  <li class="list-group-item">
+                                    @foreach($produk_proses->produk as $proses_detail)
+                                    <a href="{{route('produk-detail', ['slug_produk' => $proses_detail->slug])}}">{{$proses_detail->nama_produk}}</a>, Rp {{number_format($proses_detail->harga,0, "", ".")}}, {{$produk_proses->qty}} Produk
+                                    @endforeach
                                   </li>
+                                  @endforeach
           
                                 </ul>
                               </div>
@@ -181,7 +196,7 @@
                               @endif
                             </div>
                         </div>
-                      </div> --}}
+                      </div>
 
 
                       <!-- PESANAN DIBATALKAN -->
