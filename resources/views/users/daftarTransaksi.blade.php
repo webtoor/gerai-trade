@@ -413,7 +413,7 @@
    <!-- BATALKAN SELESAI -->
 <div class="modal fade" id="selesai" tabindex="-1" role="dialog" aria-labelledby="batalkanLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
-    {{-- {!! Form::open([ 'route' => ['home.transaksiBatalkan'], 'method' => "POST"])!!} --}}
+    {!! Form::open([ 'route' => ['home.transaksiSelesai'], 'method' => "POST"])!!}
 
     <div class="modal-content">
       <div class="modal-header">
@@ -424,7 +424,7 @@
       </div>
       <div class="modal-body">
         Barang sudah sampai?
-        <input type="hidden" id="trans_id" name="trans_id">
+        <input type="hidden" id="transaksi_id" name="trans_id">
 
       </div>
       <div class="modal-footer">
@@ -432,7 +432,7 @@
         <button type="submit" class="btn btn-primary btn-sm" >Ya</button>
       </div>
     </div>
-    {{-- {!! Form::close() !!} --}}
+    {!! Form::close() !!}
 
   </div>
 </div>
@@ -456,7 +456,7 @@
         $("button#pesananSelesai").click(function () {
             var trans_id = $(this).data('trans_id');
             console.log(trans_id)
-            $('#transaksi_kode_bukti').val(trans_id);
+            $('#transaksi_id').val(trans_id);
         });
     });
 </script>

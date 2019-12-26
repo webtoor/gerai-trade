@@ -202,6 +202,9 @@ class UserOrderController extends Controller
         
 
         return back()->withSuccess(trans('Anda Berhasil Mengunggah Bukti Pembayaran')); 
+    }
 
+    public function transaksiSelesai(Request $request){
+        return $request->all();
     }
 }
