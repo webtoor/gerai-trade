@@ -149,6 +149,11 @@ class UserOrderController extends Controller
         $order_batal = Transaction::with(['transaction_detail' => function ($query) {
             $query->with('produk');
         }])->where(['user_id' => $user_id, 'status_id' => '5'])->orderBy('created_at', 'desc')->get();
+
+        // PESANAN SELESAI
+        $order_selesai = Transaction::with(['transaction_detail' => function ($query) {
+            $query->with('produk');
+        }])->where(['user_id' => $user_id, 'status_id' => '4'])->orderBy('created_at', 'desc')->get();
         if(count($order_array) > 0){
             $tabName = 'mbayar';
         }elseif(count($order_bukti) > 0){
@@ -163,7 +168,7 @@ class UserOrderController extends Controller
             $tabName = 'mproses';
 
         }
-        return view('users.daftarTransaksi', ['order_kirim' => $new_order_kirim,'order_batal' => $order_batal,'order_proses' => $order_proses,'kategori' => $kategori, 'array_order' => $order_array, 'order_bukti' => $new_order_bukti, 'tabName' => $tabName]);
+        return view('users.daftarTransaksi', ['order_selesai' => $order_selesai,'order_kirim' => $new_order_kirim,'order_batal' => $order_batal,'order_proses' => $order_proses,'kategori' => $kategori, 'array_order' => $order_array, 'order_bukti' => $new_order_bukti, 'tabName' => $tabName]);
     }
 
     public function transaksiBatalkan(Request $request){
@@ -205,6 +210,11 @@ class UserOrderController extends Controller
     }
 
     public function transaksiSelesai(Request $request){
-        return $request->all();
+        Transaction::where('id', $request->trans_id)->update([
+            'status_id' => '4'
+        ]);
+
+        return back()->withSuccess(trans('Anda Berhasil Konfirmasi Barang Sudah Sampai')); 
+
     }
 }

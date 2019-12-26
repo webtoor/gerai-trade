@@ -42,6 +42,10 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link {{ empty($tabName) || $tabName == 'mselesai' ? 'active' : '' }}" id="pesanan-selesai" data-toggle="tab" href="#pesanan_selesai" role="tab" aria-controls="pesanan_selesai" aria-selected="true">Pesanan Selesai
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link {{ empty($tabName) || $tabName == 'mbatal' ? 'active' : '' }}" id="pesanan-batal" data-toggle="tab" href="#pesanan_batal" role="tab" aria-controls="pesanan_batal" aria-selected="true">Pesanan Dibatalkan
               </a>
             </li>
@@ -287,6 +291,52 @@
                           {{--   @foreach($order_kirim as $list_kirims)
                            {{json_encode($list_kirims['0']['rajaongkir'])}}
                             @endforeach --}}
+                        </div>
+
+                      </div>
+
+                      <div class="tab-pane fade {{ !empty($tabName) && $tabName == 'mselesai' ? 'show active' : '' }}" id="pesanan_selesai" role="tabpanel" aria-labelledby="pesanan_selesai">
+                        <div class="row" style="margin-top:40px;">
+                          <div class="col-sm-12">
+                            @if(count($order_selesai) > 0)
+  
+                            @foreach($order_selesai as $list_selesai)
+                              <div class="card" style="margin-bottom:20px;">
+                                <ul class="list-group list-group-flush">
+                                <li class="list-group-item"> <div><i class="flaticon-bag fa-lg"></i> Pesanan Selesai
+                                  <a class="float-right" style="color:#fa591d;"> 
+                                    Total Belanja
+                                    <?php $subtotal = $list_selesai->total_harga + $list_selesai->ongkir; ?>
+                                    Rp {{number_format($subtotal,0, "", ".")}}
+                                  </a></div> 
+                                   <p style="font-size:14px; margin-bottom:-10px;">Tanggal Pembelian : {{ date("j-M-Y H:i", strtotime($list_selesai->created_at))}} WIB </p>
+                                </li>
+                                
+                                  @foreach($list_selesai->transaction_detail as $produk_selesai)
+                                  <li class="list-group-item">
+                                    @foreach($produk_selesai->produk as $selesai_detail)
+                                    <a href="{{route('produk-detail', ['slug_produk' => $selesai_detail->slug])}}">{{$selesai_detail->nama_produk}}</a>, Rp {{number_format($selesai_detail->harga,0, "", ".")}}, {{$produk_selesai->qty}} Produk
+                                    @endforeach
+                                  </li>
+                                  @endforeach
+                                  <li class="list-group-item">
+                                    Ongkos Kirim :  Rp {{number_format($list_selesai->ongkir,0, "", ".")}}
+                                  </li>
+                                  <li class="list-group-item">
+                                    Kurir : {{$list_selesai->ekspedisi}} <br>
+                                    No Resi : {{$list_selesai->no_resi}}
+                                  </li>
+
+                                </ul>
+                              </div>
+    
+                              @endforeach
+                              @else
+                              <div class="text-center">
+                                <button class="btn btn-dark btn-md">Tidak Adas Transaksi</button>
+                              </div>
+                              @endif
+                            </div>
                         </div>
 
                       </div>
