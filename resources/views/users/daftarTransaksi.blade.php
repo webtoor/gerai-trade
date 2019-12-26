@@ -153,7 +153,7 @@
                               <div class="card" style="margin-bottom:20px;">
                                 <ul class="list-group list-group-flush">
                                 <li class="list-group-item"> 
-                                  <b> <i class="flaticon-bag fa-lg"></i> Diproses</b>
+                                  <b> <i class="flaticon-bag fa-lg"></i> Pesanan Diproses</b>
                                   <a class="float-right" style="color:#fa591d;"> 
                                     Total Belanja
                                     <?php $subtotal = $list_proses->total_harga + $list_proses->ongkir; ?>
@@ -208,7 +208,7 @@
                             @foreach($order_kirim as $list_kirim)
                               <div class="card" style="margin-bottom:20px;">
                                 <ul class="list-group list-group-flush">
-                                <li class="list-group-item"> <div class="text-danger"><i class="flaticon-bag fa-lg"></i> Pesanan Dikirim</div> 
+                                <li class="list-group-item"> <div><i class="flaticon-bag fa-lg"></i> Pesanan Dikirim</div> 
                                    <p style="font-size:14px; margin-bottom:-10px;">Tanggal Pembelian : {{ date("j-M-Y H:i", strtotime($list_kirim->created_at))}} WIB </p>
                                 </li>
                                 
@@ -219,7 +219,11 @@
                                     @endforeach
                                   </li>
                                   @endforeach
-          
+                                  <li class="list-group-item"> 
+                                    <button class="btn btn-outline-dark btn-sm">
+                                      <span class="ti-eye"> </span> Lihat Detail
+                                    </button>
+                                 </li>
                                 </ul>
                               </div>
     
