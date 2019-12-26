@@ -58,7 +58,8 @@ class UserOrderController extends Controller
                     'no_resi' => null,
                     'status_id' => "0",
                     'ongkir' => $row['ongkir'],
-                    'total_harga' =>  $sum_harga
+                    'total_harga' =>  $sum_harga,
+                    'kirim_at' => null
                 ]);
 
                 foreach (Cart::content('default') as $cartz) {
@@ -117,10 +118,16 @@ class UserOrderController extends Controller
             $query->with('produk');
         }])->where(['user_id' => $user_id, 'status_id' => '2'])->orderBy('created_at', 'desc')->get();
 
+
+        // PESANAN DIKIRIM
+        $order_kirim = Transaction::with(['transaction_detail' => function ($query) {
+            $query->with('produk');
+        }])->where(['user_id' => $user_id, 'status_id' => '3'])->orderBy('created_at', 'desc')->get();
+
          // PESANAN DIBATALKAN
         $order_batal = Transaction::with(['transaction_detail' => function ($query) {
             $query->with('produk');
-        }])->where(['user_id' => $user_id, 'status_id' => '4'])->orderBy('created_at', 'desc')->get();
+        }])->where(['user_id' => $user_id, 'status_id' => '5'])->orderBy('created_at', 'desc')->get();
         if(count($order_array) > 0){
             $tabName = 'mbayar';
         }elseif(count($order_bukti) > 0){
@@ -129,16 +136,19 @@ class UserOrderController extends Controller
             $tabName = 'mproses';
         }elseif(count($order_batal) > 0){
             $tabName = 'mbatal';
+        }elseif(count($order_kirim) > 0){
+            $tabName = 'mkirim';
         }else{
             $tabName = 'mproses';
 
         }
-        return view('users.daftarTransaksi', ['order_batal' => $order_batal,'order_proses' => $order_proses,'kategori' => $kategori, 'array_order' => $order_array, 'order_bukti' => $new_order_bukti, 'tabName' => $tabName]);
+        return view('users.daftarTransaksi', ['order_kirim' => $order_kirim,'order_batal' => $order_batal,'order_proses' => $order_proses,'kategori' => $kategori, 'array_order' => $order_array, 'order_bukti' => $new_order_bukti, 'tabName' => $tabName]);
     }
 
     public function transaksiBatalkan(Request $request){
+        //return $request->all();
         Transaction::where('kode', $request->transaksi_kode)->update([
-            'status_id' => '4'
+            'status_id' => '5'
         ]);
 
         return back()->withSuccess(trans('Anda Berhasil Membatalkan Pesanan')); 

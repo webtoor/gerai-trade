@@ -21,7 +21,8 @@ class Transaction extends Model
         'ongkir',
         'total_harga',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'kirim_at'
     ];
 
     public function transaction_bukti(){

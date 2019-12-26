@@ -1,6 +1,12 @@
 <?php 
 use App\Models\Pesan;
+use App\Models\Transaction;
+
+Transaction::where(['status_id' => '0'])->where('created_at', '<', \Carbon\Carbon::now()->subDays(2))->update([
+  'status_id' => '5'
+]);
  ?>
+
 
 <div class="header navbar" style="box-shadow: none;">
     <div class="header-container">

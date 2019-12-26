@@ -33,14 +33,14 @@
                 @endif
               </a>
             </li>
-           {{--  <li class="nav-item">
+            <li class="nav-item">
               <a class="nav-link {{ empty($tabName) || $tabName == 'mdikirim' ? 'active' : '' }}" id="pesanan-dikirim" data-toggle="tab" href="#pesanan_dikirim" role="tab" aria-controls="pesanan_dikirim" aria-selected="true">Pesanan Dikirim
 
-                @if(count($order_bukti) > 0)
-                <span class="badge badge-danger">{{count($order_bukti)}}</span>
+                @if(count($order_kirim) > 0)
+                <span class="badge badge-danger">{{count($order_kirim)}}</span>
                 @endif
               </a>
-            </li> --}}
+            </li>
             <li class="nav-item">
               <a class="nav-link {{ empty($tabName) || $tabName == 'mbatal' ? 'active' : '' }}" id="pesanan-batal" data-toggle="tab" href="#pesanan_batal" role="tab" aria-controls="pesanan_batal" aria-selected="true">Pesanan Dibatalkan
               </a>
@@ -198,6 +198,41 @@
                         </div>
                       </div>
 
+
+                      <!-- PESANAN DIKIRIM -->
+                      <div class="tab-pane fade {{ !empty($tabName) && $tabName == 'dikirim' ? 'show active' : '' }}" id="pesanan_dikirim" role="tabpanel" aria-labelledby="pesanan_dikirim">
+                        <div class="row" style="margin-top:40px;">
+                          <div class="col-sm-12">
+                            @if(count($order_kirim) > 0)
+  
+                            @foreach($order_kirim as $list_kirim)
+                              <div class="card" style="margin-bottom:20px;">
+                                <ul class="list-group list-group-flush">
+                                <li class="list-group-item"> <div class="text-danger"><i class="flaticon-bag fa-lg"></i> Pesanan Dikirim</div> 
+                                   <p style="font-size:14px; margin-bottom:-10px;">Tanggal Pembelian : {{ date("j-M-Y H:i", strtotime($list_kirim->created_at))}} WIB </p>
+                                </li>
+                                
+                                  @foreach($list_kirim->transaction_detail as $produk_kirim)
+                                  <li class="list-group-item">
+                                    @foreach($produk_kirim->produk as $kirim_detail)
+                                    <a href="{{route('produk-detail', ['slug_produk' => $kirim_detail->slug])}}">{{$kirim_detail->nama_produk}}</a>, Rp {{number_format($kirim_detail->harga,0, "", ".")}}, {{$produk_kirim->qty}} Produk
+                                    @endforeach
+                                  </li>
+                                  @endforeach
+          
+                                </ul>
+                              </div>
+    
+                              @endforeach
+                              @else
+                              <div class="text-center">
+                                <button class="btn btn-dark btn-md">Tidak Adas Transaksi</button>
+                              </div>
+                              @endif
+                            </div>
+                        </div>
+
+                      </div>
 
                       <!-- PESANAN DIBATALKAN -->
 
