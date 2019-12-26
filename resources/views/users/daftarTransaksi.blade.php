@@ -207,9 +207,16 @@
                             @foreach($order_kirim as $list_kirim)
                               <div class="card" style="margin-bottom:20px;">
                                 <ul class="list-group list-group-flush">
-                                <li class="list-group-item"> <div><i class="flaticon-bag fa-lg"></i> Pesanan Dikirim</div> 
+                                <li class="list-group-item"> <div><i class="flaticon-bag fa-lg"></i> Pesanan Dikirim
+                                  <a class="float-right" style="color:#fa591d;"> 
+                                    Total Belanja
+                                    <?php $subtotal = $list_kirim['total_harga'] + $list_kirim['ongkir']; ?>
+                                    Rp {{number_format($subtotal,0, "", ".")}}
+                                  </a></div> 
                                    <p style="font-size:14px; margin-bottom:-10px;">Tanggal Pembelian : {{ date("j-M-Y H:i", strtotime($list_kirim['created_at']))}} WIB </p>
                                 </li>
+                                
+
                                 
                                   @foreach($list_kirim['transaction_detail'] as $produk_kirim)
                                   <li class="list-group-item">
@@ -217,9 +224,14 @@
                                     <a href="{{route('produk-detail', ['slug_produk' => $kirim_detail['slug']])}}">{{$kirim_detail['nama_produk']}}</a>, Rp {{number_format($kirim_detail['harga'],0, "", ".")}}, {{$produk_kirim['qty']}} Produk
                                     @endforeach
                                   </li>
+                                
                                   @endforeach
+                                  <li class="list-group-item">
+                                    Ongkos Kirim :  Rp {{number_format($list_kirim['ongkir'],0, "", ".")}}
+                                  </li>
+
                                   <li class="list-group-item"> 
-                                    @if(json_encode($list_kirim['0']['rajaongkir']['status']['code']) == 200)
+                                    @if(($list_kirim['0']['rajaongkir']['status']['code'] == 200) && $list_kirim['0']['rajaongkir']['result']['summary'] && $list_kirim['0']['rajaongkir']['result']['details'] && $list_kirim['0']['rajaongkir']['result']['manifest'] )
                                     Kurir : {{$list_kirim['0']['rajaongkir']['result']['summary']['courier_name']}}  <br>
                                     No Resi : {{$list_kirim['0']['rajaongkir']['result']['summary']['waybill_number']}}  <br>
                                     Service : {{$list_kirim['0']['rajaongkir']['result']['summary']['service_code']}}  <br>
@@ -237,12 +249,12 @@
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        <?php $i=2;?>
-                                        <tr>
+                                        <?php $i=1;?>
+                                        {{-- <tr>
                                           <th scope="row">1</th>
                                           <td>{{$list_kirim['0']['rajaongkir']['result']['details']['waybill_date']}}, {{$list_kirim['0']['rajaongkir']['result']['details']['waybill_time']}}</td>
                                           <td>Shipment Received</td>
-                                        </tr>
+                                        </tr> --}}
                                         @foreach($list_kirim['0']['rajaongkir']['result']['manifest'] as $manifest)
                                         
                                         <tr>
@@ -254,17 +266,20 @@
                                       </tbody>
                                     </table>
                                     @else
-                                    
+                                    <button class="btn btn-outline-dark btn-sm">Data Tracking Belum Tersedia</button>
                                     @endif
                                    
                                  </li>
+                                 <li class="list-group-item">
+                                  <button data-toggle="modal" data-target="#selesai" data-trans_id="{{$list_kirim['id']}}" class="btn btn-success btn-md btn-block" id="pesananSelesai">Pesanan Selesai</button>
+                                </li>
                                 </ul>
                               </div>
                               
                               @endforeach 
                               @else
                               <div class="text-center">
-                                <button class="btn btn-dark btn-md">Tidak Adas Transaksi</button>
+                                <button class="btn btn-dark btn-md">Tidak Ada Transaksi</button>
                               </div>
                               @endif
                             </div>
@@ -395,7 +410,32 @@
 
   </div>
 </div>
-   
+   <!-- BATALKAN SELESAI -->
+<div class="modal fade" id="selesai" tabindex="-1" role="dialog" aria-labelledby="batalkanLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    {{-- {!! Form::open([ 'route' => ['home.transaksiBatalkan'], 'method' => "POST"])!!} --}}
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Pengiriman</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Barang sudah sampai?
+        <input type="hidden" id="trans_id" name="trans_id">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Tidak</button>
+        <button type="submit" class="btn btn-primary btn-sm" >Ya</button>
+      </div>
+    </div>
+    {{-- {!! Form::close() !!} --}}
+
+  </div>
+</div>
 @endsection
 @section('js')
 <script>
@@ -411,6 +451,12 @@
             var trans_kode_bukti = $(this).data('trans_kode_bukti');
             console.log(trans_kode_bukti)
             $('#transaksi_kode_bukti').val(trans_kode_bukti);
+        });
+
+        $("button#pesananSelesai").click(function () {
+            var trans_id = $(this).data('trans_id');
+            console.log(trans_id)
+            $('#transaksi_kode_bukti').val(trans_id);
         });
     });
 </script>
