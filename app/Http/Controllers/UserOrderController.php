@@ -120,9 +120,30 @@ class UserOrderController extends Controller
 
 
         // PESANAN DIKIRIM
+        $new_order_kirim = [];
         $order_kirim = Transaction::with(['transaction_detail' => function ($query) {
             $query->with('produk');
         }])->where(['user_id' => $user_id, 'status_id' => '3'])->orderBy('created_at', 'desc')->get();
+
+        foreach($order_kirim as $order_kirims){
+            $resi = Waybill($order_kirims->no_resi,$order_kirims->ekspedisi); 
+            $data = json_decode($resi, true);
+             $new_order_kirim[] = collect($order_kirims)->push($data);
+          /*   $new_order_kirim[] = collect([
+                    'order' => $order_kirims,
+                    'resi' => $data
+            ]); */
+           /*  array_push($new_order_kirim, (object)[
+                'order' => $order_kirims,
+                'resi' => $data
+            ]); */
+        }
+
+        //return $new_order_kirim;
+
+       
+        /* return $resi = Waybill('SOCAG00183235715','jne'); */
+
 
          // PESANAN DIBATALKAN
         $order_batal = Transaction::with(['transaction_detail' => function ($query) {
@@ -142,7 +163,7 @@ class UserOrderController extends Controller
             $tabName = 'mproses';
 
         }
-        return view('users.daftarTransaksi', ['order_kirim' => $order_kirim,'order_batal' => $order_batal,'order_proses' => $order_proses,'kategori' => $kategori, 'array_order' => $order_array, 'order_bukti' => $new_order_bukti, 'tabName' => $tabName]);
+        return view('users.daftarTransaksi', ['order_kirim' => $new_order_kirim,'order_batal' => $order_batal,'order_proses' => $order_proses,'kategori' => $kategori, 'array_order' => $order_array, 'order_bukti' => $new_order_bukti, 'tabName' => $tabName]);
     }
 
     public function transaksiBatalkan(Request $request){

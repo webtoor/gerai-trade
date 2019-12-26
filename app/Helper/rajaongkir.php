@@ -198,7 +198,7 @@ if(!function_exists('cost')){
 
 
 if( !function_exists('waybill')){
-	function waybill($resi, $eks){
+	function waybill($resi, $kurir){
 		
 		$uri = "https://pro.rajaongkir.com/api/waybill";
 
@@ -213,7 +213,7 @@ if( !function_exists('waybill')){
 		CURLOPT_TIMEOUT => 30,
 		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 		CURLOPT_CUSTOMREQUEST => "POST",
-		CURLOPT_POSTFIELDS => "waybill='.$resi.'&courier='.$eks.'",
+		CURLOPT_POSTFIELDS => "waybill=".$resi."&courier=".$kurir."",
 		CURLOPT_HTTPHEADER => array(
 		"content-type: application/x-www-form-urlencoded",
 		"key: 87b64ed6c63f0b7b591af87aabf2f6ef"

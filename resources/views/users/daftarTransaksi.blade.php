@@ -204,36 +204,74 @@
                         <div class="row" style="margin-top:40px;">
                           <div class="col-sm-12">
                             @if(count($order_kirim) > 0)
-  
                             @foreach($order_kirim as $list_kirim)
                               <div class="card" style="margin-bottom:20px;">
                                 <ul class="list-group list-group-flush">
                                 <li class="list-group-item"> <div><i class="flaticon-bag fa-lg"></i> Pesanan Dikirim</div> 
-                                   <p style="font-size:14px; margin-bottom:-10px;">Tanggal Pembelian : {{ date("j-M-Y H:i", strtotime($list_kirim->created_at))}} WIB </p>
+                                   <p style="font-size:14px; margin-bottom:-10px;">Tanggal Pembelian : {{ date("j-M-Y H:i", strtotime($list_kirim['created_at']))}} WIB </p>
                                 </li>
                                 
-                                  @foreach($list_kirim->transaction_detail as $produk_kirim)
+                                  @foreach($list_kirim['transaction_detail'] as $produk_kirim)
                                   <li class="list-group-item">
-                                    @foreach($produk_kirim->produk as $kirim_detail)
-                                    <a href="{{route('produk-detail', ['slug_produk' => $kirim_detail->slug])}}">{{$kirim_detail->nama_produk}}</a>, Rp {{number_format($kirim_detail->harga,0, "", ".")}}, {{$produk_kirim->qty}} Produk
+                                    @foreach($produk_kirim['produk'] as $kirim_detail)
+                                    <a href="{{route('produk-detail', ['slug_produk' => $kirim_detail['slug']])}}">{{$kirim_detail['nama_produk']}}</a>, Rp {{number_format($kirim_detail['harga'],0, "", ".")}}, {{$produk_kirim['qty']}} Produk
                                     @endforeach
                                   </li>
                                   @endforeach
                                   <li class="list-group-item"> 
-                                    <button class="btn btn-outline-dark btn-sm">
-                                      <span class="ti-eye"> </span> Lihat Detail
-                                    </button>
+                                    @if(json_encode($list_kirim['0']['rajaongkir']['status']['code']) == 200)
+                                    Kurir : {{$list_kirim['0']['rajaongkir']['result']['summary']['courier_name']}}  <br>
+                                    No Resi : {{$list_kirim['0']['rajaongkir']['result']['summary']['waybill_number']}}  <br>
+                                    Service : {{$list_kirim['0']['rajaongkir']['result']['summary']['service_code']}}  <br>
+                                    Dikirim dari : {{$list_kirim['0']['rajaongkir']['result']['summary']['origin']}} <br>
+                                    Tujuan : {{$list_kirim['0']['rajaongkir']['result']['summary']['destination']}} <br>
+
+                                      
+                                  
+                                    <table class="table">
+                                      <thead>
+                                        <tr>
+                                          <th scope="col">#</th>
+                                          <th scope="col"></th>
+                                          <th scope="col">History</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <?php $i=2;?>
+                                        <tr>
+                                          <th scope="row">1</th>
+                                          <td>{{$list_kirim['0']['rajaongkir']['result']['details']['waybill_date']}}, {{$list_kirim['0']['rajaongkir']['result']['details']['waybill_time']}}</td>
+                                          <td>Shipment Received</td>
+                                        </tr>
+                                        @foreach($list_kirim['0']['rajaongkir']['result']['manifest'] as $manifest)
+                                        
+                                        <tr>
+                                          <th scope="row">{{$i++}}</th>
+                                          <td>{{$manifest['manifest_date']}}, {{$manifest['manifest_time']}}</td>
+                                          <td>{{$manifest['manifest_description']}}, {{$manifest['city_name']}}</td>
+                                        </tr>
+                                        @endforeach
+                                      </tbody>
+                                    </table>
+                                    @else
+                                    
+                                    @endif
+                                   
                                  </li>
                                 </ul>
                               </div>
-    
-                              @endforeach
+                              
+                              @endforeach 
                               @else
                               <div class="text-center">
                                 <button class="btn btn-dark btn-md">Tidak Adas Transaksi</button>
                               </div>
                               @endif
                             </div>
+                           
+                          {{--   @foreach($order_kirim as $list_kirims)
+                           {{json_encode($list_kirims['0']['rajaongkir'])}}
+                            @endforeach --}}
                         </div>
 
                       </div>
