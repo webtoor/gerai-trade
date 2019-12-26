@@ -155,8 +155,8 @@ Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']
                 Route::post('post-checkout', 'UserOrderController@postCheckout')->name('ajaxPostCheckout');
                 Route::get('daftar-transaksi', 'UserOrderController@getWaitPayment')->name('getWaitPayment');
                 Route::post('daftar-transaksi-batalkan', 'UserOrderController@transaksiBatalkan')->name('transaksiBatalkan');
-                Route::post('daftar-transaksi-batalkan', 'UserOrderController@transaksiBatalkan')->name('transaksiBatalkan');
                 Route::post('daftar-transaksi-unggah', 'UserOrderController@transaksiUnggah')->name('transaksiUnggah');
+                Route::post('daftar-transaksi-selesai', 'UserOrderController@transaksiSelesai')->name('transaksiSelesai');
 
         });     
         Route::group(['middleware' => ['mitra']], function(){
