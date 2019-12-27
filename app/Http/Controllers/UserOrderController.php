@@ -73,6 +73,8 @@ class UserOrderController extends Controller
                 }
               
             }
+            Cart::instance('default')->destroy();
+
             return response()->json([
                 'status' => 1,
             ]);
@@ -228,6 +230,8 @@ class UserOrderController extends Controller
             'rating' => $request->rating,
             'ulasan' => $request->ulasan
         ]);
+
+        ProdukUlasan::where('produk_id', $request->produk_id)->avg('produk_id');
         return back()->withSuccess(trans('Terima kasih atas ulasan Anda')); 
 
     }

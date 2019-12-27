@@ -325,17 +325,38 @@ select {
                                   <li class="list-group-item">
                                     @foreach($produk_selesai->produk as $selesai_detail)
                                     <a href="{{route('produk-detail', ['slug_produk' => $selesai_detail->slug])}}">{{$selesai_detail->nama_produk}}</a>, Rp {{number_format($selesai_detail->harga,0, "", ".")}}, {{$produk_selesai->qty}} Produk
-                                    @foreach($list_selesai->produk_ulasan as $ulasans)
-                                    @if($produk_selesai->produk_id == $ulasans->produk_id)
-                                    <button id="showsUlasan" data-rating="{{$ulasans->rating}}" data-ulasan="{{$ulasans->ulasan}}" data-toggle="modal" data-target="#showModalUlasan" data-produk_id="{{$selesai_detail->id}}" class="float-right btn btn-outline-dark btn-sm">Lihat Ulasan</button>
 
+                                    @if(count($list_selesai->produk_ulasan) > 0)
+
+                                    @foreach($list_selesai->produk_ulasan as $ulasans)
+                                    @if(count($list_selesai->produk_ulasan) < count($list_selesai->transaction_detail))
+                                    {{-- {{$selesai_detail->id}} {{$ulasans->produk_id}} --}}
+
+                                    @if(($selesai_detail->id) == ($ulasans->produk_id))
+                                    <button id="showsUlasan" data-rating="{{$ulasans->rating}}" data-ulasan="{{$ulasans->ulasan}}" data-toggle="modal" data-target="#showModalUlasan" data-produk_id="{{$selesai_detail->id}}" class="float-right btn btn-outline-dark btn-sm">Lihat Ulasan</button>
+                                    @else
+                                    <button id="ulasan" data-tran_id="{{$list_selesai['id']}}" data-toggle="modal" data-target="#modalUlasan" data-produk_id="{{$selesai_detail->id}}" class="float-right btn btn-outline-dark btn-sm">Beri Ulasan</button>
+                                    @endif
+
+                                    @else
+                                    @if(($selesai_detail->id) == ($ulasans->produk_id))
+                                    <button id="showsUlasan" data-rating="{{$ulasans->rating}}" data-ulasan="{{$ulasans->ulasan}}" data-toggle="modal" data-target="#showModalUlasan" data-produk_id="{{$selesai_detail->id}}" class="float-right btn btn-outline-dark btn-sm">Lihat Ulasan</button>
+                                    @break
+                                    
+                                    @endif
+                                    @endif
+                                    @endforeach
+
+                                 
                                     @else
                                     <button id="ulasan" data-tran_id="{{$list_selesai['id']}}" data-toggle="modal" data-target="#modalUlasan" data-produk_id="{{$selesai_detail->id}}" class="float-right btn btn-outline-dark btn-sm">Beri Ulasan</button>
                                     @endif
                                     @endforeach
-                                    @endforeach
+
+                                   
                                   </li>
                                   @endforeach
+                                  
                                   <li class="list-group-item">
                                     Ongkos Kirim :  Rp {{number_format($list_selesai->ongkir,0, "", ".")}}
                                   </li>
@@ -581,7 +602,7 @@ select {
             </div>
         </div>
   
-        
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Tutup</button>
