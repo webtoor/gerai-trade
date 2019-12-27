@@ -325,7 +325,14 @@ select {
                                   <li class="list-group-item">
                                     @foreach($produk_selesai->produk as $selesai_detail)
                                     <a href="{{route('produk-detail', ['slug_produk' => $selesai_detail->slug])}}">{{$selesai_detail->nama_produk}}</a>, Rp {{number_format($selesai_detail->harga,0, "", ".")}}, {{$produk_selesai->qty}} Produk
-                                    <button id="ulasan" data-toggle="modal" data-target="#modalUlasan" data-produk_id="{{$selesai_detail->id}}" class="float-right btn btn-outline-dark btn-sm">Beri Ulasan</button>
+                                    @foreach($list_selesai->produk_ulasan as $ulasans)
+                                    @if($produk_selesai->produk_id == $ulasans->produk_id)
+                                    <button id="showUlasan" data-rating_id="{{$ulasans->rating}}" data-rating_id="{{$ulasans->ulasan}}" data-toggle="modal" data-target="#showModalUlasan" data-produk_id="{{$selesai_detail->id}}" class="float-right btn btn-outline-dark btn-sm">Lihat Ulasan</button>
+
+                                    @else
+                                    <button id="ulasan" data-tran_id="{{$list_selesai['id']}}" data-toggle="modal" data-target="#modalUlasan" data-produk_id="{{$selesai_detail->id}}" class="float-right btn btn-outline-dark btn-sm">Beri Ulasan</button>
+                                    @endif
+                                    @endforeach
                                     @endforeach
                                   </li>
                                   @endforeach
@@ -502,7 +509,7 @@ select {
   <!--BERI ULASAN -->
   <div class="modal fade" id="modalUlasan" tabindex="-1" role="dialog" aria-labelledby="batalkanLabel" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
-      {{-- {!! Form::open([ 'route' => ['home.transaksiSelesai'], 'method' => "POST"])!!} --}}
+      {!! Form::open([ 'route' => ['home.beriUlasan'], 'method' => "POST"])!!}
   
       <div class="modal-content">
         <div class="modal-header">
@@ -512,11 +519,12 @@ select {
           </button>
         </div>
         <div class="modal-body">
-          <input type="hidden" id="produk_id" name="produk_id"><div class="form-row">
-{{--             <span style="color:#ffc200"><i class="fas fa-star" aria-hidden="true"></i></span>
- --}}            <div class="form-group col-md-12">
+          <input type="hidden" id="produk_id" name="produk_id">
+          <input type="hidden" id="tran_id" name="tran_id">
+          <div class="form-row">
+          <div class="form-group col-md-12">
               <label for="inputEmail4">Rating<sup style="color:red"> *Wajib</sup></label>
-              <select name="rating" class="form-control">
+              <select name="rating" class="form-control" required>
 
                 <option value="">Pilih Rating</option>
                 <option value="5">&#xf005; &#xf005; &#xf005; &#xf005; &#xf005;</option>
@@ -539,7 +547,50 @@ select {
           <button type="submit" class="btn btn-primary btn-sm" >Ya</button>
         </div>
       </div>
-     {{--  {!! Form::close() !!} --}}
+      {!! Form::close() !!}
+  
+    </div>
+  </div>
+
+  <!--LIHAT ULASAN -->
+  <div class="modal fade" id="showModalUlasan" tabindex="-1" role="dialog" aria-labelledby="batalkanLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+  
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Beri Ulasan</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="produk_id" name="produk_id">
+          <input type="hidden" id="tran_id" name="tran_id">
+          <div class="form-row">
+          <div class="form-group col-md-12">
+              <label for="inputEmail4">Rating</sup></label> <br>
+              <select id="showRating" class="form-control" required>
+
+                <option value="">Pilih Rating</option>
+                <option value="5">&#xf005; &#xf005; &#xf005; &#xf005; &#xf005;</option>
+                <option value="4">&#xf005; &#xf005; &#xf005; &#xf005;</option>
+                <option value="3">&#xf005; &#xf005; &#xf005;</option>
+                <option value="2">&#xf005; &#xf005;</option>
+                <option value="1">&#xf005;</option>
+
+              </select>
+            </div>
+            <div class="form-group col-md-12">
+              <label for="inputEmail4">Ulasan</label>
+              <textarea id="showUlasan" class="form-control" readonly></textarea>
+            </div>
+        </div>
+  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Tutup</button>
+        </div>
+      </div>
   
     </div>
   </div>
@@ -568,8 +619,12 @@ select {
 
         $("button#ulasan").click(function () {
             var produk_id = $(this).data('produk_id');
+            var tran_id = $(this).data('tran_id');
+
             console.log(produk_id)
             $('#produk_id').val(produk_id);
+            $('#tran_id').val(tran_id);
+
         });
     });
 </script>

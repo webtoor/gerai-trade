@@ -14,7 +14,7 @@ use App\Models\TransactionBukti;
 use App\Models\Alamat;
 use App\Models\Produk;
 use App\Models\Kategori;
-
+use App\Models\ProdukUlasan;
 
 class UserOrderController extends Controller
 {
@@ -151,7 +151,7 @@ class UserOrderController extends Controller
         }])->where(['user_id' => $user_id, 'status_id' => '5'])->orderBy('created_at', 'desc')->get();
 
         // PESANAN SELESAI
-        $order_selesai = Transaction::with(['transaction_detail' => function ($query) {
+        $order_selesai = Transaction::with(['produk_ulasan','transaction_detail' => function ($query) {
             $query->with('produk');
         }])->where(['user_id' => $user_id, 'status_id' => '4'])->orderBy('created_at', 'desc')->get();
         if(count($order_array) > 0){
@@ -215,6 +215,20 @@ class UserOrderController extends Controller
         ]);
 
         return back()->withSuccess(trans('Anda Berhasil Konfirmasi Barang Sudah Sampai')); 
+
+    }
+
+    public function beriUlasan(Request $request){
+        //return $request->all();
+        $user_id = Auth::user()->id;
+        ProdukUlasan::create([
+            'user_id' => $user_id,
+            'transaction_id' => $request->tran_id,
+            'produk_id' => $request->produk_id,
+            'rating' => $request->rating,
+            'ulasan' => $request->ulasan
+        ]);
+        return back()->withSuccess(trans('Terima kasih atas ulasan Anda')); 
 
     }
 }

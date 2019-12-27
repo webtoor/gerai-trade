@@ -9,6 +9,7 @@ class ProdukUlasan extends Model
     protected $table = 'product_ulasans';
 
     protected $fillable = [
+        'transaction_id',
         'produk_id',
         'user_id',
         'rating',

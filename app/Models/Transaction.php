@@ -32,6 +32,10 @@ class Transaction extends Model
     public function transaction_detail(){
         return $this->hasMany('App\Models\Transaction_detail', 'transaction_id', 'id');
     }
+
+    public function produk_ulasan(){
+        return $this->hasMany('App\Models\ProdukUlasan', 'transaction_id', 'id');
+    }
     
 
 }
