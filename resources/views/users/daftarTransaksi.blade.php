@@ -327,7 +327,7 @@ select {
                                     <a href="{{route('produk-detail', ['slug_produk' => $selesai_detail->slug])}}">{{$selesai_detail->nama_produk}}</a>, Rp {{number_format($selesai_detail->harga,0, "", ".")}}, {{$produk_selesai->qty}} Produk
                                     @foreach($list_selesai->produk_ulasan as $ulasans)
                                     @if($produk_selesai->produk_id == $ulasans->produk_id)
-                                    <button id="showUlasan" data-rating_id="{{$ulasans->rating}}" data-rating_id="{{$ulasans->ulasan}}" data-toggle="modal" data-target="#showModalUlasan" data-produk_id="{{$selesai_detail->id}}" class="float-right btn btn-outline-dark btn-sm">Lihat Ulasan</button>
+                                    <button id="showsUlasan" data-rating="{{$ulasans->rating}}" data-ulasan="{{$ulasans->ulasan}}" data-toggle="modal" data-target="#showModalUlasan" data-produk_id="{{$selesai_detail->id}}" class="float-right btn btn-outline-dark btn-sm">Lihat Ulasan</button>
 
                                     @else
                                     <button id="ulasan" data-tran_id="{{$list_selesai['id']}}" data-toggle="modal" data-target="#modalUlasan" data-produk_id="{{$selesai_detail->id}}" class="float-right btn btn-outline-dark btn-sm">Beri Ulasan</button>
@@ -558,26 +558,21 @@ select {
   
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Beri Ulasan</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Ulasan Anda</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <input type="hidden" id="produk_id" name="produk_id">
-          <input type="hidden" id="tran_id" name="tran_id">
           <div class="form-row">
           <div class="form-group col-md-12">
               <label for="inputEmail4">Rating</sup></label> <br>
-              <select id="showRating" class="form-control" required>
-
-                <option value="">Pilih Rating</option>
-                <option value="5">&#xf005; &#xf005; &#xf005; &#xf005; &#xf005;</option>
-                <option value="4">&#xf005; &#xf005; &#xf005; &#xf005;</option>
-                <option value="3">&#xf005; &#xf005; &#xf005;</option>
-                <option value="2">&#xf005; &#xf005;</option>
-                <option value="1">&#xf005;</option>
-
+              <select id="showRating" class="form-control" disabled>
+                <option value="5">&#xf005; &#xf005; &#xf005; &#xf005; &#xf005; </option>
+                <option value="4">&#xf005; &#xf005; &#xf005; &#xf005; </option>
+                <option value="3">&#xf005; &#xf005; &#xf005; </option>
+                <option value="2">&#xf005; &#xf005; </option>
+                <option value="1">&#xf005; </option>
               </select>
             </div>
             <div class="form-group col-md-12">
@@ -624,6 +619,17 @@ select {
             console.log(produk_id)
             $('#produk_id').val(produk_id);
             $('#tran_id').val(tran_id);
+
+        });
+
+
+        $("button#showsUlasan").click(function () {
+            var rating = $(this).data('rating');
+            var ulasan = $(this).data('ulasan');
+
+            console.log(produk_id)
+            $('#showRating').val(rating);
+            $('#showUlasan').val(ulasan);
 
         });
     });
