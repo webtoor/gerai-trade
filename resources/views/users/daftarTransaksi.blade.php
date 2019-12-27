@@ -1,3 +1,12 @@
+@section('css')
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<style>
+select {
+    font-family: 'Lato', 'Font Awesome 5 Free';
+    font-weight: 900;
+}
+</style>
+@endsection
 @extends('users.default')
 
 @section('content')
@@ -316,6 +325,7 @@
                                   <li class="list-group-item">
                                     @foreach($produk_selesai->produk as $selesai_detail)
                                     <a href="{{route('produk-detail', ['slug_produk' => $selesai_detail->slug])}}">{{$selesai_detail->nama_produk}}</a>, Rp {{number_format($selesai_detail->harga,0, "", ".")}}, {{$produk_selesai->qty}} Produk
+                                    <button id="ulasan" data-toggle="modal" data-target="#modalUlasan" data-produk_id="{{$selesai_detail->id}}" class="float-right btn btn-outline-dark btn-sm">Beri Ulasan</button>
                                     @endforeach
                                   </li>
                                   @endforeach
@@ -323,7 +333,8 @@
                                     Ongkos Kirim :  Rp {{number_format($list_selesai->ongkir,0, "", ".")}}
                                   </li>
                                   <li class="list-group-item">
-                                    Kurir : {{$list_selesai->ekspedisi}} <br>
+                                    Kurir : {{strtoupper($list_selesai->ekspedisi)}} <br>
+                                    Service : {{$list_selesai->service}} <br>
                                     No Resi : {{$list_selesai->no_resi}}
                                   </li>
 
@@ -460,7 +471,8 @@
 
   </div>
 </div>
-   <!-- BATALKAN SELESAI -->
+
+   <!-- BPESANAN SELESAI -->
 <div class="modal fade" id="selesai" tabindex="-1" role="dialog" aria-labelledby="batalkanLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
     {!! Form::open([ 'route' => ['home.transaksiSelesai'], 'method' => "POST"])!!}
@@ -474,7 +486,7 @@
       </div>
       <div class="modal-body">
         Barang sudah sampai?
-        <input type="hidden" id="transaksi_id" name="trans_id">
+        <input type="hidden" id="transaksi_id" name="trans_id" required>
 
       </div>
       <div class="modal-footer">
@@ -486,6 +498,51 @@
 
   </div>
 </div>
+
+  <!--BERI ULASAN -->
+  <div class="modal fade" id="modalUlasan" tabindex="-1" role="dialog" aria-labelledby="batalkanLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+      {{-- {!! Form::open([ 'route' => ['home.transaksiSelesai'], 'method' => "POST"])!!} --}}
+  
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Beri Ulasan</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="produk_id" name="produk_id"><div class="form-row">
+{{--             <span style="color:#ffc200"><i class="fas fa-star" aria-hidden="true"></i></span>
+ --}}            <div class="form-group col-md-12">
+              <label for="inputEmail4">Rating<sup style="color:red"> *Wajib</sup></label>
+              <select name="rating" class="form-control">
+
+                <option value="">Pilih Rating</option>
+                <option value="5">&#xf005; &#xf005; &#xf005; &#xf005; &#xf005;</option>
+                <option value="4">&#xf005; &#xf005; &#xf005; &#xf005;</option>
+                <option value="3">&#xf005; &#xf005; &#xf005;</option>
+                <option value="2">&#xf005; &#xf005;</option>
+                <option value="1">&#xf005;</option>
+
+              </select>
+            </div>
+            <div class="form-group col-md-12">
+              <label for="inputEmail4">Ulasan <sup style="color:red"> *Wajib</sup></label>
+              <textarea name="ulasan" class="form-control" required></textarea>
+            </div>
+        </div>
+  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Tidak</button>
+          <button type="submit" class="btn btn-primary btn-sm" >Ya</button>
+        </div>
+      </div>
+     {{--  {!! Form::close() !!} --}}
+  
+    </div>
+  </div>
 @endsection
 @section('js')
 <script>
@@ -507,6 +564,12 @@
             var trans_id = $(this).data('trans_id');
             console.log(trans_id)
             $('#transaksi_id').val(trans_id);
+        });
+
+        $("button#ulasan").click(function () {
+            var produk_id = $(this).data('produk_id');
+            console.log(produk_id)
+            $('#produk_id').val(produk_id);
         });
     });
 </script>
