@@ -157,6 +157,7 @@ Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']
                 Route::post('daftar-transaksi-batalkan', 'UserOrderController@transaksiBatalkan')->name('transaksiBatalkan');
                 Route::post('daftar-transaksi-unggah', 'UserOrderController@transaksiUnggah')->name('transaksiUnggah');
                 Route::post('daftar-transaksi-selesai', 'UserOrderController@transaksiSelesai')->name('transaksiSelesai');
+                Route::post('beri-ulasan', 'UserOrderController@beriUlasan')->name('beriUlasan');
 
         });     
         Route::group(['middleware' => ['mitra']], function(){
