@@ -18,6 +18,7 @@ use App\Models\Produk;
 use App\Models\ProdukImage;
 use App\Models\Pesan;
 use App\Models\PesanDetail;
+use App\Models\Transaction;
 
 class AdminController extends Controller
 {
@@ -346,7 +347,8 @@ class AdminController extends Controller
     }
 
     public function Transaksi(){
-        
+        $order = Transaction::with('user', 'hub');
+        return view('admin.transaksi.index', ['order' => $order]);
     }
 
 
