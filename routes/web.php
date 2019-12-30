@@ -93,6 +93,9 @@ Route::get('/update-app', function () {
 
         Route::delete('mitra/{user_id}', 'AdminController@deleteMitra')->name('deleteMitra');
 
+        // TRANSAKSI
+        Route::get('transaksi', 'AdminController@Transaksi')->name('Transaksi');
+
    });  
   
 

@@ -80,4 +80,13 @@
             </span>
             <span class="title">Pesan</span>
         </a>
-    </li>
+</li>
+
+<li class="nav-item">
+    <a class="sidebar-link" href="{{ route('admin-panel.Transaksi') }}">
+        <span class="icon-holder">
+            <i class="c-purple-500 ti-bag"></i>
+        </span>
+        <span class="title">Transaksi</span>
+    </a>
+</li>

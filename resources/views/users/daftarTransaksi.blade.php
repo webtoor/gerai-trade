@@ -12,21 +12,21 @@ select {
 @section('content')
 
 
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top:10px;">
     <div class="row">
     @include('users.partials.sidebar')
     <div class="col-sm-10">
 
-    <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top:10px;">
+    <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top:10px;" >
             <li class="nav-item">
-              <a class="nav-link {{ empty($tabName) || $tabName == 'mbayar' ? 'active' : '' }}" id="menunggu-pembayaran" data-toggle="tab" href="#menunggu_pembayaran" role="tab" aria-controls="menunggu_pembayaran" aria-selected="true">Menunggu Pembayaran  
+              <a class="nav-link {{ empty($tabName) || $tabName == 'mbayar' ? 'active' : '' }}" id="menunggu-pembayaran" data-toggle="tab" href="#menunggu_pembayaran" role="tab" aria-controls="menunggu_pembayaran" aria-selected="true"><b style="font-size:15px;">Menunggu Pembayaran</b>  
                 @if(count($array_order) > 0)
                 <span class="badge badge-danger">{{count($array_order)}}</span>
                 @endif
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {{ empty($tabName) || $tabName == 'mkonfirmasi' ? 'active' : '' }}" id="menunggu-konfirmasi" data-toggle="tab" href="#menunggu_konfirmasi" role="tab" aria-controls="menunggu_konfirmasi" aria-selected="true">Menunggu Konfirmasi
+              <a class="nav-link {{ empty($tabName) || $tabName == 'mkonfirmasi' ? 'active' : '' }}" id="menunggu-konfirmasi" data-toggle="tab" href="#menunggu_konfirmasi" role="tab" aria-controls="menunggu_konfirmasi" aria-selected="true"><b style="font-size:15px;">Menunggu Konfirmasi</b>
 
                 @if(count($order_bukti) > 0)
                 <span class="badge badge-danger">{{count($order_bukti)}}</span>
@@ -35,7 +35,7 @@ select {
             </li>
 
             <li class="nav-item">
-              <a class="nav-link {{ empty($tabName) || $tabName == 'mproses' ? 'active' : '' }}" id="pesanan-proses" data-toggle="tab" href="#proses" role="tab" aria-controls="proses" aria-selected="true">Pesanan Diproses
+              <a class="nav-link {{ empty($tabName) || $tabName == 'mproses' ? 'active' : '' }}" id="pesanan-proses" data-toggle="tab" href="#proses" role="tab" aria-controls="proses" aria-selected="true"><b style="font-size:15px;">Pesanan Diproses</b>
 
                 @if(count($order_proses) > 0)
                 <span class="badge badge-danger">{{count($order_proses)}}</span>
@@ -43,7 +43,7 @@ select {
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {{ empty($tabName) || $tabName == 'mdikirim' ? 'active' : '' }}" id="pesanan-dikirim" data-toggle="tab" href="#pesanan_dikirim" role="tab" aria-controls="pesanan_dikirim" aria-selected="true">Pesanan Dikirim
+              <a class="nav-link {{ empty($tabName) || $tabName == 'mdikirim' ? 'active' : '' }}" id="pesanan-dikirim" data-toggle="tab" href="#pesanan_dikirim" role="tab" aria-controls="pesanan_dikirim" aria-selected="true"><b style="font-size:15px;">Pesanan Dikirim</b>
 
                 @if(count($order_kirim) > 0)
                 <span class="badge badge-danger">{{count($order_kirim)}}</span>
@@ -51,11 +51,11 @@ select {
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {{ empty($tabName) || $tabName == 'mselesai' ? 'active' : '' }}" id="pesanan-selesai" data-toggle="tab" href="#pesanan_selesai" role="tab" aria-controls="pesanan_selesai" aria-selected="true">Pesanan Selesai
+              <a class="nav-link {{ empty($tabName) || $tabName == 'mselesai' ? 'active' : '' }}" id="pesanan-selesai" data-toggle="tab" href="#pesanan_selesai" role="tab" aria-controls="pesanan_selesai" aria-selected="true"><b style="font-size:15px;">Pesanan Selesai</b>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {{ empty($tabName) || $tabName == 'mbatal' ? 'active' : '' }}" id="pesanan-batal" data-toggle="tab" href="#pesanan_batal" role="tab" aria-controls="pesanan_batal" aria-selected="true">Pesanan Dibatalkan
+              <a class="nav-link {{ empty($tabName) || $tabName == 'mbatal' ? 'active' : '' }}" id="pesanan-batal" data-toggle="tab" href="#pesanan_batal" role="tab" aria-controls="pesanan_batal" aria-selected="true"><b style="font-size:15px;">Pesanan Dibatalkan</b>
               </a>
             </li>
           </ul>
@@ -172,6 +172,8 @@ select {
                                     <?php $subtotal = $list_proses->total_harga + $list_proses->ongkir; ?>
                                     Rp {{number_format($subtotal,0, "", ".")}}
                                   </a>
+                                  <p style="font-size:14px; margin-bottom:-10px;">Tanggal Pembelian : {{ date("j-M-Y H:i", strtotime($list_proses->created_at))}} WIB </p>
+
                                 
                                   
                               
@@ -197,7 +199,9 @@ select {
                                     @endforeach
                                   </li>
                                   @endforeach
-          
+                                  <li class="list-group-item">
+                                    Ongkos Kirim :  Rp {{number_format($list_proses->ongkir,0, "", ".")}}
+                                  </li>
                                 </ul>
                               </div>
     
