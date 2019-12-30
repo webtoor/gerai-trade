@@ -347,7 +347,7 @@ class AdminController extends Controller
     }
 
     public function Transaksi(){
-        $order = Transaction::with('user', 'hub');
+        $order = Transaction::with('user', 'hub')->get();
         return view('admin.transaksi.index', ['order' => $order]);
     }
 

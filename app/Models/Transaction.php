@@ -36,6 +36,13 @@ class Transaction extends Model
     public function produk_ulasan(){
         return $this->hasMany('App\Models\ProdukUlasan', 'transaction_id', 'id');
     }
+
+    public function user(){
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
+    }
+    public function hub(){
+        return $this->belongsTo('App\Models\User', 'hub_id', 'id');
+    }
     
 
 }

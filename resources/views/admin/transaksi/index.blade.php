@@ -20,10 +20,25 @@
             <tbody>
                 @foreach($order as $list_order)
                 <tr>
-                    <td>{{$list_order->}}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{$list_order->user->nama_depan}} {{$list_order->user->nama_belakang}}</td>
+                    <td>{{$list_order->hub->nama_hub}}</td>
+                    <td><?php $subtotal = $list_order->total_harga + $list_order->ongkir; ?>
+                        Rp {{number_format($subtotal,0, "", ".")}}</td>
+                    <td>
+                        @if($list_order->status_id == '0')
+                        Menunggu Pembayaran
+                        @elseif($list_order->status_id == '1')
+                        Menunggu Konfirmasi 
+                        @elseif($list_order->status_id == '2')
+                        Pesanan Diproses
+                        @elseif($list_order->status_id == '3')
+                        Pesanan Dikirim
+                        @elseif($list_order->status_id == '4')
+                        Pesanan Selesai
+                        @elseif($list_order->status_id == '5')
+                        Pesanan Dibatalkan
+                        @endif
+                    </td>
                 
                     <td>
                             <ul class="list-inline">
