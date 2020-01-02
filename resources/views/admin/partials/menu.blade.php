@@ -2,6 +2,11 @@
     $r = \Route::current()->getAction();
     $route = (isset($r['as'])) ? $r['as'] : '';
 @endphp
+<?php 
+use App\Models\Transaction;
+use App\Models\TransactionBukti;
+
+ ?>
 {{-- 
 <li class="nav-item mT-30">
     <a class="sidebar-link {{ Str::startsWith($route, ADMIN . '.dash') ? 'active' : '' }}" href="{{ route(ADMIN . '.dash') }}">
@@ -82,20 +87,17 @@
         </a>
 </li>
 
-{{-- <li class="nav-item">
-    <a class="sidebar-link" href="{{ route('admin-panel.Transaksi') }}">
-        <span class="icon-holder">
-            <i class="c-purple-500 ti-bag"></i>
-        </span>
-        <span class="title">Transaksi</span>
-    </a>
-</li> --}}
 <li class="nav-item dropdown">
     <a class="dropdown-toggle" href="javascript:void(0);">
       <span class="icon-holder">
         <i class="c-purple-500 ti-bag"></i>
     </span>
-     <span class="title">Transaksi</span>
+     <span class="title">Transaksi 
+         <?php $ts = Transaction::where('status_id', '0')->get()?>
+       @if(count($ts) > 0)
+       <span class="badge badge-danger">{{count($ts)}}</span>
+       @endif
+    </span>
       <span class="arrow">
           <i class="ti-angle-right"></i>
         </span>
@@ -105,7 +107,11 @@
         <a class='sidebar-link'href="{{ route('admin-panel.Transaksi') }}" style="font-size:14px;margin-left:10px;">Daftar Transaksi</a>
       </li>                 
       <li>
-        <a class='sidebar-link'  href="{{ route('admin-panel.VerifikasiPembayaran') }}"  style="font-size:14px;margin-left:10px;">Verifikasi Pembayaran</a>
+        <a class='sidebar-link'  href="{{ route('admin-panel.VerifikasiPembayaran') }}"  style="font-size:14px;margin-left:10px;">Verifikasi Pembayaran 
+            <?php $tb = TransactionBukti::where('status', '0')->get()?>
+            @if(count($tb) > 0)
+            <span class="badge badge-danger">{{count($tb)}}</span>
+            @endif</a>
       </li>
     </ul>
   </li>

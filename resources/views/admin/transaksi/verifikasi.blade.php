@@ -5,17 +5,18 @@
     <b>Verifikasi</b>
     <h4 class="c-blue-900"><b>Verifikasi Pembayaran</b></h4>
 </div>
-<br>
+
 <div class="bgc-white p-20 bd">
-           <table id="dataTable" class="table table-bordered" cellspacing="0" width="100%">
-               <thead class="thead-light">
+    <table id="dataTable" class="table table-bordered" cellspacing="0" width="100%">
+        <thead class="thead-light">
                    <tr>
                        <th>ID Pemesanan</th>
-                       <th>Jumlah yang harus dibayar</th>
+                       <th>Total Pembayaran</th>
                        <th>Nama Pengirim</th>
                        <th>Jumlah Transfer</th>
                        <th>Nama Bank</th>
                        <th>Tanggal Pembayaran</th>
+                       <th>Verifikasi</th>
                        <th>Action</th>
                    </tr>
                </thead>
@@ -34,19 +35,26 @@
                   <td>Rp {{number_format($list_bukti->jumlah_transfer,0, "", ".")}}</td>
                     <td>{{$list_bukti->nama_bank}}</td>
                   <td>{{ date("j-M-Y H:i", strtotime($list_bukti['created_at']))}} WIB</td>
+                  <td>@if($list_bukti->status == '0')
+                    Belum
+                    @else
+                    Sudah
+                      @endif
+                  </td>
                   <td><ul class="list-inline">
                     <li class="list-inline-item">
                     <button id="lihatBukti" data-toggle="modal" data-target="#showBukti" data-bukti="{{$list_bukti->img_path}}" title="{{ trans('Lihat Bukti') }}" class="btn btn-dark px-3 btn-sm">
                                LIHAT BUKTI
                     </button>
                     </li>
-
+                    @if($list_bukti->status == '0')
                     <li class="list-inline-item">
                         <button title="{{ trans('Verifikasi') }}" class="btn btn-success px-3 btn-sm">
                             <span class="fas fa-exclamation-triangle"></span>
 
                         </button>
                         </li>
+                    @endif
                     </ul>
                 </td>
                   </tr>

@@ -49,4 +49,5 @@ class User extends Authenticatable
     public function alamat(){
         return $this->hasOne('App\Models\Alamat', 'user_id', 'id');
     }
+
 }
