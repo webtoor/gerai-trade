@@ -25,6 +25,8 @@
             Total Belanja <?php $subtotal = $detail->total_harga + $detail->ongkir; ?>
             Rp {{number_format($subtotal,0, "", ".")}}
         </a>
+        <p style="font-size:14px; margin-bottom:-10px;">Tanggal Pembelian : {{ date("j-M-Y H:i", strtotime($detail['created_at']))}} WIB </p>
+
     </li>
     @foreach($detail->transaction_detail as $list_detail)
     @foreach($list_detail->produk as $list_produk)

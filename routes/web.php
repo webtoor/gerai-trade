@@ -96,6 +96,7 @@ Route::get('/update-app', function () {
         // TRANSAKSI
         Route::get('transaksi', 'AdminController@Transaksi')->name('Transaksi');
         Route::get('detail-transaksi/{transaksi_id}', 'AdminController@DetailTransaksi')->name('DetailTransaksi');
+        Route::get('verifikasi-pembayaran', 'AdminController@VerifikasiPembayaran')->name('VerifikasiPembayaran');
 
 
    });  

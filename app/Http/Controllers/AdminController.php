@@ -355,6 +355,7 @@ class AdminController extends Controller
         $detail = Transaction::with(['user', 'hub', 'transaction_detail' => function ($query) {
             $query->with('produk');
         }])->where('id', $transaksi_id)->first();
+        $data = null;
         if($detail->status_id == '3'){
             $resi = Waybill($detail->no_resi,$detail->ekspedisi); 
             $data = json_decode($resi, true);
