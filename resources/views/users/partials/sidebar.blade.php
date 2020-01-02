@@ -65,13 +65,13 @@ use App\Models\Transaction;
                     <a href="{{route('home.getWaitPayment')}}" class="list-group-item border-top-0" style="font-size:14px;">
                         Daftar Transaksi
                       <?php 
-                        $order_count = Transaction::where(['user_id' => Auth::user()->id, 'status_id' => '0'])->orderBy('created_at', 'desc')->get();
+                        $order_count = Transaction::where(['user_id' => Auth::user()->id])->whereIn('status_id', ['0','1', '2', '3'])->orderBy('created_at', 'desc')->get();
 
                       $new_order_count = collect($order_count)->unique('kode');
                       $order_array_count = [];
                       foreach($new_order_count as $data){
                           $totals = 0;
-                          $total = Transaction::where(['user_id' => Auth::user()->id, 'status_id' => '0', 'kode' => $data->kode])->get();
+                          $total = Transaction::where(['user_id' => Auth::user()->id,'kode' => $data->kode])->whereIn('status_id', ['0','1', '2', '3'])->get();
                           foreach($total as $data_check){
                               $totals +=  $data_check->ongkir + $data_check->total_harga; 
                           }

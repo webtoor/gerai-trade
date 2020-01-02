@@ -82,11 +82,30 @@
         </a>
 </li>
 
-<li class="nav-item">
+{{-- <li class="nav-item">
     <a class="sidebar-link" href="{{ route('admin-panel.Transaksi') }}">
         <span class="icon-holder">
             <i class="c-purple-500 ti-bag"></i>
         </span>
         <span class="title">Transaksi</span>
     </a>
-</li>
+</li> --}}
+<li class="nav-item dropdown">
+    <a class="dropdown-toggle" href="javascript:void(0);">
+      <span class="icon-holder">
+        <i class="c-purple-500 ti-bag"></i>
+    </span>
+     <span class="title">Transaksi</span>
+      <span class="arrow">
+          <i class="ti-angle-right"></i>
+        </span>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <a class='sidebar-link'href="{{ route('admin-panel.Transaksi') }}" style="font-size:14px;margin-left:10px;">Daftar Transaksi</a>
+      </li>                 
+      <li>
+        <a class='sidebar-link'  href="{{ route('admin-panel.showMitra') }}"  style="font-size:14px;margin-left:10px;">Verifikasi Pembayaran</a>
+      </li>
+    </ul>
+  </li>

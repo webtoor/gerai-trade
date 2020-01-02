@@ -14,7 +14,8 @@
                     <th>Nama Hub</th>
                     <th>Total Bayar</th>
                     <th>Status</th>
-                    <th width="170px">Action</th>
+                    <th>Tanggal Pembelian</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,29 +40,14 @@
                         Pesanan Dibatalkan
                         @endif
                     </td>
-                
+                    <td>{{ date("j-M-Y, H:i", strtotime($list_order->created_at))}}</td>
+
                     <td>
                             <ul class="list-inline">
                                     <li class="list-inline-item">
-                                            <button style="border-radius:45%;"  id="showModalCerita" data-toggle="modal" data-target="#showCerita" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm">
+                                    <a href="{{route('admin-panel.DetailTransaksi')}}" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm">
                                                 <span class="ti-zoom-in"></span>
-                                        </button>
-                                        </li>
-                                    <li class="list-inline-item">
-                                        <a style="border-radius:45%;" href="#" title="{{ trans('Edit Cerita') }}" class="btn btn-info px-3 btn-sm">
-                                            <span class="ti-pencil"></span>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                            {!! Form::open([
-                                                'class'=>'delete',
-                                                'url'  => '', 
-                                                'method' => 'DELETE',
-                                                ]) 
-                                            !!}
-                                                <button class="btn btn-danger px-3 btn-sm" title="{{ trans('Hapus Cerita') }}" style="border-radius:45%;"><i class="ti-trash"></i></button>
-                                                
-                                            {!! Form::close() !!}
+                                            </a>
                                         </li>
                             </ul>
                       
