@@ -59,11 +59,9 @@
                 <td>{{$i++}}</td>
                 <td>{{$manifest['manifest_date']}}, {{$manifest['manifest_time']}}</td>
                 <td>{{$manifest['manifest_description']}}, {{$manifest['city_name']}}</td>
-
             </tr>
             @endforeach
           </tbody>
-
     </table>
     @endif
     </ul>
