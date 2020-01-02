@@ -352,8 +352,15 @@ class AdminController extends Controller
     }
 
     public function DetailTransaksi($transaksi_id){
-        return Transaction::with('user', 'hub')->where('id', $transaksi_id)->first();
-        return view('admin.transaksi.detail');
+        $detail = Transaction::with(['user', 'hub', 'transaction_detail' => function ($query) {
+            $query->with('produk');
+        }])->where('id', $transaksi_id)->first();
+        if($detail->status_id == '3'){
+            $resi = Waybill($detail->no_resi,$detail->ekspedisi); 
+            $data = json_decode($resi, true);
+        }
+
+        return view('admin.transaksi.detail', ['detail' => $detail, 'resi' => $data]);
     }
 
 
