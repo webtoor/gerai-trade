@@ -19,6 +19,7 @@ use App\Models\ProdukImage;
 use App\Models\Pesan;
 use App\Models\PesanDetail;
 use App\Models\Transaction;
+use App\Models\TransactionBukti;
 
 class AdminController extends Controller
 {
@@ -362,6 +363,12 @@ class AdminController extends Controller
         }
 
         return view('admin.transaksi.detail', ['detail' => $detail, 'resi' => $data]);
+    }
+
+    public function VerifikasiPembayaran(){
+        $bukti = TransactionBukti::with('transaction')->get();
+        return view('admin.transaksi.verifikasi', ['bukti' => $bukti]);
+
     }
 
 

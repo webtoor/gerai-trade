@@ -5,6 +5,7 @@
     <b>Transaksi</b>
     <h4 class="c-blue-900"><b>Detail Transaksi</b></h4>
 </div>
+<br>
 <div class="bgc-white p-20 bd">
     <ul class="list-group list-group-flush">
     <li class="list-group-item">STATUS : 

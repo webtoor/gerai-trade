@@ -105,7 +105,7 @@
         <a class='sidebar-link'href="{{ route('admin-panel.Transaksi') }}" style="font-size:14px;margin-left:10px;">Daftar Transaksi</a>
       </li>                 
       <li>
-        <a class='sidebar-link'  href="{{ route('admin-panel.showMitra') }}"  style="font-size:14px;margin-left:10px;">Verifikasi Pembayaran</a>
+        <a class='sidebar-link'  href="{{ route('admin-panel.VerifikasiPembayaran') }}"  style="font-size:14px;margin-left:10px;">Verifikasi Pembayaran</a>
       </li>
     </ul>
   </li>

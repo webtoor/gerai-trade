@@ -20,5 +20,7 @@ class TransactionBukti extends Model
         'updated_at'
     ];
 
-
+    public function transaction(){
+        return $this->hasMany('App\Models\Transaction', 'kode', 'kode_id');
+    }
 }
