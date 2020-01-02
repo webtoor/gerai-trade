@@ -351,5 +351,10 @@ class AdminController extends Controller
         return view('admin.transaksi.index', ['order' => $order]);
     }
 
+    public function DetailTransaksi($transaksi_id){
+        return Transaction::with('user', 'hub')->where('id', $transaksi_id)->first();
+        return view('admin.transaksi.detail');
+    }
+
 
 }

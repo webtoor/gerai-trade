@@ -45,7 +45,7 @@
                     <td>
                             <ul class="list-inline">
                                     <li class="list-inline-item">
-                                    <a href="{{route('admin-panel.DetailTransaksi')}}" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm">
+                                    <a href="{{route('admin-panel.DetailTransaksi', $list_order->id)}}" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm">
                                                 <span class="ti-zoom-in"></span>
                                             </a>
                                         </li>
