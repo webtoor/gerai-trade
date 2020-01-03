@@ -138,7 +138,7 @@ $(document).ready(function () {
 
     $("#dataTable" ).on( "click","button#BuktiVerifikasi", function() {
         var kode = $(this).data('kode');
-      console.log(kode)
+        console.log(kode)
         $('#kode_uniq').html(kode)
   });
 });
