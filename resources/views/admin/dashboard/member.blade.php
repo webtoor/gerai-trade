@@ -74,7 +74,7 @@
 $(document).ready(function () {
 
 
-    $("button#showModalMember").click(function () {
+    $("#dataTable" ).on( "click","button#showModalMember", function() {
             var alamat = $(this).data('alamat');
             var provinsi = $(this).data('provinsi');
             var city = $(this).data('city');

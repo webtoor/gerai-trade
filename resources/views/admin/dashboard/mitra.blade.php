@@ -312,7 +312,7 @@ $(document).ready(function () {
       });
     }); */
 
-    $("button#showModalMitra").click(function () {
+    $("#dataTable" ).on( "click","button#showModalMitra", function() {
             var alamat = $(this).data('alamat');
             var provinsi = $(this).data('provinsi');
             var city = $(this).data('city');

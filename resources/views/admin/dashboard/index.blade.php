@@ -292,8 +292,7 @@
 @section('js')
 <script>
 $(document).ready(function () {
-
-    $("button#showModalCerita").click(function () {
+    $("#dataTable" ).on( "click","button#showModalCerita", function() {
             var judulx = $(this).data('judulx');
             var kontens = $(this).data('kontens');
             var komentars = $(this).data('komentarx');
@@ -306,14 +305,16 @@ $(document).ready(function () {
             }
 
         });
+        
+    $("#dataTable" ).on( "click","button#updateModalStatus", function() {
 
-    $("button#updateModalStatus").click(function () {
         var cerita_id = $(this).data('id');
         $('#cerita_id').val(cerita_id);
 
     });
 
-    $("button#showModalProduk").click(function () {
+    $("#dataTable2" ).on( "click","button#showModalProduk", function() {
+
             var nama_produk = $(this).data('nama_produk');
             var foto_produk = $(this).data('foto');
 
@@ -336,7 +337,7 @@ $(document).ready(function () {
             console.log(foto_produk[0]['image_path']); */
 
             $('#nama_produk').html(nama_produk);
-            $('#foto_produk').html('<img id="theImg1" src="'+theImg1 +'" style="height:200px; width:200px;"/>' + '<img id="theImg2" src="'+theImg2+'" style="margin-left:30px; height:200px; width:200px;"/>' + '<img id="theImg3" src="'+theImg3+'" style="margin-left:30px; height:200px; width:200px;"/>')
+            $('#foto_produk').html('<img id="theImg1" src="'+theImg1 +'" style="margin-left:30px; height:200px; width:200px;"/>' + '<img id="theImg2" src="'+theImg2+'" style="margin-left:30px; height:200px; width:200px;"/>' + '<img id="theImg3" src="'+theImg3+'" style="margin-left:30px; height:200px; width:200px;"/>')
 
             $('#deskripsi').html(deskripsi);
             if(komentart){
@@ -346,7 +347,8 @@ $(document).ready(function () {
 
         });
 
-        $("button#updateStatusProduk").click(function () {
+        $("#dataTable2" ).on( "click","button#updateStatusProduk", function() {
+
         var produk_id = $(this).data('produk_id');
         $('#produk_id').val(produk_id);
 

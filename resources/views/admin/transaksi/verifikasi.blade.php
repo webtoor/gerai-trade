@@ -1,3 +1,4 @@
+
 @extends('admin.default')
 
 @section('content')
@@ -49,7 +50,7 @@
                     </li>
                     @if($list_bukti->status == '0')
                     <li class="list-inline-item">
-                        <button title="{{ trans('Verifikasi') }}" class="btn btn-success px-3 btn-sm">
+                        <button id="BuktiVerifikasi" data-kode="{{$list_bukti->kode_id}}" data-toggle="modal" data-target="#verifikasiBukti" title="{{ trans('Verifikasi') }}" class="btn btn-success px-3 btn-sm">
                             <span class="fas fa-exclamation-triangle"></span>
 
                         </button>
@@ -64,9 +65,9 @@
        </div>
 
 
-       <!-- SHOWBUKTI -->
+  <!-- SHOW BUKTI -->
 <div class="modal fade" id="showBukti" tabindex="-1" role="dialog" aria-labelledby="showMitraLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-md" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title"></h5>
@@ -76,32 +77,70 @@
         </div>
         <div class="modal-body">
 
-            <div id="foto_produk" style="padding-bottom: 10px; text-align:center">
-
-           
-      </div>
+            <div id="foto_produk" style="padding-bottom: 10px; text-align:center"></div>
+        </div>
     <div class="modal-footer">
             <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Tutup</button>
-        </div>
+
+          </div>
     </div>
 </div>
 </div>
+
+
+  <!-- VERIFIKASI -->
+  <div class="modal fade" id="verifikasiBukti" tabindex="-1" role="dialog" aria-labelledby="showMitraLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+      {!! Form::open([ 'route' => ['admin-panel.verifikasiProduk'], 'method' => "POST"])!!}
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="kode_uniq"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Apakah Bukti Pembayaran ini Valid?
+            <input type="hidden" value="1" name="status">
+      </div>
+    <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Tutup</button>
+            <button type="submit" class="btn btn-primary btn-md">Submit</button>
+
+          </div>
+    </div>
+    {!! Form::close() !!}
+
+</div>
+</div>
+
 @endsection
 
 @section('js')
 <script>
 $(document).ready(function () {
+  $("#dataTable" ).on( "click","button#lihatBukti", function() {
 
+    var foto_produk = $(this).data('bukti');
+        var theImg1 = "/storage/" + foto_produk;
 
-$("button#lihatBukti").click(function () {
-        
+        $('#foto_produk').html('<img id="theImg1" src="'+theImg1 +'"style="width:450px;">')
+     
+  });
+  /* $("button#lihatBukti" ).on( "click", function() {
+    console.log('sadasd')
         var foto_produk = $(this).data('bukti');
         var theImg1 = "/storage/" + foto_produk;
 
-        $('#foto_produk').html('<img id="theImg1" src="'+theImg1 +'">')
+        $('#foto_produk').html('<img id="theImg1" src="'+theImg1 +'"style="width:450px;">')
+    }); */
 
-
-    });
+    $("#dataTable" ).on( "click","button#BuktiVerifikasi", function() {
+        var kode = $(this).data('kode');
+      console.log(kode)
+        $('#kode_uniq').html(kode)
+  });
 });
 
 </script>

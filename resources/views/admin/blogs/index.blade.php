@@ -98,7 +98,8 @@
 @section('js')
 <script>
 $(document).ready(function () {
-    $("button#showModalCerita").click(function () {
+
+    $("#dataTable" ).on( "click","button#showModalCerita", function() {
             var juduls = $(this).data('juduls');
             var kontens = $(this).data('kontens');
 
