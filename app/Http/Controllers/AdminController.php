@@ -368,6 +368,15 @@ class AdminController extends Controller
     public function VerifikasiPembayaran(){
         $bukti = TransactionBukti::with('transaction')->get();
         return view('admin.transaksi.verifikasi', ['bukti' => $bukti]);
+    }
+
+    public function Verifikasikan(Request $request){
+
+        TransactionBukti::where('id', $request->bukti_id)->update([
+            'status' => '1',
+        ]);
+
+        return back()->withSuccess(trans('Verifikasi Pembayaran Berhasil')); 
 
     }
 

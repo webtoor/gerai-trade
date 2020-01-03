@@ -42,13 +42,13 @@
                     <td>
                             <ul class="list-inline">
                                     <li class="list-inline-item">
-                                            <button style="border-radius:45%;"  id="showModalCerita" data-toggle="modal" data-target="#showCerita" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"
+                                            <button   id="showModalCerita" data-toggle="modal" data-target="#showCerita" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"
                                             data-juduls="{{$blogs->judul}}" data-kontens="{{$blogs->konten}}">
                                                 <span class="ti-zoom-in"></span>
                                         </button>
                                         </li>
                                     <li class="list-inline-item">
-                                        <a style="border-radius:45%;" href="{{route('admin-panel.edit-blog', ['blog_id' => $blogs->id])}}" title="{{ trans('Edit Cerita') }}" class="btn btn-info px-3 btn-sm">
+                                        <a  href="{{route('admin-panel.edit-blog', ['blog_id' => $blogs->id])}}" title="{{ trans('Edit Cerita') }}" class="btn btn-info px-3 btn-sm">
                                             <span class="ti-pencil"></span>
                                         </a>
                                     </li>
@@ -59,7 +59,7 @@
                                                 'method' => 'DELETE',
                                                 ]) 
                                             !!}
-                                                <button class="btn btn-danger px-3 btn-sm" title="{{ trans('Hapus Cerita') }}" style="border-radius:45%;"><i class="ti-trash"></i></button>
+                                                <button class="btn btn-danger px-3 btn-sm" title="{{ trans('Hapus Cerita') }}" ><i class="ti-trash"></i></button>
                                                 
                                             {!! Form::close() !!}
                                         </li>

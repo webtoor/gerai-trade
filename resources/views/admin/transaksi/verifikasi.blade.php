@@ -50,7 +50,7 @@
                     </li>
                     @if($list_bukti->status == '0')
                     <li class="list-inline-item">
-                        <button id="BuktiVerifikasi" data-kode="{{$list_bukti->kode_id}}" data-toggle="modal" data-target="#verifikasiBukti" title="{{ trans('Verifikasi') }}" class="btn btn-success px-3 btn-sm">
+                        <button id="BuktiVerifikasi" data-kode="{{$list_bukti->kode_id}}" data-bukti_id="{{$list_bukti->id}}" data-toggle="modal" data-target="#verifikasiBukti" title="{{ trans('Verifikasi') }}" class="btn btn-success px-3 btn-sm">
                             <span class="fas fa-exclamation-triangle"></span>
 
                         </button>
@@ -91,7 +91,7 @@
   <!-- VERIFIKASI -->
   <div class="modal fade" id="verifikasiBukti" tabindex="-1" role="dialog" aria-labelledby="showMitraLabel" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
-      {!! Form::open([ 'route' => ['admin-panel.verifikasiProduk'], 'method' => "POST"])!!}
+      {!! Form::open([ 'route' => ['admin-panel.Verifikasikan'], 'method' => "POST"])!!}
 
       <div class="modal-content">
         <div class="modal-header">
@@ -103,6 +103,8 @@
         <div class="modal-body">
             Apakah Bukti Pembayaran ini Valid?
             <input type="hidden" value="1" name="status">
+            <input type="hidden" id="bukti_ids" name="bukti_id">
+
       </div>
     <div class="modal-footer">
             <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Tutup</button>
@@ -138,8 +140,12 @@ $(document).ready(function () {
 
     $("#dataTable" ).on( "click","button#BuktiVerifikasi", function() {
         var kode = $(this).data('kode');
+        var bukti_id = $(this).data('bukti_id');
+
         console.log(kode)
         $('#kode_uniq').html(kode)
+        $('#bukti_ids').val(bukti_id)
+
   });
 });
 
