@@ -231,7 +231,10 @@ class UserOrderController extends Controller
             'ulasan' => $request->ulasan
         ]);
 
-        ProdukUlasan::where('produk_id', $request->produk_id)->avg('produk_id');
+        $rating = ProdukUlasan::where('produk_id', $request->produk_id)->avg('rating');
+        Produk::where('id', $request->produk_id)->update([
+            'rating' => $rating
+        ]);
         return back()->withSuccess(trans('Terima kasih atas ulasan Anda')); 
 
     }

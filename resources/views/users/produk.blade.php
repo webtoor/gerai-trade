@@ -444,7 +444,7 @@
                     <div class="col-6">
                       <div class="box_total">
                         <h5>Rating</h5>
-                        <h4>4.0</h4>
+                        <h4>{{number_format($produk_detail->rating,1, ".", ".")}}</h4>
                       <h6>({{$produk_ulasan->total()}} Ulasan)</h6>
                       </div>
                     </div>
