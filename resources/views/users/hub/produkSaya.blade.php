@@ -149,8 +149,9 @@
 $(document).ready(function() {
 
 
+    
+    $("#dataTable" ).on( "click","button#showKomProduk", function() {
 
-$("button#showKomProduk").click(function () {
             var judul =  $(this).data('judul');
             var komentar =  $(this).data('komentar');
 
