@@ -17,13 +17,16 @@
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
+            <div style="margin-top:10px;">
+              @include('admin.partials.messages') 
 
+            </div>
             
             <div class="tab-pane fade show active" id="alamat" role="tabpanel" aria-labelledby="alamat_pengiriman">
 
                     <div class="row" style="margin-top:20px;">
                       <div class="col-sm-12">
-                          @include('admin.partials.messages') 
+                     
                        {{--  @if(count($alamat) < 1)
                         <button data-toggle="modal" data-target="#addAlamat" class="btn btn-dark btn-md" title="{{ trans('Tambah Alamat') }}">
                           <b><i class="fa fa-plus"></i> Tambah Alamat</b></button> 
@@ -95,7 +98,18 @@
                             <td>{{$bank->pemilik_rekening}}</td>
                             <td>{{$bank->nama_bank}}</td>
                             <td>{{$bank->no_rekening}}</td>
+                            <td>
 
+                              <ul class="list-inline">
+                                  <li class="list-inline-item">
+                                      <button id="ubahBanks" data-toggle="modal" data-target="#ubahBank" title="{{ trans('Lihat Detail') }}" class="btn btn-dark px-3 btn-sm"
+                                      data-no_rekening = "{{$bank->no_rekening}}" data-nama_pemilik = "{{$bank->pemilik_rekening}}" data-uuid = "{{$bank->id}}" data-nama_bank = "{{$bank->nama_bank}}"><span class="ti-pencil"></span>
+                                        Ubah
+                                  </button>
+                                  </li>
+                                
+                          </ul>
+                          </td>
                             </tr>
                             @endif
                             </tbody>
@@ -238,13 +252,13 @@
 </div>
 
 <!-- Modal Update Pembayaran-->
-<div class="modal fade" id="ubankPembayaran" tabindex="-1" role="dialog" aria-labelledby="ubankPembayaran" aria-hidden="true">
+<div class="modal fade" id="ubahBank" tabindex="-1" role="dialog" aria-labelledby="ubankPembayaran" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
-    {!! Form::open([ 'route' => ['home.bank-pembayaran'], 'method' => "PUT"])!!}
+    {!! Form::open([ 'route' => ['home.update-bank-pembayaran'], 'method' => "PUT"])!!}
 
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addKategoriLabel">Bank Pembayaran</h5>
+        <h5 class="modal-title" id="addKategoriLabel">Update Bank Pembayaran</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -253,17 +267,17 @@
             
       <div class="form-row">
           <label>Nama Bank <sup style="color:red"> *Wajib</sup></label>
-          <input type="text" class="form-control" name="nama_bank" required>
+          <input type="text" class="form-control" id="unama_bank" name="unama_bank" required>
       </div>
 
       <div class="form-row">
         <label>No Rekening <sup style="color:red"> *Wajib *Hanya Angka</sup></label>
-        <input type="number" class="form-control" name="no_rekening" required>
+        <input type="number" class="form-control" id="uno_rekening" name="uno_rekening" required>
     </div>
 
     <div class="form-row">
       <label>Nama Pemilik Rekening <sup style="color:red"> *Wajib</sup></label>
-      <input type="text" class="form-control" name="pemilik_rekening" required>
+      <input type="text" class="form-control" id="unama_pemilik" name="upemilik_rekening" required>
   </div>
 
      
@@ -272,6 +286,7 @@
       <div class="modal-footer">
        
           <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Tutup</button>
+          <input type="hidden" id="uuid" name="uuid" required>
 
           <button type="submit" class="btn btn-primary btn-md">Submit</button>
 
@@ -398,7 +413,23 @@
 
 
         });
-  
+
+
+        $("button#ubahBanks").click(function () {
+            var uuid = $(this).data('uuid');
+            var nama_bank = $(this).data('nama_bank');
+            var nama_pemilik = $(this).data('nama_pemilik');
+            var no_rekening = $(this).data('no_rekening');
+
+
+           // console.log(nama_bank + uuid + nama_pemilik)
+
+            $('#uuid').val(uuid);
+            $('#unama_bank').val(nama_bank);
+            $('#unama_pemilik').val(nama_pemilik);
+            $('#uno_rekening').val(no_rekening);
+
+        });
 });
 </script>
     

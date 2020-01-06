@@ -339,13 +339,21 @@ class HubController extends Controller
         return back()->withSuccess(trans('Anda Berhasil Menambah Bank Pembayaran')); 
     }
 
-    public function updateBankPembayaran(Request $request, $uid){
-        return $data = $request->validate([
+    public function updateBankPembayaran(Request $request){
+        $data = $request->validate([
+            'uuid' => 'required',
             'unama_bank' => 'required',
             'upemilik_rekening' => 'required',
             'uno_rekening' => 'required'
         ]); 
 
-        
+        HubBank::where(['id' => $data['uuid'],'hub_id' =>  Auth::user()->id ])->update([
+            'nama_bank' => strtoupper($data['unama_bank']),
+            'pemilik_rekening' => $data['upemilik_rekening'],
+            'no_rekening' => $data['uno_rekening']
+        ]);
+
+        return back()->withSuccess(trans('Anda Berhasil Mengubah Bank Pembayaran')); 
+
     }
 }
