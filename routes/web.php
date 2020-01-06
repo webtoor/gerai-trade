@@ -198,6 +198,7 @@ Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']
 
                 Route::get('/penjualan-saya', 'HubOrderController@getPenjualan')->name('get-penjualan');
                 Route::post('/konfirmasi-pengiriman', 'HubOrderController@konfirmasiPengiriman')->name('konfirmasi-pengiriman');
+                Route::get('/penjualan-selesai/pagination', 'HubOrderController@ajaxOrderSelesai')->name('ajax-selesai');
 
 
 

@@ -495,7 +495,7 @@
       $('.ajaxPaginationProduk').on('click', '.pagination a', function (e) {
         e.preventDefault();
         var page = $(this).attr('href').split('page=')[1];
-        var produk_id = "2"
+        var produk_id = "{{$produk_detail->id}}";
         console.log(produk_id)
         readPageProduk(produk_id, page)
       })

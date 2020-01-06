@@ -94,7 +94,7 @@ class HomeController extends Controller
 
     public function produkDetailPagination($produk_id){
        
-            $produk_ulasan = ProdukUlasan::with('user')->where('produk_id', $produk_id)->orderBy('id', 'desc')->paginate(1);
+            $produk_ulasan = ProdukUlasan::with('user')->where('produk_id', $produk_id)->orderBy('id', 'desc')->paginate(10);
             return view('users.pagination.produkUlasan', ['produk_ulasan' => $produk_ulasan])->render();
         
     }

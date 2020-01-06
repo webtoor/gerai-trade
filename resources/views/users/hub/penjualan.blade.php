@@ -22,6 +22,12 @@
                   @endif
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a class="nav-link {{ empty($tabName) || $tabName == 'order_selesai' ? 'active' : '' }}" id="order-selesai" data-toggle="tab" href="#order_selesai" role="tab" aria-controls="order_kirim" aria-selected="true"><b style="font-size:15px;">Pesanan Selesai</b>  
+                
+                </a>
+              </li>
         </ul>
         <div class="tab-content" id="myTabContent">
             <div style="margin-top:10px;">
@@ -110,7 +116,7 @@
                     <div class="card" style="margin-bottom:20px;">
                       <ul class="list-group list-group-flush">
                       <li class="list-group-item"> 
-                        <b> <i class="flaticon-bag fa-lg"></i> Pesanan Baru</b>
+                        <b> <i class="flaticon-bag fa-lg"></i> Pesanan Dikirim</b>
                         <a class="float-right" style="color:#fa591d;"> 
                           Total Pembelian
                           <?php $subtotal_dasar = 0; ?> 
@@ -170,11 +176,7 @@
                             </thead>
                             <tbody>
                               <?php $i=1;?>
-                              {{-- <tr>
-                                <th scope="row">1</th>
-                                <td>{{$list_kirim['0']['rajaongkir']['result']['details']['waybill_date']}}, {{$list_kirim['0']['rajaongkir']['result']['details']['waybill_time']}}</td>
-                                <td>Shipment Received</td>
-                              </tr> --}}
+                            
                               @foreach($list_kirim['0']['rajaongkir']['result']['manifest'] as $manifest)
                               
                               <tr>
@@ -202,6 +204,26 @@
                   </div>
               </div>
             </div>
+
+            <div class="tab-pane fade {{ !empty($tabName) && $tabName == 'order_selesai' ? 'show active' : '' }}" id="order_selesai" role="tabpanel" aria-labelledby="order_selesai">
+                <div class="row" style="margin-top:40px;">
+                    <div class="col-sm-12">
+                        @if(count($order_selesai) > 0)
+                        <div class="ajaxPaginationPesananSelesai">
+                            @include('users.pagination.HubPesananSelesai')
+                         </div>
+                        </div>
+                      
+                        @else
+                        <div class="text-center">
+                          <button class="btn btn-dark btn-md">Tidak Ada Transaksi</button>
+                        </div>
+                        @endif
+                       
+                    </div>
+                </div>
+                
+                
           </div>
           </div>
     </div>
@@ -247,6 +269,25 @@ $("button#dikirim").click(function () {
         $('#transaksi_id').val(transaksi_id);
         console.log(transaksi_id)
     });
+
+  // PAGINATION Page Produk
+  $('.ajaxPaginationPesananSelesai').on('click', '.pagination a', function (e) {
+        e.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        //console.log(page)
+        readPageSelesai(page)
+      })
+
+       // Request Page Selesai
+    function readPageSelesai(page) {
+        $.ajax({
+            url: 'penjualan-selesai/pagination' + '?page=' + page
+        }).done(function (data) {
+          console.log(data)
+            $('.ajaxPaginationPesananSelesai').html(data);
+            location.hash = page;
+        })
+    }
 });
 </script>
 
