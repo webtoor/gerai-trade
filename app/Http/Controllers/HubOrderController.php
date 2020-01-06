@@ -26,6 +26,8 @@ class HubOrderController extends Controller
 
         if(count($order_baru) > 0){
             $tabName = 'order_baru';
+        }elseif(count($order_kirim) > 0){
+            $tabName = 'order_kirim';
         }
         return view('users.hub.penjualan', ['order_kirim' => $order_kirim, 'order_baru' => $order_baru, 'kategori' => $kategori, 'tabName' => $tabName]);
 

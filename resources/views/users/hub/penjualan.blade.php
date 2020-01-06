@@ -16,7 +16,7 @@
               </li>
 
               <li class="nav-item">
-                <a class="nav-link {{ empty($tabName) || $tabName == 'order_kirim' ? 'active' : '' }}" id="order-kirim" data-toggle="tab" href="#order_kirim" role="tab" aria-controls="order_baru" aria-selected="true"><b style="font-size:15px;">Pesanan Dikirim</b>  
+                <a class="nav-link {{ empty($tabName) || $tabName == 'order_kirim' ? 'active' : '' }}" id="order-kirim" data-toggle="tab" href="#order_kirim" role="tab" aria-controls="order_kirim" aria-selected="true"><b style="font-size:15px;">Pesanan Dikirim</b>  
                   @if(count($order_kirim) > 0)
                   <span class="badge badge-danger">{{count($order_kirim)}}</span>
                   @endif
@@ -30,7 +30,7 @@
             </div>
           <!-- PESANAN DIPROSES -->
 
-          <div class="tab-pane fade {{ !empty($tabName) && $tabName == 'order_baru' ? 'show active' : '' }}" role="tabpanel" aria-labelledby="proses">
+          <div class="tab-pane fade {{ !empty($tabName) && $tabName == 'order_baru' ? 'show active' : '' }}" id="order_baru" role="tabpanel" aria-labelledby="proses">
             <div class="row" style="margin-top:40px;">
               <div class="col-sm-12">
                 @if(count($order_baru) > 0)
@@ -98,12 +98,83 @@
                 </div>
             </div>
           </div>
+
+           <!-- PESANAN DIKIRIM -->
+
+           <div class="tab-pane fade {{ !empty($tabName) && $tabName == 'order_kirim' ? 'show active' : '' }}" id="order_kirim" role="tabpanel" aria-labelledby="menunggu_konfirmasi">
+            <div class="row" style="margin-top:40px;">
+                <div class="col-sm-12">
+                  @if(count($order_kirim) > 0)
+  
+                  @foreach($order_kirim as $list_kirim)
+                    <div class="card" style="margin-bottom:20px;">
+                      <ul class="list-group list-group-flush">
+                      <li class="list-group-item"> 
+                        <b> <i class="flaticon-bag fa-lg"></i> Pesanan Baru</b>
+                        <a class="float-right" style="color:#fa591d;"> 
+                          Total Pembelian
+                          <?php $subtotal_dasar = 0; ?> 
+                          @foreach($list_kirim->transaction_detail as $total_dasar)
+                          @foreach($total_dasar->produk as $baru_dasar)
+                          <?php $subtotal_dasar += ($baru_dasar->harga_dasar * $total_dasar->qty) ?>
+                          @endforeach
+                          @endforeach
+                    
+                          Rp {{number_format(($subtotal_dasar + $list_kirim->ongkir) ,0, "", ".")}}
+  
+                        </a>
+                        <p style="font-size:14px; margin-bottom:-10px;">Tanggal Pembelian : {{ date("j-M-Y H:i", strtotime($list_kirim->created_at))}} WIB </p>
+  
+                      
+                        
+                    
+                      </li>
+                     
+                        @foreach($list_kirim->transaction_detail as $produk_kirim)
+                        <li class="list-group-item">
+                          @foreach($produk_kirim->produk as $kirim_detail)
+                          <a href="{{route('produk-detail', ['slug_produk' => $kirim_detail->slug])}}">{{$kirim_detail->nama_produk}}</a>, Rp {{number_format($kirim_detail->harga_dasar,0, "", ".")}}, {{$produk_kirim->qty}} Produk
+                          @endforeach
+                        </li>
+                        @endforeach
+                        <li class="list-group-item">
+                          Ongkos Kirim :  Rp {{number_format($list_kirim->ongkir,0, "", ".")}}
+                        </li>
+                      </ul>
+  
+                      <li class="list-group-item">
+                         <div><b>Dikirim ke : </b> 
+  
+                          </div>
+                         <div>Penerima : {{$list_kirim->user->alamat->nama_penerima}}</div>
+                         <div>No Hp Penerima : {{$list_kirim->user->alamat->nohp_penerima}}</div>
+                         <div>Alamat : {{$list_kirim->user->alamat->alamat}}, {{$list_kirim->user->alamat->city_name}}, {{$list_kirim->user->alamat->kecamatan_name}}, {{$list_kirim->user->alamat->province_name}}, {{$list_kirim->user->alamat->kodepos}} </div>
+                         {{-- {{$list_kirim->user->alamat}} --}}
+  
+                         <div style="margin-top:5px;"><b>Service : </b> </div>
+                         <div>Ekspedisi : {{strtoupper($list_kirim->ekspedisi)}} - {{$list_kirim->service}}</div>
+  
+                      </li>
+                    </div>
+                   
+                    @endforeach
+  
+                  
+                    @else
+                    <div class="text-center">
+                      <button class="btn btn-dark btn-md">Tidak Ada Transaksi</button>
+                    </div>
+                    @endif
+                  </div>
+              </div>
+            </div>
+          </div>
           </div>
     </div>
     </div>
 </div>
 
-<!-- BATALKAN PESANAN -->
+<!-- Konfirmasi Pengiriman -->
 <div class="modal fade" id="dikirims" tabindex="-1" role="dialog" aria-labelledby="batalkanLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
       {!! Form::open([ 'route' => ['home.konfirmasi-pengiriman'], 'method' => "POST"])!!}
