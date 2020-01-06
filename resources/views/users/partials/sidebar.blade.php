@@ -35,7 +35,7 @@ use App\Models\Transaction;
             <p href="#" class="list-group-item border-bottom-0">
                 <b style="font-size:14px;">PENJUALAN</b>    
             </p>
-            <a href="#" class="list-group-item border-top-0" style="font-size:14px;">Penjualan Saya</a>
+            <a href="{{route('home.get-penjualan')}}" class="list-group-item border-top-0" style="font-size:14px;">Penjualan Saya</a>
 
             <p href="#" class="list-group-item border-bottom-0">
                 <b style="font-size:14px;">CERITA</b>    

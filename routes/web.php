@@ -168,7 +168,7 @@ Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']
 
         });     
         Route::group(['middleware' => ['mitra']], function(){
-            // PRODUK
+            //PRODUK
                 Route::get('produk-saya', 'HubController@index')->name('produk-saya');
                 Route::get('tambah-produk-saya', 'HubController@tambahProduk')->name('tambah-produk');
                 Route::get('produk-saya/{kategori_id}', 'HubController@getAjaxSubkategori');
@@ -179,7 +179,7 @@ Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']
                 Route::delete('delete-image/{produk_id}', 'HubController@deleteImage')->name('delete-image');
                 Route::delete('produk-saya/{produk_id}', 'HubController@deleteProduk')->name('delete-produk-saya');
 
-              // CERITA SAYA  
+              //CERITA SAYA  
 
                 Route::get('cerita-saya', 'HubController@getCeritaSaya')->name('cerita-saya');
                 Route::get('tambah-cerita-saya', 'HubController@tambahCerita')->name('tambah-cerita');
