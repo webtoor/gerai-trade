@@ -193,6 +193,7 @@ Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']
                 Route::get('/pengaturan', 'HubController@getPengaturan')->name('index-pengaturan');
                 Route::put('/pengaturan-alamat/ubah', 'HubController@ubahAlamat')->name('ubah-alamat');
                 Route::post('/bank-pembayaran', 'HubController@bankPembayaran')->name('bank-pembayaran');
+                Route::put('/bank-pembayaran/{uid}', 'HubController@updatebankPembayaran')->name('update-bank-pembayaran');
 
 
                 //PENJUALAN SAYA

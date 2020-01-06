@@ -337,6 +337,15 @@ class HubController extends Controller
         ]);
 
         return back()->withSuccess(trans('Anda Berhasil Menambah Bank Pembayaran')); 
+    }
 
+    public function updateBankPembayaran(Request $request, $uid){
+        return $data = $request->validate([
+            'unama_bank' => 'required',
+            'upemilik_rekening' => 'required',
+            'uno_rekening' => 'required'
+        ]); 
+
+        
     }
 }
