@@ -88,7 +88,7 @@ class HomeController extends Controller
    
         $kategori =  Kategori::with('sub_kategori')->get();
         $produk_detail = Produk::with(['produk_image', 'kategori' , 'subkategori'])->where('slug', $slug_produk)->orderBy('id', 'desc')->first();
-        $produk_ulasan = ProdukUlasan::with('user')->where('produk_id', $produk_detail->id)->orderBy('id', 'desc')->paginate(1);
+        $produk_ulasan = ProdukUlasan::with('user')->where('produk_id', $produk_detail->id)->orderBy('id', 'desc')->paginate(10);
         return view('users.produk', ['kategori' => $kategori, 'produk_detail' => $produk_detail, 'produk_ulasan' => $produk_ulasan]);
     }
 

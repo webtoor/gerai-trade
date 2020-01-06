@@ -103,7 +103,7 @@ class RegisterController extends Controller
             
             return redirect()->route('login', ['message' => 1]);
         } catch (\Throwable $th) {
-            //throw $th;
+            throw $th;
         }
     
     }

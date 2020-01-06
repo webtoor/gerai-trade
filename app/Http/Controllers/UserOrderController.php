@@ -167,7 +167,7 @@ class UserOrderController extends Controller
         }elseif(count($order_kirim) > 0){
             $tabName = 'mkirim';
         }else{
-            $tabName = 'mproses';
+            $tabName = 'mselesai';
 
         }
         return view('users.daftarTransaksi', ['order_selesai' => $order_selesai,'order_kirim' => $new_order_kirim,'order_batal' => $order_batal,'order_proses' => $order_proses,'kategori' => $kategori, 'array_order' => $order_array, 'order_bukti' => $new_order_bukti, 'tabName' => $tabName]);
