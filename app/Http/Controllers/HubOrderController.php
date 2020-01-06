@@ -36,7 +36,7 @@ class HubOrderController extends Controller
 
         $order_selesai = Transaction::with(['user','transaction_detail' => function ($query) {
             $query->with('produk');
-        }])->where(['hub_id' => $hub_id, 'status_id' => '4'])->OrderBy('created_at', 'desc')->paginate(1);
+        }])->where(['hub_id' => $hub_id, 'status_id' => '4'])->OrderBy('created_at', 'desc')->paginate(10);
 
 
        // return $new_order_kirim;
@@ -66,7 +66,7 @@ class HubOrderController extends Controller
 
         $order_selesai = Transaction::with(['user','transaction_detail' => function ($query) {
             $query->with('produk');
-        }])->where(['hub_id' => $hub_id, 'status_id' => '4'])->OrderBy('created_at', 'desc')->paginate(1); 
+        }])->where(['hub_id' => $hub_id, 'status_id' => '4'])->OrderBy('created_at', 'desc')->paginate(10); 
 
          return view('users.pagination.HubPesananSelesai', ['order_selesai' => $order_selesai])->render();
     }

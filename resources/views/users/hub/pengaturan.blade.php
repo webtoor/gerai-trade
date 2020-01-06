@@ -10,11 +10,16 @@
 
     <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top:10px;">
             <li class="nav-item">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#wishlist" role="tab" aria-controls="wishlist" aria-selected="true">Alamat Pengirim</a>
+              <a class="nav-link active" id="alamat-pengiriman" data-toggle="tab" href="#alamat" role="tab" aria-controls="alamat" aria-selected="true">Alamat Pengirim</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="bank-pembayaran" data-toggle="tab" href="#bank_pembayaran" role="tab" aria-controls="bank_pembayaran" aria-selected="true">Bank Pembayaran</a>
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="pengaturan" role="tabpanel" aria-labelledby="wishlist-tab">
+
+            
+            <div class="tab-pane fade show active" id="alamat" role="tabpanel" aria-labelledby="alamat_pengiriman">
 
                     <div class="row" style="margin-top:20px;">
                       <div class="col-sm-12">
@@ -23,7 +28,6 @@
                         <button data-toggle="modal" data-target="#addAlamat" class="btn btn-dark btn-md" title="{{ trans('Tambah Alamat') }}">
                           <b><i class="fa fa-plus"></i> Tambah Alamat</b></button> 
                         @endif --}}
-                                              <div class="mT-20">
                             <table class="table" cellspacing="0" width="100%">
                                 <thead class="thead-light">
                                     <tr>
@@ -51,17 +55,7 @@
                                                       Ubah
                                                 </button>
                                                 </li>
-                                              {{--   <li class="list-inline-item">
-                                                    {!! Form::open([
-                                                        'class'=>'delete',
-                                                        'url'  => route('delete-alamat', $alamats->id), 
-                                                        'method' => 'DELETE',
-                                                        ]) 
-                                                    !!}
-                                                        <button class="btn btn-danger px-3 btn-sm" title="{{ trans('app.delete_title') }}"><i class="ti-trash"></i>Hapus</button>
-                                                        
-                                                    {!! Form::close() !!}
-                                                </li> --}}
+                                              
                                         </ul>
                                         </td>
                                         
@@ -73,6 +67,26 @@
                         </div>
                     </div>
                              
+                     </div>
+
+                     <div class="tab-pane fade" id="bank_pembayaran" role="tabpanel" aria-labelledby="bank_pembayaran">
+                      <div class="row" style="margin-top:20px;">
+                        <div class="col-sm-12">
+                          <table class="table" cellspacing="0" width="100%">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Nama Pemilik Rekening</th>
+                                    <th>Nama Bank</th>
+                                    <th>No Rekening</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            
+                            </tbody>
+                        </table>
+                        </div>
+                      </div>
                      </div>
                            
             </div>
