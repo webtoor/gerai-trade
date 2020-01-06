@@ -12,6 +12,7 @@ class HubBank extends Model
     protected $fillable = [
         'hub_id',
         'nama_bank',
+        'pemilik_rekening',
         'no_rekening'
     ];
 

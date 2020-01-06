@@ -90,7 +90,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            
+                            @if($bank)
+                            <tr>
+                            <td>{{$bank->pemilik_rekening}}</td>
+                            <td>{{$bank->nama_bank}}</td>
+                            <td>{{$bank->no_rekening}}</td>
+
+                            </tr>
+                            @endif
                             </tbody>
                         </table>
                       </div>
@@ -187,6 +194,7 @@
    <!-- Modal Ubah Alamat-->
  <div class="modal fade" id="bankPembayaran" tabindex="-1" role="dialog" aria-labelledby="bankPembayaran" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
+    {!! Form::open([ 'route' => ['home.bank-pembayaran'], 'method' => "POST"])!!}
 
     <div class="modal-content">
       <div class="modal-header">
@@ -224,6 +232,8 @@
       </div>
 
     </div>
+    {!! Form::close() !!}
+
   </div>
 </div>
 @endsection

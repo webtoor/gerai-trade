@@ -321,4 +321,22 @@ class HubController extends Controller
             throw $th;
         }
     }
+
+    public function bankPembayaran(Request $request){
+        $data = $request->validate([
+            'nama_bank' => 'required',
+            'pemilik_rekening' => 'required',
+            'no_rekening' => 'required'
+        ]); 
+
+        HubBank::create([
+            'hub_id' =>  Auth::user()->id,
+            'nama_bank' => strtoupper($data['nama_bank']),
+            'pemilik_rekening' => $data['pemilik_rekening'],
+            'no_rekening' => $data['no_rekening']
+        ]);
+
+        return back()->withSuccess(trans('Anda Berhasil Menambah Bank Pembayaran')); 
+
+    }
 }
