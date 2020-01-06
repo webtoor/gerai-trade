@@ -42,7 +42,7 @@
         Kurir : {{strtoupper($detail->ekspedisi)}} <br>
         Service : {{$detail->service}} <br>
         No Resi : {{$detail->no_resi}} <br>
-        @if($resi)
+        @if($resi['rajaongkir']['result']['summary']['origin'])
         Dikirim dari : {{$resi['rajaongkir']['result']['summary']['origin']}} <br>
         Tujuan : {{$resi['rajaongkir']['result']['summary']['destination']}} <br>
         @endif
@@ -59,6 +59,7 @@
           </thead>
           <tbody>
             <?php $i=1;?>
+            @if($resi['rajaongkir']['result']['manifest'])
             @foreach($resi['rajaongkir']['result']['manifest'] as $manifest)
             <tr>
                 <td>{{$i++}}</td>
@@ -66,6 +67,9 @@
                 <td>{{$manifest['manifest_description']}}, {{$manifest['city_name']}}</td>
             </tr>
             @endforeach
+            @else
+            <td>Data Tracking Belum Tersedia</td>
+            @endif
           </tbody>
     </table>
     @endif

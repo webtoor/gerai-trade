@@ -114,31 +114,31 @@
                         <a class="float-right" style="color:#fa591d;"> 
                           Total Pembelian
                           <?php $subtotal_dasar = 0; ?> 
-                          @foreach($list_kirim->transaction_detail as $total_dasar)
-                          @foreach($total_dasar->produk as $baru_dasar)
-                          <?php $subtotal_dasar += ($baru_dasar->harga_dasar * $total_dasar->qty) ?>
+                          @foreach($list_kirim['transaction_detail'] as $total_dasar)
+                          @foreach($total_dasar['produk'] as $baru_dasar)
+                          <?php $subtotal_dasar += ($baru_dasar['harga_dasar'] * $total_dasar['qty']) ?>
                           @endforeach
                           @endforeach
                     
-                          Rp {{number_format(($subtotal_dasar + $list_kirim->ongkir) ,0, "", ".")}}
+                          Rp {{number_format(($subtotal_dasar + $list_kirim['ongkir']) ,0, "", ".")}}
   
                         </a>
-                        <p style="font-size:14px; margin-bottom:-10px;">Tanggal Pembelian : {{ date("j-M-Y H:i", strtotime($list_kirim->created_at))}} WIB </p>
+                        <p style="font-size:14px; margin-bottom:-10px;">Tanggal Pembelian : {{ date("j-M-Y H:i", strtotime($list_kirim['created_at']))}} WIB </p>
   
                       
                         
                     
                       </li>
                      
-                        @foreach($list_kirim->transaction_detail as $produk_kirim)
+                        @foreach($list_kirim['transaction_detail'] as $produk_kirim)
                         <li class="list-group-item">
-                          @foreach($produk_kirim->produk as $kirim_detail)
-                          <a href="{{route('produk-detail', ['slug_produk' => $kirim_detail->slug])}}">{{$kirim_detail->nama_produk}}</a>, Rp {{number_format($kirim_detail->harga_dasar,0, "", ".")}}, {{$produk_kirim->qty}} Produk
+                          @foreach($produk_kirim['produk'] as $kirim_detail)
+                          <a href="{{route('produk-detail', ['slug_produk' => $kirim_detail['slug']])}}">{{$kirim_detail['nama_produk']}}</a>, Rp {{number_format($kirim_detail['harga_dasar'],0, "", ".")}}, {{$produk_kirim['qty']}} Produk
                           @endforeach
                         </li>
                         @endforeach
                         <li class="list-group-item">
-                          Ongkos Kirim :  Rp {{number_format($list_kirim->ongkir,0, "", ".")}}
+                          Ongkos Kirim :  Rp {{number_format($list_kirim['ongkir'],0, "", ".")}}
                         </li>
                       </ul>
   
@@ -146,14 +146,48 @@
                          <div><b>Dikirim ke : </b> 
   
                           </div>
-                         <div>Penerima : {{$list_kirim->user->alamat->nama_penerima}}</div>
-                         <div>No Hp Penerima : {{$list_kirim->user->alamat->nohp_penerima}}</div>
-                         <div>Alamat : {{$list_kirim->user->alamat->alamat}}, {{$list_kirim->user->alamat->city_name}}, {{$list_kirim->user->alamat->kecamatan_name}}, {{$list_kirim->user->alamat->province_name}}, {{$list_kirim->user->alamat->kodepos}} </div>
-                         {{-- {{$list_kirim->user->alamat}} --}}
+                         <div>Penerima : {{$list_kirim['user']['alamat']['nama_penerima']}}</div>
+                         <div>No Hp Penerima : {{$list_kirim['user']['alamat']['nohp_penerima']}}</div>
+                         <div>Alamat : {{$list_kirim['user']['alamat']['alamat']}}, {{$list_kirim['user']['alamat']['city_name']}}, {{$list_kirim['user']['alamat']['kecamatan_name']}}, {{$list_kirim['user']['alamat']['province_name']}}, {{$list_kirim['user']['alamat']['kodepos']}} </div>
   
                          <div style="margin-top:5px;"><b>Service : </b> </div>
-                         <div>Ekspedisi : {{strtoupper($list_kirim->ekspedisi)}} - {{$list_kirim->service}}</div>
-  
+                         <div>Ekspedisi : {{strtoupper($list_kirim['ekspedisi'])}} - {{$list_kirim['service']}}</div>
+                         <div style="margin-top:5px;"><b>Detail Pengiriman : </b> </div>
+                         <div>No Resi : {{$list_kirim['no_resi']}}</div>
+                         @if(($list_kirim['0']['rajaongkir']['status']['code'] == 200) && $list_kirim['0']['rajaongkir']['result']['summary'] && $list_kirim['0']['rajaongkir']['result']['details'] && $list_kirim['0']['rajaongkir']['result']['manifest'] )
+                         Kurir : {{$list_kirim['0']['rajaongkir']['result']['summary']['courier_name']}}  <br>
+                         No Resi : {{$list_kirim['0']['rajaongkir']['result']['summary']['waybill_number']}}  <br>
+                         Service : {{$list_kirim['0']['rajaongkir']['result']['summary']['service_code']}}  <br>
+                         Dikirim dari : {{$list_kirim['0']['rajaongkir']['result']['summary']['origin']}} <br>
+                         Tujuan : {{$list_kirim['0']['rajaongkir']['result']['summary']['destination']}} <br>
+                         <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col"></th>
+                                <th scope="col">History</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php $i=1;?>
+                              {{-- <tr>
+                                <th scope="row">1</th>
+                                <td>{{$list_kirim['0']['rajaongkir']['result']['details']['waybill_date']}}, {{$list_kirim['0']['rajaongkir']['result']['details']['waybill_time']}}</td>
+                                <td>Shipment Received</td>
+                              </tr> --}}
+                              @foreach($list_kirim['0']['rajaongkir']['result']['manifest'] as $manifest)
+                              
+                              <tr>
+                                <th scope="row">{{$i++}}</th>
+                                <td>{{$manifest['manifest_date']}}, {{$manifest['manifest_time']}}</td>
+                                <td>{{$manifest['manifest_description']}}, {{$manifest['city_name']}}</td>
+                              </tr>
+                              @endforeach
+                            </tbody>
+                          </table>
+                          @else
+                          <button class="btn btn-outline-dark btn-sm">Data Tracking Belum Tersedia</button>
+                          @endif
                       </li>
                     </div>
                    
