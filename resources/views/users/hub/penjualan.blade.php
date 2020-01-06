@@ -52,7 +52,10 @@
                     </ul>
 
                     <li class="list-group-item">
-                       <div><b>Dikirim ke : </b> </div>
+                       <div><b>Dikirim ke : </b> 
+                        <button id="dikirim" data-toggle="modal" data-target="#dikirims" class="float-right btn btn-outline-dark btn-sm">Konfirmasi Pengiriman</button>
+
+                        </div>
                        <div>Penerima : {{$list_baru->user->alamat->nama_penerima}}</div>
                        <div>No Hp Penerima : {{$list_baru->user->alamat->nohp_penerima}}</div>
                        <div>Alamat : {{$list_baru->user->alamat->alamat}}, {{$list_baru->user->alamat->city_name}}, {{$list_baru->user->alamat->kecamatan_name}}, {{$list_baru->user->alamat->province_name}}, {{$list_baru->user->alamat->kodepos}} </div>
@@ -79,6 +82,35 @@
     </div>
     </div>
 </div>
+
+<!-- BATALKAN PESANAN -->
+<div class="modal fade" id="dikirims" tabindex="-1" role="dialog" aria-labelledby="batalkanLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm role="document">
+      {{-- {!! Form::open([ 'route' => ['home.transaksiBatalkan'], 'method' => "POST"])!!} --}}
+  
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Pengiriman</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+            <label>Masukan No Resi <sup style="color:red"> *Wajib</sup></label> 
+            <input type="text" class="form-control"  name="no_resi" required>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Tidak</button>
+          <button type="submit" class="btn btn-primary btn-sm" >Ya</button>
+        </div>
+      </div>
+      {{-- {!! Form::close() !!} --}}
+  
+    </div>
+  </div>
+  
 @endsection
 @section('js')
 
