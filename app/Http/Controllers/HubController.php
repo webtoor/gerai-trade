@@ -15,6 +15,8 @@ use App\Models\ProdukImage;
 use App\Models\Blog;
 use App\Models\Alamat;
 use App\Models\User;
+use App\Models\HubBank;
+
 
 class HubController extends Controller
 {
@@ -278,8 +280,8 @@ class HubController extends Controller
         $user_id = Auth::user()->id;
 
         $alamat = Alamat::with('user')->where(['user_id' => $user_id, 'jenis_alamat_id' => '1'])->get();
-
-        return view('users.hub.pengaturan', ['kategori' => $kategori, 'alamat' => $alamat]);
+        $bank = HubBank::where('hub_id', $user_id)->first();
+        return view('users.hub.pengaturan', ['bank' => $bank, 'kategori' => $kategori, 'alamat' => $alamat]);
     }
 
     public function ubahAlamat(Request $request){

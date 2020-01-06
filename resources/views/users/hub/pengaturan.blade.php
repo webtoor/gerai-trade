@@ -72,6 +72,14 @@
                      <div class="tab-pane fade" id="bank_pembayaran" role="tabpanel" aria-labelledby="bank_pembayaran">
                       <div class="row" style="margin-top:20px;">
                         <div class="col-sm-12">
+                          @if(!$bank)
+
+                              <button data-toggle="modal" data-target="#bankPembayaran" class="btn btn-dark btn-md" title="{{ trans('Tambah Alamat') }}">
+                                <b><i class="fa fa-plus"></i> Tambah Bank Pembayaran</b></button> 
+                          @endif
+                          <div class="mT-20">                          
+
+
                           <table class="table" cellspacing="0" width="100%">
                             <thead class="thead-light">
                                 <tr>
@@ -85,6 +93,7 @@
                             
                             </tbody>
                         </table>
+                      </div>
                         </div>
                       </div>
                      </div>
@@ -174,6 +183,49 @@
       </div>
     </div>
   </div>
+
+   <!-- Modal Ubah Alamat-->
+ <div class="modal fade" id="bankPembayaran" tabindex="-1" role="dialog" aria-labelledby="bankPembayaran" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addKategoriLabel">Bank Pembayaran</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            
+      <div class="form-row">
+          <label>Nama Bank <sup style="color:red"> *Wajib</sup></label>
+          <input type="text" class="form-control" name="nama_bank" required>
+      </div>
+
+      <div class="form-row">
+        <label>No Rekening <sup style="color:red"> *Wajib *Hanya Angka</sup></label>
+        <input type="number" class="form-control" name="no_rekening" required>
+    </div>
+
+    <div class="form-row">
+      <label>Nama Pemilik Rekening <sup style="color:red"> *Wajib</sup></label>
+      <input type="text" class="form-control" name="pemilik_rekening" required>
+  </div>
+
+     
+  
+      </div>
+      <div class="modal-footer">
+       
+          <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Tutup</button>
+
+          <button type="submit" class="btn btn-primary btn-md">Submit</button>
+
+      </div>
+
+    </div>
+  </div>
+</div>
 @endsection
 @section('js')
 <script>
