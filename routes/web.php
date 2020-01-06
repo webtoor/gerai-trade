@@ -196,7 +196,7 @@ Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']
 
                 //PENJUALAN SAYA
 
-                Route::get('/penjualan-saya', 'HubController@getPenjualan')->name('get-penjualan');
+                Route::get('/penjualan-saya', 'HubOrderController@getPenjualan')->name('get-penjualan');
 
 
     });  
