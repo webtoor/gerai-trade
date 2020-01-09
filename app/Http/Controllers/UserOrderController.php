@@ -187,9 +187,20 @@ class UserOrderController extends Controller
 
     public function transaksiBatalkan(Request $request){
         //return $request->all();
+        $trans = Transaction::with('transaction_detail')->where('kode', $request->transaksi_kode)->get();
+        foreach($trans as $detail){
+            foreach($detail->transaction_detail as $transdetail){
+                $stok = Produk::where('id', $transdetail->produk_id)->first();
+                $stok->update([
+                    'stok' => (($stok->stok) + ($transdetail->qty))
+                ]);
+            }
+        }
+
         Transaction::where('kode', $request->transaksi_kode)->update([
             'status_id' => '5'
         ]);
+        
 
         return back()->withSuccess(trans('Anda Berhasil Membatalkan Pesanan')); 
     }

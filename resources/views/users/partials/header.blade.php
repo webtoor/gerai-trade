@@ -1,7 +1,11 @@
 <?php 
 use App\Models\Transaction;
+use App\Models\Transaction_detail;
+use App\Models\Produk;
 
-Transaction::where(['status_id' => '0'])->where('created_at', '<', \Carbon\Carbon::now()->subDays(2))->update([
+$batal = Transaction::with(['transaction_detail' => function ($query) {
+            $query->with('produk');
+        }])->where(['status_id' => '0'])->where('created_at', '<', \Carbon\Carbon::now()->subDays(2))->update([
   'status_id' => '5'
 ]);
 ?>
