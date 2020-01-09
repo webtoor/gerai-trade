@@ -347,7 +347,7 @@
             <div class="col-lg-5 offset-lg-1">
 					<div class="s_product_text">
             <h3>{{$produk_detail->nama_produk}}</h3>
-            <?php $nr = 2;?>
+            <?php $nr = $produk_detail->rating;?>
             <div class="tests">
                 @for($i = 0; $i < 5; $i++)
                     <span style="color:#ffc200"><i class="{{ $nr <= $i ? 'far fa-star' : 'fas fa-star' }}" aria-hidden="true"></i></span>
@@ -375,20 +375,26 @@
           {{$produk_detail->berat}} gram
         </a>
       </li>
+      <li style="margin-left:-40px;"><a href="#"><span>Lokasi</span> : 
+        {{$produk_detail->user->alamat->city_name}}
+      </a>
+    </li>
 						</ul>
             <div>
               {{-- {!! html_entity_decode($produk_detail->deskripsi) !!} --}}
             
             </div>
             <br>
+            @guest
+            
             <form action="{{ url('cart') }}" method="POST">
                 {{ @csrf_field() }}
 						<div class="product_count">
 							<label for="qty">Jumlah:</label>
-							<input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+							<input type="number" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
 							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
 							 class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 1 ) result.value--;return false;"
 							 class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
 						</div>
 						<div class="card_area d-flex align-items-center">
@@ -396,7 +402,35 @@
                  
                   <input type="hidden" name="produk_id" value="<?php echo $produk_detail->id;?>">
 
-                <button type="submit" class="btn btn-primary" href="#">Masukan Keranjang</button>
+                
+                  <button type="submit" class="btn btn-primary" href="#">Masukan Keranjang</button>
+                  @else
+                  @if(Auth::user()->role->role_id == '1')
+                  <form action="{{ url('cart') }}" method="POST">
+                    {{ @csrf_field() }}
+                <div class="product_count">
+                  <label for="qty">Jumlah:</label>
+                  <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+                  <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                   class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+                  <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                   class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                </div>
+                <div class="card_area d-flex align-items-center">
+                  <div>
+                     
+                      <input type="hidden" name="produk_id" value="<?php echo $produk_detail->id;?>">
+    
+                    
+                      <button type="submit" class="btn btn-primary" href="#">Masukan Keranjang</button>
+                      @else
+                      
+                      @endif
+
+                  @endguest
+                
+              
+
                   </form>
                </div>
 							{{-- <div><a class="btn btn-success" href="{{$produk_detail->link_tokped}}">Beli di Tokopedia</a></div>

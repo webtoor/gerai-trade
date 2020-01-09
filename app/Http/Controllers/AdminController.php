@@ -87,7 +87,8 @@ class AdminController extends Controller
         $data = $request->validate([
             'status_id' => 'required',
             'produk_id' => 'required',
-            'komentar' => 'nullable'
+            'komentar' => 'nullable',
+            'harga_trade' => 'nullable'
         ]); 
         try {
             $now = date("Y-m-d H:i:s", strtotime('now'));
@@ -97,6 +98,7 @@ class AdminController extends Controller
                     'status' => '1',
                     'komentar' => $data['komentar'],
                     'dtapproved' => $now,
+                    'harga' => $data['harga_trade']
                 ]);
 
             }else{
@@ -169,6 +171,8 @@ class AdminController extends Controller
         ]); 
 
         try {
+            $now = date("Y-m-d H:i:s", strtotime('now'));
+
             $result = User::create([
                 'nama_hub' => $data['nama_hub'],
                 'nama_depan' => $data['nama_depan'],
@@ -176,7 +180,8 @@ class AdminController extends Controller
                 'nomor_ponsel' => $data['nomor_ponsel'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
-                'status_mitra' => '1'
+                'status_mitra' => '1',
+                'email_verifiy_at' => $now
             ]);
 
             User_role::create([
@@ -375,7 +380,10 @@ class AdminController extends Controller
         TransactionBukti::where('id', $request->bukti_id)->update([
             'status' => '1',
         ]);
-
+        $bukti = TransactionBukti::where('id', $request->bukti_id)->first();
+        Transaction::where('kode', $bukti->kode_id)->update([
+            'status_id' => '2'
+        ]);
         return back()->withSuccess(trans('Verifikasi Pembayaran Berhasil')); 
 
     }

@@ -93,7 +93,7 @@ use App\Models\TransactionBukti;
         <i class="c-purple-500 ti-bag"></i>
     </span>
      <span class="title">Transaksi 
-         <?php $ts = Transaction::where('status_id', '0')->get()?>
+         <?php $ts = Transaction::whereIn('status_id', ['1'])->get()?>
        @if(count($ts) > 0)
        <span class="badge badge-danger">{{count($ts)}}</span>
        @endif

@@ -126,15 +126,16 @@ select {
                                 <li class="list-group-item">
                                   <div class="row">
                                   <div class="col-sm-6" style="margin-left:50px;">
+                                    @if($list_bukti->transaction_bukti)
                                   <div style="font-size:14px;margin-bottom:10px;"><b  style="color:#fa591d; margin-right:10px;" ></b> Tanggal Unggah Bukti Pembayaran: {{ date("j-M-Y H:i", strtotime($list_bukti->transaction_bukti->created_at))}} WIB</div>
                                   <div style="background:#f8f9fa; font-size:13px; margin-bottom:10px; height:80px;">
                                     <div style="padding:10px;">
-                                      Nama Bank Pengirim: {{$list_bukti->transaction_bukti->nama_pengirim}} <br>
-                                      Nama Pengirim : {{$list_bukti->transaction_bukti->nama_bank}} <br>
+                                      Nama Bank Pengirim: {{$list_bukti->transaction_bukti->nama_bank}} <br>
+                                      Nama Pengirim : {{$list_bukti->transaction_bukti->nama_pengirim}} <br>
                                       Jumlah Transfer : <b  style="color:#fa591d;" > Rp {{number_format($list_bukti->transaction_bukti->jumlah_transfer,0, "", ".")}}</b> <br>
                                     </div>
                                   </div>
-  
+                                  @endif
                                   </div>
             
                                   </div>

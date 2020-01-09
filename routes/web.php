@@ -19,12 +19,19 @@ Route::get('/update-app', function () {
         Artisan::call('dump-autoload');
         echo 'dump-autoload complete';
 });
+
+Route::get('/clear-cache', function () {
+    Artisan::call('config:clear');
+
+    Artisan::call('cache:clear');
+    echo 'cache-clear';
+});
     Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
     Route::group(['middleware' => ['guest']], function(){
             Route::get('/', 'HomeController@index');
     });
     Auth::routes();
-
+    Auth::routes(['verify' => true]);
 
     // LOKASI
     Route::get('ajax-kota-kab/{provinsi_id}', 'LokasiController@ajaxKotaKab');
@@ -150,7 +157,7 @@ Route::get('/cerita-kita', 'BlogController@ceritaKita')->name('cerita-kita');
 Route::get('/kontak-kita', 'HomeController@kontakKita')->name('kontak-kita');
 
 // MITRA / MEMBER
-Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']], function(){
+Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member', 'verified']], function(){
 
         Route::get('/', 'HomeController@index')->name('home');
 
@@ -201,9 +208,6 @@ Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member']
                 Route::get('/penjualan-saya', 'HubOrderController@getPenjualan')->name('get-penjualan');
                 Route::post('/konfirmasi-pengiriman', 'HubOrderController@konfirmasiPengiriman')->name('konfirmasi-pengiriman');
                 Route::get('/penjualan-selesai/pagination', 'HubOrderController@ajaxOrderSelesai')->name('ajax-selesai');
-
-
-
     });  
 
 });  

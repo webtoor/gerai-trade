@@ -45,7 +45,14 @@ class LoginController extends Controller
         
         $this->clearLoginAttempts($request);
         $user = $request->user()->role;
-        if(($user->role_id == '1') || ($user->role_id == '2')){
+        if (($user->role_id == '1')) {
+           if($request->user()->email_verified_at == null){
+            $request->user()->sendEmailVerificationNotification();
+            return redirect('email/verify');
+           }else{
+            return redirect('home');
+           }
+        }elseif($user->role_id == '2'){
             return redirect('home');
         }elseif($user->role_id == '3'){
             return redirect('admin-panel');

@@ -100,10 +100,10 @@ class RegisterController extends Controller
                 'user_id' => $result->id,
                 'role_id' => '1'
             ]);
-            
+            /* $result->sendEmailVerificationNotification(); */
             return redirect()->route('login', ['message' => 1]);
         } catch (\Throwable $th) {
-            throw $th;
+            //throw $th;
         }
     
     }

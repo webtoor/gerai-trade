@@ -144,7 +144,7 @@ Transaction::where(['status_id' => '0'])->where('created_at', '<', \Carbon\Carbo
                      <a class="dropdown-item" href="{{route('index-pengaturan')}}">Pengaturan</a>
                      <a class="dropdown-item" href="/logout">Logout</a>
                   @elseif(Auth::user()->role->role_id == 2)
-                  <a class="dropdown-item" href="#">Penjualan</a>
+                  <a class="dropdown-item" href="{{route('home.get-penjualan')}}">Penjualan</a>
                   <a class="dropdown-item" href="{{route('index-pengaturan')}}">Pengaturan</a>
                   <a class="dropdown-item" href="/logout">Logout</a>
                   @endif

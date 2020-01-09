@@ -122,10 +122,7 @@
             </div>
           </div>    
     </div>
-    </div>       
-</div>
-
-
+ 
  <!-- Modal Ubah Alamat-->
  <div class="modal fade" id="ubahAlamat" tabindex="-1" role="dialog" aria-labelledby="ubahAlamat" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">

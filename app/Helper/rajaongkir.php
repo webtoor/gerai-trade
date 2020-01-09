@@ -1,10 +1,8 @@
 <?php
-
 if( !function_exists('province')){
 	function province() {
 		$uri = "https://pro.rajaongkir.com/api/province";
 		$curl = curl_init();
-
 		 curl_setopt_array($curl, array(
 		  CURLOPT_URL => $uri,
 		  CURLOPT_RETURNTRANSFER => true,
@@ -17,12 +15,9 @@ if( !function_exists('province')){
 		    "key: 87b64ed6c63f0b7b591af87aabf2f6ef"
 		  ),
 		));
-
 		$response = curl_exec($curl);
 		$err = curl_error($curl);
-
 		curl_close($curl);
-
 		if ($err) {
 		  echo "cURL Error #:" . $err;
 		} else {
@@ -30,14 +25,12 @@ if( !function_exists('province')){
 		}
 	}
 }
-
 if( !function_exists('allcity')){
 	function allcity($province_id){
 		
 		$uri = "https://pro.rajaongkir.com/api/city?province=".$province_id;
 		
 		$curl = curl_init();
-
 		 curl_setopt_array($curl, array(
 		  CURLOPT_URL => $uri,
 		  CURLOPT_RETURNTRANSFER => true,
@@ -50,12 +43,9 @@ if( !function_exists('allcity')){
 		    "key: 87b64ed6c63f0b7b591af87aabf2f6ef"
 		  ),
 		));
-
 		$response = curl_exec($curl);
 		$err = curl_error($curl);
-
 		curl_close($curl);
-
 		if ($err) {
 		  echo "cURL Error #:" . $err;
 		} else {
@@ -71,7 +61,6 @@ if( !function_exists('city')){
 			$uri = "https://pro.rajaongkir.com/api/city?id=".$id;
 		}
 		$curl = curl_init();
-
 		 curl_setopt_array($curl, array(
 		  CURLOPT_URL => $uri,
 		  CURLOPT_RETURNTRANSFER => true,
@@ -84,12 +73,9 @@ if( !function_exists('city')){
 		    "key: 87b64ed6c63f0b7b591af87aabf2f6ef"
 		  ),
 		));
-
 		$response = curl_exec($curl);
 		$err = curl_error($curl);
-
 		curl_close($curl);
-
 		if ($err) {
 		  echo "cURL Error #:" . $err;
 		} else {
@@ -103,7 +89,6 @@ if( !function_exists('kecamatan')){
 		$uri = "https://pro.rajaongkir.com/api/subdistrict?city=".$city_id;
 		
 		$curl = curl_init();
-
 		 curl_setopt_array($curl, array(
 		  CURLOPT_URL => $uri,
 		  CURLOPT_RETURNTRANSFER => true,
@@ -116,12 +101,9 @@ if( !function_exists('kecamatan')){
 		    "key: 87b64ed6c63f0b7b591af87aabf2f6ef"
 		  ),
 		));
-
 		$response = curl_exec($curl);
 		$err = curl_error($curl);
-
 		curl_close($curl);
-
 		if ($err) {
 		  echo "cURL Error #:" . $err;
 		} else {
@@ -129,14 +111,12 @@ if( !function_exists('kecamatan')){
 		}
 	}
 }
-
 if( !function_exists('showAlamat')){
 	function showAlamat($city_id, $kecamatan_id){
 		
 		$uri = "https://pro.rajaongkir.com/api/subdistrict?city=".$city_id.'&id='.$kecamatan_id;
 		
 		$curl = curl_init();
-
 		 curl_setopt_array($curl, array(
 		  CURLOPT_URL => $uri,
 		  CURLOPT_RETURNTRANSFER => true,
@@ -149,12 +129,9 @@ if( !function_exists('showAlamat')){
 		    "key: 87b64ed6c63f0b7b591af87aabf2f6ef"
 		  ),
 		));
-
 		$response = curl_exec($curl);
 		$err = curl_error($curl);
-
 		curl_close($curl);
-
 		if ($err) {
 		  echo "cURL Error #:" . $err;
 		} else {
@@ -165,7 +142,6 @@ if( !function_exists('showAlamat')){
 if(!function_exists('cost')){
 	 function cost($origin,$destination,$weight,$courier){
 		$curl = curl_init();
-
 		 curl_setopt_array($curl, array(
 		  CURLOPT_URL => "https://pro.rajaongkir.com/api/cost",
 		  CURLOPT_RETURNTRANSFER => true,
@@ -180,12 +156,9 @@ if(!function_exists('cost')){
 		    "key: 87b64ed6c63f0b7b591af87aabf2f6ef"
 		  ),
 		));
-
 		$response = curl_exec($curl);
 		$err = curl_error($curl);
-
 		curl_close($curl);
-
 		if ($err) {
 		  echo "cURL Error #:" . $err;
 		} else {
@@ -193,18 +166,12 @@ if(!function_exists('cost')){
 		}
 	}
 }
-
-
-
-
 if( !function_exists('waybill')){
 	function waybill($resi, $kurir){
 		
 		$uri = "https://pro.rajaongkir.com/api/waybill";
-
 		
 		$curl = curl_init();
-
 		curl_setopt_array($curl, array(
 		CURLOPT_URL => $uri,
 		CURLOPT_RETURNTRANSFER => true,
@@ -219,12 +186,9 @@ if( !function_exists('waybill')){
 		"key: 87b64ed6c63f0b7b591af87aabf2f6ef"
 		),
 		));
-
 		$response = curl_exec($curl);
 		$err = curl_error($curl);
-
 		curl_close($curl);
-
 		if ($err) {
 		  echo "cURL Error #:" . $err;
 		} else {

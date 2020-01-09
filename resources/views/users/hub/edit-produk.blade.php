@@ -1,6 +1,10 @@
 @section('css')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.css" rel="stylesheet">  
 <style>
+    body{
+    overflow: auto;
+    height: 100%; 
+}
         .thumb{
             margin: 10px 5px 0 0;
             width: 300px;
@@ -31,7 +35,7 @@
             <div class="row gap-20 masonry pos-r">
                     <div class="masonry-sizer col-md-6"></div>
                     <div class="masonry-item col-md-6">
-            <div class="bgc-white p-20 bd">
+            <div class="bgc-white p-20 bd" style="height:950px;">
                 {!! Form::open([
                     'url'  => route('home.update-produk-saya', $produk->id), 
                     'method' => 'PUT',
@@ -177,7 +181,7 @@
     </div>
     </div>
 </div>
-
+</div>
 <footer class="ftco-footer ftco-section" style="background-color:#f8f9fa; margin-top:100px;">
     @include('users.partials.footer');
 </footer> 
