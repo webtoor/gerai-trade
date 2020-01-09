@@ -40,7 +40,7 @@ class UserOrderController extends Controller
                 $random = Str::random(5);
                 $merge_random = $random.$now.$user_id;
             }
-            $ctts = array_reverse($request->ctt);
+            $ctts = $request->ctt;
             $i=0;
             foreach($data as $row){
                 $sum_harga = 0;
@@ -72,11 +72,17 @@ class UserOrderController extends Controller
                         'qty' => $cartz->qty,
                         'catatan' => $ctts[$i++]
                     ]);
+
+                    $stok = Produk::where('id', $transaction_detail->produk_id)->first();
+                    $stok->update([
+                        'stok' => ($stok->stok) - ($cartz->qty)
+                    ]);
+
                     }
                 }
               
             }
-            //Cart::instance('default')->destroy();
+            Cart::instance('default')->destroy();
 
             return response()->json([
                 'status' => 1,
@@ -127,7 +133,9 @@ class UserOrderController extends Controller
 
         // PESANAN DIKIRIM
         $new_order_kirim = [];
-        $order_kirim = Transaction::with(['transaction_detail' => function ($query) {
+        $order_kirim = Transaction::with(['user' => function ($query) {
+            $query->with('alamat');
+        },'transaction_detail' => function ($query) {
             $query->with('produk');
         }])->where(['user_id' => $user_id, 'status_id' => '3'])->orderBy('created_at', 'desc')->get();
 

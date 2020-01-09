@@ -305,7 +305,7 @@
               success:function(results){
                 if(results.status == 1){
                   console.log(results)
-                  //location.replace("{{route('home.getWaitPayment')}}");
+                  location.replace("{{route('home.getWaitPayment')}}");
                   
 
                 }else{

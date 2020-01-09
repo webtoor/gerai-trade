@@ -379,7 +379,7 @@
       </a>
     </li>
             </ul>
-          <p>{{Cart::instance('default')->content()}}</p>
+          <p>{{-- {{Cart::instance('default')->content()}} --}}</p>
   
             @guest
             

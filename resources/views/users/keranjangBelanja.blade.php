@@ -13,7 +13,7 @@
             </div>
         </div>
     </section>
-    {{Cart::instance('default')->content()}}
+    {{-- {{Cart::instance('default')->content()}} --}}
     @if(count(Cart::instance('default')->content()) > 0)
         <div class="container" style="margin-top:-30px;">
           <div class="row bar">

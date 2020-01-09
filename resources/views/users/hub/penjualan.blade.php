@@ -34,7 +34,7 @@
               @include('admin.partials.messages') 
 
             </div>
-          <!-- PESANAN DIPROSES -->
+          <!-- PESANAN BARU -->
 
           <div class="tab-pane fade {{ !empty($tabName) && $tabName == 'order_baru' ? 'show active' : '' }}" id="order_baru" role="tabpanel" aria-labelledby="proses">
             <div class="row" style="margin-top:40px;">
@@ -70,6 +70,14 @@
                         @foreach($produk_baru->produk as $baru_detail)
                         <a href="{{route('produk-detail', ['slug_produk' => $baru_detail->slug])}}">{{$baru_detail->nama_produk}}</a>, Rp {{number_format($baru_detail->harga_dasar,0, "", ".")}}, {{$produk_baru->qty}} Produk
                         @endforeach
+
+                        <div>
+                          @if($produk_baru->catatan)
+                          Catatan : {{$produk_baru->catatan}}
+                          @else
+                          Catatan : -
+                          @endif
+                        </div>
                       </li>
                       @endforeach
                       <li class="list-group-item">
@@ -141,6 +149,13 @@
                           @foreach($produk_kirim['produk'] as $kirim_detail)
                           <a href="{{route('produk-detail', ['slug_produk' => $kirim_detail['slug']])}}">{{$kirim_detail['nama_produk']}}</a>, Rp {{number_format($kirim_detail['harga_dasar'],0, "", ".")}}, {{$produk_kirim['qty']}} Produk
                           @endforeach
+                          <div>
+                            @if($produk_kirim['catatan'])
+                            Catatan : {{$produk_kirim['catatan']}}
+                            @else
+                            Catatan : -
+                            @endif
+                          </div>
                         </li>
                         @endforeach
                         <li class="list-group-item">

@@ -28,6 +28,13 @@
       @foreach($produk_selesai['produk'] as $selesai_detail)
       <a href="{{route('produk-detail', ['slug_produk' => $selesai_detail['slug']])}}">{{$selesai_detail['nama_produk']}}</a>, Rp {{number_format($selesai_detail['harga_dasar'],0, "", ".")}}, {{$produk_selesai['qty']}} Produk
       @endforeach
+      <div>
+        @if($produk_selesai->catatan)
+        Catatan : {{$produk_selesai->catatan}}
+        @else
+        Catatan : -
+        @endif
+      </div>
     </li>
     @endforeach
     <li class="list-group-item">

@@ -197,12 +197,31 @@ select {
                                   <li class="list-group-item">
                                     @foreach($produk_proses->produk as $proses_detail)
                                     <a href="{{route('produk-detail', ['slug_produk' => $proses_detail->slug])}}">{{$proses_detail->nama_produk}}</a>, Rp {{number_format($proses_detail->harga,0, "", ".")}}, {{$produk_proses->qty}} Produk
+                                    <div>
+                                      @if($produk_proses->catatan)
+                                      Catatan : {{$produk_proses->catatan}}
+                                      @else
+                                      Catatan : -
+                                      @endif
+                                    </div>
                                     @endforeach
                                   </li>
                                   @endforeach
                                   <li class="list-group-item">
                                     Ongkos Kirim :  Rp {{number_format($list_proses->ongkir,0, "", ".")}}
                                   </li>
+                                  <li class="list-group-item">
+                                    <div><b>Dikirim ke : </b> 
+             
+                                     </div>
+                                    <div>Penerima : {{$list_proses->user->alamat->nama_penerima}}</div>
+                                    <div>No Hp Penerima : {{$list_proses->user->alamat->nohp_penerima}}</div>
+                                    <div>Alamat : {{$list_proses->user->alamat->alamat}}, {{$list_proses->user->alamat->city_name}}, {{$list_proses->user->alamat->kecamatan_name}}, {{$list_proses->user->alamat->province_name}}, {{$list_proses->user->alamat->kodepos}} </div>
+             
+                                    <div style="margin-top:5px;"><b>Service : </b> </div>
+                                    <div>Ekspedisi : {{strtoupper($list_proses->ekspedisi)}} - {{$list_proses->service}}</div>
+             
+                                 </li>
                                 </ul>
                               </div>
     
@@ -247,6 +266,20 @@ select {
                                   <li class="list-group-item">
                                     Ongkos Kirim :  Rp {{number_format($list_kirim['ongkir'],0, "", ".")}}
                                   </li>
+                                  <li class="list-group-item">
+                                    <div><b>Dikirim ke : </b> 
+             
+                                     </div>
+                                    <div>Penerima : {{$list_kirim['user']['alamat']['nama_penerima']}}</div>
+                                    <div>No Hp Penerima : {{$list_kirim['user']['alamat']['nohp_penerima']}}</div>
+                                    <div>Alamat : {{$list_kirim['user']['alamat']['alamat']}}, {{$list_kirim['user']['alamat']['city_name']}}, {{$list_kirim['user']['alamat']['kecamatan_name']}}, {{$list_kirim['user']['alamat']['province_name']}}, {{$list_kirim['user']['alamat']['kodepos']}} </div>
+             
+                                    <div style="margin-top:5px;"><b>Service : </b> </div>
+                                    <div>Ekspedisi : {{strtoupper($list_kirim['ekspedisi'])}} - {{$list_kirim['service']}}</div>
+                                    <div style="margin-top:5px;"><b>Detail Pengiriman : </b> </div>
+                                    <div>No Resi : {{$list_kirim['no_resi']}}</div>
+             
+                                 </li>
 
                                   <li class="list-group-item"> 
                                     @if(($list_kirim['0']['rajaongkir']['status']['code'] == 200) && $list_kirim['0']['rajaongkir']['result']['summary'] && $list_kirim['0']['rajaongkir']['result']['details'] && $list_kirim['0']['rajaongkir']['result']['manifest'] )
