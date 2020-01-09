@@ -1,16 +1,3 @@
-<?php 
-use App\Models\Transaction;
-use App\Models\Transaction_detail;
-use App\Models\Produk;
-
-$batal = Transaction::with(['transaction_detail' => function ($query) {
-            $query->with('produk');
-        }])->where(['status_id' => '0'])->where('created_at', '<', \Carbon\Carbon::now()->subDays(2))->update([
-  'status_id' => '5'
-]);
-?>
-
-
 <nav class="navbar navbar-expand-sm sticky-top navbar-light" style="background-color: #FFFFFF">
     <a class="navbar-brand" href="/">            
       <img src="/img/logo.png" alt="" style="margin-top:-10px;" height="45px;">
