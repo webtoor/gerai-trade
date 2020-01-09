@@ -168,6 +168,7 @@
                           <th>Jumlah</th>
                           <th>Harga</th>
                           <th>Berat</th>
+                          <th>Catatan</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -180,13 +181,12 @@
                           </td>
                           <td>Rp {{number_format($row->price,0, ".", ".")}}</td>
                         <td>{{$row->options->weight}} gram</td>
+                        <td><textarea name="ctt[]" id="{{$row->id}}"></textarea></td>
                         </tr>
-                       {{--  <input type="hidden" name="harga_produk[]" value="{{$row->price}}" id="harga_produkselectDurasi{{$row->options->hub_id}}"> --}}
                         <input type="hidden" name="result_id[]" value="{{$row->id}}" id="id_produkselectDurasi{{$row->options->hub_id}}">
                         @endif
                     <?php endforeach;?>
                    
-
                       </tbody>
                       <tfoot>
                        
@@ -271,7 +271,8 @@
 
 
  
-    <script src="{{ mix('/js/app.js') }}"></script><script type="text/javascript">
+    <script src="{{ mix('/js/app.js') }}"></script>
+    <script type="text/javascript">
 
       $(document).ready(function () {
         $("button#submit").click(function () {
@@ -279,9 +280,18 @@
             'courier': $('#eks').val(),
             'id_produk': $("#id_produkselectDurasi9").attr("name"),
           } */
-          var values = $("input[id='harga_produkselectDurasi9']")
+          /* var values = $("input[id='harga_produkselectDurasi9']")
               .map(function(){return $(this).val();}).get();
-          var harga_produk = values.map(parseFloat);
+          var harga_produk = values.map(parseFloat); */
+          var ctts = $('textarea[name="ctt[]"]').map(function(){
+              return this.value;
+            }).get();
+        
+          var catats = {
+            'data' : selectById,
+            'ctt' : ctts
+          }
+          console.log(catats);
           if(selectById.length > 0){
             $.ajax({
               headers: {
@@ -291,11 +301,11 @@
               dataType: "json",
               type: 'POST',
               url : "{{ route('home.ajaxPostCheckout')}}",
-              data: JSON.stringify(selectById),
+              data: JSON.stringify(catats),
               success:function(results){
                 if(results.status == 1){
                   console.log(results)
-                  location.replace("{{route('home.getWaitPayment')}}");
+                  //location.replace("{{route('home.getWaitPayment')}}");
                   
 
                 }else{
@@ -354,7 +364,11 @@
 
               $.each(results.rajaongkir.results[0].costs, function(index, data) {
                 $("#selectDurasi"+ counts).prop('disabled', false);
-                $('#selectDurasi'+ counts).append($('<option>', {value:data['cost'][0]['value'] + '#' + data['service'] + '#' + results.rajaongkir.results[0].code, text:data['service'] + ' (' + data['cost'][0]['etd'] + ' Hari) ' + ' (Rp '  +  data['cost'][0]['value'] + ')'}, '</option>'));
+                if(data['cost'][0]['etd']){
+                  $('#selectDurasi'+ counts).append($('<option>', {value:data['cost'][0]['value'] + '#' + data['service'] + '#' + results.rajaongkir.results[0].code, text:data['service'] + ' (' + data['cost'][0]['etd'] + ' Hari) ' + ' (Rp '  +  data['cost'][0]['value'] + ')'}, '</option>'));
+                }else{
+                  $('#selectDurasi'+ counts).append($('<option>', {value:data['cost'][0]['value'] + '#' + data['service'] + '#' + results.rajaongkir.results[0].code, text:data['service'] + ' (Rp '  +  data['cost'][0]['value'] + ')'}, '</option>'));
+                }
               })
 
               }
@@ -374,12 +388,7 @@
 
             if( $('select#' + data_val)){
               var id_produk = $("input[id='id_produk"+data_val+"']").map(function(){return $(this).val();}).get();
-              /* var hargaById = $("input[id='harga_produk"+data_val+"']").map(function(){return $(this).val();}).get();
-              var harga_produk = hargaById.map(parseFloat);
-              var harga_total = 0; */
-             /*  $.each(harga_produk,function(){harga_total+=parseFloat(this) || 0;});
-              console.log(harga_total)
-              console.log(harga_produk) */
+          
               console.log(id_produk)
               let optionSelected = $("option:selected", this);
               let valueSelected = this.value;

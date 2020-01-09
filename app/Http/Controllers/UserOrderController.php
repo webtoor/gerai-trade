@@ -19,10 +19,11 @@ use App\Models\ProdukUlasan;
 class UserOrderController extends Controller
 {
     public function postCheckout(Request $request){
+      
         try {
             $user_id = Auth::user()->id;
             $alamat = Alamat::where('user_id', $user_id)->first();
-            $data = $request->all();
+            $data = $request->data;
             $total_ongkir = 0; 
 
             // To String Total Pembayaran
@@ -39,7 +40,8 @@ class UserOrderController extends Controller
                 $random = Str::random(5);
                 $merge_random = $random.$now.$user_id;
             }
-
+            $ctts = array_reverse($request->ctt);
+            $i=0;
             foreach($data as $row){
                 $sum_harga = 0;
                 $qty = 0;
@@ -67,16 +69,18 @@ class UserOrderController extends Controller
                         $transaction_detail = Transaction_detail::create([
                         'transaction_id' => $transaction->id,
                         'produk_id' => $cartz->id,
-                        'qty' => $cartz->qty
+                        'qty' => $cartz->qty,
+                        'catatan' => $ctts[$i++]
                     ]);
                     }
                 }
               
             }
-            Cart::instance('default')->destroy();
+            //Cart::instance('default')->destroy();
 
             return response()->json([
                 'status' => 1,
+                'data' => $i++
             ]);
         } catch (\Exception $e) {
             return response()->json([

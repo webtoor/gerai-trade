@@ -19,8 +19,28 @@ class CartController extends Controller
             return redirect('login'); 
 
         }else{
-            $produks = Produk::find($request->produk_id);
-    	    Cart::add($produks->id, $produks->nama_produk, $request->qty, $produks->harga, ['slug' => $produks->slug, 'weight' => $produks->berat, 'hub_id' => $produks->hub_id]);
+             $produks = Produk::find($request->produk_id);
+           /* $row_id = null;
+            $quanty = null;
+            foreach(Cart::instance('default')->content() as $rows){
+                if($produks->id === $rows->id){
+                    $row_id = $rows->rowId;
+                    $quanty = $rows->qty;
+
+                }
+            }  
+            if($row_id){
+                $quanty = $quanty + $request->qty;
+                $item =  Cart::get($row_id);
+                $option = $item->options->merge(['item_code' => 'KEY02']);
+
+                return Cart::content('default')->update($row_id, $option);
+            }else{
+               Cart::instance('default')->add($produks->id, $produks->nama_produk, $request->qty, $produks->harga, ['slug' => $produks->slug, 'note' => $request->ctt, 'weight' => $produks->berat, 'hub_id' => $produks->hub_id]);
+            } */
+            
+            Cart::instance('default')->add($produks->id, $produks->nama_produk, $request->qty, $produks->harga, ['slug' => $produks->slug, 'weight' => $produks->berat, 'hub_id' => $produks->hub_id]);
+
             return redirect('keranjang-belanja'); 
         }
     	
@@ -33,7 +53,7 @@ class CartController extends Controller
 
         }else{
             $produks = Produk::find($produk_id);
-    	    Cart::add($produks->id, $produks->nama_produk, 1, $produks->harga, ['slug' => $produks->slug, 'weight' => $produks->berat, 'hub_id' => $produks->hub_id]);
+    	    Cart::instance('default')->add($produks->id, $produks->nama_produk, 1, $produks->harga, ['slug' => $produks->slug, 'weight' => $produks->berat, 'hub_id' => $produks->hub_id]);
             return redirect('keranjang-belanja'); 
         }
     	
@@ -59,12 +79,13 @@ class CartController extends Controller
 
     public function keranjangBelanja(){
         $kategori = Kategori::with('sub_kategori')->get();
+       
 
         return view ('users.keranjangBelanja', ['kategori' => $kategori]);
     }
 
     public function update(Request $request){
-        Cart::update($request->rowid, $request->qty);
+        Cart::instance('default')->update($request->rowid, $request->qty);
         $kategori = Kategori::with('sub_kategori')->get();
         return back(); 
     }
@@ -81,7 +102,7 @@ class CartController extends Controller
 
         }else{
             $produks = Produk::find($request->produk_id);
-    	    return Cart::instance('wishlist')->add($produks->id, $produks->nama_produk, $request->qty, $produks->harga, ['slug' => $produks->slug, 'weight' => $produks->berat]);
+    	    Cart::instance('wishlist')->add($produks->id, $produks->nama_produk, $request->qty, $produks->harga, ['slug' => $produks->slug, 'weight' => $produks->berat]);
             return redirect('wishlist'); 
         }
     }

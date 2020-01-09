@@ -12,6 +12,7 @@ class Transaction_detail extends Model
         'transaction_id',
         'produk_id',
         'qty',
+        'catatan',
         'created_at',
         'updated_at'
     ];

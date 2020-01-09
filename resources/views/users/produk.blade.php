@@ -29,8 +29,8 @@
   .s_product_text .list li {
     margin-bottom: 5px; }
     .s_product_text .list li a {
-      font-size: 14px;
-      font-family: "Roboto", sans-serif;
+      font-size: 16px;
+      /* font-family: "Roboto", sans-serif; */
       font-weight: normal;
       color: #555555; }
       .s_product_text .list li a span {
@@ -90,9 +90,8 @@
   position: relative;
   margin-bottom: 24px; }
   .product_count label {
-    font-size: 14px;
+    font-size: 16px;
     color: #777777;
-    font-family: "Roboto", sans-serif;
     font-weight: normal;
     padding-right: 10px; }
   .product_count input {
@@ -379,43 +378,38 @@
         {{$produk_detail->user->alamat->city_name}}
       </a>
     </li>
-						</ul>
-            <div>
-              {{-- {!! html_entity_decode($produk_detail->deskripsi) !!} --}}
-            
-            </div>
-            <br>
+            </ul>
+          <p>{{Cart::instance('default')->content()}}</p>
+  
             @guest
             
-            <form action="{{ url('cart') }}" method="POST">
-                {{ @csrf_field() }}
-						<div class="product_count">
-							<label for="qty">Jumlah:</label>
-							<input type="number" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-							 class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 1 ) result.value--;return false;"
-							 class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-						</div>
+            <form action="{{ url('cart') }}" method="POST"  style="margin-top:-50px;">
+              {{ @csrf_field() }}
+					
 						<div class="card_area d-flex align-items-center">
 							<div>
                  
                   <input type="hidden" name="produk_id" value="<?php echo $produk_detail->id;?>">
 
                 
-                  <button type="submit" class="btn btn-primary" href="#">Masukan Keranjang</button>
+                  <button type="submit" class="btn btn-primary" href="#">Beli</button>
                   @else
                   @if(Auth::user()->role->role_id == '1')
-                  <form action="{{ url('cart') }}" method="POST">
+                  <form action="{{ url('cart') }}" method="POST"  style="margin-top:-50px;">
                     {{ @csrf_field() }}
                 <div class="product_count">
                   <label for="qty">Jumlah:</label>
                   <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
                   <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
                    class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                  <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                  <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 1 ) result.value--;return false;"
                    class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
                 </div>
+                <div>
+                  <label for="ctt">Catatan untuk Penjual: </label>
+                <input type="text" name="ctt">
+
+               </div>
                 <div class="card_area d-flex align-items-center">
                   <div>
                      

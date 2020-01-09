@@ -117,7 +117,9 @@ class KategoriController extends Controller
 
 
         }else{
-            $kategori_menu = SubKategori::with('kategori')->where('slug', $slug)->first();
+            return abort(404);
+
+           /*  $kategori_menu = SubKategori::with('kategori')->where('slug', $slug)->first();
             $sort = request()->sort;
             if($sort == 'desc'){
                 $produk = Produk::with('produk_image')->where(['subkategori_id' => $kategori_menu->id, 'status' => '1'])->orderBy('id', 'desc')->paginate(20);
@@ -127,7 +129,7 @@ class KategoriController extends Controller
                 $produk = Produk::with('produk_image')->where(['subkategori_id' => $kategori_menu->id, 'status' => '1'])->orderBy('harga', 'desc')->paginate(20);
             }else{
                 $produk = Produk::with('produk_image')->where(['subkategori_id' => $kategori_menu->id, 'status' => '1'])->orderBy('id', 'desc')->paginate(20);
-            }
+            } */
 
         }
         return view('users.kategori', ['produk' => $produk, 'kategori' => $kategori, 'kategori_menu' => $kategori_menu , 'sort' => $sort]);

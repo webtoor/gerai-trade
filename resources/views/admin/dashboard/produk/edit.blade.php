@@ -36,7 +36,7 @@
             <label>Hub <sup style="color:red"> *Wajib</sup></label>
             <select class="form-control" name="hub_id" id="mitra_id" required>
                 @foreach ($mitra as $mitraes)
-                @if(($mitraes->user->id) == ($produk->mitra_id))
+                @if(($mitraes->user->id) == ($produk->hub_id))
                 <option value="{{$mitraes->user->id}}" selected="selected">{{$mitraes->user->nama_hub}}</option>
                 @else
                 <option value="{{$mitraes->user->id}}">{{$mitraes->user->nama_hub}}</option>
