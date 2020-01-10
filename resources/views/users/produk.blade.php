@@ -405,11 +405,7 @@
                   <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 1 ) result.value--;return false;"
                    class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
                 </div>
-                <div>
-                  <label for="ctt">Catatan untuk Penjual: </label>
-                <input type="text" name="ctt">
-
-               </div>
+               
                 <div class="card_area d-flex align-items-center">
                   <div>
                      
