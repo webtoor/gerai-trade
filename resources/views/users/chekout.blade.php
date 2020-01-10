@@ -168,11 +168,11 @@
                           <th>Jumlah</th>
                           <th>Harga</th>
                           <th>Berat</th>
-                          <th>Catatan</th>
                         </tr>
                       </thead>
+
                       <tbody>
-                          <?php foreach(Cart::content('default') as $row) :?>
+                        <?php foreach(Cart::content('default') as $row) :?>
                           @if($hub->user_id == $row->options->hub_id)
                         <tr>
                           <td><a href="{{route('produk-detail', ['slug_produk' => $row->options->slug])}}" style="color:#3f51b5; font-weight:bold"><?php echo \Illuminate\Support\Str::limit($row->name, 20) ?></a></td>
@@ -181,12 +181,17 @@
                           </td>
                           <td>Rp {{number_format($row->price,0, ".", ".")}}</td>
                         <td>{{$row->options->weight}} gram</td>
-                        <td><textarea name="ctt[]" id="{{$row->id}}"></textarea></td>
+                        </tr>
+                        <tr>
+                          <br>
+                          <td>
+                            <textarea name="ctt[]" id="{{$row->id}}" placeholder="Tulis Catatan" cols="35"></textarea>
+                          </td>
+
                         </tr>
                         <input type="hidden" name="result_id[]" value="{{$row->id}}" id="id_produkselectDurasi{{$row->options->hub_id}}">
                         @endif
-                    <?php endforeach;?>
-                   
+                        <?php endforeach;?>
                       </tbody>
                       <tfoot>
                        
@@ -207,9 +212,9 @@
                           </select>
                         </div>
                         <div class="form-group col-sm-8">
-                            <label>Pilih Durasi Pengiriman</label>
+                            <label>Pilih Layanan</label>
                             <select class="form-control selectDurasi" id="selectDurasi{{$hub->user_id}}" name="selectDurasi" data-target="{{$hub->user_id}}" required="true" disabled>   
-                                <option value="">Pilih Durasi Pengiriman</option>
+                                <option value="">Pilih Layanan</option>
                             </select>
                           </div>
                           <input type="hidden" value="{{$hub->kecamatan_id}}" id="districts_origin{{$hub->user_id}}">
@@ -229,7 +234,7 @@
           
             </div>
            
-            <div class="col-lg-4" style="margin-top:100px;">
+            <div class="col-lg-4" style="margin-top:20px;">
                     <div id="order-summary" class="card box mt-0 mb-4 p-0">
                             <div class="card-body">
                               <h6 class="card-title"><b>Ringkasan Belanja</b></h6>

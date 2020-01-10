@@ -1,4 +1,8 @@
-<div class="header navbar" style="box-shadow: none;">
+<?php 
+use App\Models\Pesan;
+use App\Models\Transaction;
+ ?>
+ <div class="header navbar" style="box-shadow: none;">
     <div class="header-container">
         <ul class="nav-left">
             <li>
@@ -40,7 +44,7 @@
                     </div>
                 </a>
                 <ul class="dropdown-menu fsz-sm">
-                    <li>
+                   {{--  <li>
                         <a href="" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
                             <i class="ti-settings mR-10"></i>
                             <span>Setting</span>
@@ -51,7 +55,7 @@
                             <i class="ti-user mR-10"></i>
                             <span>Profile</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li>
                     <a href="" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
                             <i class="ti-email mR-10"></i>
