@@ -84,6 +84,9 @@
                                         <div class="price">
                                             <h6>Rp {{number_format($produk_item->harga,0, ".", ".")}}</h6>
                                         </div>
+                                        <div>
+                                            <h6 style="color:#90a4ae; font-size:12px;">{{$produk_item->user->alamat->city_name}}</h6>
+                                        </div>
 
                                         {{-- <h6 style="color:#AEAEAE;">Jakarta</h6> --}}
                                     </a>

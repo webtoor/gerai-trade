@@ -185,6 +185,9 @@
                                                 <div class="price">
                                                     <h6>Rp {{number_format($produk_item->harga,0, ".", ".")}}</h6>
                                                 </div>
+                                                <div>
+                                                    <h6 style="color:#90a4ae; font-size:12px;">{{$produk_item->user->alamat->city_name}}</h6>
+                                                </div>
 
                                                 {{-- <h6 style="color:#AEAEAE;">Jakarta</h6> --}}
                                             </a>
@@ -194,7 +197,7 @@
                                                     <span class="float-left">
                                                         <?php $nr = $produk_item->rating;?>
                                                         @for($i = 0; $i < 5; $i++)
-                                                            <span style="color:#ffc200; font-size:15px;"><i class="{{ $nr <= $i ? 'far fa-star' : 'fas fa-star' }}" aria-hidden="true"></i></span>
+                                                            <span style="color:#ffc200; font-size:13px;"><i class="{{ $nr <= $i ? 'far fa-star' : 'fas fa-star' }}" aria-hidden="true"></i></span>
                                                         @endfor
                                                     </span>
                                                     <span class="float-right">

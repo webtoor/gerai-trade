@@ -24,9 +24,9 @@
               <div class="ftco-footer-widget mb-4 ml-md-5">
                 <h2 class="ftco-heading-2">Menu</h2>
                 <ul class="list-unstyled">
-                  <li><a href="#" class="py-2 d-block">Siapa Kita</a></li>
-                  <li><a href="#" class="py-2 d-block">Cerita Kita</a></li>
-                  <li><a href="#" class="py-2 d-block">Kontak Kita</a></li>
+                  <li><a href="{{route('siapa-kita')}}" class="py-2 d-block">Siapa Kita</a></li>
+                  <li><a href="{{route('cerita-kita')}}" class="py-2 d-block">Cerita Kita</a></li>
+                  <li><a href="{{route('kontak-kita')}}" class="py-2 d-block">Kontak Kita</a></li>
                 </ul>
               </div>
             </div>

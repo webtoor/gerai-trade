@@ -61,7 +61,7 @@
         <ul class="navbar-nav ml-auto">
          
 
-       <li class="nav-item" style="margin-right:20px;">
+       <li class="nav-item" style="margin-right:15px;">
           <a class="nav-link" href="{{route('cerita-kita')}}"><b>Cerita Kita</b></a>
       </li>
       @guest

@@ -117,451 +117,106 @@
 .card-blog__info li:not(:last-child) {
     margin-right: 20px
 }
-/*------------------
-  Header section
----------------------*/
-
-.header-top {
-	padding: 18px 0 14px;
+/* line 1, ../../Arafath/CL/Cl November/222. Directory/HTML/scss/_popular_catagory.scss */
+.popular_catagory_area {
+  padding-top: 20px;
+  padding-bottom: 30px;
 }
 
-.site-logo {
-	display: inline-block;
+@media (max-width: 767px) {
+  /* line 1, ../../Arafath/CL/Cl November/222. Directory/HTML/scss/_popular_catagory.scss */
+  .popular_catagory_area {
+    padding-top: 50px;
+    padding-bottom: 20px;
+  }
 }
 
-.header-search-form {
-	width: 100%;
-	position: relative;
-	padding: 0 10px;
+@media (min-width: 768px) and (max-width: 991px) {
+  /* line 1, ../../Arafath/CL/Cl November/222. Directory/HTML/scss/_popular_catagory.scss */
+  .popular_catagory_area {
+    padding-top: 80px;
+    padding-bottom: 50px;
+  }
 }
 
-.header-search-form input {
-	width: 100%;
-	height: 44px;
-	font-size: 14px;
-	border-radius: 50px;
-	border: none;
-	padding: 0 19px;
-	background: #f0f0f0;
+/* line 12, ../../Arafath/CL/Cl November/222. Directory/HTML/scss/_popular_catagory.scss */
+.popular_catagory_area .single_catagory {
+  position: relative;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 30px;
 }
 
-.header-search-form button {
-	position: absolute;
-	height: 100%;
-	right: 18px;
-	top: 0;
-	font-size: 26px;
-	color: #000;
-	border: none;
-	cursor: pointer;
-	background-color: transparent;
+/* line 17, ../../Arafath/CL/Cl November/222. Directory/HTML/scss/_popular_catagory.scss */
+.popular_catagory_area .single_catagory .thumb {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
 }
 
-.user-panel .up-item {
-	display: inline-block;
-	font-size: 14px;
+/* line 20, ../../Arafath/CL/Cl November/222. Directory/HTML/scss/_popular_catagory.scss */
+.popular_catagory_area .single_catagory .thumb img {
+  width: 100%;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
 }
 
-.user-panel .up-item i {
-	font-size: 22px;
+/* line 25, ../../Arafath/CL/Cl November/222. Directory/HTML/scss/_popular_catagory.scss */
+.popular_catagory_area .single_catagory .hover_overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#001d38+0,001d38+100&0+0,1+100 */
+  background: -moz-linear-gradient(top, rgba(0, 29, 56, 0) 0%, #001d38 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(0, 29, 56, 0) 0%, #001d38 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(0, 29, 56, 0) 0%, #001d38 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00001d38', endColorstr='#001d38',GradientType=0 );
+  /* IE6-9 */
 }
 
-.user-panel .up-item a {
-	font-size: 14px;
-	color: #000;
+/* line 37, ../../Arafath/CL/Cl November/222. Directory/HTML/scss/_popular_catagory.scss */
+.popular_catagory_area .single_catagory .hover_overlay .hover_inner {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
 }
 
-.user-panel .up-item:first-child {
-	margin-right: 29px;
+/* line 41, ../../Arafath/CL/Cl November/222. Directory/HTML/scss/_popular_catagory.scss */
+.popular_catagory_area .single_catagory .hover_overlay .hover_inner h4 {
+  font-family: "Raleway", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 10px;
 }
 
-.shopping-card {
-	display: inline-block;
-	position: relative;
+/* line 48, ../../Arafath/CL/Cl November/222. Directory/HTML/scss/_popular_catagory.scss */
+.popular_catagory_area .single_catagory .hover_overlay .hover_inner span {
+  font-family: "Raleway", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.2);
+  display: inline-block;
+  padding: 5px 7px;
+  border-radius: 5px;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
 }
 
-.shopping-card span {
-	position: absolute;
-	top: -4px;
-	left: 100%;
-	height: 16px;
-	min-width: 16px;
-	color: #fff;
-	font-size: 13px;
-	background: #f51167;
-	text-align: center;
-	border-radius: 30px;
-	padding: 0 2px;
-	margin-left: -7px;
-}
-
-.main-navbar {
-	background: #282828;
-}
-
-.slicknav_menu {
-	display: none;
-}
-
-.main-menu {
-	list-style: none;
-}
-
-.main-menu li {
-	display: inline-block;
-	position: relative;
-}
-
-.main-menu li a {
-	display: inline-block;
-	font-size: 16px;
-	color: #ffffff;
-	margin-right: 50px;
-	line-height: 1;
-	padding: 17px 0;
-	position: relative;
-}
-
-.main-menu li a .new {
-	position: absolute;
-	top: -8px;
-	font-size: 10px;
-	font-weight: 700;
-	color: #fff;
-	background: #f51167;
-	line-height: 1;
-	text-transform: uppercase;
-	left: calc(50% - 21px);
-	padding: 5px 9px 1px;
-	border-radius: 15px;
-	width: 42px;
-}
-
-.main-menu li:hover .sub-menu {
-	visibility: visible;
-	opacity: 1;
-	margin-top: 0;
-}
-
-.main-menu li:hover>a {
-	color: #f51167;
-}
-
-.main-menu .sub-menu {
-	position: absolute;
-	list-style: none;
-	width: 220px;
-	left: 0;
-	top: 100%;
-	padding: 20px 0;
-	visibility: hidden;
-	opacity: 0;
-	margin-top: 50px;
-	background: #fff;
-	z-index: 99;
-	-webkit-transition: all 0.4s;
-	-o-transition: all 0.4s;
-	transition: all 0.4s;
-	-webkit-box-shadow: 2px 7px 20px rgba(0, 0, 0, 0.05);
-	box-shadow: 2px 7px 20px rgba(0, 0, 0, 0.05);
-}
-
-.main-menu .sub-menu li {
-	display: block;
-}
-
-.main-menu .sub-menu li a {
-	display: block;
-	color: #000;
-	margin-right: 0;
-	padding: 8px 20px;
-}
-
-.main-menu .sub-menu li a:hover {
-	color: #f51167;
-}
-
-.nav-switch {
-	display: none;
-}
-
-/* ----------------
-  Features
----------------------*/
-
-.hero-section {
-	padding-bottom: 54px;
-}
-
-.hero-slider .hs-item {
-	position: relative;
-	height: 720px;
-}
-
-.hero-slider .hs-item span {
-	font-size: 18px;
-	text-transform: uppercase;
-	font-weight: 600;
-	letter-spacing: 3px;
-	margin-bottom: 5px;
-	display: block;
-	position: relative;
-	top: 50px;
-	opacity: 0;
-}
-
-.hero-slider .hs-item h2 {
-	font-size: 60px;
-	text-transform: uppercase;
-	font-weight: 700;
-	margin-bottom: 10px;
-	position: relative;
-	top: 50px;
-	opacity: 0;
-}
-
-.hero-slider .hs-item p {
-	font-size: 18px;
-	font-weight: 300;
-	margin-bottom: 35px;
-	position: relative;
-	top: 100px;
-	opacity: 0;
-}
-
-.hero-slider .hs-item .site-btn {
-	position: relative;
-	top: 50px;
-	opacity: 0;
-}
-
-.hero-slider .hs-item .sb-line {
-	margin-right: 5px;
-}
-
-.hero-slider .hs-item .container {
-	position: relative;
-	padding-top: 170px;
-}
-
-.hero-slider .hs-item .offer-card {
-	position: absolute;
-	right: 0;
-	top: 226px;
-	width: 162px;
-	height: 162px;
-	border-radius: 50%;
-	background: #f51167;
-	text-align: center;
-	padding-top: 20px;
-	-webkit-transform: rotate(45deg);
-	-ms-transform: rotate(45deg);
-	transform: rotate(45deg);
-	opacity: 0;
-}
-
-.hero-slider .hs-item .offer-card:after {
-	position: absolute;
-	content: "";
-	width: calc(100% - 10px);
-	height: calc(100% - 10px);
-	border: 1px solid #f96790;
-	left: 5px;
-	top: 5px;
-	border-radius: 50%;
-}
-
-.hero-slider .hs-item .offer-card span {
-	font-size: 18px;
-	text-transform: lowercase;
-	position: relative;
-	top: 50px;
-	opacity: 0;
-}
-
-.hero-slider .hs-item .offer-card h2 {
-	font-size: 72px;
-	font-weight: 400;
-	line-height: 1;
-}
-
-.hero-slider .hs-item .offer-card p {
-	text-transform: uppercase;
-	line-height: 1;
-	font-size: 14px;
-}
-
-.hero-slider .slider-nav-warp {
-	max-width: 1145px;
-	bottom: 0;
-	margin: -78px auto 0;
-}
-
-.hero-slider .slider-nav {
-	display: inline-block;
-	padding: 0 38px;
-	position: relative;
-}
-
-.hero-slider .owl-dots {
-	display: -ms-flex;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	padding-top: 9px;
-}
-
-.hero-slider .owl-dots .owl-dot {
-	width: 8px;
-	height: 8px;
-	background: #fff;
-	border-radius: 15px;
-	margin-right: 10px;
-	opacity: 0.25;
-}
-
-.hero-slider .owl-dots .owl-dot.active {
-	opacity: 1;
-}
-
-.hero-slider .owl-dots .owl-dot:last-child {
-	margin-right: 0;
-}
-
-.hero-slider .owl-nav button.owl-next,
-.hero-slider .owl-nav button.owl-prev {
-	font-size: 27px;
-	position: absolute;
-	color: #fff;
-	opacity: 0.5;
-	bottom: -20px;
-}
-
-.hero-slider .owl-nav button.owl-next {
-	right: 0;
-}
-
-.hero-slider .owl-nav button.owl-prev {
-	left: 0;
-}
-
-.hero-slider .owl-item.active .hs-item h2,
-.hero-slider .owl-item.active .hs-item span,
-.hero-slider .owl-item.active .hs-item p,
-.hero-slider .owl-item.active .hs-item .site-btn {
-	top: 0;
-	opacity: 1;
-}
-
-.hero-slider .owl-item.active .hs-item span {
-	-webkit-transition: all 0.5s ease 0.2s;
-	-o-transition: all 0.5s ease 0.2s;
-	transition: all 0.5s ease 0.2s;
-}
-
-.hero-slider .owl-item.active .hs-item h2 {
-	-webkit-transition: all 0.5s ease 0.4s;
-	-o-transition: all 0.5s ease 0.4s;
-	transition: all 0.5s ease 0.4s;
-}
-
-.hero-slider .owl-item.active .hs-item p {
-	-webkit-transition: all 0.5s ease 0.6s;
-	-o-transition: all 0.5s ease 0.6s;
-	transition: all 0.5s ease 0.6s;
-}
-
-.hero-slider .owl-item.active .hs-item .site-btn {
-	-webkit-transition: all 0.5s ease 0.8s;
-	-webkit-transition: all 0.5s ease 0.8s;
-	-o-transition: all 0.5s ease 0.8s;
-	transition: all 0.5s ease 0.8s;
-}
-
-.hero-slider .owl-item.active .hs-item .offer-card {
-	opacity: 1;
-	-webkit-transform: rotate(0deg);
-	-ms-transform: rotate(0deg);
-	transform: rotate(0deg);
-	-webkit-transition: all 0.5s ease 1s;
-	-webkit-transition: all 0.5s ease 1s;
-	-o-transition: all 0.5s ease 1s;
-	transition: all 0.5s ease 1s;
-}
-
-.slide-num-holder {
-	float: right;
-	z-index: 1;
-	color: #fff;
-	position: relative;
-	font-size: 24px;
-	font-weight: 700;
-	position: relative;
-	margin-top: -22px;
-}
-
-.slide-num-holder span:first-child {
-	margin-right: 41px;
-}
-
-.slide-num-holder:after {
-	position: absolute;
-	content: "";
-	height: 30px;
-	width: 1px;
-	background: #fff;
-	left: 50%;
-	top: 0;
-	-webkit-transform-origin: center;
-	-ms-transform-origin: center;
-	transform-origin: center;
-	-webkit-transform: rotate(30deg);
-	-ms-transform: rotate(30deg);
-	transform: rotate(30deg);
-}
-
-/* ------------------
-  Features section
----------------------*/
-
-.feature {
-	text-align: center;
-	background: #f8f8f8;
-	height: 100%;
-}
-
-.feature:nth-child(2) {
-	background: #f51167;
-}
-
-.feature:nth-child(2) h2 {
-	color: #fff;
-}
-
-.feature .feature-inner {
-	padding: 20px 25px;
-	display: -ms-flex;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
-	-webkit-box-pack: center;
-	-ms-flex-pack: center;
-	justify-content: center;
-	height: 100%;
-}
-
-.feature .feature-icon {
-	display: inline-block;
-	margin-right: 15px;
-}
-
-.feature h2 {
-	font-size: 24px;
-	text-transform: uppercase;
-	display: inline-block;
+/* line 63, ../../Arafath/CL/Cl November/222. Directory/HTML/scss/_popular_catagory.scss */
+.popular_catagory_area .single_catagory:hover .hover_overlay span {
+  background: #F91842;
 }
 
     </style>
@@ -639,6 +294,73 @@
                                 </a>
                                 <!--/.Controls-->
                             </div>
+                         
+
+                            <div class="popular_catagory_area" style="background-color:#122740">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="section_title mb-60 text-center" style="color:white">
+                                                <h3>
+                                                   Kategori Terpopuler
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-3 col-md-4 col-lg-3">
+                                            <div class="single_catagory">
+                                                <div class="thumb">
+                                                    <img src="img/catagory/satu.png" alt="">
+                                                </div>
+                                                <div class="hover_overlay">
+                                                    <div class="hover_inner">
+                                                       <a href="/k/kopi-teh-dan-minuman-lainnya"> <span>Kopi, Teh dan Minuman lain</span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-4 col-lg-3">
+                                            <div class="single_catagory">
+                                                <div class="thumb">
+                                                    <img src="img/catagory/dua.png" alt="">
+                                                </div>
+                                                <div class="hover_overlay">
+                                                    <div class="hover_inner">
+                                                        <a href="/k/madu"><span>Madu</span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-4 col-lg-3">
+                                            <div class="single_catagory">
+                                                <div class="thumb">
+                                                    <img src="img/catagory/tiga.png" alt="">
+                                                </div>
+                                                <div class="hover_overlay">
+                                                    <div class="hover_inner">
+                                                            
+                                                        <a href="/k/makanan-jadi-dan-snack"><span>Makanan Jadi dan Snack</span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-4 col-lg-3">
+                                            <div class="single_catagory">
+                                                <div class="thumb">
+                                                    <img src="img/catagory/empat.png" alt="">
+                                                </div>
+                                                <div class="hover_overlay">
+                                                    <div class="hover_inner">
+                                                           <a href="/k/kerajinan"> <span>Kerajinan</span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="container">
 
@@ -683,8 +405,8 @@
                                                                     <h6>Rp {{number_format($produk_terbarus->harga,0, ".", ".")}}</h6>
                                                                 </div>
                                                                 <div>
-                                                                <h6 style="color:#90a4ae">{{$produk_terbarus->user->alamat->city_name}}</h6>
-                                                                    </div>
+                                                                <h6 style="color:#90a4ae; font-size:12px;">{{$produk_terbarus->user->alamat->city_name}}</h6>
+                                                                </div>
                                                             </a>
 
                                                             @guest
