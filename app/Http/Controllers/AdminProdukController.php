@@ -103,7 +103,7 @@ class AdminProdukController extends Controller
 
     public function updateProduk(Request $request, $produk_id){
         
-        return$data = $request->validate([
+        $data = $request->validate([
             'hub_id' => ['required'],
             'kategori_id' => ['required'],
             'subkategori_id' => ['nullable'],

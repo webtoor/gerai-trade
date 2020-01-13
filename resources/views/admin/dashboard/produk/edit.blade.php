@@ -24,10 +24,10 @@
         'method' => 'PUT',
         ]) !!}  
 
-
+{{-- {{$produk->status}} --}}
 <div class="form-group">
         <label>Status</label>
-        <select class="form-control" name="status" id="subkategori">
+        <select class="form-control" name="status">
             <option value="0" {{ ( $produk->status == 0) ? 'selected' : '' }}>Non-Aktif</option>
             <option value="1" {{ ( $produk->status == 1) ? 'selected' : '' }}>Aktif</option>
         </select>
