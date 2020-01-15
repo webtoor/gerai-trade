@@ -15,7 +15,7 @@ use App\Models\Alamat;
 use App\Models\Produk;
 use App\Models\Kategori;
 use App\Models\ProdukUlasan;
-
+use PDF;
 class UserOrderController extends Controller
 {
     public function postCheckout(Request $request){
@@ -261,4 +261,42 @@ class UserOrderController extends Controller
         return back()->withSuccess(trans('Terima kasih atas ulasan Anda')); 
 
     }
+
+    public function showInvoice($kode){
+        $user_id = Auth::user()->id;
+        $invoice =  Transaction::with(['user' => function ($query) {
+            $query->with('alamat');
+        },'transaction_detail' => function ($query) {
+            $query->with('produk');
+        }])->where(['kode' => $kode, 'user_id' => $user_id])->get();
+        $new_invoice = [];
+        $totals = 0;
+        foreach($invoice as $data){
+            $totals += $data->ongkir + $data->total_harga;
+        }
+        array_push($new_invoice, (object)[
+            'order' => $invoice,
+            'total_pembayaran' => $totals
+        ]);
+
+        //return $new_invoice;
+        return view('users.invoice.member', ['invoice' => $new_invoice]);
+    }
+    /* public function cetakInvoice($kode){
+        $user_id = Auth::user()->id;
+        $invoice =  Transaction::with(['user', 'transaction_detail' => function ($query) {
+            $query->with('produk');
+        }])->where(['kode' => $kode, 'user_id' => $user_id])->get();
+        $new_invoice = [];
+        $totals = 0;
+        foreach($invoice as $data){
+            $totals += $data->ongkir + $data->total_harga;
+        }
+        array_push($new_invoice, (object)[
+            'order' => $invoice,
+            'total_pembayaran' => $totals
+        ]);
+        $pdf = PDF::loadview('users.invoice.member', ['invoice' =>  $new_invoice]);
+	    return $pdf->download('laporan-pegawai-pdf');
+    } */
 }

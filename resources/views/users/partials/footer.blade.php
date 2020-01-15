@@ -16,7 +16,7 @@
                 <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-0">
                   <li class="ftco-animate"><a href="javascript:void(0)"><span class="fab fa-twitter"></span></a></li>
                   <li class="ftco-animate"><a href="javascript:void(0)"><span class="fab fa-facebook"></span></a></li>
-                  <li class="ftco-animate"><a href="javascript:void(0)"><span class="fab fa-instagram"></span></a></li>
+                  <li class="ftco-animate"><a href="https://www.instagram.com/tradecafe.nusantara" target="_blank"><span class="fab fa-instagram"></span></a></li>
                 </ul>
               </div>
             </div>

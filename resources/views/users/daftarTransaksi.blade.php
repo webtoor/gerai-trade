@@ -73,7 +73,7 @@ select {
                         @foreach($array_order as $list)
                           <div class="card" style="margin-bottom:20px;">
                             <ul class="list-group list-group-flush">
-                            <li class="list-group-item"> <b> <i class="flaticon-bag fa-lg"></i> Pembelian</b>
+                            <li class="list-group-item"> <b> <i class="flaticon-bag fa-lg"></i> Pembelian</b> | <a href="{{route('home.show-invoice', $list->order[0]->kode)}}">Invoice</a> 
                           
                               <a id="clickBatal" class="float-right text-danger" style="font-size:14px;" data-toggle="modal" data-target="#batalkan" data-trans_kode="{{$list->order[0]->kode}}">Batalkan</a>
                             </li>
@@ -167,7 +167,7 @@ select {
                               <div class="card" style="margin-bottom:20px;">
                                 <ul class="list-group list-group-flush">
                                 <li class="list-group-item"> 
-                                  <b> <i class="flaticon-bag fa-lg"></i> Pesanan Diproses</b>
+                                  <b> <i class="flaticon-bag fa-lg"></i> Pesanan Diproses</b> | <a href="{{route('home.show-invoice', $list_proses->kode)}}">Invoice</a> 
                                   <a class="float-right" style="color:#fa591d;"> 
                                     Total Belanja
                                     <?php $subtotal = $list_proses->total_harga + $list_proses->ongkir; ?>
@@ -244,7 +244,7 @@ select {
                             @foreach($order_kirim as $list_kirim)
                               <div class="card" style="margin-bottom:20px;">
                                 <ul class="list-group list-group-flush">
-                                <li class="list-group-item"> <div><i class="flaticon-bag fa-lg"></i> Pesanan Dikirim
+                                <li class="list-group-item"> <div><i class="flaticon-bag fa-lg"></i> Pesanan Dikirim | <a href="{{route('home.show-invoice', $list_proses['kode'])}}">Invoice</a> 
                                   <a class="float-right" style="color:#fa591d;"> 
                                     Total Belanja
                                     <?php $subtotal = $list_kirim['total_harga'] + $list_kirim['ongkir']; ?>
@@ -350,7 +350,7 @@ select {
                             @foreach($order_selesai as $list_selesai)
                               <div class="card" style="margin-bottom:20px;">
                                 <ul class="list-group list-group-flush">
-                                <li class="list-group-item"> <div><i class="flaticon-bag fa-lg"></i> Pesanan Selesai
+                                <li class="list-group-item"> <div><i class="flaticon-bag fa-lg"></i> Pesanan Selesai  | <a href="{{route('home.show-invoice', $list_selesai->kode)}}">Invoice</a> 
                                   <a class="float-right" style="color:#fa591d;"> 
                                     Total Belanja
                                     <?php $subtotal = $list_selesai->total_harga + $list_selesai->ongkir; ?>
