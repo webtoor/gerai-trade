@@ -239,7 +239,7 @@ class UserOrderController extends Controller
                 $bayar = new \stdClass();
                 $bayar->no_invoice = $data['transaksi_kode_bukti'];
                 $bayar->email = 'hairudinberry@gmail.com';
-                $bayar->subject = 'Pembayaran Baru';  
+                $bayar->subject = 'Notifikasi Bukti Pembayaran';  
         
         
                 Mail::send('admin.partials.mail.pembayaran', ['invoice' => $bayar->no_invoice, 'subject' => $bayar->subject ], function($mail) use ($bayar){
