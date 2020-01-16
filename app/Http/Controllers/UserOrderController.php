@@ -16,6 +16,8 @@ use App\Models\Produk;
 use App\Models\Kategori;
 use App\Models\ProdukUlasan;
 use PDF;
+use Illuminate\Support\Facades\Mail;
+
 class UserOrderController extends Controller
 {
     public function postCheckout(Request $request){
@@ -213,25 +215,39 @@ class UserOrderController extends Controller
             'nama_pengirim' => 'required',
             'image_pembayaran' => 'required|file|mimes:jpeg,jpg,png|max:5000'
         ]); 
-       
-        $file = $request->file('image_pembayaran');
-        $imageName = 'image_'.time().Str::random(10).'.png';
-        $path = Storage::disk('public')->putFileAs('bukti_pembayaran', $file, $imageName);
-            TransactionBukti::create([
-            'kode_id' => $data['transaksi_kode_bukti'],
-            'img_path' => $path,
-            'jumlah_transfer' => $data['jumlah_transfer'],
-            'nama_bank' => $data['bank_pengirim'],
-            'nama_pengirim' => $data['nama_pengirim'],
-            'status' => '0'
-        ]);
+        $check = TransactionBukti::where('kode_id',$data['transaksi_kode_bukti'] )->get();
+        if(count($check) > 0){
+            TransactionBukti::where('kode_id',$data['transaksi_kode_bukti'] )->delete();
+        }
 
-        Transaction::where('kode', $data['transaksi_kode_bukti'])->update([
-            'status_id' => '1'
-        ]);
+            $file = $request->file('image_pembayaran');
+            $imageName = 'image_'.time().Str::random(10).'.png';
+            $path = Storage::disk('public')->putFileAs('bukti_pembayaran', $file, $imageName);
+                TransactionBukti::create([
+                'kode_id' => $data['transaksi_kode_bukti'],
+                'img_path' => $path,
+                'jumlah_transfer' => $data['jumlah_transfer'],
+                'nama_bank' => $data['bank_pengirim'],
+                'nama_pengirim' => $data['nama_pengirim'],
+                'status' => '0'
+            ]);
+    
+            Transaction::where('kode', $data['transaksi_kode_bukti'])->update([
+                'status_id' => '1'
+            ]);
+    
+                $bayar = new \stdClass();
+                $bayar->no_invoice = $data['transaksi_kode_bukti'];
+                $bayar->email = 'hairudinberry@gmail.com';
+                $bayar->subject = 'Pembayaran Baru';  
         
+        
+                Mail::send('admin.partials.mail.pembayaran', ['invoice' => $bayar->no_invoice, 'subject' => $bayar->subject ], function($mail) use ($bayar){
+                    $mail->from('_donotreply@geraitrade.com','TraDe');
+                    $mail->to($bayar->email)->subject($bayar->subject);
+                });
+                return back()->withSuccess(trans('Anda Berhasil Mengunggah Bukti Pembayaran')); 
 
-        return back()->withSuccess(trans('Anda Berhasil Mengunggah Bukti Pembayaran')); 
     }
 
     public function transaksiSelesai(Request $request){
