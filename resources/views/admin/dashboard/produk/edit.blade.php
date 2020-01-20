@@ -116,7 +116,7 @@
 </div>
 <div class="masonry-item col-md-6">
         <div class="bgc-white p-20 bd">
-            @if(count($produk->produk_image) < 3)
+            @if(count($produk->produk_image) < 5)
         <button id="insertImage" data-produk_id="{{$produk->id}}" data-toggle="modal" data-target="#addFotoProduk" class="btn indigo white-text btn-md" title="{{ trans('Tambah Mitra') }}">
                     <b><i class="fa fa-plus"></i> Tambah Foto Produk</b></button>
             @endif

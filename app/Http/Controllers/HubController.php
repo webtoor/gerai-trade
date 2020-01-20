@@ -51,15 +51,20 @@ class HubController extends Controller
             'stok' => ['required', 'numeric'],
             'berat' => ['required','numeric'],
             'harga_dasar' => ['required', 'numeric'],
-            'image_produk' => 'required|array|min:1|max:3',
-            'image_produk.*' => 'file|mimes:jpeg,jpg,png|max:8000'
+            'image_produk' => 'required|array|min:1|max:5',
+            'image_produk.*' => 'file|mimes:jpeg,jpg,png|max:7000'
         ]); 
         
         try {
+            if($request['subkategori_id']){
+                $subkategori = $request['subkategori_id'];
+            }else{
+                $subkategori = null;
+            }
             $post = Produk::create([
             'hub_id' => $hub_id,
             'kategori_id' => $data['kategori_id'],
-            /* 'subkategori_id' => $data['subkategori_id'], */
+            'subkategori_id' => $subkategori,
             'nama_produk' => $data['nama_produk'],
             'deskripsi' => $data['deskripsi'],
             'stok' => $data['stok'],
@@ -102,7 +107,7 @@ class HubController extends Controller
     public function updateProduk(Request $request, $produk_id){
         $data = $request->validate([
             'kategori_id' => ['required'],
-            /* 'subkategori_id' => ['nullable'], */
+            'subkategori_id' => ['nullable'],
             'nama_produk' => ['required'], 
             'deskripsi' => ['required'], 
             'stok' => ['required', 'numeric'],
