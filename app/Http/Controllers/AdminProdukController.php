@@ -45,18 +45,20 @@ class AdminProdukController extends Controller
             'berat' => ['required','numeric'],
             'harga_dasar' => ['required', 'numeric'],
             'harga' => ['required', 'numeric'],
-          /*   'link_tokped' => ['nullable'],
-            'link_shopee' => ['nullable'],
-            'link_bukalapak' => ['nullable'], */
-            'image_produk' => 'required|array|min:1|max:3',
-            'image_produk.*' => 'file|mimes:jpeg,jpg,png|max:8000'
+            'image_produk' => 'required|array|min:1|max:5',
+            'image_produk.*' => 'file|mimes:jpeg,jpg,png|max:7000'
         ]); 
         
         try {
+            if($request['subkategori_id']){
+                $subkategori = $request['subkategori_id'];
+            }else{
+                $subkategori = null;
+            }
             $post = Produk::create([
             'hub_id' => $data['hub_id'],
             'kategori_id' => $data['kategori_id'],
-            'subkategori_id' => $data['subkategori_id'],
+            'subkategori_id' => $subkategori,
             'nama_produk' => $data['nama_produk'],
             'deskripsi' => $data['deskripsi'],
             'stok' => $data['stok'],
@@ -64,10 +66,6 @@ class AdminProdukController extends Controller
             'harga_dasar' => $data['harga_dasar'],
             'harga' => $data['harga'],
             'status' => '1'
-       /*      'link_tokped' => $data['link_tokped'],
-            'link_shopee' => $data['link_shopee'],
-            'link_bukalapak' => $data['link_bukalapak'], */
-
         ]);
         
             $newPost = $post->replicate();

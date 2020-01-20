@@ -154,9 +154,9 @@ class AdminController extends Controller
 
     public function addMitra(Request $request){
         $data = $request->validate([
-            'nama_hub' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:15'],
-            'nama_depan' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:15'],
-            'nama_belakang' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:20'],
+            'nama_hub' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:50'],
+            'nama_depan' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:50'],
+            'nama_belakang' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/', 'max:50'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
             'nomor_ponsel' => ['required', 'string','min:10', 'max:14', 'unique:users'],
             'password' => ['required', 'string', 'min:3', 'confirmed'],

@@ -51,9 +51,9 @@
                                         
                                                    <div class="card-footer px-1" style="background:white">
                                                     <span class="float-left">
-                                                        <?php $nr = 4;?>
+                                                        <?php $nr = $wishlists->rating;?>
                                                         @for($i = 0; $i < 5; $i++)
-                                                            <span style="color:#ffc200"><i class="{{ $nr <= $i ? 'far fa-star' : 'fas fa-star' }}" aria-hidden="true"></i></span>
+                                                            <span style="color:#ffc200; font-size:13px;"><i class="{{ $nr <= $i ? 'far fa-star' : 'fas fa-star' }}" aria-hidden="true"></i></span>
                                                         @endfor
                                                     </span>
                                                        <span class="float-right">

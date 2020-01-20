@@ -22,7 +22,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'nomor_ponsel',
         'email',
         'password',
-        'status_mitra'
+        'status_mitra',
+        'email_verifiy_at'
     ];
 
     /**

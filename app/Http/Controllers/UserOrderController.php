@@ -176,10 +176,10 @@ class UserOrderController extends Controller
             $tabName = 'mkonfirmasi';
         }elseif(count($order_proses) > 0){
             $tabName = 'mproses';
+        }elseif(count($order_kirim) > 0){
+            $tabName = 'mdikirim';
         }elseif(count($order_batal) > 0){
             $tabName = 'mbatal';
-        }elseif(count($order_kirim) > 0){
-            $tabName = 'mkirim';
         }else{
             $tabName = 'mselesai';
 

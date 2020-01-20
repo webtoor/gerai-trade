@@ -67,7 +67,7 @@
                         <input type="number" class="form-control" name="harga" id="harga_produk" aria-describedby="emailHelp" placeholder="Masukan Harga TRADE" required>
                     </div>
                     <div class="form-group">
-                          <label>Pilih Foto Produk<sup style="color:red"> *Wajib *Maksimal 3</sup></label>
+                          <label>Pilih Foto Produk<sup style="color:red"> *Wajib *Maksimal 5 Gambar *Maksimal 1 Ukuran Gambar 1 MB</sup></label>
                           <input type="file" class="form-control" name="image_produk[]" id="file-input" multiple required/>   
                           <div id="thumb-output"></div>
                          
@@ -132,8 +132,8 @@ $('select#kategori').on('change', function (e) {
     $('input#file-input').on('change', function(){ 
         if (window.FileReader) //check File API supported browser
         {
-            if (this.files.length > 3){
-                alert('Gambar Maksimal Hanya 3')
+            if (this.files.length > 5){
+                alert('Gambar Maksimal Hanya 5')
                 this.value = ""
                 $('#thumb-output').empty()
 

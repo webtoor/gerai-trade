@@ -237,14 +237,14 @@ select {
 
 
                       <!-- PESANAN DIKIRIM -->
-                      <div class="tab-pane fade {{ !empty($tabName) && $tabName == 'dikirim' ? 'show active' : '' }}" id="pesanan_dikirim" role="tabpanel" aria-labelledby="pesanan_dikirim">
+                      <div class="tab-pane fade {{ !empty($tabName) && $tabName == 'mdikirim' ? 'show active' : '' }}" id="pesanan_dikirim" role="tabpanel" aria-labelledby="pesanan_dikirim">
                         <div class="row" style="margin-top:40px;">
                           <div class="col-sm-12">
                             @if(count($order_kirim) > 0)
                             @foreach($order_kirim as $list_kirim)
                               <div class="card" style="margin-bottom:20px;">
                                 <ul class="list-group list-group-flush">
-                                <li class="list-group-item"> <div><i class="flaticon-bag fa-lg"></i> Pesanan Dikirim | <a href="{{route('home.show-invoice', $list_proses['kode'])}}">Invoice</a> 
+                                <li class="list-group-item"> <div><i class="flaticon-bag fa-lg"></i> Pesanan Dikirim | <a href="{{route('home.show-invoice', $list_kirim['kode'])}}">Invoice</a> 
                                   <a class="float-right" style="color:#fa591d;"> 
                                     Total Belanja
                                     <?php $subtotal = $list_kirim['total_harga'] + $list_kirim['ongkir']; ?>

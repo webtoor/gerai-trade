@@ -45,7 +45,7 @@ class HubController extends Controller
         $hub_id = Auth::user()->id;
         $data = $request->validate([
             'kategori_id' => ['required'],
-            'subkategori_id' => ['nullable'],
+            /* 'subkategori_id' => ['nullable'], */
             'nama_produk' => ['required'], 
             'deskripsi' => ['required'], 
             'stok' => ['required', 'numeric'],
@@ -59,7 +59,7 @@ class HubController extends Controller
             $post = Produk::create([
             'hub_id' => $hub_id,
             'kategori_id' => $data['kategori_id'],
-            'subkategori_id' => $data['subkategori_id'],
+            /* 'subkategori_id' => $data['subkategori_id'], */
             'nama_produk' => $data['nama_produk'],
             'deskripsi' => $data['deskripsi'],
             'stok' => $data['stok'],
@@ -102,7 +102,7 @@ class HubController extends Controller
     public function updateProduk(Request $request, $produk_id){
         $data = $request->validate([
             'kategori_id' => ['required'],
-            'subkategori_id' => ['nullable'],
+            /* 'subkategori_id' => ['nullable'], */
             'nama_produk' => ['required'], 
             'deskripsi' => ['required'], 
             'stok' => ['required', 'numeric'],
