@@ -93,6 +93,8 @@ Route::get('/clear-cache', function () {
 
         // USER
         Route::get('member', 'AdminController@showMember')->name('showMember');
+        Route::delete('member/{user_id}', 'AdminController@deleteMitra')->name('deleteMember');
+
         Route::get('hub', 'AdminController@showMitra')->name('showMitra');
         Route::post('hub', 'AdminController@addMitra')->name('addMitra');
         Route::get('edit-hub/{user_id}', 'AdminController@editHub')->name('editHub');
