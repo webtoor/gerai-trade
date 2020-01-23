@@ -35,6 +35,17 @@
                                     <span class="ti-zoom-in"></span>
                             </button>
                             </li>
+                            <li class="list-inline-item">
+                                {!! Form::open([
+                                    'class'=>'delete',
+                                    'url'  => route('admin-panel.deleteMember', $members->user->id), 
+                                    'method' => 'DELETE',
+                                    ]) 
+                                !!}
+                                    <button class="btn btn-danger px-3 btn-sm" title="{{ trans('Hapus Member') }}"><i class="ti-trash"></i></button>
+                                    
+                                {!! Form::close() !!}
+                            </li>
                     </ul>
                     </td>
                 </tr>

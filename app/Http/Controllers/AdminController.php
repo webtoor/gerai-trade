@@ -181,7 +181,7 @@ class AdminController extends Controller
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
                 'status_mitra' => '1',
-                'email_verifiy_at' => $now
+                'email_verified_at' => $now
             ]);
 
             User_role::create([
