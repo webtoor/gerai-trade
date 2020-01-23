@@ -285,6 +285,20 @@ class AdminController extends Controller
         return back()->withSuccess(trans('Anda Berhasil menghapus Hub')); 
     }
 
+    public function deleteMember($user_id){
+        $user_table = User::findOrFail($user_id);
+        $user_table->delete();
+        DB::statement("ALTER TABLE users AUTO_INCREMENT = 1");
+        DB::statement("ALTER TABLE user_roles AUTO_INCREMENT = 1");
+        DB::statement("ALTER TABLE pesan_details AUTO_INCREMENT = 1");
+        DB::statement("ALTER TABLE alamats AUTO_INCREMENT = 1");
+        DB::statement("ALTER TABLE transactions AUTO_INCREMENT = 1");
+        DB::statement("ALTER TABLE transaction_bukti AUTO_INCREMENT = 1");
+        DB::statement("ALTER TABLE transaction_detail AUTO_INCREMENT = 1");
+
+        return back()->withSuccess(trans('Anda Berhasil menghapus Member')); 
+    }
+
     public function getPesan(){
         $pesan = Pesan::with(['user', 'pesan_detail' => function ($query) {
             $query->orderBy('created_at');
