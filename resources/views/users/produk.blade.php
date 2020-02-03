@@ -391,10 +391,14 @@
                  
                   <input type="hidden" name="produk_id" value="<?php echo $produk_detail->id;?>">
 
-                
+                  @if($produk_detail->stok > 0)
                   <button type="submit" class="btn btn-primary" href="#">Beli</button>
+                  @endif
+
                   @else
-                  @if(Auth::user()->role->role_id == '1')
+                  @if(Auth::user()->role->role_id == '1' && $produk_detail->stok > 0)
+
+
                   <form action="{{ url('cart') }}" method="POST"  style="margin-top:-50px;">
                     {{ @csrf_field() }}
                 <div class="product_count">
@@ -408,10 +412,10 @@
                
                 <div class="card_area d-flex align-items-center">
                   <div>
-                     
+
                       <input type="hidden" name="produk_id" value="<?php echo $produk_detail->id;?>">
     
-                    
+
                       <button type="submit" class="btn btn-primary" href="#">Masukan Keranjang</button>
                       @else
                       
