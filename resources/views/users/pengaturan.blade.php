@@ -227,8 +227,8 @@
             <input type="hidden" id="uid" name="alamat_id" value="uid" required>
 
             <input type="hidden" name="uprovince_name" id="uprovince_name">
-          <input type="hidden" name="ucity_name" id="ucity_name">
-          <input type="hidden" name="ukecamatan_name" id="ukecamatan_name">
+            <input type="hidden" name="ucity_name" id="ucity_name">
+            <input type="hidden" name="ukecamatan_name" id="ukecamatan_name">
             <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Tutup</button>
 
             <button type="submit" class="btn btn-primary btn-md">Submit</button>

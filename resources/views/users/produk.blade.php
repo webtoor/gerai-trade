@@ -451,6 +451,10 @@
           <li class="nav-item">
               <a class="nav-link" id="ulasan-tab" data-toggle="tab" href="#ulasan" role="tab" aria-controls="ulasan" aria-selected="true">ULASAN</a>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link" id="diskusi-tab" data-toggle="tab" href="#diskusi" role="tab" aria-controls="diskusi" aria-selected="true">DISKUSI PRODUK</a>
+            </li>
 			</ul>
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
@@ -505,6 +509,80 @@
               
                 
               </div>
+            </div>
+
+            <div class="tab-pane fade" id="diskusi" role="tabpanel" aria-labelledby="diskusi-tab">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="comment_list">
+                    <div class="review_item">
+                      <div class="media">
+                        <div class="d-flex">
+                          <img src="/images/user.png" alt="">
+                        </div>
+                        <div class="media-body">
+                          <h4>Blake Ruiz</h4>
+                          <h5>12th Feb, 2018 at 05:56 pm</h5>
+                          <a class="reply_btn" href="#">Reply</a>
+                        </div>
+                      </div>
+                      <p>Test</p>
+                    </div>
+                    <div class="review_item reply">
+                      <div class="media">
+                        <div class="d-flex">
+                          <img src="/images/user.png" alt="">
+                        </div>
+                        <div class="media-body">
+                          <h4>Blake Ruiz</h4>
+                          <h5>12th Feb, 2018 at 05:56 pm</h5>
+                          <a class="reply_btn" href="#">Reply</a>
+                        </div>
+                      </div>
+                      <p>Test</p>
+                    </div>
+                    <div class="review_item">
+                      <div class="media">
+                        <div class="d-flex">
+                          <img src="/images/user.png" alt="">
+                        </div>
+                        <div class="media-body">
+                          <h4>Blake Ruiz</h4>
+                          <h5>12th Feb, 2018 at 05:56 pm</h5>
+                          <a class="reply_btn" href="#">Reply</a>
+                        </div>
+                      </div>
+                      <p>Test</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="review_box">
+                    <h4>Pertanyaan</h4>
+                    <form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <input type="text" class="form-control" id="name" name="name" placeholder="Nama">
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <textarea class="form-control" name="message" id="message" rows="4" placeholder="Apa yang ingin Anda tanyakan mengenai produk ini?"></textarea>
+                        </div>
+                      </div>
+                      <div class="col-md-12 text-right">
+                        <button type="submit" value="submit" class="btn btn-info">KIRIM</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+    
             </div>
 		</div>
 	</section>
