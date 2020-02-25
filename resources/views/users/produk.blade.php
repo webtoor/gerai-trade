@@ -559,24 +559,24 @@
                 <div class="col-lg-6">
                   <div class="review_box">
                     <h4>Pertanyaan</h4>
-                    <form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                    <form class="row contact_form" action="javascript:void(0)" method="post" id="contactForm">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <input type="text" class="form-control" id="name" name="name" placeholder="Nama">
+                          <input type="text" class="form-control" id="form_name" name="name" placeholder="Nama" required>
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
-                          <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                          <input type="email" class="form-control" id="form_email" name="email" placeholder="Email" required>
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
-                          <textarea class="form-control" name="message" id="message" rows="4" placeholder="Apa yang ingin Anda tanyakan mengenai produk ini?"></textarea>
+                          <textarea class="form-control" name="message" id="form_message" rows="4" placeholder="Apa yang ingin Anda tanyakan mengenai produk ini?" required></textarea>
                         </div>
                       </div>
                       <div class="col-md-12 text-right">
-                        <button type="submit" value="submit" class="btn btn-info">KIRIM</button>
+                        <button type="submit" id="ask-send" value="submit" class="btn btn-info">KIRIM</button>
                       </div>
                     </form>
                   </div>
@@ -616,6 +616,33 @@
             location.hash = page;
         })
     }
+
+    $("#ask-send").click(function () {
+              console.log('readyss')
+              var params = {
+                'name' : $('#form_name').val(),
+                'email' :  $('#form_email').val(),
+                'message' :  $('#form_message').val(),
+              }
+              console.log(params)
+              $.ajax({
+              headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              },
+            contentType: "application/json",
+            dataType: "json",
+            type: 'POST',
+            url: "/diskusi",
+            data: JSON.stringify(params),
+            success: function (results) {
+              console.log(results);
+             /*  if(results['success'] == 'true'){
+                $('.messages').html('<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Terima kasih!</strong><p>Decepatnya segera saya respon</p></div>');
+                $('#contact_form')[0].reset();
+              } */
+        }
+    });
+});
     </script>
 
 

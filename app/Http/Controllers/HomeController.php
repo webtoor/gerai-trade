@@ -13,6 +13,8 @@ use App\Models\ProdukUlasan;
 use App\Models\ProdukUnggulan;
 use App\Models\Blog;
 use App\Models\Wishlist;
+use App\Models\Diskusi;
+
 use Cart;
 
 
@@ -114,6 +116,17 @@ class HomeController extends Controller
     public function kontakKita(){
         $kategori =  Kategori::with('sub_kategori')->get();
         return view('users.kontakKita', ['kategori' => $kategori]);
+    }
+    public function postDiskusi(Request $request){
+        $data = $request->all();
+
+        Diskusi::create([
+            'nama' => $data['name'],
+            'email' => $data['email'],
+            'pesan' => $data['message']
+        ]);
+        return response()->json($request->all());
+
     }
    
 }

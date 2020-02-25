@@ -157,6 +157,7 @@ Route::get('/single/{slug}', 'BlogController@singleBlog')->name('single-blog');
 Route::get('/siapa-kita', 'HomeController@siapaKita')->name('siapa-kita');
 Route::get('/cerita-kita', 'BlogController@ceritaKita')->name('cerita-kita');
 Route::get('/kontak-kita', 'HomeController@kontakKita')->name('kontak-kita');
+Route::post('/diskusi', 'HomeController@postDiskusi')->name('post-diskusi');
 
 // MITRA / MEMBER
 Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member', 'verified']], function(){
