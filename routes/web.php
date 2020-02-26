@@ -158,6 +158,8 @@ Route::get('/siapa-kita', 'HomeController@siapaKita')->name('siapa-kita');
 Route::get('/cerita-kita', 'BlogController@ceritaKita')->name('cerita-kita');
 Route::get('/kontak-kita', 'HomeController@kontakKita')->name('kontak-kita');
 Route::post('/diskusi', 'HomeController@postDiskusi')->name('post-diskusi');
+Route::post('/diskusi-detail', 'HomeController@postDiskusiDetail')->name('post-diskusi-detail');
+Route::get('/diskusi-detail/pagination/{produk_id}','HomeController@diskusiProdukPagination');
 
 // MITRA / MEMBER
 Route::group(['prefix'=> 'home', 'as'=> 'home' . '.', 'middleware' => ['member', 'verified']], function(){

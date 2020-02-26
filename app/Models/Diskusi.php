@@ -13,5 +13,11 @@ class Diskusi extends Model
         'nama',
         'email',
         'pesan',
+        'produk_id'
     ];
+
+
+    public function diskusi_detail(){
+        return $this->hasMany('App\Models\DiskusiDetail', 'diskusi_id', 'id');
+    }
 }

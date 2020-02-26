@@ -99,14 +99,20 @@ class HomeController extends Controller
             $query->with('alamat');
         }])->where('slug', $slug_produk)->orderBy('id', 'desc')->first();
         $produk_ulasan = ProdukUlasan::with('user')->where('produk_id', $produk_detail->id)->orderBy('id', 'desc')->paginate(10);
-        return view('users.produk', ['kategori' => $kategori, 'produk_detail' => $produk_detail, 'produk_ulasan' => $produk_ulasan]);
+        $produk_diskusi = Diskusi::with('diskusi_detail')->where('produk_id', $produk_detail->id)->orderBy('id', 'desc')->paginate(1);
+
+        return view('users.produk', ['kategori' => $kategori, 'produk_detail' => $produk_detail, 'produk_ulasan' => $produk_ulasan, 'produk_diskusi' => $produk_diskusi]);
     }
 
+
     public function produkDetailPagination($produk_id){
-       
-            $produk_ulasan = ProdukUlasan::with('user')->where('produk_id', $produk_id)->orderBy('id', 'desc')->paginate(10);
-            return view('users.pagination.produkUlasan', ['produk_ulasan' => $produk_ulasan])->render();
-        
+        $produk_ulasan = ProdukUlasan::with('user')->where('produk_id', $produk_id)->orderBy('id', 'desc')->paginate(10);
+        return view('users.pagination.produkUlasan', ['produk_ulasan' => $produk_ulasan])->render();
+    }
+
+    public function diskusiProdukPagination($produk_id){
+        $produk_diskusi = Diskusi::with('diskusi_detail')->where('produk_id', $produk_id)->orderBy('id', 'desc')->paginate(1);
+        return view('users.pagination.diskusiProduk', ['produk_diskusi' => $produk_diskusi])->render();
     }
 
     public function siapaKita(){
@@ -119,14 +125,20 @@ class HomeController extends Controller
     }
     public function postDiskusi(Request $request){
         $data = $request->all();
-
-        Diskusi::create([
-            'nama' => $data['name'],
-            'email' => $data['email'],
-            'pesan' => $data['message']
-        ]);
-        return response()->json($request->all());
-
+        try {
+            Diskusi::create([
+                'nama' => $data['name'],
+                'produk_id' => $data['produk_id'],
+                'email' => $data['email'],
+                'pesan' => $data['message']
+            ]);
+            return response()->json([
+                'status' => '1',
+                'message' => 'success'
+            ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
    
 }

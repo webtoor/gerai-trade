@@ -18,10 +18,12 @@ class CreateDiskusiDetailTable extends Migration
             $table->string('nama');
             $table->string('email');
             $table->longText('pesan');
+            $table->integer('user_id')->unsigned();
             $table->integer('diskusi_id')->unsigned()->nullable();
             $table->timestamps();
 
             $table->foreign('diskusi_id')->references('id')->on('diskusi')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

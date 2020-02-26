@@ -15,10 +15,12 @@ class CreateDiskusiTable extends Migration
     {
         Schema::create('diskusi', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('produk_id')->unsigned();
             $table->string('nama');
             $table->string('email');
             $table->longText('pesan');
             $table->timestamps();
+            $table->foreign('produk_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 

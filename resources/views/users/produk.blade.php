@@ -480,86 +480,30 @@
                       <h6>({{$produk_ulasan->total()}} Ulasan)</h6>
                       </div>
                     </div>
-                   {{--  <div class="col-6">
-                      <div class="rating_list">
-                        <h3>Based on 3 Reviews</h3>
-                        <ul class="list">
-                          <li><a href="#">5 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                               class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-                          <li><a href="#">4 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                               class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-                          <li><a href="#">3 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                               class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-                          <li><a href="#">2 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                               class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-                          <li><a href="#">1 Star <i class="fa fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i
-                               class="far fa-star"></i><i class="far fa-star"></i> 01</a></li>
-                        </ul>
-                      </div>
-                    </div> --}}
                   </div>
                   <br>
                   <div class="review_list">
                    <div class="ajaxPaginationProduk">
                       @include('users.pagination.produkUlasan')
                    </div>
-    
                   </div>
                 </div>
-              
-                
               </div>
             </div>
 
             <div class="tab-pane fade" id="diskusi" role="tabpanel" aria-labelledby="diskusi-tab">
               <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                   <div class="comment_list">
-                    <div class="review_item">
-                      <div class="media">
-                        <div class="d-flex">
-                          <img src="/images/user.png" alt="">
-                        </div>
-                        <div class="media-body">
-                          <h4>Blake Ruiz</h4>
-                          <h5>12th Feb, 2018 at 05:56 pm</h5>
-                          <a class="reply_btn" href="#">Reply</a>
-                        </div>
-                      </div>
-                      <p>Test</p>
-                    </div>
-                    <div class="review_item reply">
-                      <div class="media">
-                        <div class="d-flex">
-                          <img src="/images/user.png" alt="">
-                        </div>
-                        <div class="media-body">
-                          <h4>Blake Ruiz</h4>
-                          <h5>12th Feb, 2018 at 05:56 pm</h5>
-                          <a class="reply_btn" href="#">Reply</a>
-                        </div>
-                      </div>
-                      <p>Test</p>
-                    </div>
-                    <div class="review_item">
-                      <div class="media">
-                        <div class="d-flex">
-                          <img src="/images/user.png" alt="">
-                        </div>
-                        <div class="media-body">
-                          <h4>Blake Ruiz</h4>
-                          <h5>12th Feb, 2018 at 05:56 pm</h5>
-                          <a class="reply_btn" href="#">Reply</a>
-                        </div>
-                      </div>
-                      <p>Test</p>
-                    </div>
+                    <div class="ajaxPaginationDiskusi">
+                      @include('users.pagination.diskusiProduk')
+                   </div>
                   </div>
                 </div>
-                <div class="col-lg-6">
-                  <div class="review_box">
-                    <h4>Pertanyaan</h4>
-                    <form class="row contact_form" action="javascript:void(0)" method="post" id="contactForm">
+                <div class="col-lg-12">
+                  <div class="review_box" style="margin-top:20px;">
+                    <h4 style="text-align:center">Pertanyaan</h4>
+                    <form class="row contact_form" action="javascript:void(0)" method="post" id="diskusiForm">
                       <div class="col-md-12">
                         <div class="form-group">
                           <input type="text" class="form-control" id="form_name" name="name" placeholder="Nama" required>
@@ -568,6 +512,7 @@
                       <div class="col-md-12">
                         <div class="form-group">
                           <input type="email" class="form-control" id="form_email" name="email" placeholder="Email" required>
+                          <input type="hidden"  id="form_id" name="id" value="{{$produk_detail->id}}" required>
                         </div>
                       </div>
                       <div class="col-md-12">
@@ -582,7 +527,6 @@
                   </div>
                 </div>
               </div>
-    
             </div>
 		</div>
 	</section>
@@ -606,6 +550,14 @@
         readPageProduk(produk_id, page)
       })
 
+      $('.ajaxPaginationDiskusi').on('click', '.pagination a', function (e) {
+        e.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        var produk_id = "{{$produk_detail->id}}";
+        console.log(produk_id)
+        readPageDiskusi(produk_id, page)
+      })
+
        // Request Page Produk
     function readPageProduk(produk_id, page) {
         $.ajax({
@@ -617,31 +569,62 @@
         })
     }
 
+    function readPageDiskusi(produk_id, page) {
+        $.ajax({
+            url: '/diskusi-detail/pagination/' + produk_id + '?page=' + page
+        }).done(function (data) {
+          console.log(data)
+            $('.ajaxPaginationDiskusi').html(data);
+            location.hash = page;
+        })
+    }
+
+      /*  // PAGINATION Page Produk
+       $('.ajaxPaginationProduk').on('click', '.pagination a', function (e) {
+        e.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        var produk_id = "{{$produk_detail->id}}";
+        console.log(produk_id)
+        readPageProduk(produk_id, page)
+      })
+
+       // Request Page Produk
+    function readPageProduk(produk_id, page) {
+        $.ajax({
+            url: '/produk/pagination/' + produk_id + '?page=' + page
+        }).done(function (data) {
+          console.log(data)
+            $('.ajaxPaginationProduk').html(data);
+            location.hash = page;
+        })
+    } */
+
     $("#ask-send").click(function () {
-              console.log('readyss')
-              var params = {
-                'name' : $('#form_name').val(),
-                'email' :  $('#form_email').val(),
-                'message' :  $('#form_message').val(),
-              }
-              console.log(params)
-              $.ajax({
-              headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-              },
-            contentType: "application/json",
-            dataType: "json",
-            type: 'POST',
-            url: "/diskusi",
-            data: JSON.stringify(params),
-            success: function (results) {
-              console.log(results);
-             /*  if(results['success'] == 'true'){
-                $('.messages').html('<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Terima kasih!</strong><p>Decepatnya segera saya respon</p></div>');
-                $('#contact_form')[0].reset();
-              } */
+          console.log('readyss')
+        var params = {
+          'name' : $('#form_name').val(),
+          'email' :  $('#form_email').val(),
+          'produk_id' : $('#form_id').val(),
+          'message' :  $('#form_message').val(),
         }
-    });
+          console.log(params)
+        $.ajax({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+          contentType: "application/json",
+          dataType: "json",
+          type: 'POST',
+          url: "/diskusi",
+          data: JSON.stringify(params),
+      success: function (results) {
+        console.log(results);
+        if(results['status'] == '1'){
+          //$('.messages').html('<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Terima kasih!</strong><p>Decepatnya segera saya respon</p></div>');
+          $('#diskusiForm')[0].reset();
+        }
+    }
+});
 });
     </script>
 
