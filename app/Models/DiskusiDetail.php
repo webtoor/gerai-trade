@@ -11,7 +11,6 @@ class DiskusiDetail extends Model
 
     protected $fillable = [
         'nama',
-        'email',
         'pesan',
         'diskusi_id',
         'user_id'

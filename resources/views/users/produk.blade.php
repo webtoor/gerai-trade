@@ -125,7 +125,7 @@
   margin-top: 60px; }
   .product_description_area .nav.nav-tabs {
     background: #f3f4f5;
-    text-align: left;
+    text-align: center;
     display: block;
     border: none;
     padding: 10px 0px; }
@@ -444,7 +444,7 @@
 <section class="product_description_area">
 		<div class="container">
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
-				<li class="nav-item" style="margin-left: 30px;">
+				<li class="nav-item">
 					<a class="nav-link active" id="home-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="true">INFORMASI PRODUK</a>
         </li>
 
@@ -493,13 +493,7 @@
 
             <div class="tab-pane fade" id="diskusi" role="tabpanel" aria-labelledby="diskusi-tab">
               <div class="row">
-                <div class="col-lg-12">
-                  <div class="comment_list">
-                    <div class="ajaxPaginationDiskusi">
-                      @include('users.pagination.diskusiProduk')
-                   </div>
-                  </div>
-                </div>
+                @guest
                 <div class="col-lg-12">
                   <div class="review_box" style="margin-top:20px;">
                     <h4 style="text-align:center">Pertanyaan</h4>
@@ -507,11 +501,6 @@
                       <div class="col-md-12">
                         <div class="form-group">
                           <input type="text" class="form-control" id="form_name" name="name" placeholder="Nama" required>
-                        </div>
-                      </div>
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <input type="email" class="form-control" id="form_email" name="email" placeholder="Email" required>
                           <input type="hidden"  id="form_id" name="id" value="{{$produk_detail->id}}" required>
                         </div>
                       </div>
@@ -526,6 +515,40 @@
                     </form>
                   </div>
                 </div>
+                @else
+                @if(Auth::user()->role->role_id == '1')
+                <div class="col-lg-12">
+                  <div class="review_box" style="margin-top:20px;">
+                    <h4 style="text-align:center">Pertanyaan</h4>
+                    <form class="row contact_form" action="javascript:void(0)" method="post" id="diskusiForm">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <input type="text" class="form-control" id="form_name" name="name" placeholder="Nama" required>
+                          <input type="hidden"  id="form_id" name="id" value="{{$produk_detail->id}}" required>
+
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <textarea class="form-control" name="message" id="form_message" rows="4" placeholder="Apa yang ingin Anda tanyakan mengenai produk ini?" required></textarea>
+                        </div>
+                      </div>
+                      <div class="col-md-12 text-right">
+                        <button type="submit" id="ask-send" value="submit" class="btn btn-info">KIRIM</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                @endif
+                @endguest
+                <div class="col-lg-12">
+                  <div class="comment_list">
+                    <div class="ajaxPaginationDiskusi">
+                      @include('users.pagination.diskusiProduk')
+                   </div>
+                  </div>
+                </div>
+              
               </div>
             </div>
 		</div>
@@ -534,12 +557,10 @@
 @section('js')
 
 	<script>
-      /*   $(document).ready(function () {
-            $(".s_Product_carousel").owlCarousel({
-                
-            });
+        $(document).ready(function () {
+          
             
-            }); */
+         
 
         // PAGINATION Page Produk
       $('.ajaxPaginationProduk').on('click', '.pagination a', function (e) {
@@ -571,7 +592,7 @@
 
     function readPageDiskusi(produk_id, page) {
         $.ajax({
-            url: '/diskusi-detail/pagination/' + produk_id + '?page=' + page
+            url: '/diskusi/pagination/' + produk_id + '?page=' + page
         }).done(function (data) {
           console.log(data)
             $('.ajaxPaginationDiskusi').html(data);
@@ -579,31 +600,11 @@
         })
     }
 
-      /*  // PAGINATION Page Produk
-       $('.ajaxPaginationProduk').on('click', '.pagination a', function (e) {
-        e.preventDefault();
-        var page = $(this).attr('href').split('page=')[1];
-        var produk_id = "{{$produk_detail->id}}";
-        console.log(produk_id)
-        readPageProduk(produk_id, page)
-      })
 
-       // Request Page Produk
-    function readPageProduk(produk_id, page) {
-        $.ajax({
-            url: '/produk/pagination/' + produk_id + '?page=' + page
-        }).done(function (data) {
-          console.log(data)
-            $('.ajaxPaginationProduk').html(data);
-            location.hash = page;
-        })
-    } */
-
-    $("#ask-send").click(function () {
+    $("button#ask-send").click(function () {
           console.log('readyss')
         var params = {
           'name' : $('#form_name').val(),
-          'email' :  $('#form_email').val(),
           'produk_id' : $('#form_id').val(),
           'message' :  $('#form_message').val(),
         }
@@ -620,10 +621,62 @@
       success: function (results) {
         console.log(results);
         if(results['status'] == '1'){
-          //$('.messages').html('<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Terima kasih!</strong><p>Decepatnya segera saya respon</p></div>');
           $('#diskusiForm')[0].reset();
+          $( ".ajax_item" ).prepend( '<div class="review_item"><div class="media"><div class="d-flex"><img src="/images/user.png" alt="" style="height:50px; width:50px;"></div><div class="media-body"><h4>'+results['data']['nama']+'</h4><h5>'+ 'now' +'</h5></div></div> <p>'+results['data']['pesan']+'</p></div>' );
         }
     }
+});
+});
+$(".ajaxPaginationDiskusi" ).on( "click","button#ask-detail-send", function() {
+          console.log('readyss')
+        var paramx = {
+          'name' : $('#form_detail_name').val(),
+          'diskusi_id' : $('#form_detail_id').val(),
+          'message' :  $('#form_detail_message').val(),
+        }
+          console.log(paramx)
+        $.ajax({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+          contentType: "application/json",
+          dataType: "json",
+          type: 'POST',
+          url: "/diskusi-detail",
+          data: JSON.stringify(paramx),
+      success: function (results) {
+        console.log(results);
+        if(results['status'] == '1'){
+          $('#diskusiDetailForm')[0].reset();
+          $( ".ajax_detail" ).append( ' <div class="media"><div class="d-flex"><img src="/images/user.png" alt="" style="height:50px; width:50px;"></div><div class="media-body"><h4>'+results['data']['nama'] +'</h4><h5>'+ 'now' +'</h5></div></div><p>'+results['data']['pesan']+'</p>' );
+        }
+    }
+});
+});
+$(".ajaxPaginationDiskusi" ).on( "click","button#hub-detail-send", function() {
+          console.log('readyss')
+        var paramx = {
+          'diskusi_id' : $('#form_detail_id').val(),
+          'message' :  $('#form_detail_message').val(),
+        }
+          console.log(paramx)
+        $.ajax({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+          contentType: "application/json",
+          dataType: "json",
+          type: 'POST',
+          url: "/diskusi-hub",
+          data: JSON.stringify(paramx),
+      success: function (results) {
+        console.log(results);
+        if(results['status'] == '1'){
+          $('#diskusiDetailForm')[0].reset();
+          $( ".ajax_detail" ).append( ' <div class="media"><div class="d-flex"><img src="/images/user.png" alt="" style="height:50px; width:50px;"></div><div class="media-body"><h4>'+results['data']['nama']+' - <button class="btn-outline-secondary btn-sm">Penjual</button></h4><h5>'+ 'now' +'</h5></div></div><p>'+results['data']['pesan']+'</p>' );
+        }
+    }
+});
 });
 });
     </script>

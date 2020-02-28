@@ -14,6 +14,7 @@ use App\Models\ProdukUnggulan;
 use App\Models\Blog;
 use App\Models\Wishlist;
 use App\Models\Diskusi;
+use App\Models\DiskusiDetail;
 
 use Cart;
 
@@ -99,7 +100,7 @@ class HomeController extends Controller
             $query->with('alamat');
         }])->where('slug', $slug_produk)->orderBy('id', 'desc')->first();
         $produk_ulasan = ProdukUlasan::with('user')->where('produk_id', $produk_detail->id)->orderBy('id', 'desc')->paginate(10);
-        $produk_diskusi = Diskusi::with('diskusi_detail')->where('produk_id', $produk_detail->id)->orderBy('id', 'desc')->paginate(1);
+        $produk_diskusi = Diskusi::with('diskusi_detail')->where('produk_id', $produk_detail->id)->orderBy('id', 'desc')->paginate(5);
 
         return view('users.produk', ['kategori' => $kategori, 'produk_detail' => $produk_detail, 'produk_ulasan' => $produk_ulasan, 'produk_diskusi' => $produk_diskusi]);
     }
@@ -111,7 +112,7 @@ class HomeController extends Controller
     }
 
     public function diskusiProdukPagination($produk_id){
-        $produk_diskusi = Diskusi::with('diskusi_detail')->where('produk_id', $produk_id)->orderBy('id', 'desc')->paginate(1);
+        $produk_diskusi = Diskusi::with('diskusi_detail')->where('produk_id', $produk_id)->orderBy('id', 'desc')->paginate(5);
         return view('users.pagination.diskusiProduk', ['produk_diskusi' => $produk_diskusi])->render();
     }
 
@@ -126,19 +127,55 @@ class HomeController extends Controller
     public function postDiskusi(Request $request){
         $data = $request->all();
         try {
-            Diskusi::create([
+           $result =  Diskusi::create([
                 'nama' => $data['name'],
                 'produk_id' => $data['produk_id'],
-                'email' => $data['email'],
                 'pesan' => $data['message']
             ]);
             return response()->json([
                 'status' => '1',
-                'message' => 'success'
+                'message' => 'success',
+                'data' => $result
             ]);
         } catch (\Throwable $th) {
             //throw $th;
         }
     }
    
+    public function postDiskusiDetail(Request $request){
+        $data = $request->all();
+        //return response()->json($request->all());
+        
+           $result = DiskusiDetail::create([
+                'nama' => $data['name'],
+                'pesan' => $data['message'],
+                'diskusi_id' => $data['diskusi_id'],
+                'user_id' => null
+            ]);
+            return response()->json([
+                'status' => '1',
+                'message' => 'success',
+                'data' => $result
+            ]);
+       
+    }
+
+    public function postDiskusiHub(Request $request){
+        $data = $request->all();
+        //return response()->json($request->all());
+        $user_id = Auth::user()->id;
+        $user =  User::where('id', $user_id)->first();
+           $result = DiskusiDetail::create([
+                'nama' => $user->nama_hub,
+                'pesan' => $data['message'],
+                'diskusi_id' => $data['diskusi_id'],
+                'user_id' => $user_id
+            ]);
+            return response()->json([
+                'status' => '1',
+                'message' => 'success',
+                'data' => $result
+            ]);
+       
+    }
 }

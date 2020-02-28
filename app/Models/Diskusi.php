@@ -11,7 +11,6 @@ class Diskusi extends Model
 
     protected $fillable = [
         'nama',
-        'email',
         'pesan',
         'produk_id'
     ];
