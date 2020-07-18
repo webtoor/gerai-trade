@@ -19,7 +19,7 @@
         "jquery-sparkline": "^2.4.0",
         "jvectormap": "^2.0.4",
         "laravel-mix": "^4.0.7",
-        "lodash": "^4.17.13",
+        "lodash": "^4.17.19",
         "masonry-layout": "^4.2.2",
         "perfect-scrollbar": "^1.4.0",
         "popper.js": "^1.12",
